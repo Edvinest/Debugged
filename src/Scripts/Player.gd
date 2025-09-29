@@ -2,13 +2,16 @@ extends CharacterBody3D
 
 @export var speed := 5.0
 @export var jump_velocity := 4.5
-@onready var camera = $Camera3D
+@onready var firstPersonCamera = $FirstPersonCamera
+@onready var thirdPersonCamera = $ThirdPersonCamera
+var using_first_person : bool = true
 
 var mouse_sensitivity := 0.002
 var gravity := 30
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	set_camera_mode(using_first_person)
 
 func _process(delta: float) -> void:
 	# Right stick is typically on JoyCon-R
@@ -21,17 +24,22 @@ func _process(delta: float) -> void:
 	if abs(right_y) < 0.2:
 		right_y = 0
 
-	# Apply to camera rotation
-	camera.rotate_y(-right_x * delta * 2.0)  # yaw
-	camera.rotate_x(-right_y * delta * 2.0)  # pitch
-	camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-80), deg_to_rad(80))
+	# Apply to firstPersonCamera rotation
+	firstPersonCamera.rotate_y(-right_x * delta * 2.0)  # yaw
+	firstPersonCamera.rotate_x(-right_y * delta * 2.0)  # pitch
+	firstPersonCamera.rotation.x = clamp(firstPersonCamera.rotation.x, deg_to_rad(-80), deg_to_rad(80))
 
 func _unhandled_input(event):
 	if event is InputEventMouseMotion:
 		rotate_y(-event.relative.x * mouse_sensitivity)
-		camera.rotate_x(-event.relative.y * mouse_sensitivity)
-		camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-80), deg_to_rad(80))
+		firstPersonCamera.rotate_x(-event.relative.y * mouse_sensitivity)
+		firstPersonCamera.rotation.x = clamp(firstPersonCamera.rotation.x, deg_to_rad(-80), deg_to_rad(80))
 
+func _input(event):
+	if event.is_action_pressed("toggle_view"):
+		using_first_person = !using_first_person
+		set_camera_mode(using_first_person)
+		
 func _physics_process(delta):
 	var input_dir = Input.get_vector("move_left", "move_right", "move_forward", "move_back")
 	var direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
@@ -50,3 +58,7 @@ func _physics_process(delta):
 		velocity.y = jump_velocity
 
 	move_and_slide()
+
+func set_camera_mode(first_person : bool):
+	firstPersonCamera.current = first_person
+	thirdPersonCamera.current = not first_person
