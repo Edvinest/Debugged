@@ -5,11 +5,11 @@
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_qbkls"]
 
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_qm7rr"]
+
 [sub_resource type="BoxMesh" id="BoxMesh_qbkls"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_rpqav"]
-
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_qm7rr"]
 
 [node name="CharacterBody3D" type="CharacterBody3D"]
 script = ExtResource("1_rpqav")
@@ -18,22 +18,22 @@ script = ExtResource("1_rpqav")
 shape = SubResource("CapsuleShape3D_qbkls")
 
 [node name="ThirdPersonCamera" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.613677, 2.8612342)
+transform = Transform3D(1, 0, 0, 0, 0.74294627, 0.6693511, 0, -0.6693511, 0.74294627, 0, 2.7736914, 2.321082)
 
 [node name="FirstPersonCamera" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4769659, 0.088204324)
 
-[node name="Hands" type="Node3D" parent="."]
+[node name="PlayerBody" type="MeshInstance3D" parent="."]
+mesh = SubResource("CapsuleMesh_qm7rr")
+
+[node name="Hands" type="Node3D" parent="PlayerBody"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.39501464, 0.4332748)
 script = ExtResource("2_kyqiw")
 
-[node name="RightHand" type="MeshInstance3D" parent="Hands"]
+[node name="RightHand" type="MeshInstance3D" parent="PlayerBody/Hands"]
 transform = Transform3D(0.25, 0, 0, 0, 0.12031216, -0.13368723, 0, 0.02557314, 0.6289489, 0.4049094, 0, -0.71150947)
 mesh = SubResource("BoxMesh_qbkls")
 
-[node name="LeftHand" type="MeshInstance3D" parent="Hands"]
+[node name="LeftHand" type="MeshInstance3D" parent="PlayerBody/Hands"]
 transform = Transform3D(0.248, 0, 0, 0, 0.121290304, -0.12142043, 0, 0.02578105, 0.5712382, -0.323106, 0, -0.69663966)
 mesh = SubResource("BoxMesh_rpqav")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-mesh = SubResource("CapsuleMesh_qm7rr")

@@ -2,8 +2,8 @@ extends Node3D
 
 var udp := PacketPeerUDP.new()
 
-@onready var righthand = $RightHand
-@onready var lefthand = $LeftHand
+@onready var rightHand = $RightHand
+@onready var leftHand = $LeftHand
 
 var targetRotL := Vector3()
 var smoothRotL := Vector3()
@@ -11,8 +11,13 @@ var smoothRotL := Vector3()
 var targetRotR := Vector3()
 var smoothRotR := Vector3()
 
+var using_first_person : bool
+
 func _ready():
 	udp.bind(4243, "127.0.0.1")
+	
+	if Input.get_connected_joypads().is_empty():
+		using_first_person = false
 
 func _process(_delta):
 	while udp.get_available_packet_count() > 0:
@@ -35,10 +40,14 @@ func _process(_delta):
 					targetRotR.x = pitch
 					targetRotR.z = roll
 
-	# Smooth interpolation
-	smoothRotL = smoothRotL.lerp(-targetRotL, 0.1)
-	smoothRotR = smoothRotR.lerp(-targetRotR, 0.1)
+	if using_first_person:
+		# Smooth interpolation
+		smoothRotL = smoothRotL.lerp(-targetRotL, 0.1)
+		smoothRotR = smoothRotR.lerp(-targetRotR, 0.1)
 
-	# Apply to hands
-	lefthand.rotation = smoothRotL
-	righthand.rotation = smoothRotR
+		# Apply to hands
+		leftHand.rotation = smoothRotL
+		rightHand.rotation = smoothRotR
+		
+	else:
+		pass

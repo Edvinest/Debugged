@@ -5,10 +5,12 @@ from evdev import list_devices, InputDevice, ecodes
 UDP_IP = "127.0.0.1"
 UDP_PORT = 4243
 
-sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM) # open socket so we can send the data from the joy-cons to Godot
 
 # -------------------------------
 # Find all IMU devices (Joy-Cons)
+# IMU - Inertial Measurment Units
+# We ignore the combined controller
 # -------------------------------
 def find_imu_devices():
     devices = []
@@ -83,10 +85,11 @@ for tag, dev in devices:
     print(f"  {tag}: {dev.path} {dev.name}")
     threading.Thread(target=handle_device, args=(dev, tag), daemon=True).start()
 
+# This code is redundant
 # Assign first Joy-Con = Left (L), second = Right (R)
-for idx, dev in enumerate(devices):
-    tag = "L" if idx == 0 else "R"
-    threading.Thread(target=handle_device, args=(dev, tag), daemon=True).start()
+# for idx, dev in enumerate(devices):
+#     tag = "L" if idx == 0 else "R"
+#     threading.Thread(target=handle_device, args=(dev, tag), daemon=True).start()
 
 print("Streaming IMU data over UDP on", UDP_IP, UDP_PORT)
 
