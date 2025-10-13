@@ -1,16 +1,38 @@
-[gd_scene load_steps=4 format=3 uid="uid://bp1n81hkwp3tu"]
+[gd_scene load_steps=8 format=3 uid="uid://bp1n81hkwp3tu"]
 
 [ext_resource type="PackedScene" uid="uid://crsa4cllx3gqp" path="res://src/Objects/Cabinet/prop_cabinet.tscn" id="1_1b8pk"]
 [ext_resource type="PackedScene" uid="uid://dct6crx3jwiat" path="res://src/Scenes/Player.tscn" id="2_mwp01"]
 [ext_resource type="PackedScene" uid="uid://ubl8xp4twfti" path="res://src/Objects/Carpet/prop_carpet.tscn" id="3_mwp01"]
+[ext_resource type="PackedScene" uid="uid://cjijja3sqc0ku" path="res://src/Objects/Desk/prop_desk.tscn" id="4_ajlcv"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ajlcv"]
+albedo_color = Color(0.28627452, 0.21176471, 0.15686275, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_ajlcv"]
+material = SubResource("StandardMaterial3D_ajlcv")
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_n562r"]
+data = PackedVector3Array(1, 0, 1, -1, 0, 1, 1, 0, -1, -1, 0, 1, -1, 0, -1, 1, 0, -1)
 
 [node name="LevelOne" type="Node3D"]
 
 [node name="prop_cabinet" parent="." instance=ExtResource("1_1b8pk")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 5)
+transform = Transform3D(0.023926197, 0, -0.9997137, 0, 1, 0, 0.9997137, 0, 0.023926197, 3.4664059, 0, 0.42678)
 
 [node name="prop_carpet" parent="." instance=ExtResource("3_mwp01")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.38681293, 0, -0.7725295)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5085075, 0, -0.24319899)
 
 [node name="CharacterBody3D" parent="." instance=ExtResource("2_mwp01")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.31115794, 1.0113001, -0.83596504)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6470163, 2.982271, -3.718903)
+
+[node name="prop_desk" parent="." instance=ExtResource("4_ajlcv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.9170103, 0, -4.054242)
+
+[node name="temporary_floor" type="MeshInstance3D" parent="."]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 0)
+mesh = SubResource("PlaneMesh_ajlcv")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="temporary_floor"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="temporary_floor/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_n562r")
