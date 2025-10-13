@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://bp1n81hkwp3tu"]
+
+[ext_resource type="PackedScene" uid="uid://crsa4cllx3gqp" path="res://src/Objects/prop_cabinet.tscn" id="1_1b8pk"]
+
+[node name="LevelOne" type="Node3D"]
+
+[node name="prop_cabinet2" parent="." instance=ExtResource("1_1b8pk")]
