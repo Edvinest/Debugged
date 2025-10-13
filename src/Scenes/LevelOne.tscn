@@ -1,7 +1,16 @@
-[gd_scene load_steps=2 format=3 uid="uid://bp1n81hkwp3tu"]
+[gd_scene load_steps=4 format=3 uid="uid://bp1n81hkwp3tu"]
 
-[ext_resource type="PackedScene" uid="uid://crsa4cllx3gqp" path="res://src/Objects/prop_cabinet.tscn" id="1_1b8pk"]
+[ext_resource type="PackedScene" uid="uid://crsa4cllx3gqp" path="res://src/Objects/Cabinet/prop_cabinet.tscn" id="1_1b8pk"]
+[ext_resource type="PackedScene" uid="uid://dct6crx3jwiat" path="res://src/Scenes/Player.tscn" id="2_mwp01"]
+[ext_resource type="PackedScene" uid="uid://ubl8xp4twfti" path="res://src/Objects/Carpet/prop_carpet.tscn" id="3_mwp01"]
 
 [node name="LevelOne" type="Node3D"]
 
-[node name="prop_cabinet2" parent="." instance=ExtResource("1_1b8pk")]
+[node name="prop_cabinet" parent="." instance=ExtResource("1_1b8pk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 5)
+
+[node name="prop_carpet" parent="." instance=ExtResource("3_mwp01")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.38681293, 0, -0.7725295)
+
+[node name="CharacterBody3D" parent="." instance=ExtResource("2_mwp01")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.31115794, 1.0113001, -0.83596504)
