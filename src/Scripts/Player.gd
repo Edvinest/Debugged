@@ -10,7 +10,7 @@ var mouse_sensitivity := 0.002
 var gravity := 30
 
 func _ready():
-	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	#Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	set_camera_mode(using_first_person)
 	
 	if Input.get_connected_joypads().is_empty():
@@ -63,7 +63,11 @@ func _physics_process(delta):
 	else:
 		velocity.x = move_toward(velocity.x, 0, speed)
 		velocity.z = move_toward(velocity.z, 0, speed)
+		
 
+	if Input.is_action_just_pressed("jump") and is_on_floor():
+		velocity.y = jump_velocity
+	
 	move_and_slide()
 
 func set_camera_mode(first_person : bool):
