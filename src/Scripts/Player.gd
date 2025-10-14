@@ -51,6 +51,8 @@ func _physics_process(delta):
 
 	if using_first_person:
 		direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
+		var fpCamYaw = firstPersonCamera.rotation.y
+		$PlayerBody.rotation.y = fpCamYaw
 	else:
 		direction = Vector3(input_dir.x, 0, input_dir.y).normalized()
 		if direction != Vector3.ZERO:
