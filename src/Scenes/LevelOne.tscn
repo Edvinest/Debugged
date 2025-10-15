@@ -1,42 +1,36 @@
-[gd_scene load_steps=9 format=3 uid="uid://bp1n81hkwp3tu"]
+[gd_scene load_steps=7 format=3 uid="uid://bp1n81hkwp3tu"]
 
-[ext_resource type="PackedScene" uid="uid://crsa4cllx3gqp" path="res://src/Objects/Cabinet/prop_cabinet.tscn" id="1_1b8pk"]
+[ext_resource type="PackedScene" uid="uid://cecoibexlr4q5" path="res://src/Objects/LevelOne/level_one_and_collisions.tscn" id="2_1b8pk"]
 [ext_resource type="PackedScene" uid="uid://dct6crx3jwiat" path="res://src/Scenes/Player.tscn" id="2_mwp01"]
-[ext_resource type="PackedScene" uid="uid://ubl8xp4twfti" path="res://src/Objects/Carpet/prop_carpet.tscn" id="3_mwp01"]
-[ext_resource type="PackedScene" uid="uid://cjijja3sqc0ku" path="res://src/Objects/Desk/prop_desk.tscn" id="4_ajlcv"]
-[ext_resource type="PackedScene" uid="uid://cko5d0eoa2eq" path="res://src/Objects/PC/prop_pc.tscn" id="5_n562r"]
+[ext_resource type="Texture2D" uid="uid://cco5yars76inj" path="res://src/Objects/citrus_orchard_puresky_4k.exr" id="3_mwp01"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ajlcv"]
-albedo_color = Color(0.28627452, 0.21176471, 0.15686275, 1)
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_ajlcv"]
+panorama = ExtResource("3_mwp01")
 
-[sub_resource type="PlaneMesh" id="PlaneMesh_ajlcv"]
-material = SubResource("StandardMaterial3D_ajlcv")
+[sub_resource type="Sky" id="Sky_n562r"]
+sky_material = SubResource("PanoramaSkyMaterial_ajlcv")
 
-[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_n562r"]
-data = PackedVector3Array(1, 0, 1, -1, 0, 1, 1, 0, -1, -1, 0, 1, -1, 0, -1, 1, 0, -1)
+[sub_resource type="Environment" id="Environment_ndl4m"]
+background_mode = 2
+sky = SubResource("Sky_n562r")
 
 [node name="LevelOne" type="Node3D"]
 
-[node name="prop_cabinet" parent="." instance=ExtResource("1_1b8pk")]
-transform = Transform3D(0.023926197, 0, -0.9997137, 0, 1, 0, 0.9997137, 0, 0.023926197, 3.4664059, 0, 0.42678)
-
-[node name="prop_carpet" parent="." instance=ExtResource("3_mwp01")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5085075, 0, -0.24319899)
-
 [node name="CharacterBody3D" parent="." instance=ExtResource("2_mwp01")]
-transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0.6470163, 2.982271, -3.718903)
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, -9.856059, 11.948006, 3.984746)
+jump_velocity = 3.5
+gravity = 10
 
-[node name="prop_desk" parent="." instance=ExtResource("4_ajlcv")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.9170103, 0, -4.054242)
+[node name="levelOne_andCollisions" parent="." instance=ExtResource("2_1b8pk")]
 
-[node name="temporary_floor" type="MeshInstance3D" parent="."]
-transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 0)
-mesh = SubResource("PlaneMesh_ajlcv")
+[node name="SpotLight3D" type="SpotLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.017051065, 0.9998546, 0, -0.9998546, 0.017051065, -10.863335, 9.635879, -3.319994)
+light_color = Color(0.76855594, 0.7279258, 0.014714148, 1)
+light_energy = 12.711
 
-[node name="StaticBody3D" type="StaticBody3D" parent="temporary_floor"]
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.017051065, 0.9998546, 0, -0.9998546, 0.017051065, 2.450859, 21.194654, 1.0088596)
+light_energy = 1.33
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="temporary_floor/StaticBody3D"]
-shape = SubResource("ConcavePolygonShape3D_n562r")
-
-[node name="prop_pc" parent="." instance=ExtResource("5_n562r")]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.1374731, 0.13355786, -3.7945042)
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_ndl4m")

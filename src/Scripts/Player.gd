@@ -7,10 +7,10 @@ extends CharacterBody3D
 var using_first_person : bool
 
 var mouse_sensitivity := 0.002
-var gravity := 30
+@export var gravity := 20
 
 func _ready():
-	#Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	set_camera_mode(using_first_person)
 	
 	if Input.get_connected_joypads().is_empty():
@@ -65,8 +65,13 @@ func _physics_process(delta):
 		velocity.z = move_toward(velocity.z, 0, speed)
 		
 
+	#Added for test: Jump.
 	if Input.is_action_just_pressed("jump") and is_on_floor():
 		velocity.y = jump_velocity
+	
+	#Added for test: Respawn in case of falling out of map.	
+	if global_transform.origin.y <= -10.0:
+		global_transform.origin = Vector3(0, 5, 0)
 	
 	move_and_slide()
 
@@ -75,3 +80,12 @@ func set_camera_mode(first_person : bool):
 	firstPersonCamera.current = first_person
 	thirdPersonCamera.current = not first_person
 	$PlayerBody/Hands.using_first_person = first_person
+	
+	# Testing feature: Sync first person camera to character rotation.
+	#Note: When snapping back to first person, camera does not align with the
+	#third person direction of the character, instead the character snaps to 
+	#the default FP camera direction.
+	if first_person:
+		# Align player body rotation to camera rotation to prevent inverted controls
+		var cam_yaw = firstPersonCamera.rotation.y
+		$PlayerBody.rotation.y = cam_yaw
