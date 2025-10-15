@@ -1,0 +1,10 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://c7c0jusa8j400"]
+
+[ext_resource type="Shader" uid="uid://cntyuoso6mcu3" path="res://src/Scripts/OutlineShaderForOverlaps.gdshader" id="1_2qdlc"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_2qdlc")
+shader_parameter/enable = true
+shader_parameter/outline_thickness = 0.04
+shader_parameter/color = Color(0, 0, 0, 0)
