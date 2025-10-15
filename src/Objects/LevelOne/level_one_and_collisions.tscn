@@ -12,7 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://dxw2t2y5vtpbw" path="res://src/Objects/LevelOne/levelOne_andCollisions_display.png" id="9_pimjs"]
 [ext_resource type="Texture2D" uid="uid://b7iyru55glkb5" path="res://src/Objects/LevelOne/levelOne_andCollisions_lamp.png" id="10_5faqj"]
 [ext_resource type="Shader" uid="uid://cntyuoso6mcu3" path="res://src/Scripts/OutlineShaderForOverlaps.gdshader" id="10_aw7hb"]
-[ext_resource type="Shader" uid="uid://cgcpbq2sspixh" path="res://src/Scripts/OutlineShaderF.gdshader" id="12_b4k5p"]
+[ext_resource type="Shader" uid="uid://cgcpbq2sspixh" path="res://src/Scripts/OutlineShader.gdshader" id="12_b4k5p"]
 
 [sub_resource type="GDScript" id="GDScript_xc2qv"]
 script/source = "extends Node3D
