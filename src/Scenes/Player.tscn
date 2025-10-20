@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://nchnj2u7kv5" path="res://src/Scripts/Player.gd" id="1_rpqav"]
 [ext_resource type="Script" uid="uid://be4htp0wqoeex" path="res://src/Scenes/Hands.gd" id="2_kyqiw"]
 [ext_resource type="Script" uid="uid://dkn6cmd7fhaja" path="res://src/Scenes/PlayerCombat.gd" id="3_g1uh0"]
-[ext_resource type="Script" uid="uid://88e8mfb84hfa" path="res://src/Scripts/Weapon.gd" id="4_5dq0m"]
+[ext_resource type="Script" uid="uid://cf5websnqr811" path="res://src/Scripts/Weapon.gd" id="4_5dq0m"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_qbkls"]
 

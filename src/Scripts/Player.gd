@@ -49,6 +49,7 @@ func _physics_process(delta):
 	if not is_on_floor():
 		velocity.y -= gravity * delta
 
+	# This will soon be removed
 	if using_first_person:
 		direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 		var fpCamYaw = firstPersonCamera.rotation.y
