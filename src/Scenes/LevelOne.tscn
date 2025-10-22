@@ -7,7 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://n7sqk2ahk5er" path="res://src/Objects/LevelOne/Materials/citrus_orchard_puresky_1k.exr" id="4_n562r"]
 [ext_resource type="PackedScene" uid="uid://bp2svu4xo4o8r" path="res://src/Objects/LevelOne/prop_cabinet.tscn" id="5_austs"]
 [ext_resource type="PackedScene" uid="uid://bureje6ylljyi" path="res://src/Objects/LevelOne/prop_chair.tscn" id="6_ceyxk"]
-[ext_resource type="PackedScene" uid="uid://c2dk8817ndhwr" path="res://src/Objects/LevelOne/prop_deskLamp.tscn" id="7_ygok4"]
+[ext_resource type="PackedScene" uid="uid://c83chm8mrrym0" path="res://src/Objects/LevelOne/prop_deskLamp.tscn" id="7_ygok4"]
 [ext_resource type="PackedScene" uid="uid://dn6f5seok4iub" path="res://src/Objects/LevelOne/prop_display.tscn" id="8_b06gv"]
 [ext_resource type="PackedScene" uid="uid://bf8chaltvocpt" path="res://src/Objects/LevelOne/prop_frames.tscn" id="9_pjf87"]
 [ext_resource type="PackedScene" uid="uid://cld43by6q6re3" path="res://src/Objects/LevelOne/prop_main_lamp.tscn" id="10_75nk5"]
@@ -58,9 +58,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0921669, 0, -0.90050125)
 [node name="prop_cabinet" parent="." instance=ExtResource("5_austs")]
 transform = Transform3D(2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, 4.617687, 3, -13.735708)
 
-[node name="prop_chair" parent="." instance=ExtResource("6_ceyxk")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.751156, 3, 0.6630683)
-
 [node name="prop_frames" parent="." instance=ExtResource("9_pjf87")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.11976433, 9.8645115, 16.734161)
 
@@ -70,27 +67,27 @@ transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 4.2096777, -4.3758326, 
 [node name="prop_desk" parent="desk_and_props" instance=ExtResource("3_ajlcv")]
 transform = Transform3D(-9.616505e-08, 0, 2.2, 0, 2.2, 0, -2.2, 0, -9.616505e-08, -10.395598, 4.9381933, 0.04573822)
 
-[node name="prop_deskLamp" parent="desk_and_props" instance=ExtResource("7_ygok4")]
-transform = Transform3D(0.73630565, 0, -0.31281623, 0, 0.8, 0, 0.31281623, 0, 0.73630565, -10.261425, 8.609417, -2.6790318)
+[node name="prop_display" parent="desk_and_props" instance=ExtResource("8_b06gv")]
+transform = Transform3D(0.9, 0, 0, 0, 0.9, 0, 0, 0, 0.9, -9.333334, 8.691412, 0.32955536)
 
-[node name="OmniLight3D" type="OmniLight3D" parent="desk_and_props/prop_deskLamp"]
-transform = Transform3D(0.8333334, 0, 0, 0, -3.6426158e-08, 0.8333333, 0, -0.8333334, -3.6426158e-08, 0.09236717, 1.5547428, -0.2911229)
-light_color = Color(0.84705883, 0.6627451, 0, 1)
-light_energy = 5.686
-shadow_enabled = true
-omni_range = 3.785
-omni_attenuation = 1.02
-
-[node name="SpotLight3D" type="SpotLight3D" parent="desk_and_props"]
-transform = Transform3D(-2.9140926e-08, 0, -0.6666667, 0, 0.6666667, 0, 0.6666667, 0, -2.9140926e-08, -9.949129, 10.280264, -0.33042145)
+[node name="SpotLight3D" type="SpotLight3D" parent="desk_and_props/prop_display"]
+transform = Transform3D(-3.2378804e-08, 0, -0.7407407, 0, 0.7407407, 0, 0.7407407, 0, -3.2378804e-08, -0.014277935, 1.7653913, -0.73330754)
 light_energy = 5.946
 shadow_enabled = true
 spot_range = 4.829
 spot_angle = 64.6
 spot_angle_attenuation = 0.659754
 
-[node name="prop_display" parent="desk_and_props" instance=ExtResource("8_b06gv")]
-transform = Transform3D(0.9, 0, 0, 0, 0.9, 0, 0, 0, 0.9, -9.333334, 8.691412, 0.32955536)
+[node name="prop_deskLamp" parent="desk_and_props" instance=ExtResource("7_ygok4")]
+transform = Transform3D(0.6666667, 0, 0, 0, 0.6666667, 0, 0, 0, 0.6666667, -9.930262, 8.673414, -2.6672246)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="desk_and_props/prop_deskLamp"]
+transform = Transform3D(0.92038214, 0.3910203, 1.7092038e-08, 0, -4.3711392e-08, 1, 0.3910203, -0.92038214, -4.023118e-08, 0.023152351, 1.4678602, -0.045244694)
+light_color = Color(0.84705883, 0.6627451, 0, 1)
+light_energy = 5.686
+shadow_enabled = true
+omni_range = 3.785
+omni_attenuation = 1.02
 
 [node name="prop_mainLamp" parent="." instance=ExtResource("10_75nk5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.7059708, 18.20557, 0.47491837)
@@ -122,3 +119,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.217733, 3.3334022, -6.803
 
 [node name="prop_cactus" parent="." instance=ExtResource("11_ceyxk")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.747814, 8.63596, 6.075992)
+
+[node name="prop_chair" parent="." instance=ExtResource("6_ceyxk")]
+transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, -5.718702, 2.9582841, 0.45221567)
