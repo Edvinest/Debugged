@@ -1,0 +1,61 @@
+[gd_scene load_steps=10 format=3 uid="uid://b7pxexvaix2s4"]
+
+[ext_resource type="PackedScene" uid="uid://cixtwxoghxscu" path="res://src/Objects/LevelOne/prop_desk.glb" id="1_1d7pk"]
+[ext_resource type="Material" uid="uid://dis3bix1aj8s3" path="res://src/Objects/LevelOne/Materials/mat_wood1.tres" id="2_givla"]
+[ext_resource type="Material" uid="uid://cghjbmyu661mi" path="res://src/Materials/simple_outline.tres" id="2_n2uo7"]
+[ext_resource type="Material" uid="uid://c0jjbnudo5020" path="res://src/Objects/LevelOne/Materials/mat_wood2.tres" id="3_0r3u1"]
+[ext_resource type="Texture2D" uid="uid://t3olxnpdyel6" path="res://src/Objects/LevelOne/Textures/easterEgg_Orkeny.png" id="5_4jy3o"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4jy3o"]
+blend_mode = 4
+cull_mode = 1
+shading_mode = 0
+albedo_color = Color(0, 0, 0, 1)
+grow = true
+grow_amount = 0.01
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rx8hx"]
+blend_mode = 4
+cull_mode = 1
+shading_mode = 0
+albedo_color = Color(0, 0, 0, 1)
+grow = true
+grow_amount = 0.02
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_rx8hx"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vwk7l"]
+albedo_texture = ExtResource("5_4jy3o")
+uv1_triplanar_sharpness = 4.287094
+uv1_world_triplanar = true
+z_clip_scale = 0.54
+
+[node name="prop_desk" instance=ExtResource("1_1d7pk")]
+
+[node name="table" parent="." index="0"]
+material_overlay = ExtResource("2_n2uo7")
+surface_material_override/0 = ExtResource("2_givla")
+
+[node name="handle" parent="." index="1"]
+material_overlay = SubResource("StandardMaterial3D_4jy3o")
+surface_material_override/0 = ExtResource("2_givla")
+
+[node name="drawer" parent="." index="2"]
+material_overlay = SubResource("StandardMaterial3D_rx8hx")
+surface_material_override/0 = ExtResource("3_0r3u1")
+
+[node name="paper" type="MeshInstance3D" parent="drawer" index="0"]
+transform = Transform3D(0.21783873, 0, -0.041092757, 0, 1, 0, 0.055834226, 0, 0.16032448, 0.37935352, 0.63272583, 0.70686865)
+mesh = SubResource("PlaneMesh_rx8hx")
+surface_material_override/0 = SubResource("StandardMaterial3D_vwk7l")
+
+[node name="frontPanel" parent="." index="3"]
+material_overlay = ExtResource("2_n2uo7")
+surface_material_override/0 = ExtResource("3_0r3u1")
+
+[node name="legs" parent="." index="4"]
+material_overlay = ExtResource("2_n2uo7")
+surface_material_override/0 = ExtResource("3_0r3u1")
+
+[node name="CollisionShape3D" parent="@StaticBody3D@46898" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0034127235, -0.004123807, 0.003283918)

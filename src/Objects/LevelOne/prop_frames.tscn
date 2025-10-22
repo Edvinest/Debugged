@@ -1,0 +1,75 @@
+[gd_scene load_steps=8 format=3 uid="uid://bf8chaltvocpt"]
+
+[ext_resource type="PackedScene" uid="uid://dx6qse1kgqt2c" path="res://src/Objects/LevelOne/prop_frames.glb" id="1_mqmvy"]
+[ext_resource type="Material" uid="uid://ci7gm2ali3xqi" path="res://src/Objects/LevelOne/Materials/mat_plainPicture.tres" id="2_rb0c7"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kqhr7"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pah1r"]
+blend_mode = 4
+cull_mode = 1
+shading_mode = 0
+albedo_color = Color(0, 0, 0, 1)
+grow = true
+grow_amount = 0.01
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pqy2f"]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_qp56r"]
+_surfaces = [{
+"aabb": AABB(0.22336659, -0.14698017, -0.002996385, 0.15454, 0.2973634, 1e-05),
+"format": 34896613377,
+"index_count": 6,
+"index_data": PackedByteArray(0, 0, 1, 0, 2, 0, 0, 0, 3, 0, 1, 0),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 4,
+"vertex_data": PackedByteArray(0, 0, 255, 255, 0, 0, 0, 0, 255, 255, 0, 0, 0, 0, 0, 0, 255, 255, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_8u71h"]
+resource_name = "prop_frames_Cube_010"
+_surfaces = [{
+"aabb": AABB(0.22336659, -0.14698017, -0.002996385, 0.15454, 0.2973634, 1e-05),
+"attribute_data": PackedByteArray(190, 139, 60, 12, 64, 116, 194, 51, 190, 139, 194, 51, 64, 116, 60, 12),
+"format": 34896613399,
+"index_count": 6,
+"index_data": PackedByteArray(0, 0, 1, 0, 2, 0, 0, 0, 3, 0, 1, 0),
+"material": SubResource("StandardMaterial3D_pqy2f"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 4,
+"vertex_data": PackedByteArray(0, 0, 255, 255, 0, 0, 0, 0, 255, 255, 0, 0, 0, 0, 0, 0, 255, 255, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 191, 255, 191, 255, 191, 255, 191, 255, 191, 255, 191, 255, 191, 255, 191)
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_qp56r")
+
+[node name="prop_frames" instance=ExtResource("1_mqmvy")]
+
+[node name="frames" parent="." index="0"]
+transform = Transform3D(16.70324, 0, 0, 0, 16.70324, 0, 0, 0, 16.70324, 0.19043922, 3.69761, 0.039600372)
+material_override = SubResource("StandardMaterial3D_kqhr7")
+material_overlay = SubResource("StandardMaterial3D_pah1r")
+
+[node name="frames_001" parent="frames" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.011541486)
+material_override = ExtResource("2_rb0c7")
+
+[node name="frames_004" type="MeshInstance3D" parent="frames" index="1"]
+transform = Transform3D(-2.97488e-08, -1.5834241, 0, 0.6805733, -6.921366e-08, 0, 0, 0, 1, -0.13815258, -0.33913812, -0.011541486)
+material_override = ExtResource("2_rb0c7")
+mesh = SubResource("ArrayMesh_8u71h")
+skeleton = NodePath("")
+
+[node name="frames_002" type="MeshInstance3D" parent="frames" index="2"]
+transform = Transform3D(1, 0, 0, 0, 0.6312231, 0, 0, 0, 1, -0.29438853, 0.08898157, -0.011541486)
+material_override = ExtResource("2_rb0c7")
+mesh = SubResource("ArrayMesh_8u71h")
+skeleton = NodePath("")
+
+[node name="frames_003" type="MeshInstance3D" parent="frames" index="3"]
+transform = Transform3D(1.3613673, 0, 0, 0, 0.7417494, 0, 0, 0, 1, -0.68856364, 0.08898157, -0.011541486)
+material_override = ExtResource("2_rb0c7")
+mesh = SubResource("ArrayMesh_8u71h")
+skeleton = NodePath("")
