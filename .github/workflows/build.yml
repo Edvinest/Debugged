@@ -38,8 +38,16 @@ jobs:
           preset: ${{ matrix.platform }}
           debugMode: "false"
 
+      - name: Set folder name
+        run: |
+        if [ "${{ matrix.platform }}" = "Windows Desktop" ]; then
+          echo "FOLDER=Windows" >> $GITHUB_ENV
+        else
+          echo "FOLDER=Linux" >> $GITHUB_ENV
+        shell: bash
+
       - name: Upload build artifact
         uses: actions/upload-artifact@v4
         with:
           name: Debugged - ${{ matrix.platform }}
-          path: build/${{ steps.build.outputs.build }}
+          path: build/${{ env.FOLDER }}
