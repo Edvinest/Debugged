@@ -7,7 +7,7 @@
 [ext_resource type="Material" uid="uid://cghjbmyu661mi" path="res://src/Materials/simple_outline.tres" id="5_73sfq"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jmwq0"]
-albedo_color = Color(1.348, 1.0912985, 0.96813595, 1)
+albedo_color = Color(1.3370808, 1.0835284, 0.95933944, 1)
 albedo_texture = ExtResource("1_2s17x")
 metallic = 1.0
 metallic_texture = ExtResource("2_73sfq")
