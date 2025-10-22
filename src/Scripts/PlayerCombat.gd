@@ -3,8 +3,8 @@ extends Node
 @export var left_weapon : Weapon
 @export var right_weapon : Weapon
 
-@onready var right_hand = $PlayerBody/RightHand
-@onready var left_hand = $PlayerBody/LeftHand
+@onready var right_hand = $PlayerBody/Hands/RightHand
+@onready var left_hand = $PlayerBody/Hands/LeftHand
 
 var using_first_person : bool = true
 var attack_cooldown_left : float = 0.0

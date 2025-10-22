@@ -24,7 +24,7 @@ script = ExtResource("1_rpqav")
 shape = SubResource("CapsuleShape3D_qbkls")
 
 [node name="ThirdPersonCamera" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.74294627, 0.6693511, 0, -0.6693511, 0.74294627, 0, 2.7736914, 2.321082)
+transform = Transform3D(1, 0, 0, 0, 0.70710677, 0.70710677, 0, -0.70710677, 0.70710677, 0, 6, 6)
 
 [node name="FirstPersonCamera" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4769659, 0.088204324)
