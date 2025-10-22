@@ -28,6 +28,8 @@ jobs:
         with:
           lfs: true
 
+      - name: Create export directories
+        run: mkdir -p build/Linux build/Windows
       - name: Build Godot
         id: build
         uses: felix-schindler/build-godot-action@v2.0.0
