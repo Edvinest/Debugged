@@ -81,16 +81,16 @@ shadow_enabled = true
 omni_range = 3.785
 omni_attenuation = 1.02
 
-[node name="prop_display" parent="desk_and_props" instance=ExtResource("8_b06gv")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.222652, 8.601893, -0.33042145)
-
-[node name="SpotLight3D" type="SpotLight3D" parent="desk_and_props/prop_display"]
-transform = Transform3D(-2.9140926e-08, 0, -0.6666667, 0, 0.6666667, 0, 0.6666667, 0, -2.9140926e-08, 0.27352428, 1.678371, 0)
+[node name="SpotLight3D" type="SpotLight3D" parent="desk_and_props"]
+transform = Transform3D(-2.9140926e-08, 0, -0.6666667, 0, 0.6666667, 0, 0.6666667, 0, -2.9140926e-08, -9.949129, 10.280264, -0.33042145)
 light_energy = 5.946
 shadow_enabled = true
 spot_range = 4.829
 spot_angle = 64.6
 spot_angle_attenuation = 0.659754
+
+[node name="prop_display" parent="desk_and_props" instance=ExtResource("8_b06gv")]
+transform = Transform3D(0.9, 0, 0, 0, 0.9, 0, 0, 0, 0.9, -9.333334, 8.691412, 0.32955536)
 
 [node name="prop_mainLamp" parent="." instance=ExtResource("10_75nk5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.7059708, 18.20557, 0.47491837)
