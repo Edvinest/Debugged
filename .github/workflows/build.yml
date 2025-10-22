@@ -21,7 +21,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        platform: ${{ github.event.inputs.platform == 'all' && ['Linux', 'Windows Desktop'] || [github.event.inputs.platform] }}
+        platform: ["Linux", "Windows Desktop"] 
 
     steps:
       - uses: actions/checkout@v4
