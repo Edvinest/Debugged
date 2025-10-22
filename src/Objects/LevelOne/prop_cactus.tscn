@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://b73kbwpshnerv"]
+
+[ext_resource type="PackedScene" uid="uid://06vp7oucd1vd" path="res://src/Objects/LevelOne/prop_cactus.glb" id="1_fgk20"]
+[ext_resource type="Material" uid="uid://ckflsbqsydvbq" path="res://src/Objects/LevelOne/Materials/mat_clay.tres" id="2_3tpo3"]
+[ext_resource type="Material" uid="uid://cghjbmyu661mi" path="res://src/Materials/simple_outline.tres" id="3_35evi"]
+[ext_resource type="Material" uid="uid://bn8csyt6e4qd7" path="res://src/Objects/LevelOne/Materials/mat_plant.tres" id="3_fds5d"]
+
+[node name="prop_cactus" instance=ExtResource("1_fgk20")]
+
+[node name="cactus" parent="." index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.13816357, 0.4647684, 0.24184799)
+material_override = ExtResource("2_3tpo3")
+material_overlay = ExtResource("3_35evi")
+
+[node name="Sphere_002" parent="cactus" index="0"]
+material_override = ExtResource("3_fds5d")
+material_overlay = ExtResource("3_35evi")
+
+[node name="Sphere_005" parent="." index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.14591026, 0.887269, 0.2488265)
+visible = false
+
+[node name="@StaticBody3D@194038" parent="." index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.13816357, 0.4647684, 0.24184799)
+
+[node name="Sphere_006" parent="@StaticBody3D@194038" index="0"]
+visible = false

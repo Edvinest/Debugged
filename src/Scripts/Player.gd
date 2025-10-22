@@ -63,15 +63,6 @@ func _physics_process(delta):
 	else:
 		velocity.x = move_toward(velocity.x, 0, speed)
 		velocity.z = move_toward(velocity.z, 0, speed)
-		
-
-	#Added for test: Jump.
-	if Input.is_action_just_pressed("jump") and is_on_floor():
-		velocity.y = jump_velocity
-	
-	#Added for test: Respawn in case of falling out of map.	
-	if global_transform.origin.y <= -10.0:
-		global_transform.origin = Vector3(0, 5, 0)
 	
 	move_and_slide()
 
@@ -81,11 +72,3 @@ func set_camera_mode(first_person : bool):
 	thirdPersonCamera.current = not first_person
 	$PlayerBody/Hands.using_first_person = first_person
 	
-	# Testing feature: Sync first person camera to character rotation.
-	#Note: When snapping back to first person, camera does not align with the
-	#third person direction of the character, instead the character snaps to 
-	#the default FP camera direction.
-	if first_person:
-		# Align player body rotation to camera rotation to prevent inverted controls
-		var cam_yaw = firstPersonCamera.rotation.y
-		$PlayerBody.rotation.y = cam_yaw

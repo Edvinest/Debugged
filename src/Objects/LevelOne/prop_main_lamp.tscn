@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://cld43by6q6re3"]
+
+[ext_resource type="PackedScene" uid="uid://4pyymx38uwc3" path="res://src/Objects/LevelOne/prop_mainLamp.glb" id="1_87gm8"]
+[ext_resource type="Material" uid="uid://bukgxbxfgb5pq" path="res://src/Objects/LevelOne/Materials/mat_emissionWhite.tres" id="2_t216y"]
+
+[node name="prop_mainLamp" instance=ExtResource("1_87gm8")]
+
+[node name="main_lamp" parent="." index="0"]
+transform = Transform3D(3.3728895, 0, 0, 0, -0.22731453, 2.2349575e-07, 0, -7.406848e-08, -0.68590355, 0.113630295, 0.5520642, -0.41379642)
+material_override = ExtResource("2_t216y")
+cast_shadow = 0

@@ -1,0 +1,45 @@
+[gd_scene load_steps=8 format=3 uid="uid://cwl5p6tqsbgn0"]
+
+[ext_resource type="PackedScene" uid="uid://ddadbtkr4747m" path="res://src/Objects/LevelOne/prop_walls.glb" id="1_gsevl"]
+[ext_resource type="Material" uid="uid://dvegvl763n2ha" path="res://src/Objects/LevelOne/Materials/mat_wallPaint.tres" id="2_ebmpm"]
+[ext_resource type="Material" uid="uid://bjwv7s0des0qc" path="res://src/Objects/LevelOne/Materials/mat_windows.tres" id="3_44e63"]
+[ext_resource type="Material" uid="uid://cghjbmyu661mi" path="res://src/Materials/simple_outline.tres" id="4_o0uul"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lcn6a"]
+blend_mode = 4
+cull_mode = 1
+shading_mode = 0
+albedo_color = Color(0, 0, 0, 1)
+grow = true
+grow_amount = 0.06
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_bl4ps"]
+size = Vector3(1, 8.805603, 8.674805)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_odmjj"]
+size = Vector3(1, 7.0134277, 20.26654)
+
+[node name="prop_walls" instance=ExtResource("1_gsevl")]
+
+[node name="walls" parent="." index="0"]
+material_override = ExtResource("2_ebmpm")
+
+[node name="window_small" parent="." index="1"]
+material_override = ExtResource("3_44e63")
+material_overlay = SubResource("StandardMaterial3D_lcn6a")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="window_small" index="0"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="window_small/StaticBody3D" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.10195923, 0.26123047)
+shape = SubResource("BoxShape3D_bl4ps")
+
+[node name="window_big" parent="." index="2"]
+material_override = ExtResource("3_44e63")
+material_overlay = ExtResource("4_o0uul")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="window_big" index="0"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="window_big/StaticBody3D" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0892334, 0.049224854)
+shape = SubResource("BoxShape3D_odmjj")

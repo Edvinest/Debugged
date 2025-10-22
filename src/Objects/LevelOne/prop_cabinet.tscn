@@ -1,0 +1,108 @@
+[gd_scene load_steps=11 format=3 uid="uid://bp2svu4xo4o8r"]
+
+[ext_resource type="PackedScene" uid="uid://bqelhvghe2g2h" path="res://src/Objects/LevelOne/prop_cabinet.glb" id="1_nmwt1"]
+[ext_resource type="Material" uid="uid://cghjbmyu661mi" path="res://src/Materials/simple_outline.tres" id="2_0qp74"]
+[ext_resource type="Material" uid="uid://dis3bix1aj8s3" path="res://src/Objects/LevelOne/Materials/mat_wood1.tres" id="3_f2acq"]
+[ext_resource type="Material" uid="uid://c0jjbnudo5020" path="res://src/Objects/LevelOne/Materials/mat_wood2.tres" id="4_r2y5v"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nmwt1"]
+blend_mode = 4
+cull_mode = 1
+shading_mode = 0
+albedo_color = Color(0, 0, 0, 1)
+grow = true
+grow_amount = 0.01
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0qp74"]
+blend_mode = 4
+cull_mode = 1
+shading_mode = 0
+albedo_color = Color(0, 0, 0, 1)
+grow = true
+grow_amount = 0.01
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_f2acq"]
+blend_mode = 4
+cull_mode = 1
+shading_mode = 0
+albedo_color = Color(0, 0, 0, 1)
+grow = true
+grow_amount = 0.01
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r2y5v"]
+blend_mode = 4
+cull_mode = 1
+shading_mode = 0
+albedo_color = Color(0, 0, 0, 1)
+grow = true
+grow_amount = 0.01
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ocrcw"]
+blend_mode = 4
+cull_mode = 1
+shading_mode = 0
+albedo_color = Color(0, 0, 0, 1)
+grow = true
+grow_amount = 0.01
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1poy5"]
+blend_mode = 4
+cull_mode = 1
+shading_mode = 0
+albedo_color = Color(0, 0, 0, 1)
+grow = true
+grow_amount = 0.01
+
+[node name="prop_cabinet" instance=ExtResource("1_nmwt1")]
+
+[node name="cabinet" parent="." index="0"]
+material_overlay = ExtResource("2_0qp74")
+surface_material_override/0 = ExtResource("3_f2acq")
+
+[node name="cabinet_doorLargeRight" parent="." index="1"]
+material_overlay = ExtResource("2_0qp74")
+surface_material_override/0 = ExtResource("4_r2y5v")
+
+[node name="cabinet_handle2" parent="." index="2"]
+material_overlay = SubResource("StandardMaterial3D_nmwt1")
+surface_material_override/0 = ExtResource("3_f2acq")
+
+[node name="cabinet_doorSmallRight" parent="." index="3"]
+material_overlay = ExtResource("2_0qp74")
+surface_material_override/0 = ExtResource("4_r2y5v")
+
+[node name="cabinet_handle4" parent="." index="4"]
+material_overlay = SubResource("StandardMaterial3D_0qp74")
+surface_material_override/0 = ExtResource("3_f2acq")
+
+[node name="cabinet_drawerTop" parent="." index="5"]
+material_overlay = ExtResource("2_0qp74")
+surface_material_override/0 = ExtResource("4_r2y5v")
+
+[node name="cabinet_drawerBottom" parent="." index="6"]
+material_overlay = ExtResource("2_0qp74")
+surface_material_override/0 = ExtResource("4_r2y5v")
+
+[node name="cabinet_handle6" parent="." index="7"]
+material_overlay = SubResource("StandardMaterial3D_f2acq")
+surface_material_override/0 = ExtResource("3_f2acq")
+
+[node name="cabinet_handle5" parent="." index="8"]
+material_overlay = SubResource("StandardMaterial3D_r2y5v")
+surface_material_override/0 = ExtResource("3_f2acq")
+
+[node name="cabinet_doorSmallLeft" parent="." index="9"]
+material_overlay = ExtResource("2_0qp74")
+surface_material_override/0 = ExtResource("4_r2y5v")
+
+[node name="cabinet_handle3" parent="." index="10"]
+material_override = ExtResource("3_f2acq")
+material_overlay = SubResource("StandardMaterial3D_ocrcw")
+
+[node name="cabinet_handle1" parent="." index="11"]
+material_override = ExtResource("3_f2acq")
+material_overlay = SubResource("StandardMaterial3D_1poy5")
+
+[node name="cabinet_doorLargeLeft" parent="." index="12"]
+material_override = ExtResource("4_r2y5v")
+material_overlay = ExtResource("2_0qp74")
