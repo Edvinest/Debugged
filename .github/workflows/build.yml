@@ -39,12 +39,13 @@ jobs:
           debugMode: "false"
 
       - name: Set folder name
-        run: |
-        if [ "${{ matrix.platform }}" = "Windows Desktop" ]; then
-          echo "FOLDER=Windows" >> $GITHUB_ENV
-        else
-          echo "FOLDER=Linux" >> $GITHUB_ENV
         shell: bash
+        run: |
+          if [ "${{ matrix.platform }}" = "Windows Desktop" ]; then
+            echo "FOLDER=Windows" >> $GITHUB_ENV
+          else
+            echo "FOLDER=Linux" >> $GITHUB_ENV
+          fi
 
       - name: Upload build artifact
         uses: actions/upload-artifact@v4
