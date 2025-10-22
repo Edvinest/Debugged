@@ -7,7 +7,7 @@ extends CharacterBody3D
 var using_first_person : bool
 
 var mouse_sensitivity := 0.002
-var gravity := 30
+@export var gravity := 20
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
@@ -66,7 +66,7 @@ func _physics_process(delta):
 	else:
 		velocity.x = move_toward(velocity.x, 0, speed)
 		velocity.z = move_toward(velocity.z, 0, speed)
-
+	
 	move_and_slide()
 
 func set_camera_mode(first_person : bool):
@@ -74,3 +74,4 @@ func set_camera_mode(first_person : bool):
 	firstPersonCamera.current = first_person
 	thirdPersonCamera.current = not first_person
 	$PlayerBody/Hands.using_first_person = first_person
+	

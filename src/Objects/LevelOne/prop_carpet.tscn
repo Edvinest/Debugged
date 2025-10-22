@@ -1,0 +1,28 @@
+[gd_scene load_steps=8 format=3 uid="uid://6b82iph8j6d5"]
+
+[ext_resource type="Texture2D" uid="uid://bdtfi78lbkr4g" path="res://src/Objects/LevelOne/Textures/Fabric/texture_carpetAlbedo.jpg" id="1_2s17x"]
+[ext_resource type="Texture2D" uid="uid://bwi0spn3vk37n" path="res://src/Objects/LevelOne/Textures/Fabric/texture_carpetMetallic.jpg" id="2_73sfq"]
+[ext_resource type="Texture2D" uid="uid://byfpyfrtyc7kq" path="res://src/Objects/LevelOne/Textures/Fabric/texture_carpetNormal.png" id="2_jxefn"]
+[ext_resource type="Texture2D" uid="uid://b8fnmfj6qgi5v" path="res://src/Objects/LevelOne/Textures/Fabric/texture_carpetRoughness.jpg" id="3_73sfq"]
+[ext_resource type="Material" uid="uid://cghjbmyu661mi" path="res://src/Materials/simple_outline.tres" id="5_73sfq"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jmwq0"]
+albedo_color = Color(1.3370808, 1.0835284, 0.95933944, 1)
+albedo_texture = ExtResource("1_2s17x")
+metallic = 1.0
+metallic_texture = ExtResource("2_73sfq")
+roughness_texture = ExtResource("3_73sfq")
+normal_enabled = true
+normal_texture = ExtResource("2_jxefn")
+bent_normal_enabled = true
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_ajxno"]
+
+[node name="PropCarpet" type="Node3D"]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
+material_override = SubResource("StandardMaterial3D_jmwq0")
+material_overlay = ExtResource("5_73sfq")
+mesh = SubResource("PlaneMesh_ajxno")

@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://bliarftr5secx"]
+
+[ext_resource type="PackedScene" uid="uid://fnwauo6qlrlp" path="res://src/Objects/LevelOne/prop_pc.glb" id="1_wg7lt"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yo4vf"]
+blend_mode = 4
+cull_mode = 1
+shading_mode = 0
+albedo_color = Color(0, 0, 0, 1)
+grow = true
+grow_amount = 0.05
+
+[node name="prop_pc" instance=ExtResource("1_wg7lt")]
+
+[node name="pc" parent="." index="0"]
+transform = Transform3D(-8.182275e-08, 0, 1.4609874, 0, 1.4609873, 0, -0.6863789, 0, -1.7416329e-07, 0.057893753, 0.0068621635, 0.035530567)
+material_overlay = SubResource("StandardMaterial3D_yo4vf")
