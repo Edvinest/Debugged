@@ -92,9 +92,6 @@ spot_range = 4.829
 spot_angle = 64.6
 spot_angle_attenuation = 0.659754
 
-[node name="prop_cactus" parent="desk_and_props" instance=ExtResource("11_ceyxk")]
-transform = Transform3D(0.88423073, 0, 0.46705037, 0, 1, 0, -0.46705037, 0, 0.88423073, -9.092297, 8.602879, 4.04996)
-
 [node name="prop_mainLamp" parent="." instance=ExtResource("10_75nk5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.7059708, 18.20557, 0.47491837)
 
@@ -122,3 +119,6 @@ mesh = SubResource("BoxMesh_f868b")
 
 [node name="prop_pc" parent="." instance=ExtResource("17_f868b")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.217733, 3.3334022, -6.8039417)
+
+[node name="prop_cactus" parent="." instance=ExtResource("11_ceyxk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.747814, 8.63596, 6.075992)
