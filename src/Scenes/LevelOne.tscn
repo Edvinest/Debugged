@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://bp1n81hkwp3tu"]
+[gd_scene load_steps=23 format=3 uid="uid://bp1n81hkwp3tu"]
 
 [ext_resource type="PackedScene" uid="uid://chpye160qgiy6" path="res://src/Objects/LevelOne/prop_bed.tscn" id="1_02nir"]
 [ext_resource type="PackedScene" uid="uid://ch7albaj53q7" path="res://src/Objects/LevelOne/prop_floor.tscn" id="2_1b8pk"]
@@ -17,6 +17,7 @@
 [ext_resource type="PackedScene" uid="uid://cwl5p6tqsbgn0" path="res://src/Objects/LevelOne/prop_walls.tscn" id="14_pjf87"]
 [ext_resource type="Material" uid="uid://ckflsbqsydvbq" path="res://src/Objects/LevelOne/Materials/mat_clay.tres" id="15_2rfmo"]
 [ext_resource type="PackedScene" uid="uid://bliarftr5secx" path="res://src/Objects/LevelOne/prop_pc.tscn" id="17_f868b"]
+[ext_resource type="PackedScene" uid="uid://qjjoef5p6xhx" path="res://src/Scenes/SpiderEnemy.tscn" id="18_7qily"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_ndl4m"]
 panorama = ExtResource("4_n562r")
@@ -46,7 +47,10 @@ light_color = Color(1, 1, 0.5372549, 1)
 light_energy = 0.1
 shadow_enabled = true
 
-[node name="CharacterBody3D" parent="." instance=ExtResource("2_mwp01")]
+[node name="SpiderEnemy" parent="." instance=ExtResource("18_7qily")]
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 4.210294, 3.8804832, 1.172594)
+
+[node name="Player" parent="." instance=ExtResource("2_mwp01")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.817619, 9.796223, 3.003212)
 
 [node name="prop_bed" parent="." instance=ExtResource("1_02nir")]
