@@ -1,6 +1,6 @@
 extends CharacterBody3D
 
-@onready var anim = $SpiderEnemy/entity_spider/AnimationPlayer
+@onready var anim = $entity_spider/AnimationPlayer
 @export var speed: float = 4.0
 @export var detection_range: float = 5.0  # How far the spider can "see" the player
 @onready var player = get_node("/root/LevelOne/Player")  # Replace with your player path
@@ -19,7 +19,13 @@ func _physics_process(delta):
 		move_and_slide()
 
 		# Play walking animation
-		anim.play("SpiderWalkCycle")
+		
+		if velocity.length() > 0.01:
+			if anim.current_animation != "walk":
+				anim.play("SpiderWalkCycle")
+		else:
+			if anim.current_animation != "idle":
+				anim.play("SpiderIdle")
 
 		# Rotate to face the player
 		if direction.length() > 0.01:
@@ -28,4 +34,4 @@ func _physics_process(delta):
 	else:
 		# Idle when player is far
 		velocity = Vector3.ZERO
-		anim.play("idle")
+		anim.play("SpiderIdle")

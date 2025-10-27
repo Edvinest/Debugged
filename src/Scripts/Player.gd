@@ -1,6 +1,6 @@
 extends CharacterBody3D
 
-@export var speed := 5.0
+@export var speed := 10.0
 @export var jump_velocity := 4.5
 @onready var firstPersonCamera = $FirstPersonCamera
 @onready var thirdPersonCamera = $ThirdPersonCamera

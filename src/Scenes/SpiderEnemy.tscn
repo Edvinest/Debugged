@@ -13,7 +13,5 @@ script = ExtResource("2_2yc0a")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.897522, -0.011829138, -3.31031)
 shape = SubResource("BoxShape3D_2yc0a")
 
-[node name="SpiderEnemy" type="Node3D" parent="."]
-
-[node name="entity_spider" parent="SpiderEnemy" instance=ExtResource("1_peton")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.2860208, 0, -3.473606)
+[node name="entity_spider" parent="." instance=ExtResource("1_peton")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.1989412, 0.048565626, -3.2908952)
