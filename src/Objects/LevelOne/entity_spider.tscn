@@ -1,0 +1,546 @@
+[gd_scene load_steps=6 format=3 uid="uid://cln6asbdyk1i3"]
+
+[ext_resource type="PackedScene" uid="uid://bslgbplahotop" path="res://src/Objects/LevelOne/entity_spider.glb" id="1_wlfnb"]
+[ext_resource type="Material" uid="uid://ca1kwee5fjjar" path="res://src/Objects/LevelOne/Materials/mat_emissionRed.tres" id="2_iv6wx"]
+[ext_resource type="Material" uid="uid://b4apxmgpff0s4" path="res://src/Objects/LevelOne/Materials/mat_spiderBody.tres" id="2_t3q8o"]
+[ext_resource type="Material" uid="uid://gcnqmh8k0s0m" path="res://src/Materials/entity_outline.tres" id="3_nurlt"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_t3q8o"]
+albedo_color = Color(0.654902, 0, 0, 1)
+emission_enabled = true
+emission = Color(0.827451, 0, 0, 1)
+emission_energy_multiplier = 4.95
+
+[node name="entity_spider" instance=ExtResource("1_wlfnb")]
+
+[node name="Skeleton3D" parent="Armature" index="0"]
+bones/0/position = Vector3(-0.65155804, -1.9153408, -4.322839)
+bones/1/position = Vector3(-0.07493665, -1.4120909, 4.322839)
+bones/2/position = Vector3(0.10224593, -1.58568, -4.322839)
+bones/3/position = Vector3(2.0132327, -1.9153414, 4.322839)
+bones/4/position = Vector3(3.6331985, -1.9153408, -4.322839)
+bones/5/position = Vector3(1.7222118, -1.58568, 4.322839)
+bones/6/position = Vector3(0.96211654, 0.36362886, -0.01344778)
+bones/6/rotation = Quaternion(0.0103973, -0.010397318, 0.70703036, 0.70703036)
+bones/7/rotation = Quaternion(-0.6513699, 5.7162083e-07, 4.709202e-07, 0.75876033)
+bones/8/rotation = Quaternion(1.19421735e-08, 1.9203257e-09, -0.19992676, 0.97981095)
+bones/9/rotation = Quaternion(-3.886705e-10, -9.488855e-10, 0.55594164, 0.83122134)
+bones/10/rotation = Quaternion(-3.5892669e-09, 1.974537e-09, 0.60372525, 0.7971924)
+bones/11/rotation = Quaternion(0.70099777, 9.5059995e-08, -1.0113986e-06, 0.71316355)
+bones/12/rotation = Quaternion(-1.5883714e-07, 4.162875e-07, -0.32378632, 0.9461303)
+bones/13/rotation = Quaternion(-5.7291294e-10, -5.637043e-10, 0.57058513, 0.82123846)
+bones/14/rotation = Quaternion(3.7740366e-10, -8.0386003e-10, 0.6761344, 0.7367784)
+bones/15/rotation = Quaternion(-0.6301062, 5.846731e-07, 4.552091e-07, 0.776509)
+bones/16/rotation = Quaternion(1.8007675e-08, 4.9735376e-09, -0.25464243, 0.9670353)
+bones/17/rotation = Quaternion(1.7443875e-09, -3.1627587e-09, 0.563044, 0.82642686)
+bones/18/rotation = Quaternion(-2.6453542e-09, 2.8794025e-09, 0.6353266, 0.7722436)
+bones/19/rotation = Quaternion(0.78262174, -2.8510124e-08, -1.0159607e-06, 0.6224975)
+bones/20/rotation = Quaternion(-9.371617e-08, 4.361104e-07, -0.24387512, 0.9698067)
+bones/21/rotation = Quaternion(5.6782494e-09, -3.030833e-09, 0.54870045, 0.8360191)
+bones/22/rotation = Quaternion(2.5958649e-09, 9.29322e-09, 0.6163161, 0.78749895)
+bones/23/rotation = Quaternion(-0.8241391, 4.3171818e-07, 6.0221936e-07, 0.5663876)
+bones/24/rotation = Quaternion(1.7664366e-08, 5.3695963e-09, -0.20249087, 0.97928417)
+bones/25/rotation = Quaternion(8.024211e-09, -2.8757925e-09, 0.5355977, 0.8444734)
+bones/26/rotation = Quaternion(4.8527897e-09, 1.3687636e-08, 0.5844953, 0.81139714)
+bones/27/rotation = Quaternion(0.6843417, -4.4504898e-08, -1.1829981e-06, 0.72916144)
+bones/28/rotation = Quaternion(-1.8898994e-07, 6.5754176e-07, -0.29620045, 0.95512587)
+bones/29/rotation = Quaternion(1.9263253e-09, -9.397598e-10, 0.5666001, 0.82399297)
+bones/30/rotation = Quaternion(-9.0681795e-10, 5.9098776e-10, 0.6585895, 0.75250244)
+
+[node name="Bone_005" parent="Armature/Skeleton3D" index="0"]
+transform = Transform3D(0, 0, -1, 1, 0, 0, 0, -1, 0, -0.65155804, -1.9153408, -4.322839)
+
+[node name="Cube_037" parent="Armature/Skeleton3D/Bone_005" index="0"]
+visible = false
+
+[node name="Cube_044" parent="Armature/Skeleton3D/Bone_005" index="1"]
+material_override = ExtResource("2_t3q8o")
+material_overlay = ExtResource("3_nurlt")
+
+[node name="Cube_046" parent="Armature/Skeleton3D/Bone_005" index="2"]
+material_override = ExtResource("2_t3q8o")
+material_overlay = ExtResource("3_nurlt")
+
+[node name="Cube_053" parent="Armature/Skeleton3D/Bone_005" index="3"]
+visible = false
+
+[node name="Bone_010" parent="Armature/Skeleton3D" index="1"]
+transform = Transform3D(4.7683716e-07, 0, 1, 1, 0, -4.7683716e-07, 0, 0.99999994, 0, -0.07493665, -1.4120909, 4.322839)
+
+[node name="Cube_055" parent="Armature/Skeleton3D/Bone_010" index="0"]
+material_override = ExtResource("2_t3q8o")
+material_overlay = ExtResource("3_nurlt")
+
+[node name="Cube_062" parent="Armature/Skeleton3D/Bone_010" index="1"]
+material_override = ExtResource("2_t3q8o")
+material_overlay = ExtResource("3_nurlt")
+
+[node name="Cube_064" parent="Armature/Skeleton3D/Bone_010" index="2"]
+visible = false
+
+[node name="Cube_071" parent="Armature/Skeleton3D/Bone_010" index="3"]
+visible = false
+
+[node name="Bone_019" parent="Armature/Skeleton3D" index="2"]
+transform = Transform3D(0, 0, -1, 1, 0, 0, 0, -1, 0, 0.10224593, -1.58568, -4.322839)
+
+[node name="Cube_019" parent="Armature/Skeleton3D/Bone_019" index="0"]
+material_override = ExtResource("2_t3q8o")
+material_overlay = ExtResource("3_nurlt")
+
+[node name="Cube_026" parent="Armature/Skeleton3D/Bone_019" index="1"]
+material_override = ExtResource("2_t3q8o")
+material_overlay = ExtResource("3_nurlt")
+
+[node name="Cube_028" parent="Armature/Skeleton3D/Bone_019" index="2"]
+visible = false
+material_override = ExtResource("2_t3q8o")
+
+[node name="Cube_035" parent="Armature/Skeleton3D/Bone_019" index="3"]
+visible = false
+
+[node name="Bone_020" parent="Armature/Skeleton3D" index="3"]
+transform = Transform3D(4.7683716e-07, 0, 1, 1, 0, -4.7683716e-07, 0, 0.99999994, 0, 2.0132327, -1.9153414, 4.322839)
+
+[node name="Cube_073" parent="Armature/Skeleton3D/Bone_020" index="0"]
+material_override = ExtResource("2_t3q8o")
+material_overlay = ExtResource("3_nurlt")
+
+[node name="Cube_080" parent="Armature/Skeleton3D/Bone_020" index="1"]
+material_override = ExtResource("2_t3q8o")
+material_overlay = ExtResource("3_nurlt")
+
+[node name="Cube_082" parent="Armature/Skeleton3D/Bone_020" index="2"]
+visible = false
+
+[node name="Cube_089" parent="Armature/Skeleton3D/Bone_020" index="3"]
+visible = false
+
+[node name="Bone_029" parent="Armature/Skeleton3D" index="4"]
+transform = Transform3D(0, 0, -1, 1, 0, 0, 0, -1, 0, 3.6331985, -1.9153408, -4.322839)
+
+[node name="Cube_001" parent="Armature/Skeleton3D/Bone_029" index="0"]
+material_override = ExtResource("2_t3q8o")
+material_overlay = ExtResource("3_nurlt")
+
+[node name="Cube_008" parent="Armature/Skeleton3D/Bone_029" index="1"]
+visible = false
+
+[node name="Cube_010" parent="Armature/Skeleton3D/Bone_029" index="2"]
+visible = false
+
+[node name="Cube_017" parent="Armature/Skeleton3D/Bone_029" index="3"]
+material_override = ExtResource("2_t3q8o")
+material_overlay = ExtResource("3_nurlt")
+
+[node name="Bone_030" parent="Armature/Skeleton3D" index="5"]
+transform = Transform3D(4.7683716e-07, 0, 1, 1, 0, -4.7683716e-07, 0, 0.99999994, 0, 1.7222118, -1.58568, 4.322839)
+
+[node name="Cube_091" parent="Armature/Skeleton3D/Bone_030" index="0"]
+material_override = ExtResource("2_t3q8o")
+material_overlay = ExtResource("3_nurlt")
+
+[node name="Cube_098" parent="Armature/Skeleton3D/Bone_030" index="1"]
+material_override = ExtResource("2_t3q8o")
+material_overlay = ExtResource("3_nurlt")
+
+[node name="Cube_100" parent="Armature/Skeleton3D/Bone_030" index="2"]
+visible = false
+
+[node name="Cube_107" parent="Armature/Skeleton3D/Bone_030" index="3"]
+visible = false
+
+[node name="Bone_004" parent="Armature/Skeleton3D" index="6"]
+transform = Transform3D(-0.13275361, 0.07286191, -0.98846734, -0.45545775, -0.89024645, -0.0044527813, -0.88030386, 0.44961393, 0.15136895, -0.7975994, -0.13573205, -5.223158)
+
+[node name="Cube_043" parent="Armature/Skeleton3D/Bone_004" index="0"]
+material_override = ExtResource("2_t3q8o")
+material_overlay = ExtResource("3_nurlt")
+
+[node name="Cube_052" parent="Armature/Skeleton3D/Bone_004" index="1"]
+material_overlay = ExtResource("3_nurlt")
+
+[node name="Bone_003" parent="Armature/Skeleton3D" index="7"]
+transform = Transform3D(-0.10611515, -0.10803682, -0.98846734, 0.7334815, -0.67969507, -0.0044527748, -0.6713752, -0.725495, 0.15136895, -0.58152574, 1.2236581, -3.772168)
+
+[node name="Cube_038" parent="Armature/Skeleton3D/Bone_003" index="0"]
+visible = false
+
+[node name="Cube_042" parent="Armature/Skeleton3D/Bone_003" index="1"]
+material_override = ExtResource("2_t3q8o")
+material_overlay = ExtResource("3_nurlt")
+
+[node name="Cube_047" parent="Armature/Skeleton3D/Bone_003" index="2"]
+material_override = ExtResource("2_t3q8o")
+material_overlay = ExtResource("3_nurlt")
+
+[node name="Cube_051" parent="Armature/Skeleton3D/Bone_003" index="3"]
+visible = false
+
+[node name="Bone_002" parent="Armature/Skeleton3D" index="8"]
+transform = Transform3D(0.059329007, -0.13932857, -0.98846734, 0.9082741, 0.41835225, -0.004452773, 0.41414788, -0.897535, 0.15136895, -0.3028686, 0.38695353, -1.9770979)
+
+[node name="Cube_039" parent="Armature/Skeleton3D/Bone_002" index="0"]
+material_override = ExtResource("2_t3q8o")
+material_overlay = ExtResource("3_nurlt")
+
+[node name="Cube_041" parent="Armature/Skeleton3D/Bone_002" index="1"]
+visible = false
+
+[node name="Cube_048" parent="Armature/Skeleton3D/Bone_002" index="2"]
+visible = false
+
+[node name="Cube_050" parent="Armature/Skeleton3D/Bone_002" index="3"]
+material_override = ExtResource("2_t3q8o")
+material_overlay = ExtResource("3_nurlt")
+
+[node name="Bone_001" parent="Armature/Skeleton3D" index="9"]
+transform = Transform3D(-8.9167166e-08, -0.15143439, -0.98846734, 0.99956775, 0.029064259, -0.004452771, 0.029403372, -0.98804, 0.15136892, 1.7881393e-07, 0.32882503, -0.0010179859)
+
+[node name="Cube_036" parent="Armature/Skeleton3D/Bone_001" index="0"]
+material_override = ExtResource("2_t3q8o")
+material_overlay = ExtResource("3_nurlt")
+
+[node name="Cube_040" parent="Armature/Skeleton3D/Bone_001" index="1"]
+material_override = ExtResource("2_t3q8o")
+material_overlay = ExtResource("3_nurlt")
+
+[node name="Cube_045" parent="Armature/Skeleton3D/Bone_001" index="2"]
+visible = false
+
+[node name="Cube_049" parent="Armature/Skeleton3D/Bone_001" index="3"]
+visible = false
+
+[node name="Bone_009" parent="Armature/Skeleton3D" index="10"]
+transform = Transform3D(-0.015345342, 0.00777893, 0.999852, -0.4781899, -0.8782565, -0.00050616526, 0.87812245, -0.4781267, 0.017196948, -0.09084706, 0.34503567, 5.281434)
+
+[node name="Cube_061" parent="Armature/Skeleton3D/Bone_009" index="0"]
+material_overlay = ExtResource("3_nurlt")
+
+[node name="Cube_070" parent="Armature/Skeleton3D/Bone_009" index="1"]
+material_override = ExtResource("2_t3q8o")
+material_overlay = ExtResource("3_nurlt")
+
+[node name="Bone_008" parent="Armature/Skeleton3D" index="11"]
+transform = Transform3D(-0.009065181, -0.014622374, 0.999852, 0.83405304, -0.55168426, -0.0005061656, 0.5516099, 0.8339249, 0.01719695, -0.061602313, 1.4484042, 3.613584)
+
+[node name="Cube_056" parent="Armature/Skeleton3D/Bone_008" index="0"]
+visible = false
+
+[node name="Cube_060" parent="Armature/Skeleton3D/Bone_008" index="1"]
+material_override = ExtResource("2_t3q8o")
+material_overlay = ExtResource("3_nurlt")
+
+[node name="Cube_065" parent="Armature/Skeleton3D/Bone_008" index="2"]
+material_override = ExtResource("2_t3q8o")
+material_overlay = ExtResource("3_nurlt")
+
+[node name="Cube_069" parent="Armature/Skeleton3D/Bone_008" index="3"]
+visible = false
+
+[node name="Bone_007" parent="Armature/Skeleton3D" index="12"]
+transform = Transform3D(0.010541165, -0.013596879, 0.999852, 0.8079956, 0.58918846, -0.0005061645, -0.5890943, 0.80788124, 0.017196948, -0.03440855, 0.27002716, 1.9978213)
+
+[node name="Cube_057" parent="Armature/Skeleton3D/Bone_007" index="0"]
+material_override = ExtResource("2_t3q8o")
+material_overlay = ExtResource("3_nurlt")
+
+[node name="Cube_059" parent="Armature/Skeleton3D/Bone_007" index="1"]
+material_override = ExtResource("2_t3q8o")
+material_overlay = ExtResource("3_nurlt")
+
+[node name="Cube_066" parent="Armature/Skeleton3D/Bone_007" index="2"]
+visible = false
+
+[node name="Cube_068" parent="Armature/Skeleton3D/Bone_007" index="3"]
+visible = false
+material_override = ExtResource("2_t3q8o")
+
+[node name="Bone_006" parent="Armature/Skeleton3D" index="13"]
+transform = Transform3D(1.190102e-06, -0.017204367, 0.999852, 0.99956775, -0.029398927, -0.0005070538, 0.0294033, 0.9994197, 0.01719689, 1.7881393e-07, 0.32882503, -0.0010179859)
+
+[node name="Cube_054" parent="Armature/Skeleton3D/Bone_006" index="0"]
+material_override = ExtResource("2_t3q8o")
+material_overlay = ExtResource("3_nurlt")
+
+[node name="Cube_058" parent="Armature/Skeleton3D/Bone_006" index="1"]
+material_override = ExtResource("2_t3q8o")
+material_overlay = ExtResource("3_nurlt")
+
+[node name="Cube_063" parent="Armature/Skeleton3D/Bone_006" index="2"]
+visible = false
+
+[node name="Cube_067" parent="Armature/Skeleton3D/Bone_006" index="3"]
+visible = false
+
+[node name="Bone_014" parent="Armature/Skeleton3D" index="14"]
+transform = Transform3D(-0.18196763, 0.09641525, -0.9785663, -0.4425615, -0.89671785, -0.0060552023, -0.8780816, 0.43197387, 0.20584328, -0.090266556, 0.20686007, -5.187668)
+
+[node name="Cube_025" parent="Armature/Skeleton3D/Bone_014" index="0"]
+visible = false
+
+[node name="Cube_034" parent="Armature/Skeleton3D/Bone_014" index="1"]
+material_override = ExtResource("2_t3q8o")
+material_overlay = ExtResource("3_nurlt")
+
+[node name="Bone_013" parent="Armature/Skeleton3D" index="15"]
+transform = Transform3D(-0.12967667, -0.15997526, -0.9785663, 0.7946172, -0.6070808, -0.0060551986, -0.5931001, -0.77837074, 0.20584328, 0.22968397, 1.4210217, -3.6309266)
+
+[node name="Cube_020" parent="Armature/Skeleton3D/Bone_013" index="0"]
+material_override = ExtResource("2_t3q8o")
+material_overlay = ExtResource("3_nurlt")
+
+[node name="Cube_024" parent="Armature/Skeleton3D/Bone_013" index="1"]
+material_override = ExtResource("2_t3q8o")
+material_overlay = ExtResource("3_nurlt")
+
+[node name="Cube_029" parent="Armature/Skeleton3D/Bone_013" index="2"]
+visible = false
+
+[node name="Cube_033" parent="Armature/Skeleton3D/Bone_013" index="3"]
+visible = false
+
+[node name="Bone_012" parent="Armature/Skeleton3D" index="16"]
+transform = Transform3D(0.10142086, -0.17922592, -0.9785663, 0.8557676, 0.5173252, -0.0060551926, 0.5073222, -0.8368111, 0.20584328, 0.5881358, 0.38637143, -1.9573047)
+
+[node name="Cube_021" parent="Armature/Skeleton3D/Bone_012" index="0"]
+visible = false
+
+[node name="Cube_023" parent="Armature/Skeleton3D/Bone_012" index="1"]
+material_override = ExtResource("2_t3q8o")
+material_overlay = ExtResource("3_nurlt")
+
+[node name="Cube_030" parent="Armature/Skeleton3D/Bone_012" index="2"]
+material_override = ExtResource("2_t3q8o")
+material_overlay = ExtResource("3_nurlt")
+
+[node name="Cube_032" parent="Armature/Skeleton3D/Bone_012" index="3"]
+visible = false
+
+[node name="Bone_011" parent="Armature/Skeleton3D" index="17"]
+transform = Transform3D(-8.934486e-08, -0.20593229, -0.9785663, 0.99956775, 0.028773129, -0.006055192, 0.029403372, -0.9781432, 0.20584325, 1.0000004, 0.32882518, -0.0010179887)
+
+[node name="Cube_018" parent="Armature/Skeleton3D/Bone_011" index="0"]
+material_override = ExtResource("2_t3q8o")
+material_overlay = ExtResource("3_nurlt")
+
+[node name="Cube_022" parent="Armature/Skeleton3D/Bone_011" index="1"]
+material_override = ExtResource("2_t3q8o")
+material_overlay = ExtResource("3_nurlt")
+
+[node name="Cube_027" parent="Armature/Skeleton3D/Bone_011" index="2"]
+visible = false
+
+[node name="Cube_031" parent="Armature/Skeleton3D/Bone_011" index="3"]
+visible = false
+
+[node name="Bone_018" parent="Armature/Skeleton3D" index="18"]
+transform = Transform3D(0.20486514, -0.093018815, 0.9743603, -0.43933484, -0.8982992, 0.006615298, 0.8746516, -0.4294257, -0.22489657, 2.199467, -0.11798024, 5.182507)
+
+[node name="Cube_079" parent="Armature/Skeleton3D/Bone_018" index="0"]
+material_overlay = ExtResource("3_nurlt")
+
+[node name="Cube_088" parent="Armature/Skeleton3D/Bone_018" index="1"]
+material_override = ExtResource("2_t3q8o")
+material_overlay = ExtResource("3_nurlt")
+
+[node name="Bone_017" parent="Armature/Skeleton3D" index="19"]
+transform = Transform3D(0.139524, 0.1765086, 0.9743603, 0.7663997, -0.64233017, 0.006615289, 0.62702864, 0.7458263, -0.22489658, 1.8464497, 1.1666801, 3.6908545)
+
+[node name="Cube_074" parent="Armature/Skeleton3D/Bone_017" index="0"]
+material_override = ExtResource("2_t3q8o")
+material_overlay = ExtResource("3_nurlt")
+
+[node name="Cube_078" parent="Armature/Skeleton3D/Bone_017" index="1"]
+material_override = ExtResource("2_t3q8o")
+material_overlay = ExtResource("3_nurlt")
+
+[node name="Cube_083" parent="Armature/Skeleton3D/Bone_017" index="2"]
+visible = false
+
+[node name="Cube_087" parent="Armature/Skeleton3D/Bone_017" index="3"]
+visible = false
+
+[node name="Bone_016" parent="Armature/Skeleton3D" index="20"]
+transform = Transform3D(-0.10642706, 0.19823094, 0.9743603, 0.894221, 0.44757712, 0.0066152937, -0.43478996, 0.87199736, -0.22489657, 1.4499879, 0.27152583, 1.94686)
+
+[node name="Cube_075" parent="Armature/Skeleton3D/Bone_016" index="0"]
+visible = false
+
+[node name="Cube_077" parent="Armature/Skeleton3D/Bone_016" index="1"]
+visible = false
+
+[node name="Cube_084" parent="Armature/Skeleton3D/Bone_016" index="2"]
+material_override = ExtResource("2_t3q8o")
+material_overlay = ExtResource("3_nurlt")
+
+[node name="Cube_086" parent="Armature/Skeleton3D/Bone_016" index="3"]
+material_override = ExtResource("2_t3q8o")
+material_overlay = ExtResource("3_nurlt")
+
+[node name="Bone_015" parent="Armature/Skeleton3D" index="21"]
+transform = Transform3D(1.1902821e-06, 0.2249938, 0.9743603, 0.99956775, -0.028649675, 0.0066144015, 0.0294033, 0.973939, -0.22489657, 1.0000004, 0.32882518, -0.0010179887)
+
+[node name="Cube_072" parent="Armature/Skeleton3D/Bone_015" index="0"]
+material_override = ExtResource("2_t3q8o")
+material_overlay = ExtResource("3_nurlt")
+
+[node name="Cube_076" parent="Armature/Skeleton3D/Bone_015" index="1"]
+material_override = ExtResource("2_t3q8o")
+material_overlay = ExtResource("3_nurlt")
+
+[node name="Cube_081" parent="Armature/Skeleton3D/Bone_015" index="2"]
+visible = false
+
+[node name="Cube_085" parent="Armature/Skeleton3D/Bone_015" index="3"]
+visible = false
+
+[node name="Bone_024" parent="Armature/Skeleton3D" index="22"]
+transform = Transform3D(0.3300691, -0.13968648, -0.9335641, -0.36429143, -0.93122566, 0.0105384, -0.8708308, 0.33661097, -0.35825524, 3.912524, -0.054002643, -4.9960527)
+
+[node name="Cube_007" parent="Armature/Skeleton3D/Bone_024" index="0"]
+visible = false
+
+[node name="Cube_016" parent="Armature/Skeleton3D/Bone_024" index="1"]
+material_override = ExtResource("2_t3q8o")
+material_overlay = ExtResource("3_nurlt")
+
+[node name="Bone_023" parent="Armature/Skeleton3D" index="23"]
+transform = Transform3D(0.2370377, 0.26883268, -0.9335641, 0.76789975, -0.6404836, 0.010538384, -0.59509933, -0.7193816, -0.3582552, 3.3748586, 1.2269646, -3.5572898)
+
+[node name="Cube_002" parent="Armature/Skeleton3D/Bone_023" index="0"]
+material_override = ExtResource("2_t3q8o")
+material_overlay = ExtResource("3_nurlt")
+
+[node name="Cube_006" parent="Armature/Skeleton3D/Bone_023" index="1"]
+visible = false
+
+[node name="Cube_011" parent="Armature/Skeleton3D/Bone_023" index="2"]
+visible = false
+
+[node name="Cube_015" parent="Armature/Skeleton3D/Bone_023" index="3"]
+material_override = ExtResource("2_t3q8o")
+material_overlay = ExtResource("3_nurlt")
+
+[node name="Bone_022" parent="Armature/Skeleton3D" index="24"]
+transform = Transform3D(-0.14214279, 0.32901874, -0.9335641, 0.9067117, 0.4216197, 0.010538388, 0.3970763, -0.8449754, -0.35825524, 2.7168212, 0.3837253, -1.8673393)
+
+[node name="Cube_003" parent="Armature/Skeleton3D/Bone_022" index="0"]
+visible = false
+
+[node name="Cube_005" parent="Armature/Skeleton3D/Bone_022" index="1"]
+visible = false
+
+[node name="Cube_012" parent="Armature/Skeleton3D/Bone_022" index="2"]
+material_override = ExtResource("2_t3q8o")
+material_overlay = ExtResource("3_nurlt")
+
+[node name="Cube_014" parent="Armature/Skeleton3D/Bone_022" index="3"]
+material_override = ExtResource("2_t3q8o")
+material_overlay = ExtResource("3_nurlt")
+
+[node name="Bone_021" parent="Armature/Skeleton3D" index="25"]
+transform = Transform3D(-8.979671e-08, 0.35841027, -0.9335641, 0.99956775, 0.027449965, 0.010538385, 0.029403372, -0.9331605, -0.35825527, 2.0000007, 0.32882535, -0.0010179924)
+
+[node name="Cube" parent="Armature/Skeleton3D/Bone_021" index="0"]
+visible = false
+
+[node name="Cube_004" parent="Armature/Skeleton3D/Bone_021" index="1"]
+material_override = ExtResource("2_t3q8o")
+material_overlay = ExtResource("3_nurlt")
+
+[node name="Cube_009" parent="Armature/Skeleton3D/Bone_021" index="2"]
+material_override = ExtResource("2_t3q8o")
+material_overlay = ExtResource("3_nurlt")
+
+[node name="Cube_013" parent="Armature/Skeleton3D/Bone_021" index="3"]
+visible = false
+
+[node name="Bone_028" parent="Armature/Skeleton3D" index="26"]
+transform = Transform3D(-0.056471653, 0.028714655, 0.9979912, -0.47921503, -0.87769574, -0.0018630798, 0.875879, -0.47835746, 0.06332541, 1.6644862, 0.1702913, 5.2819366)
+
+[node name="Cube_097" parent="Armature/Skeleton3D/Bone_028" index="0"]
+material_overlay = ExtResource("3_nurlt")
+
+[node name="Cube_106" parent="Armature/Skeleton3D/Bone_028" index="1"]
+material_override = ExtResource("2_t3q8o")
+material_overlay = ExtResource("3_nurlt")
+
+[node name="Bone_027" parent="Armature/Skeleton3D" index="27"]
+transform = Transform3D(-0.035945013, -0.052168332, 0.9979912, 0.8064493, -0.59130055, -0.0018630783, 0.59020984, 0.80476224, 0.06332541, 1.7688228, 1.3528924, 3.6724122)
+
+[node name="Cube_092" parent="Armature/Skeleton3D/Bone_027" index="0"]
+material_override = ExtResource("2_t3q8o")
+material_overlay = ExtResource("3_nurlt")
+
+[node name="Cube_096" parent="Armature/Skeleton3D/Bone_027" index="1"]
+material_override = ExtResource("2_t3q8o")
+material_overlay = ExtResource("3_nurlt")
+
+[node name="Cube_101" parent="Armature/Skeleton3D/Bone_027" index="2"]
+visible = false
+
+[node name="Cube_105" parent="Armature/Skeleton3D/Bone_027" index="3"]
+visible = false
+
+[node name="Bone_026" parent="Armature/Skeleton3D" index="28"]
+transform = Transform3D(0.03584637, -0.052236166, 0.9979912, 0.84077764, 0.54137766, -0.0018630766, -0.5401928, 0.8391554, 0.06332542, 1.8732951, 0.2701371, 1.9941014)
+
+[node name="Cube_093" parent="Armature/Skeleton3D/Bone_026" index="0"]
+visible = false
+
+[node name="Cube_095" parent="Armature/Skeleton3D/Bone_026" index="1"]
+material_override = ExtResource("2_t3q8o")
+material_overlay = ExtResource("3_nurlt")
+
+[node name="Cube_102" parent="Armature/Skeleton3D/Bone_026" index="2"]
+material_override = ExtResource("2_t3q8o")
+material_overlay = ExtResource("3_nurlt")
+
+[node name="Cube_104" parent="Armature/Skeleton3D/Bone_026" index="3"]
+visible = false
+
+[node name="Bone_025" parent="Armature/Skeleton3D" index="29"]
+transform = Transform3D(1.6668969e-06, -0.063352846, 0.9979912, 0.99956775, -0.029344128, -0.0018644448, 0.0294033, 0.9975597, 0.063325405, 2.0000007, 0.32882535, -0.0010179924)
+
+[node name="Cube_090" parent="Armature/Skeleton3D/Bone_025" index="0"]
+material_override = ExtResource("2_t3q8o")
+material_overlay = ExtResource("3_nurlt")
+
+[node name="Cube_094" parent="Armature/Skeleton3D/Bone_025" index="1"]
+material_overlay = ExtResource("3_nurlt")
+
+[node name="Cube_099" parent="Armature/Skeleton3D/Bone_025" index="2"]
+visible = false
+
+[node name="Cube_103" parent="Armature/Skeleton3D/Bone_025" index="3"]
+material_override = ExtResource("2_t3q8o")
+material_overlay = ExtResource("3_nurlt")
+
+[node name="Bone_031" parent="Armature/Skeleton3D" index="30"]
+transform = Transform3D(-1.1920929e-07, -1, -2.514571e-08, 0.9995677, -1.1920928e-07, -0.029404853, 0.029404853, -2.5145708e-08, 0.99956757, 0.96211654, 0.36362886, -0.01344778)
+
+[node name="Cube_115" parent="Armature/Skeleton3D/Bone_031" index="0"]
+material_override = ExtResource("2_t3q8o")
+material_overlay = ExtResource("3_nurlt")
+
+[node name="Cube_109" parent="Armature/Skeleton3D/Bone_031/Cube_115" index="0"]
+material_override = ExtResource("2_t3q8o")
+material_overlay = ExtResource("3_nurlt")
+
+[node name="Cube_110" parent="Armature/Skeleton3D/Bone_031/Cube_115" index="1"]
+transform = Transform3D(1, -6.661338e-16, 1.0658141e-14, -2.220446e-16, 1, 0, 0, 0, 1, 0.13506968, -0.08978726, -0.096532)
+material_override = ExtResource("2_t3q8o")
+material_overlay = ExtResource("3_nurlt")
+
+[node name="Cube_108" parent="Armature/Skeleton3D/Bone_031/Cube_115/Cube_110" index="0"]
+material_override = ExtResource("2_iv6wx")
+material_overlay = ExtResource("3_nurlt")
+
+[node name="Cube_113" parent="Armature/Skeleton3D/Bone_031/Cube_115/Cube_110" index="1"]
+material_override = ExtResource("2_iv6wx")
+material_overlay = ExtResource("3_nurlt")
+
+[node name="Cube_114" parent="Armature/Skeleton3D/Bone_031/Cube_115/Cube_110" index="2"]
+material_override = SubResource("StandardMaterial3D_t3q8o")
+material_overlay = ExtResource("3_nurlt")
