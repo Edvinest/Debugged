@@ -1,9 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://dct6crx3jwiat"]
+[gd_scene load_steps=9 format=3 uid="uid://dct6crx3jwiat"]
 
 [ext_resource type="Script" uid="uid://nchnj2u7kv5" path="res://src/Scripts/Player.gd" id="1_rpqav"]
-[ext_resource type="Script" path="res://src/Scripts/Hands.gd" id="2_kyqiw"]
+[ext_resource type="PackedScene" uid="uid://be1gwv0coi2ua" path="res://src/Scenes/WeaponInstance.tscn" id="3_5dq0m"]
 [ext_resource type="Script" uid="uid://dsi0c4pqhkju7" path="res://src/Scripts/PlayerCombat.gd" id="3_g1uh0"]
-[ext_resource type="Script" uid="uid://cf5websnqr811" path="res://src/Scripts/Weapon.gd" id="4_5dq0m"]
+[ext_resource type="Resource" uid="uid://dopfylkhey6db" path="res://src/Objects/Weapons/Blade1/TestBlade.tres" id="4_ma0cp"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_qbkls"]
 
@@ -12,10 +12,6 @@
 [sub_resource type="BoxMesh" id="BoxMesh_qbkls"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_rpqav"]
-
-[sub_resource type="Resource" id="Resource_ma0cp"]
-script = ExtResource("4_5dq0m")
-metadata/_custom_type_script = "uid://88e8mfb84hfa"
 
 [node name="CharacterBody3D" type="CharacterBody3D"]
 script = ExtResource("1_rpqav")
@@ -34,16 +30,16 @@ mesh = SubResource("CapsuleMesh_qm7rr")
 
 [node name="Hands" type="Node3D" parent="PlayerBody"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.39501464, 0.4332748)
-script = ExtResource("2_kyqiw")
+script = ExtResource("3_g1uh0")
 
 [node name="RightHand" type="MeshInstance3D" parent="PlayerBody/Hands"]
 transform = Transform3D(0.25, 0, 0, 0, 0.12031216, -0.13368723, 0, 0.02557314, 0.6289489, 0.4049094, 0, -0.71150947)
 mesh = SubResource("BoxMesh_qbkls")
 
+[node name="WeaponInstance" parent="PlayerBody/Hands/RightHand" instance=ExtResource("3_5dq0m")]
+transform = Transform3D(4, 0, 0, 0, 7.9524198, 1.6903387, 0, -0.32334632, 1.5212247, 0, -0.3020947, -0.27187097)
+weapon_data = ExtResource("4_ma0cp")
+
 [node name="LeftHand" type="MeshInstance3D" parent="PlayerBody/Hands"]
 transform = Transform3D(0.248, 0, 0, 0, 0.121290304, -0.12142043, 0, 0.02578105, 0.5712382, -0.323106, 0, -0.69663966)
 mesh = SubResource("BoxMesh_rpqav")
-
-[node name="PlayerCombat" type="Node" parent="."]
-script = ExtResource("3_g1uh0")
-right_weapon = SubResource("Resource_ma0cp")

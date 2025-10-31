@@ -1,0 +1,22 @@
+[gd_scene load_steps=5 format=3 uid="uid://be1gwv0coi2ua"]
+
+[ext_resource type="Script" uid="uid://bkaksglscwqf4" path="res://src/Scripts/WeaponInstance.gd" id="1_ow7c6"]
+[ext_resource type="Resource" uid="uid://dopfylkhey6db" path="res://src/Objects/Weapons/Blade1/TestBlade.tres" id="2_a37qv"]
+[ext_resource type="PackedScene" uid="uid://bu0r4bpxeg11y" path="res://src/Objects/Weapons/Blade1/Test.glb" id="3_hpulj"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_a37qv"]
+
+[node name="WeaponInstance" type="Node3D"]
+script = ExtResource("1_ow7c6")
+weapon_data = ExtResource("2_a37qv")
+
+[node name="ModelHolder" type="Node3D" parent="."]
+
+[node name="Area3D" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(0.48122728, 0, 0, 0, 0.26840216, 0.39942458, 0, -0.39942458, 0.26840216, 0, 0, 0)
+shape = SubResource("CapsuleShape3D_a37qv")
+
+[node name="Test" parent="Area3D" instance=ExtResource("3_hpulj")]
+visible = false
