@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://cdim0in7b6lrh"]
+
+[ext_resource type="PackedScene" uid="uid://bc747i8q8ahv2" path="res://src/Objects/LevelTwo/prop_lamp.glb" id="1_5gjly"]
+[ext_resource type="Material" uid="uid://ctn12158k3mp8" path="res://src/Objects/LevelTwo/Materials/mat_metallic.tres" id="2_hlqfe"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5gjly"]
+emission_enabled = true
+emission = Color(1.0946224, 1.1399221, 0.49440092, 1)
+emission_energy_multiplier = 9.07
+
+[node name="prop_lamp" instance=ExtResource("1_5gjly")]
+
+[node name="Cube" parent="." index="0"]
+material_override = ExtResource("2_hlqfe")
+
+[node name="Cylinder" parent="." index="1"]
+material_override = ExtResource("2_hlqfe")
+
+[node name="Cone" parent="." index="2"]
+material_override = ExtResource("2_hlqfe")
+
+[node name="Cube_001" parent="." index="3"]
+material_override = SubResource("StandardMaterial3D_5gjly")
