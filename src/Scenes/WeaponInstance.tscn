@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://bkaksglscwqf4" path="res://src/Scripts/WeaponInstance.gd" id="1_ow7c6"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_a37qv"]
+height = 4.0
 
 [node name="WeaponInstance" type="Node3D"]
 script = ExtResource("1_ow7c6")

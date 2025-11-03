@@ -35,14 +35,14 @@ left_weapon = ExtResource("4_ma0cp")
 right_weapon = ExtResource("4_ma0cp")
 
 [node name="RightHand" type="MeshInstance3D" parent="PlayerBody/Hands"]
-transform = Transform3D(0.25, 0, 0, 0, 0.12031216, -0.13368723, 0, 0.02557314, 0.6289489, 0.4049094, 0, -0.71150947)
+transform = Transform3D(0.25, 0, 0, 0, 0.12300001, 0, 0, 0, 0.643, 0.4049094, 0, -0.71150947)
 mesh = SubResource("BoxMesh_qbkls")
 
 [node name="WeaponInstance" parent="PlayerBody/Hands/RightHand" instance=ExtResource("4_5dq0m")]
 transform = Transform3D(4, 0, 0, 0, 7.9589896, 0, 0, 0, 2.2740648, 0, 0, 0)
 
 [node name="LeftHand" type="MeshInstance3D" parent="PlayerBody/Hands"]
-transform = Transform3D(0.248, 0, 0, 0, 0.121290304, -0.12142043, 0, 0.02578105, 0.5712382, -0.323106, 0, -0.69663966)
+transform = Transform3D(0.248, 0, 0, 0, 0.124000005, 0, 0, 0, 0.584, -0.323106, 0, -0.69663966)
 mesh = SubResource("BoxMesh_rpqav")
 
 [node name="WeaponInstance" parent="PlayerBody/Hands/LeftHand" instance=ExtResource("4_5dq0m")]

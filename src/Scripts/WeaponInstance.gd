@@ -6,7 +6,7 @@ extends Node3D
 @onready var hitbox : Area3D = $ModelHolder/Area3D
 var is_attacking : bool = false
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	if is_attacking:
 		if get_parent().get_parent().using_first_person():
 			_motion_hit_detection()
@@ -23,9 +23,9 @@ func _load_model(scene: PackedScene) -> void:
 	var instance = scene.instantiate()
 	model_holder.add_child(instance)
 
-	# Only needed if we don't use animation based attacks
-	#instance.transform.origin = weapon_data.weapon_position
-	#instance.rotation_degrees = weapon_data.weapon_rotation
+	# Only needed if we don't use animation based attacks or want to offset model
+	instance.transform.origin = weapon_data.weapon_position
+	instance.rotation_degrees = weapon_data.weapon_rotation
 
 func start_attack(is_motion: bool) -> void:
 	if is_attacking:
@@ -44,25 +44,25 @@ func _perform_standard_attack():
 
 	match weapon_data.weapon_type:
 		Weapon.WeaponType.BLADE:
-			_attack_slash(weapon_data)
+			_attack_slash()
 		Weapon.WeaponType.HAMMER:
-			_attack_slam(weapon_data)
+			_attack_slam()
 		Weapon.WeaponType.GUN:
-			_attack_shoot(weapon_data)
+			_attack_shoot()
 		_:
 			push_warning("Unknown weapon type")
 	
-func _attack_slash(weapon: Weapon):
+func _attack_slash():
 	#TODO: implement animations
 	_enable_hitbox(true)
 	await get_tree().create_timer(weapon_data.attack_speed).timeout
 	_enable_hitbox(false)
 
-func _attack_slam(weapon: Weapon):
+func _attack_slam():
 	# TODO: Implement it later
 	pass
 
-func _attack_shoot(weapon: Weapon):
+func _attack_shoot():
 	# TODO: Implement it later
 	pass
 
