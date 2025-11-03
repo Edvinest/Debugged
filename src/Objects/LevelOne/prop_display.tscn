@@ -46,14 +46,3 @@ shape = SubResource("ConcavePolygonShape3D_imvtd")
 transform = Transform3D(-5.0709154e-08, 1, 0, -1.1600902, -4.371139e-08, 0, 0, 0, 2.113734, -10.574767, 9.807245, 0.6526989)
 material_override = SubResource("StandardMaterial3D_m3jht")
 mesh = SubResource("PlaneMesh_xh8kq")
-
-[node name="@StaticBody3D@46916" parent="." index="1"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11, -8, 0)
-
-[node name="Cube_003" parent="@StaticBody3D@46916" index="0"]
-material_override = ExtResource("2_m3jht")
-material_overlay = ExtResource("3_m3jht")
-
-[node name="Cube_004" parent="@StaticBody3D@46916" index="1"]
-material_override = ExtResource("2_m3jht")
-material_overlay = ExtResource("3_m3jht")

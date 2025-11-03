@@ -20,9 +20,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.042946815, 0.73403645, -0.3
 material_override = SubResource("StandardMaterial3D_hna3a")
 material_overlay = ExtResource("2_tkpv1")
 
-[node name="@StaticBody3D@46909" parent="." index="1"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.042946815, 0.73403645, -0.33772373)
-
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." index="2"]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0.05707383, 1.6003745, -0.33975932)
 material_override = SubResource("StandardMaterial3D_6sxs0")

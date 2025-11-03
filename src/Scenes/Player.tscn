@@ -1,7 +1,7 @@
 [gd_scene load_steps=10 format=3 uid="uid://dct6crx3jwiat"]
 
 [ext_resource type="Script" uid="uid://nchnj2u7kv5" path="res://src/Scripts/Player.gd" id="1_rpqav"]
-[ext_resource type="Script" path="res://src/Scripts/Hands.gd" id="2_kyqiw"]
+[ext_resource type="Script" uid="uid://be4htp0wqoeex" path="res://src/Scripts/Hands.gd" id="2_kyqiw"]
 [ext_resource type="Script" uid="uid://dsi0c4pqhkju7" path="res://src/Scripts/PlayerCombat.gd" id="3_g1uh0"]
 [ext_resource type="Script" uid="uid://cf5websnqr811" path="res://src/Scripts/Weapon.gd" id="4_5dq0m"]
 

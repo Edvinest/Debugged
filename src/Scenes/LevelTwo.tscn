@@ -37,12 +37,11 @@ transform = Transform3D(20, 2.6545824e-06, 4.4597373e-06, -2.6545822e-06, -9.535
 light_color = Color(0.7764706, 0.7137255, 0.23921569, 1)
 light_energy = 7.454
 shadow_enabled = true
+spot_range = 5.0458097
+spot_angle = 89.99
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_mp8yv")
-
-[node name="LightmapGI" type="LightmapGI" parent="WorldEnvironment"]
-transform = Transform3D(0.5707643, 0.26791108, -0.77617764, 0.0036535407, 0.9444361, 0.32867497, 0.8211058, -0.19043176, 0.5380716, 0, 1.0995595, 0)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="WorldEnvironment"]
 transform = Transform3D(0.5707643, 0.26791108, -0.77617764, 0.0036535407, 0.9444361, 0.32867497, 0.8211058, -0.19043176, 0.5380716, 0, 1.0995595, 0)
