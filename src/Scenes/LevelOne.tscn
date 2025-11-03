@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://ch7albaj53q7" path="res://src/Objects/LevelOne/prop_floor.tscn" id="2_1b8pk"]
 [ext_resource type="PackedScene" uid="uid://dct6crx3jwiat" path="res://src/Scenes/Player.tscn" id="2_mwp01"]
 [ext_resource type="PackedScene" uid="uid://b7pxexvaix2s4" path="res://src/Objects/LevelOne/prop_desk.tscn" id="3_ajlcv"]
-[ext_resource type="Texture2D" uid="uid://n7sqk2ahk5er" path="res://src/Objects/LevelOne/Materials/citrus_orchard_puresky_1k.exr" id="4_n562r"]
+[ext_resource type="Texture2D" uid="uid://n7sqk2ahk5er" path="res://src/Materials/citrus_orchard_puresky_1k.exr" id="4_n562r"]
 [ext_resource type="PackedScene" uid="uid://bp2svu4xo4o8r" path="res://src/Objects/LevelOne/prop_cabinet.tscn" id="5_austs"]
 [ext_resource type="PackedScene" uid="uid://bureje6ylljyi" path="res://src/Objects/LevelOne/prop_chair.tscn" id="6_ceyxk"]
 [ext_resource type="PackedScene" uid="uid://c2dk8817ndhwr" path="res://src/Objects/LevelOne/prop_deskLamp.tscn" id="7_ygok4"]

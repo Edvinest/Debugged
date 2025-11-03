@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://chlrsoaokxhib"]
+
+[ext_resource type="PackedScene" uid="uid://cr7emqx2wqtv6" path="res://src/Objects/LevelTwo/prop_hut.glb" id="1_ptfbe"]
+[ext_resource type="Material" uid="uid://b8rkle3b5r23o" path="res://src/Objects/LevelTwo/Materials/mat_wood2.tres" id="2_bg8iy"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8pus3"]
+albedo_color = Color(0.48235294, 0.14901961, 0.11764706, 1)
+
+[node name="prop_hut" instance=ExtResource("1_ptfbe")]
+
+[node name="Hut" parent="." index="0"]
+transform = Transform3D(0, 0, 1.0152066, 0, 1.0152066, 0, -0.98829097, 0, 0, -2.0753791, 0.0036672782, 0.0013189316)
+material_override = ExtResource("2_bg8iy")
+
+[node name="Roof" parent="Hut" index="0"]
+material_override = SubResource("StandardMaterial3D_8pus3")
+
+[node name="Walls" parent="Hut" index="1"]
+material_override = ExtResource("2_bg8iy")
+
+[node name="Hut_001" parent="." index="1"]
+transform = Transform3D(0, 0, 1.0152066, 0, 1.0152066, 0, -0.98829097, 0, 0, -2.0753791, 0.0036672782, 0.0013189316)

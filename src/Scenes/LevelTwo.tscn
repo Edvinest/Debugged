@@ -1,0 +1,31 @@
+[gd_scene load_steps=8 format=3 uid="uid://8qntwwgak3vn"]
+
+[ext_resource type="PackedScene" uid="uid://d2d2c08im7jck" path="res://src/Objects/LevelTwo/prop_garden.tscn" id="1_ufe8o"]
+[ext_resource type="PackedScene" uid="uid://chlrsoaokxhib" path="res://src/Objects/LevelTwo/prop_hut.tscn" id="2_w8vme"]
+[ext_resource type="PackedScene" uid="uid://dct6crx3jwiat" path="res://src/Scenes/Player.tscn" id="3_3ce2r"]
+[ext_resource type="Texture2D" uid="uid://n7sqk2ahk5er" path="res://src/Materials/citrus_orchard_puresky_1k.exr" id="4_go00i"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_u45fr"]
+panorama = ExtResource("4_go00i")
+energy_multiplier = 0.5
+
+[sub_resource type="Sky" id="Sky_bn36d"]
+sky_material = SubResource("PanoramaSkyMaterial_u45fr")
+
+[sub_resource type="Environment" id="Environment_mp8yv"]
+background_mode = 2
+sky = SubResource("Sky_bn36d")
+
+[node name="LevelTwo" type="Node3D"]
+
+[node name="prop_garden" parent="." instance=ExtResource("1_ufe8o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.47490692, 0, -1.3476486)
+
+[node name="prop_hut" parent="." instance=ExtResource("2_w8vme")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.08250743, -0.008635223, 4.85423)
+
+[node name="CharacterBody3D" parent="." instance=ExtResource("3_3ce2r")]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -2.3080695, 0.9941931, -0.15144433)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_mp8yv")
