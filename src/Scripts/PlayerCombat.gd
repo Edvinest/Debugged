@@ -19,6 +19,10 @@ var attack_cooldown_left : float = 0.0
 var attack_cooldown_right : float = 0.0
 
 func _ready():
+	if right_hand.has_node("WeaponInstance"):
+		right_hand.get_node("WeaponInstance").set_weapon_data(right_weapon)
+	if left_hand.has_node("WeaponInstance"):
+		left_hand.get_node("WeaponInstance").set_weapon_data(right_weapon)
 	udp.bind(4243, "127.0.0.1")
 	
 	if Input.get_connected_joypads().is_empty():
@@ -40,33 +44,14 @@ func _process(delta: float) -> void:
 
 func _detect_input_attacks():
 	if Input.is_action_just_pressed("attack_left"):
-		_perform_attack(left_weapon, left_hand, "L")
+		if left_hand.has_node("WeaponInstance"):
+			left_hand.get_node("WeaponInstance").start_attack()
+			
 	if Input.is_action_just_pressed("attack_right"):
-		_perform_attack(right_weapon, right_hand, "R")
+		if right_hand.has_mode("WeaponInstance"):
+			right_hand.get_node("WeaponInstance").start_attack()
 
-func _perform_attack(weapon: Weapon, hand: Node3D, hand_side: String):
-	if weapon == null:
-		return
 
-	match weapon.weapon_type:
-		"blade":
-			_attack_slash(weapon, hand)
-		"hammer":
-			_attack_slam(weapon, hand)
-		"gun":
-			_attack_shoot(weapon, hand)
-
-func _attack_slash(weapon: Weapon, hand: Node3D):
-	# TODO: Implement it later
-	pass
-
-func _attack_slam(weapon: Weapon, hand: Node3D):
-	# TODO: Implement it later
-	pass
-
-func _attack_shoot(weapon: Weapon, hand: Node3D):
-	# TODO: Implement it later
-	pass
 
 func _handle_joycon():
 	while udp.get_available_packet_count() > 0:
