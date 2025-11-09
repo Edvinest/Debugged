@@ -11,13 +11,21 @@ config_version=5
 [application]
 
 config/name="Debugged"
-run/main_scene="uid://bp1n81hkwp3tu"
+run/main_scene="uid://vbf7gt6ejvsd"
 config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
+
+[autoload]
+
+Firebase="*res://addons/godot-firebase/firebase/firebase.tscn"
 
 [display]
 
 display_server/driver.linuxbsd="wayland"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/godot-firebase/plugin.cfg")
 
 [input]
 
