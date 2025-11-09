@@ -2,20 +2,24 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c86l2n0h37f7n"
-path="res://.godot/imported/Test.png-4db1d4579c64c99806ab9c8ee6043e08.ctex"
+uid="uid://buutvr13a37up"
+path.s3tc="res://.godot/imported/Sword1_Sword.png-0fa68fbd0ccc3ea9818c8ef73b500058.s3tc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
+}
+generator_parameters={
+"md5": "9fa4e35ad16be4f14795b7b4de4fcb7b"
 }
 
 [deps]
 
-source_file="res://src/Objects/Weapons/Blade1/Test.png"
-dest_files=["res://.godot/imported/Test.png-4db1d4579c64c99806ab9c8ee6043e08.ctex"]
+source_file="res://src/Objects/Weapons/Blade1/Sword1_Sword.png"
+dest_files=["res://.godot/imported/Sword1_Sword.png-0fa68fbd0ccc3ea9818c8ef73b500058.s3tc.ctex"]
 
 [params]
 
-compress/mode=0
+compress/mode=2
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/uastc_level=0
@@ -23,7 +27,7 @@ compress/rdo_quality_loss=0.0
 compress/hdr_compression=1
 compress/normal_map=0
 compress/channel_pack=0
-mipmaps/generate=false
+mipmaps/generate=true
 mipmaps/limit=-1
 roughness/mode=0
 roughness/src_normal=""
@@ -37,4 +41,4 @@ process/normal_map_invert_y=false
 process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
-detect_3d/compress_to=1
+detect_3d/compress_to=0

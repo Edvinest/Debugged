@@ -12,6 +12,3 @@ enum WeaponType {BLADE, HAMMER, GUN}
 @export_category("Weapon orientation")
 @export var weapon_position : Vector3
 @export var weapon_rotation : Vector3
-
-# TODO: implement weapon animation dictionary
-# var attack_animations : Dictionary = {}
