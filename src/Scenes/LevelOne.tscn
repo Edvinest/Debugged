@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://bp1n81hkwp3tu"]
+[gd_scene load_steps=27 format=3 uid="uid://bp1n81hkwp3tu"]
 
 [ext_resource type="PackedScene" uid="uid://chpye160qgiy6" path="res://src/Objects/LevelOne/prop_bed.tscn" id="1_02nir"]
 [ext_resource type="PackedScene" uid="uid://ch7albaj53q7" path="res://src/Objects/LevelOne/prop_floor.tscn" id="2_1b8pk"]
@@ -17,6 +17,7 @@
 [ext_resource type="PackedScene" uid="uid://cwl5p6tqsbgn0" path="res://src/Objects/LevelOne/prop_walls.tscn" id="14_pjf87"]
 [ext_resource type="Material" uid="uid://ckflsbqsydvbq" path="res://src/Objects/LevelOne/Materials/mat_clay.tres" id="15_2rfmo"]
 [ext_resource type="PackedScene" uid="uid://bliarftr5secx" path="res://src/Objects/LevelOne/prop_pc.tscn" id="17_f868b"]
+[ext_resource type="Script" uid="uid://dj63i1pq61734" path="res://src/Scripts/teleportation_demo.gd" id="18_7qily"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_ndl4m"]
 panorama = ExtResource("4_n562r")
@@ -34,6 +35,20 @@ glow_levels/3 = 1.07
 glow_levels/5 = 0.42
 
 [sub_resource type="BoxMesh" id="BoxMesh_f868b"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_f868b"]
+emission_enabled = true
+emission = Color(1, 0, 0, 1)
+emission_energy_multiplier = 8.43
+
+[sub_resource type="BoxMesh" id="BoxMesh_7qily"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_46rq7"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_58uts"]
+emission_enabled = true
+emission = Color(1, 0, 0, 1)
+emission_energy_multiplier = 7.55
 
 [node name="LevelOne" type="Node3D"]
 
@@ -122,3 +137,22 @@ mesh = SubResource("BoxMesh_f868b")
 
 [node name="prop_pc" parent="." instance=ExtResource("17_f868b")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.217733, 3.3334022, -6.8039417)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.29999998, 0, 0, 0, 0.29999998, 0, 0, 0, 0.29999998, 7, 3.3905268, 0)
+material_override = SubResource("StandardMaterial3D_f868b")
+mesh = SubResource("BoxMesh_7qily")
+script = ExtResource("18_7qily")
+
+[node name="Area3D" type="Area3D" parent="MeshInstance3D"]
+transform = Transform3D(1.0000001, 0, 0, 0, 1.0000001, 0, 0, 0, 1.0000001, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/Area3D"]
+shape = SubResource("BoxShape3D_46rq7")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 13, 6.390527, 4)
+material_override = SubResource("StandardMaterial3D_58uts")
+mesh = SubResource("BoxMesh_7qily")
+
+[connection signal="body_entered" from="MeshInstance3D/Area3D" to="MeshInstance3D" method="_on_area_3d_body_entered"]
