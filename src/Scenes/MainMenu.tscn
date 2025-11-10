@@ -1,0 +1,88 @@
+[gd_scene load_steps=6 format=3 uid="uid://c17fchistp0rd"]
+
+[ext_resource type="Texture2D" uid="uid://c3v3sa5pct3nm" path="res://src/Objects/MainMenu/icon.png" id="1_814sq"]
+
+[sub_resource type="SystemFont" id="SystemFont_814sq"]
+
+[sub_resource type="SystemFont" id="SystemFont_ftic1"]
+
+[sub_resource type="SystemFont" id="SystemFont_jlbbt"]
+
+[sub_resource type="SystemFont" id="SystemFont_1nasp"]
+
+[node name="MainMenu" type="Node2D"]
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+custom_minimum_size = Vector2(1920, 1080)
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ProfileMenu" type="MarginContainer" parent="PanelContainer"]
+custom_minimum_size = Vector2(350, 250)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 15
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/ProfileMenu"]
+layout_mode = 2
+
+[node name="ProfileButton" type="MenuButton" parent="PanelContainer/ProfileMenu/VBoxContainer"]
+unique_name_in_owner = true
+light_mask = 0
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+theme_override_fonts/font = SubResource("SystemFont_814sq")
+icon = ExtResource("1_814sq")
+
+[node name="Menu" type="MarginContainer" parent="PanelContainer"]
+custom_minimum_size = Vector2(450, 350)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = 50
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/Menu"]
+custom_minimum_size = Vector2(750, 750)
+layout_mode = 2
+theme_override_constants/separation = 30
+
+[node name="MainMenu" type="Label" parent="PanelContainer/Menu/VBoxContainer"]
+custom_minimum_size = Vector2(300, 150)
+layout_mode = 2
+size_flags_stretch_ratio = 0.0
+theme_override_fonts/font = SubResource("SystemFont_ftic1")
+theme_override_font_sizes/font_size = 40
+text = "MENU"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="StartGameButton" type="Button" parent="PanelContainer/Menu/VBoxContainer"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+theme_override_fonts/font = SubResource("SystemFont_jlbbt")
+theme_override_font_sizes/font_size = 25
+text = "START GAME"
+
+[node name="OptionsButton" type="Button" parent="PanelContainer/Menu/VBoxContainer"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+theme_override_fonts/font = SubResource("SystemFont_1nasp")
+theme_override_font_sizes/font_size = 25
+text = "OPTIONS
+"
+
+[node name="ExitButton" type="Button" parent="PanelContainer/Menu/VBoxContainer"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_font_sizes/font_size = 25
+text = "EXIT GAME"

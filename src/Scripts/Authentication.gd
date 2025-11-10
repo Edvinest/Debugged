@@ -40,6 +40,7 @@ func on_login_succeeded(auth)->void:
 		return
 	var username = user_doc.get("user_name")
 	%StateLabel.text = "Welcome back, %s!" % username	
+	get_tree().change_scene_to_file("res://src/Scenes/MainMenu.tscn")
 
 func on_signup_succeeded(auth)->void:
 	print("Auth response:", auth)
@@ -58,7 +59,7 @@ func on_signup_succeeded(auth)->void:
 	var users_collection = Firebase.Firestore.collection("users")
 	await users_collection.add(uid, user_data)
 	%StateLabel.text = "Signup successful! You can now log in."
-	
+	get_tree().change_scene_to_file("res://src/Scenes/MainMenu.tscn")
 	
 func on_login_failed(error_code, message)->void:
 	print(error_code)
