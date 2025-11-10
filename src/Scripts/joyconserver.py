@@ -5,21 +5,19 @@ from evdev import list_devices, InputDevice, ecodes
 UDP_IP = "127.0.0.1"
 UDP_PORT = 4243
 
-sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM) # open socket so we can send the data from the joy-cons to Godot
+sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 
 # -------------------------------
 # Find all IMU devices (Joy-Cons)
-# IMU - Inertial Measurment Units
-# We ignore the combined controller
 # -------------------------------
 def find_imu_devices():
     devices = []
     for fn in list_devices():
         d = InputDevice(fn)
-        if "Nintendo Switch" in d.name:
-            if "Left" in d.name:
+        if "Joy-Con" in d.name and "(IMU)" in d.name:
+            if "(L)" in d.name:
                 devices.append(("L", d))
-            elif "Right" in d.name:
+            elif "(R)" in d.name:
                 devices.append(("R", d))
     if not devices:
         raise SystemExit("No Joy-Con IMU devices found (check permissions).")
@@ -28,7 +26,7 @@ def find_imu_devices():
 # axis mapping
 axis_map = {
     ecodes.ABS_X: 'accel_x', ecodes.ABS_Y: 'accel_y', ecodes.ABS_Z: 'accel_z',
-    ecodes.ABS_RX: 'gyro_x',  ecodes.ABS_RY: 'gyro_y',  ecodes.ABS_RZ: 'gyro_z'
+    ecodes.ABS_RX: 'gyro_x', ecodes.ABS_RY: 'gyro_y', ecodes.ABS_RZ: 'gyro_z'
 }
 
 # -------------------------------
@@ -36,7 +34,7 @@ axis_map = {
 # -------------------------------
 def handle_device(dev, tag):
     vals = {}
-    roll = pitch = 0.0
+    roll = pitch = yaw = 0.0
     last_t = time.time()
     alpha = 0.98  # complementary filter weight
 
@@ -50,7 +48,7 @@ def handle_device(dev, tag):
         if ev.type == ecodes.EV_ABS and ev.code in axis_map:
             vals[axis_map[ev.code]] = ev.value
 
-            if all(k in vals for k in ('accel_x','accel_y','accel_z')):
+            if all(k in vals for k in ('accel_x', 'accel_y', 'accel_z')):
                 ax, ay, az = vals['accel_x'], vals['accel_y'], vals['accel_z']
 
                 ai_x, ai_y, ai_z = dev.absinfo(ecodes.ABS_X), dev.absinfo(ecodes.ABS_Y), dev.absinfo(ecodes.ABS_Z)
@@ -65,15 +63,25 @@ def handle_device(dev, tag):
                 dt = now - last_t
                 last_t = now
 
-                if all(k in vals for k in ('gyro_x','gyro_y')):
+                if all(k in vals for k in ('gyro_x', 'gyro_y', 'gyro_z')):
                     gx = gyro_to_rads(ecodes.ABS_RX, vals['gyro_x'])
                     gy = gyro_to_rads(ecodes.ABS_RY, vals['gyro_y'])
-                    roll = alpha * (roll + gx * dt) + (1 - alpha) * roll_acc
+                    gz = gyro_to_rads(ecodes.ABS_RZ, vals['gyro_z'])
+
+                    # Integrate gyroscope for orientation
+                    roll  = alpha * (roll  + gx * dt) + (1 - alpha) * roll_acc
                     pitch = alpha * (pitch + gy * dt) + (1 - alpha) * pitch_acc
+                    yaw  += gz * dt  # yaw only from gyro (will drift)
                 else:
                     roll, pitch = roll_acc, pitch_acc
 
-                msg = f"{tag}:{roll:.4f},{pitch:.4f}"
+                # Normalize yaw to [-pi, pi]
+                if yaw > math.pi:
+                    yaw -= 2 * math.pi
+                elif yaw < -math.pi:
+                    yaw += 2 * math.pi
+
+                msg = f"{tag}:{yaw:.4f},{pitch:.4f},{roll:.4f}"
                 sock.sendto(msg.encode(), (UDP_IP, UDP_PORT))
 
 # -------------------------------
@@ -85,13 +93,7 @@ for tag, dev in devices:
     print(f"  {tag}: {dev.path} {dev.name}")
     threading.Thread(target=handle_device, args=(dev, tag), daemon=True).start()
 
-# This code is redundant
-# Assign first Joy-Con = Left (L), second = Right (R)
-# for idx, dev in enumerate(devices):
-#     tag = "L" if idx == 0 else "R"
-#     threading.Thread(target=handle_device, args=(dev, tag), daemon=True).start()
-
-print("Streaming IMU data over UDP on", UDP_IP, UDP_PORT)
+print("Streaming IMU data (yaw, pitch, roll) over UDP on", UDP_IP, UDP_PORT)
 
 # Keep main thread alive
 while True:

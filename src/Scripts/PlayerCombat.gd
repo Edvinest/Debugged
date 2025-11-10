@@ -58,7 +58,7 @@ func _detect_input_attacks():
 func _handle_joycon():
 	while udp.get_available_packet_count() > 0:
 		var packet = udp.get_packet().get_string_from_utf8().strip_edges()
-		print("Got packet:", packet)
+		#print("Got packet:", packet)
 
 		# Expect "L:roll,pitch" or "R:roll,pitch"
 		var side_and_vals = packet.split(":")
@@ -69,12 +69,13 @@ func _handle_joycon():
 				var roll = float(vals[0])
 				var pitch = float(vals[1])
 
+				var joy_sensitivity : float = 0.1
 				if side == "L":
-					targetRotL.x = pitch
-					targetRotL.z = roll
+					targetRotL.x = pitch * joy_sensitivity
+					targetRotL.z = roll * joy_sensitivity
 				elif side == "R":
-					targetRotR.x = pitch
-					targetRotR.z = roll
+					targetRotR.x = pitch * joy_sensitivity
+					targetRotR.z = roll * joy_sensitivity
 
 	if using_first_person:
 		# Smooth interpolation
