@@ -1,37 +1,15 @@
 extends CharacterBody3D
 
-@onready var anim = $entity_spider/AnimationPlayer
-@export var speed: float = 4.0
-@export var detection_range: float = 5.0  # How far the spider can "see" the player
-@onready var player = get_node("/root/LevelOne/Player")  # Replace with your player path
+@onready var animation: AnimationPlayer = $AnimationPlayer
+@onready var player: CharacterBody3D = $"../Player"
 
-func _physics_process(delta):
-	if not player:
-		return
+const DETECTION_DISTANCE = 10.0
 
-	var direction = player.global_position - global_position
-	var distance_to_player = direction.length()
-
-	if distance_to_player <= detection_range:
-		# Move towards player
-		direction = direction.normalized()
-		velocity = direction * speed
-		move_and_slide()
-
-		# Play walking animation
-		
-		if velocity.length() > 0.01:
-			if anim.current_animation != "walk":
-				anim.play("SpiderWalkCycle")
-		else:
-			if anim.current_animation != "idle":
-				anim.play("SpiderIdle")
-
-		# Rotate to face the player
-		if direction.length() > 0.01:
-			look_at(global_position + direction, Vector3.UP)
-			rotate_y(deg_to_rad(-60))  # rotate 90 degrees around Y to match mesh forward
-	else:
-		# Idle when player is far
-		velocity = Vector3.ZERO
-		anim.play("SpiderIdle")
+func _physics_process(delta: float) -> void:
+	var distance = global_position.distance_to(player.global_position)
+	
+	if distance < DETECTION_DISTANCE:
+		var target = player.global_position
+		target.y = global_position.y
+		look_at(target, Vector3.UP)
+		rotate_y(-50)
