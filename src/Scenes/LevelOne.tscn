@@ -38,20 +38,20 @@ glow_levels/5 = 0.42
 
 [node name="LevelOne" type="Node3D"]
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_ygosd")
-
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(0.52632487, -0.5022381, -0.68610424, -0.40805054, -0.85711664, 0.31439757, -0.7459738, 0.114489995, -0.65606016, -5.5181646, 11.93999, 0)
-light_color = Color(1, 1, 0.5372549, 1)
-light_energy = 0.1
-shadow_enabled = true
+[node name="Player" parent="." instance=ExtResource("2_mwp01")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.817619, 9.796223, 3.003212)
 
 [node name="SpiderEnemy" parent="." instance=ExtResource("18_7qily")]
 transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 4.210294, 3.8804832, 1.172594)
 
-[node name="Player" parent="." instance=ExtResource("2_mwp01")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.817619, 9.796223, 3.003212)
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_ygosd")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.52632487, -0.5022381, -0.68610424, -0.40805054, -0.85711664, 0.31439754, -0.7459738, 0.11448996, -0.65606034, -5.5181646, 11.93999, 0)
+light_color = Color(1, 1, 0.5372549, 1)
+light_energy = 0.1
+shadow_enabled = true
 
 [node name="prop_bed" parent="." instance=ExtResource("1_02nir")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5832319, -0.28739643, -1.3672981)
