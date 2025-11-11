@@ -1,8 +1,9 @@
-[gd_scene load_steps=22 format=3 uid="uid://bp1n81hkwp3tu"]
+[gd_scene load_steps=23 format=3 uid="uid://bp1n81hkwp3tu"]
 
 [ext_resource type="PackedScene" uid="uid://chpye160qgiy6" path="res://src/Objects/LevelOne/prop_bed.tscn" id="1_02nir"]
 [ext_resource type="PackedScene" uid="uid://ch7albaj53q7" path="res://src/Objects/LevelOne/prop_floor.tscn" id="2_1b8pk"]
 [ext_resource type="PackedScene" uid="uid://dct6crx3jwiat" path="res://src/Scenes/Player.tscn" id="2_mwp01"]
+[ext_resource type="PackedScene" uid="uid://rm072rt8lhy7" path="res://src/Scenes/HUD.tscn" id="3_7qily"]
 [ext_resource type="PackedScene" uid="uid://b7pxexvaix2s4" path="res://src/Objects/LevelOne/prop_desk.tscn" id="3_ajlcv"]
 [ext_resource type="Texture2D" uid="uid://n7sqk2ahk5er" path="res://src/Materials/citrus_orchard_puresky_1k.exr" id="4_n562r"]
 [ext_resource type="PackedScene" uid="uid://bp2svu4xo4o8r" path="res://src/Objects/LevelOne/prop_cabinet.tscn" id="5_austs"]
@@ -48,6 +49,8 @@ shadow_enabled = true
 
 [node name="CharacterBody3D" parent="." instance=ExtResource("2_mwp01")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.817619, 9.796223, 3.003212)
+
+[node name="HUD" parent="." instance=ExtResource("3_7qily")]
 
 [node name="prop_bed" parent="." instance=ExtResource("1_02nir")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5832319, -0.28739643, -1.3672981)
