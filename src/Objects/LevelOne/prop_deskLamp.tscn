@@ -1,29 +1,21 @@
-[gd_scene load_steps=6 format=3 uid="uid://c2dk8817ndhwr"]
+[gd_scene load_steps=5 format=3 uid="uid://c83chm8mrrym0"]
 
-[ext_resource type="PackedScene" uid="uid://dl67xfv77ca4c" path="res://src/Objects/LevelOne/prop_deskLamp.glb" id="1_6sxs0"]
-[ext_resource type="Material" uid="uid://cghjbmyu661mi" path="res://src/Materials/simple_outline.tres" id="2_tkpv1"]
+[ext_resource type="PackedScene" uid="uid://06twg7cg6gy1" path="res://src/Objects/LevelOne/prop_deskLamp.glb" id="1_6sxs0"]
+[ext_resource type="Material" uid="uid://ckflsbqsydvbq" path="res://src/Objects/LevelOne/Materials/mat_clay.tres" id="2_6sxs0"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hna3a"]
-albedo_color = Color(0.79606956, 0.3443769, 0.4617033, 1)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6sxs0"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tkpv1"]
 emission_enabled = true
 emission = Color(0.84705883, 0.6627451, 0, 1)
-emission_energy_multiplier = 16.0
+emission_energy_multiplier = 2.24
 
-[sub_resource type="SphereMesh" id="SphereMesh_tkpv1"]
+[sub_resource type="SphereMesh" id="SphereMesh_uj8h1"]
 
 [node name="prop_deskLamp" instance=ExtResource("1_6sxs0")]
 
 [node name="lamp" parent="." index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.042946815, 0.73403645, -0.33772373)
-material_override = SubResource("StandardMaterial3D_hna3a")
-material_overlay = ExtResource("2_tkpv1")
-
-[node name="@StaticBody3D@46909" parent="." index="1"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.042946815, 0.73403645, -0.33772373)
+material_override = ExtResource("2_6sxs0")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." index="2"]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0.05707383, 1.6003745, -0.33975932)
-material_override = SubResource("StandardMaterial3D_6sxs0")
-mesh = SubResource("SphereMesh_tkpv1")
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0, 1.5799928, 0)
+material_override = SubResource("StandardMaterial3D_tkpv1")
+mesh = SubResource("SphereMesh_uj8h1")

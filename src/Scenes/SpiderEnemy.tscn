@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://qjjoef5p6xhx"]
+
+[ext_resource type="PackedScene" uid="uid://cln6asbdyk1i3" path="res://src/Objects/LevelOne/entity_spider.tscn" id="1_peton"]
+[ext_resource type="Script" uid="uid://cicppk4ymhc72" path="res://src/Scripts/enemy_Spider.gd" id="2_2yc0a"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_2yc0a"]
+radius = 0.9
+height = 7.5
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_quvuh"]
+size = Vector3(4, 3.5, 3.3)
+
+[node name="CharacterBody3D" type="CharacterBody3D"]
+script = ExtResource("2_2yc0a")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(-4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0, 1, -1.4505229, 0.40619752, -3.3172789)
+shape = SubResource("CapsuleShape3D_2yc0a")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.98219705, 0.4551735, -3.2908952)
+shape = SubResource("BoxShape3D_quvuh")
+
+[node name="entity_spider" parent="." instance=ExtResource("1_peton")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.1989412, 0.048565626, -3.2908952)

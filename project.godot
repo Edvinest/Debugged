@@ -15,6 +15,14 @@ run/main_scene="uid://bp1n81hkwp3tu"
 config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
 
+[display]
+
+display_server/driver.linuxbsd="wayland"
+
+[dotnet]
+
+project/assembly_name="Debugged"
+
 [input]
 
 move_forward={
