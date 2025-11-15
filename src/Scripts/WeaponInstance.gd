@@ -15,11 +15,6 @@ var is_attacking : bool = false
 
 signal request_animation(anim_name: String)
 
-#func _physics_process(_delta: float) -> void:
-	#if is_attacking:
-		#if get_parent().get_parent().using_first_person():
-			#_motion_hit_detection()
-
 func set_weapon_data(data : Weapon) -> void:
 	weapon_data = data
 	if weapon_data and weapon_data.mesh:
@@ -45,12 +40,68 @@ func _load_model(scene: PackedScene) -> void:
 	instance.transform.origin = weapon_data.weapon_position
 	instance.rotation_degrees = weapon_data.weapon_rotation
 
-func start_attack(is_motion: bool, hand : String) -> void:
-	if not is_motion:
-		_perform_standard_attack(hand)
-	else:
-		await get_tree().create_timer(0.3).timeout
-		is_attacking = false
+func start_motion_attack(direction: String, hand: Node3D) -> void:
+	if is_attacking:
+		return
+	
+	if weapon_data == null:
+		return
+
+	match weapon_data.type:
+		Weapon.WeaponType.BLADE:
+			_imu_sword_attack(direction, hand)
+		Weapon.WeaponType.HAMMER:
+			_attack_slam()
+		Weapon.WeaponType.GUN:
+			_attack_shoot()
+		_:
+			push_warning("Unknown weapon type")
+
+func _imu_sword_attack(direction: String, hand : Node3D) -> void:
+	if weapon_data == null:
+		return
+	
+	# Since weapons point upward, rotate them forward 90°
+	# so a slash looks forward, not vertical.
+	var forward_offset := Vector3(-90, 0, 0)
+
+	# Direction-based temporary rotation
+	var dir_rot := Vector3.ZERO
+
+	match direction:
+		"up":
+			dir_rot = Vector3(-45, 0, 0)     # tilt up
+		"down":
+			dir_rot = Vector3(45, 0, 0)      # tilt down
+		"left":
+			dir_rot = Vector3(0, 45, 0)
+		"right":
+			dir_rot = Vector3(0, -45, 0)
+		"diag_down_right":
+			dir_rot = Vector3(0, -45, 0)
+		"diag_down_left":
+			dir_rot = Vector3(0, -45, 0)
+		"diag_up_right":
+			dir_rot = Vector3(0, -45, 0)
+		"diag_up_left":
+			dir_rot = Vector3(0, -45, 0)
+			
+		"stab":
+			dir_rot = Vector3(-10, 0, 0)
+
+	var final_rot = forward_offset + dir_rot
+	var original_rotation = hand.rotation_degrees
+	rotation_degrees = final_rot
+	_smooth_reset_rotation(original_rotation, hand)
+
+# Smooth timed return of weapon rotation
+func _smooth_reset_rotation(original_rot: Vector3, hand: Node3D) -> void:
+	var t := 0.0
+	var duration := weapon_data.attack_speed
+	while t < duration:
+		t += get_process_delta_time()
+		hand.rotation_degrees = hand.rotation_degrees.lerp(original_rot, t / duration)
+		await get_tree().process_frame
 
 func _perform_standard_attack(hand : String):
 	if weapon_data == null:
@@ -73,6 +124,7 @@ func _attack_slash(hand : String):
 	is_attacking = true
 	
 	var anim_name = "attack_slash_%s" % hand.to_lower()
+	emit_signal("request_animation", anim_name)
 	_enable_hitbox(true)
 	await get_tree().create_timer(weapon_data.attack_speed).timeout
 	_enable_hitbox(false)
