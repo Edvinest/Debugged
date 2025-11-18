@@ -91,6 +91,8 @@ material_overlay = ExtResource("3_35evi")
 mesh = SubResource("ArrayMesh_idrsf")
 skeleton = NodePath("")
 
-[node name="Sphere_005" parent="." index="1"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.14591026, 0.887269, 0.2488265)
-visible = false
+[node name="@StaticBody3D@24732" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0061969757, 0.36564684, 0.009378314)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="@StaticBody3D@24732"]
+shape = SubResource("ConcavePolygonShape3D_p3kxl")
