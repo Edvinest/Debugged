@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://be1gwv0coi2ua"]
+
+[ext_resource type="Script" uid="uid://bkaksglscwqf4" path="res://src/Scripts/WeaponInstance.gd" id="1_ow7c6"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_a37qv"]
+radius = 0.25
+height = 1.25
+
+[node name="WeaponInstance" type="Node3D"]
+script = ExtResource("1_ow7c6")
+
+[node name="ModelHolder" type="Node3D" parent="."]
+
+[node name="Area3D" type="Area3D" parent="ModelHolder"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ModelHolder/Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+shape = SubResource("CapsuleShape3D_a37qv")

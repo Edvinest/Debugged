@@ -1,12 +1,13 @@
 extends CharacterBody3D
 
-@export var speed := 5.0
+@export var speed := 10.0
 @export var jump_velocity := 4.5
 @onready var firstPersonCamera = $FirstPersonCamera
 @onready var thirdPersonCamera = $ThirdPersonCamera
 var using_first_person : bool
 
 var mouse_sensitivity := 0.002
+var controller_sensitivity := 2.0
 var gravity := 30
 
 func _ready():
@@ -18,10 +19,12 @@ func _ready():
 		
 	if Input.get_connected_joypads().is_empty():
 		using_first_person = false
-
+	else:
+		using_first_person = true
+		
 func _process(delta: float) -> void:
-	var right_x := Input.get_joy_axis(0, JOY_AXIS_RIGHT_X) # horizontal
-	var right_y := Input.get_joy_axis(0, JOY_AXIS_RIGHT_Y) # vertical
+	var right_x := Input.get_joy_axis(0, JOY_AXIS_RIGHT_X)
+	var right_y := Input.get_joy_axis(0, JOY_AXIS_RIGHT_Y)
 
 	# Deadzone
 	if abs(right_x) < 0.2:
@@ -32,13 +35,13 @@ func _process(delta: float) -> void:
 	if using_first_person:
 		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 		set_camera_mode(using_first_person)
+
+		# Apply controller look (same logic as mouse)
+		rotate_y(-right_x * delta * controller_sensitivity)  # yaw on player
+		firstPersonCamera.rotate_x(-right_y * delta * controller_sensitivity)  # pitch on camera
+		firstPersonCamera.rotation.x = clamp(firstPersonCamera.rotation.x, deg_to_rad(-80), deg_to_rad(80))
 	else:
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-		
-	# Apply to firstPersonCamera rotation
-	firstPersonCamera.rotate_y(-right_x * delta * 2.0)  # yaw
-	firstPersonCamera.rotate_x(-right_y * delta * 2.0)  # pitch
-	firstPersonCamera.rotation.x = clamp(firstPersonCamera.rotation.x, deg_to_rad(-80), deg_to_rad(80))
 
 func _unhandled_input(event):
 	if event is InputEventMouseMotion and using_first_person:

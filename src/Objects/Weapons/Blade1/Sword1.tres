@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Weapon" load_steps=3 format=3 uid="uid://tfggkjfecp7f"]
+
+[ext_resource type="PackedScene" uid="uid://b7rnaui7pmkj" path="res://src/Objects/Weapons/Blade1/Sword1.glb" id="1_2cs4o"]
+[ext_resource type="Script" uid="uid://cf5websnqr811" path="res://src/Scripts/Weapon.gd" id="1_r2tni"]
+
+[resource]
+script = ExtResource("1_r2tni")
+name = "Iron Sword"
+mesh = ExtResource("1_2cs4o")
+weapon_rotation = Vector3(0, 90, 0)
+metadata/_custom_type_script = "uid://cf5websnqr811"
