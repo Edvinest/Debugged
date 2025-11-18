@@ -63,7 +63,8 @@ func _detect_input_attacks():
 			
 	if Input.is_action_just_pressed("attack_right"):
 		if right_hand.has_node("WeaponInstance"):
-			right_hand.get_node("WeaponInstance")._perform_standard_attack("right")
+			#right_hand.get_node("WeaponInstance")._perform_standard_attack("right")
+			right_hand.get_node("WeaponInstance").start_motion_attack("diag_up_right", right_hand)
 	
 		
 func _handle_joycon():

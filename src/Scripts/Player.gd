@@ -19,7 +19,9 @@ func _ready():
 		
 	if Input.get_connected_joypads().is_empty():
 		using_first_person = false
-
+	else:
+		using_first_person = true
+		
 func _process(delta: float) -> void:
 	var right_x := Input.get_joy_axis(0, JOY_AXIS_RIGHT_X)
 	var right_y := Input.get_joy_axis(0, JOY_AXIS_RIGHT_Y)
