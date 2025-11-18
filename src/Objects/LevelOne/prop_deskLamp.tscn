@@ -13,7 +13,9 @@ emission_energy_multiplier = 2.24
 [node name="prop_deskLamp" instance=ExtResource("1_6sxs0")]
 
 [node name="lamp" parent="." index="0"]
-material_override = ExtResource("2_6sxs0")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.042946815, 0.73403645, -0.33772373)
+material_override = SubResource("StandardMaterial3D_hna3a")
+material_overlay = ExtResource("2_tkpv1")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." index="2"]
 transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0, 1.5799928, 0)

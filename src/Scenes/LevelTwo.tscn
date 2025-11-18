@@ -1,0 +1,49 @@
+[gd_scene load_steps=9 format=3 uid="uid://8qntwwgak3vn"]
+
+[ext_resource type="PackedScene" uid="uid://d2d2c08im7jck" path="res://src/Objects/LevelTwo/prop_garden.tscn" id="1_ufe8o"]
+[ext_resource type="PackedScene" uid="uid://chlrsoaokxhib" path="res://src/Objects/LevelTwo/prop_hut.tscn" id="2_w8vme"]
+[ext_resource type="PackedScene" uid="uid://dct6crx3jwiat" path="res://src/Scenes/Player.tscn" id="3_3ce2r"]
+[ext_resource type="Texture2D" uid="uid://n7sqk2ahk5er" path="res://src/Materials/citrus_orchard_puresky_1k.exr" id="4_go00i"]
+[ext_resource type="PackedScene" uid="uid://cdim0in7b6lrh" path="res://src/Objects/LevelTwo/prop_lamp.tscn" id="4_u45fr"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_u45fr"]
+panorama = ExtResource("4_go00i")
+energy_multiplier = 0.5
+
+[sub_resource type="Sky" id="Sky_bn36d"]
+sky_material = SubResource("PanoramaSkyMaterial_u45fr")
+
+[sub_resource type="Environment" id="Environment_mp8yv"]
+background_mode = 2
+sky = SubResource("Sky_bn36d")
+glow_enabled = true
+
+[node name="LevelTwo" type="Node3D"]
+
+[node name="CharacterBody3D" parent="." instance=ExtResource("3_3ce2r")]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -2.3080695, 0.9941931, -0.15144433)
+
+[node name="prop_garden" parent="." instance=ExtResource("1_ufe8o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.47490692, 0, -1.3476486)
+
+[node name="prop_hut" parent="." instance=ExtResource("2_w8vme")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.08250743, -0.008635223, 4.85423)
+
+[node name="prop_lamp" parent="." instance=ExtResource("4_u45fr")]
+transform = Transform3D(-0.05, 0, -7.54979e-09, 0, 0.05, 0, 7.54979e-09, 0, -0.05, -1.9389058, 1.0958786, 3.6767263)
+
+[node name="SpotLight3D" type="SpotLight3D" parent="prop_lamp"]
+transform = Transform3D(20, 2.6545824e-06, 4.4597373e-06, -2.6545822e-06, -9.535505, 17.580505, 4.4597373e-06, -17.580505, -9.535505, 0, -0.14596939, 0)
+light_color = Color(0.7764706, 0.7137255, 0.23921569, 1)
+light_energy = 7.454
+shadow_enabled = true
+spot_range = 5.0458097
+spot_angle = 89.99
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_mp8yv")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="WorldEnvironment"]
+transform = Transform3D(0.5707643, 0.26791108, -0.77617764, 0.0036535407, 0.9444361, 0.32867497, 0.8211058, -0.19043176, 0.5380716, 0, 1.0995595, 0)
+light_energy = 1.06
+shadow_enabled = true

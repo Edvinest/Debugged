@@ -52,7 +52,12 @@ skeleton = NodePath("")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="@StaticBody3D@42277"]
 shape = SubResource("ConcavePolygonShape3D_na730")
 
-[node name="displayGlow" type="MeshInstance3D" parent="."]
-transform = Transform3D(-5.1388845e-08, 1, 0, -1.1756397, -4.371139e-08, 0, 0, 0, 2.0908737, 0, 1.7375076, 0)
-material_override = ExtResource("1_s0m52")
-mesh = SubResource("PlaneMesh_qj75p")
+[node name="StaticBody3D" type="StaticBody3D" parent="display/Cube_002" index="0"]
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="display/Cube_002/StaticBody3D" index="0"]
+shape = SubResource("ConcavePolygonShape3D_imvtd")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="display" index="2"]
+transform = Transform3D(-5.0709154e-08, 1, 0, -1.1600902, -4.371139e-08, 0, 0, 0, 2.113734, -10.574767, 9.807245, 0.6526989)
+material_override = SubResource("StandardMaterial3D_m3jht")
+mesh = SubResource("PlaneMesh_xh8kq")

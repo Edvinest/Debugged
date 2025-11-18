@@ -10,6 +10,16 @@ albedo_color = Color(0.88235295, 0.41568628, 0.32941177, 0)
 
 [node name="chair_stand" parent="." index="0"]
 material_override = ExtResource("2_is8qy")
+material_overlay = ExtResource("2_xcsx7")
 
-[node name="chair_back" parent="." index="1"]
-material_override = SubResource("StandardMaterial3D_160su")
+[node name="Sphere_001" parent="chair" index="1"]
+material_override = SubResource("StandardMaterial3D_xcsx7")
+material_overlay = ExtResource("2_xcsx7")
+
+[node name="_StaticBody3D_46891#CollisionShape3D3" type="CollisionShape3D" parent="." index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.63460803, 0)
+shape = SubResource("ConcavePolygonShape3D_is8qy")
+
+[node name="_StaticBody3D_46891#CollisionShape3D2" type="CollisionShape3D" parent="." index="3"]
+transform = Transform3D(0, 1, 9.536743e-07, -0.9986224, 0, 0.052471448, 0.052471448, -9.536743e-07, 0.9986224, 2.15622e-06, 2.6964347, 0)
+shape = SubResource("ConcavePolygonShape3D_xcsx7")
