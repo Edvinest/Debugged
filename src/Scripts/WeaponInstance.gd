@@ -51,7 +51,8 @@ func start_motion_attack(direction: String, hand: Node3D) -> void:
 		Weapon.WeaponType.BLADE:
 			_imu_sword_attack(direction, hand)
 		Weapon.WeaponType.HAMMER:
-			_attack_slam()
+			#_attack_slam()
+			pass
 		Weapon.WeaponType.GUN:
 			_attack_shoot()
 		_:
@@ -139,7 +140,7 @@ func _perform_standard_attack(hand : String):
 		Weapon.WeaponType.BLADE:
 			_attack_slash(hand)
 		Weapon.WeaponType.HAMMER:
-			_attack_slam()
+			_attack_slam(hand)
 		Weapon.WeaponType.GUN:
 			_attack_shoot()
 		_:
@@ -159,9 +160,19 @@ func _attack_slash(hand : String):
 	
 	is_attacking = false
 
-func _attack_slam():
-	# TODO: Implement it later
-	pass
+func _attack_slam(hand : String):
+	if is_attacking:
+		return
+		
+	is_attacking = true
+	
+	var anim_name = "hammer_slam_%s" % hand.to_lower()
+	emit_signal("request_animation", anim_name)
+	_enable_hitbox(true)
+	await get_tree().create_timer(weapon_data.attack_speed).timeout
+	_enable_hitbox(false)
+	
+	is_attacking = false
 
 func _attack_shoot():
 	# TODO: Implement it later

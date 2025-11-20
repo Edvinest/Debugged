@@ -1,10 +1,8 @@
-[gd_scene load_steps=14 format=3 uid="uid://dct6crx3jwiat"]
+[gd_scene load_steps=12 format=3 uid="uid://dct6crx3jwiat"]
 
 [ext_resource type="Script" uid="uid://nchnj2u7kv5" path="res://src/Scripts/Player.gd" id="1_rpqav"]
 [ext_resource type="Script" uid="uid://dsi0c4pqhkju7" path="res://src/Scripts/PlayerCombat.gd" id="3_g1uh0"]
-[ext_resource type="Resource" uid="uid://bqwyrpwgffbns" path="res://src/Objects/Weapons/Hammer1/Hammer.tres" id="3_ma0cp"]
 [ext_resource type="PackedScene" uid="uid://be1gwv0coi2ua" path="res://src/Scenes/WeaponInstance.tscn" id="4_5dq0m"]
-[ext_resource type="Resource" uid="uid://tfggkjfecp7f" path="res://src/Objects/Weapons/Blade1/Sword1.tres" id="4_ma0cp"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_qbkls"]
 
@@ -43,7 +41,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("PlayerBody/Hands/RightHand/WeaponInstance:rotation")
+tracks/2/path = NodePath("PlayerBody/Hands/RightHand/RightWeapon:rotation")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -79,7 +77,7 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("PlayerBody/Hands/LeftHand/WeaponInstance:rotation")
+tracks/5/path = NodePath("PlayerBody/Hands/LeftHand/LeftWeapon:rotation")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
@@ -120,7 +118,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("PlayerBody/Hands/LeftHand/WeaponInstance:rotation")
+tracks/2/path = NodePath("PlayerBody/Hands/LeftHand/LeftWeapon:rotation")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -161,7 +159,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("PlayerBody/Hands/RightHand/WeaponInstance:rotation")
+tracks/2/path = NodePath("PlayerBody/Hands/RightHand/RightWeapon:rotation")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -178,7 +176,7 @@ _data = {
 &"attack_slash_right": SubResource("Animation_5dq0m")
 }
 
-[node name="CharacterBody3D" type="CharacterBody3D"]
+[node name="Player" type="CharacterBody3D"]
 script = ExtResource("1_rpqav")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
@@ -196,13 +194,11 @@ mesh = SubResource("CapsuleMesh_qm7rr")
 [node name="Hands" type="Node3D" parent="PlayerBody"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.39501464, 0.4332748)
 script = ExtResource("3_g1uh0")
-left_weapon = ExtResource("3_ma0cp")
-right_weapon = ExtResource("4_ma0cp")
 
 [node name="RightHand" type="Node3D" parent="PlayerBody/Hands"]
 transform = Transform3D(0.99999976, 0, 0, 0, 1, 0, 0, 0, 0.99999976, 0, 0, 0)
 
-[node name="WeaponInstance" parent="PlayerBody/Hands/RightHand" instance=ExtResource("4_5dq0m")]
+[node name="RightWeapon" parent="PlayerBody/Hands/RightHand" instance=ExtResource("4_5dq0m")]
 transform = Transform3D(0.9999998, 0, 0, 0, 0.9999999, 0, 0, 0, 0.9999999, 0.43993986, 0, -0.8960203)
 
 [node name="RHandMesh" type="MeshInstance3D" parent="PlayerBody/Hands/RightHand"]
@@ -213,7 +209,7 @@ skeleton = NodePath("../..")
 [node name="LeftHand" type="Node3D" parent="PlayerBody/Hands"]
 transform = Transform3D(0.9999997, 0, 0, 0, 1, 0, 0, 0, 0.9999997, 0, 0, 0)
 
-[node name="WeaponInstance" parent="PlayerBody/Hands/LeftHand" instance=ExtResource("4_5dq0m")]
+[node name="LeftWeapon" parent="PlayerBody/Hands/LeftHand" instance=ExtResource("4_5dq0m")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.44, 0, -0.896)
 
 [node name="LHandMesh" type="MeshInstance3D" parent="PlayerBody/Hands/LeftHand"]
@@ -226,5 +222,5 @@ libraries = {
 &"": SubResource("AnimationLibrary_ma0cp")
 }
 
-[connection signal="request_animation" from="PlayerBody/Hands/RightHand/WeaponInstance" to="PlayerBody/Hands" method="_on_weapon_instance_request_animation"]
-[connection signal="request_animation" from="PlayerBody/Hands/LeftHand/WeaponInstance" to="PlayerBody/Hands" method="_on_weapon_instance_request_animation"]
+[connection signal="request_animation" from="PlayerBody/Hands/RightHand/RightWeapon" to="PlayerBody/Hands" method="_on_weapon_instance_request_animation"]
+[connection signal="request_animation" from="PlayerBody/Hands/LeftHand/LeftWeapon" to="PlayerBody/Hands" method="_on_weapon_instance_request_animation"]
