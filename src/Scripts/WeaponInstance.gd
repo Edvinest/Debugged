@@ -166,7 +166,7 @@ func _attack_slam(hand : String):
 		
 	is_attacking = true
 	
-	var anim_name = "hammer_slam_%s" % hand.to_lower()
+	var anim_name = "attack_slam_%s" % hand.to_lower()
 	emit_signal("request_animation", anim_name)
 	_enable_hitbox(true)
 	await get_tree().create_timer(weapon_data.attack_speed).timeout
