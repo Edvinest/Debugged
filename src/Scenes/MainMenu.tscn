@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://c17fchistp0rd"]
+[gd_scene load_steps=7 format=3 uid="uid://c17fchistp0rd"]
 
 [ext_resource type="Texture2D" uid="uid://c3v3sa5pct3nm" path="res://src/Objects/MainMenu/icon.png" id="1_814sq"]
+[ext_resource type="Script" uid="uid://dg6jeqsyye484" path="res://src/Scripts/MainMenu.gd" id="1_ftic1"]
 
 [sub_resource type="SystemFont" id="SystemFont_814sq"]
 
@@ -11,11 +12,14 @@
 [sub_resource type="SystemFont" id="SystemFont_1nasp"]
 
 [node name="MainMenu" type="Node2D"]
+script = ExtResource("1_ftic1")
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 custom_minimum_size = Vector2(1920, 1080)
-offset_right = 40.0
-offset_bottom = 40.0
+offset_left = 6.0
+offset_top = 18.0
+offset_right = 1926.0
+offset_bottom = 1098.0
 
 [node name="ProfileMenu" type="MarginContainer" parent="PanelContainer"]
 custom_minimum_size = Vector2(350, 250)
@@ -37,8 +41,14 @@ custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 0
+tooltip_text = "asd"
 theme_override_fonts/font = SubResource("SystemFont_814sq")
 icon = ExtResource("1_814sq")
+
+[node name="Button" type="Button" parent="PanelContainer/ProfileMenu/VBoxContainer/ProfileButton"]
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
 
 [node name="Menu" type="MarginContainer" parent="PanelContainer"]
 custom_minimum_size = Vector2(450, 350)
@@ -50,12 +60,50 @@ theme_override_constants/margin_top = 50
 theme_override_constants/margin_right = 50
 theme_override_constants/margin_bottom = 50
 
+[node name="Window" type="Window" parent="PanelContainer/Menu"]
+unique_name_in_owner = true
+oversampling_override = 1.0
+mode = 1
+title = "Are you sure you want to exit?"
+initial_position = 1
+size = Vector2i(300, 200)
+visible = false
+content_scale_size = Vector2i(300, 300)
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/Menu/Window"]
+offset_right = 304.0
+offset_bottom = 200.0
+size_flags_vertical = 4
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/Menu/Window/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+alignment = 1
+
+[node name="YesButton" type="Button" parent="PanelContainer/Menu/Window/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(100, 50)
+layout_mode = 2
+size_flags_vertical = 4
+text = "YES"
+
+[node name="NoButton" type="Button" parent="PanelContainer/Menu/Window/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(100, 50)
+layout_mode = 2
+size_flags_vertical = 4
+text = "NO"
+
 [node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/Menu"]
 custom_minimum_size = Vector2(750, 750)
 layout_mode = 2
 theme_override_constants/separation = 30
 
 [node name="MainMenu" type="Label" parent="PanelContainer/Menu/VBoxContainer"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(300, 150)
 layout_mode = 2
 size_flags_stretch_ratio = 0.0
@@ -66,6 +114,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="StartGameButton" type="Button" parent="PanelContainer/Menu/VBoxContainer"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
 theme_override_fonts/font = SubResource("SystemFont_jlbbt")
@@ -73,6 +122,7 @@ theme_override_font_sizes/font_size = 25
 text = "START GAME"
 
 [node name="OptionsButton" type="Button" parent="PanelContainer/Menu/VBoxContainer"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
 theme_override_fonts/font = SubResource("SystemFont_1nasp")
@@ -81,8 +131,15 @@ text = "OPTIONS
 "
 
 [node name="ExitButton" type="Button" parent="PanelContainer/Menu/VBoxContainer"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
 size_flags_vertical = 8
 theme_override_font_sizes/font_size = 25
 text = "EXIT GAME"
+
+[connection signal="pressed" from="PanelContainer/Menu/Window/MarginContainer/VBoxContainer/YesButton" to="." method="_on_yes_button_pressed"]
+[connection signal="pressed" from="PanelContainer/Menu/Window/MarginContainer/VBoxContainer/NoButton" to="." method="_on_no_button_pressed"]
+[connection signal="pressed" from="PanelContainer/Menu/VBoxContainer/StartGameButton" to="." method="_on_start_game_button_pressed"]
+[connection signal="pressed" from="PanelContainer/Menu/VBoxContainer/OptionsButton" to="." method="_on_options_button_pressed"]
+[connection signal="pressed" from="PanelContainer/Menu/VBoxContainer/ExitButton" to="." method="_on_exit_button_pressed"]

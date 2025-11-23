@@ -60,10 +60,12 @@ layout_mode = 2
 placeholder_text = "Enter  Password"
 
 [node name="SignUpButton" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 text = "Sign Up"
 
 [node name="LogInButton" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 text = "Log In"
 
