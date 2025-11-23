@@ -4,8 +4,8 @@
 [ext_resource type="PackedScene" uid="uid://ch7albaj53q7" path="res://src/Objects/LevelOne/prop_floor.tscn" id="2_1b8pk"]
 [ext_resource type="Resource" uid="uid://bqwyrpwgffbns" path="res://src/Objects/Weapons/Hammer1/Hammer.tres" id="2_58uts"]
 [ext_resource type="PackedScene" uid="uid://dct6crx3jwiat" path="res://src/Scenes/Player.tscn" id="2_mwp01"]
+[ext_resource type="Resource" uid="uid://cnjulojn4qarn" path="res://src/Objects/Weapons/Gun1/Pesticide.tres" id="3_58uts"]
 [ext_resource type="PackedScene" uid="uid://b7pxexvaix2s4" path="res://src/Objects/LevelOne/prop_desk.tscn" id="3_ajlcv"]
-[ext_resource type="Resource" uid="uid://tfggkjfecp7f" path="res://src/Objects/Weapons/Blade1/Sword1.tres" id="3_xaf01"]
 [ext_resource type="Texture2D" uid="uid://n7sqk2ahk5er" path="res://src/Materials/citrus_orchard_puresky_1k.exr" id="4_n562r"]
 [ext_resource type="PackedScene" uid="uid://bp2svu4xo4o8r" path="res://src/Objects/LevelOne/prop_cabinet.tscn" id="5_austs"]
 [ext_resource type="PackedScene" uid="uid://bureje6ylljyi" path="res://src/Objects/LevelOne/prop_chair.tscn" id="6_ceyxk"]
@@ -43,7 +43,7 @@ glow_levels/5 = 0.42
 [node name="Player" parent="." instance=ExtResource("2_mwp01")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.817619, 9.796223, 3.003212)
 left_weapon = ExtResource("2_58uts")
-right_weapon = ExtResource("3_xaf01")
+right_weapon = ExtResource("3_58uts")
 
 [node name="SpiderEnemy" parent="." instance=ExtResource("18_7qily")]
 transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 4.210294, 3.8804832, 1.172594)
