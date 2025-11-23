@@ -51,7 +51,8 @@ func start_motion_attack(direction: String, hand: Node3D) -> void:
 		Weapon.WeaponType.BLADE:
 			_imu_sword_attack(direction, hand)
 		Weapon.WeaponType.HAMMER:
-			_attack_slam()
+			_imu_hammer_attack(direction, hand)
+			pass
 		Weapon.WeaponType.GUN:
 			_attack_shoot()
 		_:
@@ -113,6 +114,49 @@ func _imu_sword_attack(direction: String, hand: Node3D) -> void:
 	_enable_hitbox(false)
 	is_attacking = false
 
+func _imu_hammer_attack(direction: String, hand: Node3D) -> void:
+	if is_attacking or weapon_data == null:
+		return
+
+	is_attacking = true
+
+	# Save original hand transform
+	var original_hand_pos = hand.position
+	var original_hand_rot = hand.rotation_degrees
+	var original_weapon_rot = rotation_degrees
+
+	# --- Hand swing motion ---
+	var hand_position_offset := Vector3.ZERO
+	var hand_rotation_offset := Vector3.ZERO
+	
+	rotation_degrees = Vector3(-130, 0, 0)
+
+	#TODO: make nicer animations
+	match direction:
+		"down":             
+			hand_position_offset = Vector3(0, -0.7, 0)
+			hand_rotation_offset = Vector3(-20.0, 0, 0)
+		"left":             
+			hand_position_offset = Vector3(-0.3, -0.3, 0)
+			hand_rotation_offset = Vector3(-15.0, 10.0, 0)
+		"right":            
+			hand_position_offset = Vector3(0.3, -0.3, 0)
+			hand_rotation_offset = Vector3(-15.0, 10.0, 0)
+		"stab":             
+			hand_position_offset = Vector3(0, -0.2, -0.5)
+			hand_rotation_offset = Vector3(-25.0, 0, 0)
+
+	# Apply hand movement
+	hand.position += hand_position_offset
+	hand.rotation_degrees += hand_rotation_offset
+
+	_enable_hitbox(true)
+
+	# --- Smoothly reset ---
+	await _smooth_reset_rotation(original_hand_pos, original_hand_rot, original_weapon_rot, hand)
+
+	_enable_hitbox(false)
+	is_attacking = false
 
 # Smooth timed return of weapon rotation
 func _smooth_reset_rotation(orig_hand_pos: Vector3, orig_hand_rot: Vector3, orig_weapon_rot: Vector3, hand: Node3D) -> void:
@@ -139,7 +183,7 @@ func _perform_standard_attack(hand : String):
 		Weapon.WeaponType.BLADE:
 			_attack_slash(hand)
 		Weapon.WeaponType.HAMMER:
-			_attack_slam()
+			_attack_slam(hand)
 		Weapon.WeaponType.GUN:
 			_attack_shoot()
 		_:
@@ -159,9 +203,19 @@ func _attack_slash(hand : String):
 	
 	is_attacking = false
 
-func _attack_slam():
-	# TODO: Implement it later
-	pass
+func _attack_slam(hand : String):
+	if is_attacking:
+		return
+		
+	is_attacking = true
+	
+	var anim_name = "attack_slam_%s" % hand.to_lower()
+	emit_signal("request_animation", anim_name)
+	_enable_hitbox(true)
+	await get_tree().create_timer(weapon_data.attack_speed).timeout
+	_enable_hitbox(false)
+	
+	is_attacking = false
 
 func _attack_shoot():
 	# TODO: Implement it later

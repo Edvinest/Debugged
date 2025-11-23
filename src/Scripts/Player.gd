@@ -1,9 +1,13 @@
 extends CharacterBody3D
 
 @export var speed := 10.0
-@export var jump_velocity := 4.5
 @onready var firstPersonCamera = $FirstPersonCamera
 @onready var thirdPersonCamera = $ThirdPersonCamera
+
+@export var left_weapon : Weapon = null
+@export var right_weapon : Weapon = null
+
+@onready var Hands = $"PlayerBody/Hands"
 var using_first_person : bool
 
 var mouse_sensitivity := 0.002
@@ -11,6 +15,8 @@ var controller_sensitivity := 2.0
 var gravity := 30
 
 func _ready():
+	Hands.set_weapons(left_weapon, right_weapon)
+	
 	if using_first_person:
 		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 		set_camera_mode(using_first_person)

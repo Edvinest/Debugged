@@ -22,8 +22,8 @@ const SWING_THRESHOLD : float = 1.2
 const FREEZE_TIME : float = 0.18
 const PACKET_HISTORY_SIZE = 8
 
-@export var left_weapon : Weapon
-@export var right_weapon : Weapon
+var left_weapon : Weapon = null
+var right_weapon : Weapon = null
 
 @onready var right_hand = $RightHand
 @onready var left_hand = $LeftHand
@@ -32,16 +32,20 @@ const PACKET_HISTORY_SIZE = 8
 var using_first_person : bool = true
 
 func _ready():
-	if right_hand.has_node("WeaponInstance"):
-		right_hand.get_node("WeaponInstance").set_weapon_data(right_weapon)
-		
-	if left_hand.has_node("WeaponInstance"):
-		left_hand.get_node("WeaponInstance").set_weapon_data(left_weapon)
-		
 	udp.bind(4243, "127.0.0.1")
 	
 	if Input.get_connected_joypads().is_empty():
 		using_first_person = false
+
+func set_weapons(left : Weapon, right: Weapon):
+	left_weapon = left
+	right_weapon = right
+	
+	if right_hand.has_node("RightWeapon"):
+		right_hand.get_node("RightWeapon").set_weapon_data(right_weapon)
+		
+	if left_hand.has_node("LeftWeapon"):
+		left_hand.get_node("LeftWeapon").set_weapon_data(left_weapon)
 
 func _process(delta: float) -> void:
 	_handle_joycon()
@@ -58,13 +62,13 @@ func _process(delta: float) -> void:
 
 func _detect_input_attacks():
 	if Input.is_action_just_pressed("attack_left"):
-		if left_hand.has_node("WeaponInstance"):
-			left_hand.get_node("WeaponInstance")._perform_standard_attack("left", )
+		if left_hand.has_node("LeftWeapon"):
+			left_hand.get_node("LeftWeapon")._perform_standard_attack("left", )
 			
 	if Input.is_action_just_pressed("attack_right"):
-		if right_hand.has_node("WeaponInstance"):
-			#right_hand.get_node("WeaponInstance")._perform_standard_attack("right")
-			right_hand.get_node("WeaponInstance").start_motion_attack("diag_up_right", right_hand)
+		if right_hand.has_node("RightWeapon"):
+			right_hand.get_node("RightWeapon")._perform_standard_attack("right")
+			#right_hand.get_node("WeaponInstance").start_motion_attack("diag_up_right", right_hand)
 	
 		
 func _handle_joycon():
