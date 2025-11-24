@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://bdtfi78lbkr4g" path="res://src/Objects/LevelOne/Textures/Fabric/texture_carpetAlbedo.jpg" id="1_2s17x"]
 [ext_resource type="Texture2D" uid="uid://bwi0spn3vk37n" path="res://src/Objects/LevelOne/Textures/Fabric/texture_carpetMetallic.jpg" id="2_73sfq"]
 [ext_resource type="Texture2D" uid="uid://byfpyfrtyc7kq" path="res://src/Objects/LevelOne/Textures/Fabric/texture_carpetNormal.png" id="2_jxefn"]
-[ext_resource type="Texture2D" uid="uid://b8fnmfj6qgi5v" path="res://src/Objects/LevelOne/Textures/Fabric/texture_carpetRoughness.jpg" id="3_73sfq"]
+[ext_resource type="Texture2D" uid="uid://b8fnmfj6qgi5v" path="res://src/Objects/LevelOne/texture_carpetRoughness.jpg" id="3_73sfq"]
 [ext_resource type="Material" uid="uid://cghjbmyu661mi" path="res://src/Materials/simple_outline.tres" id="5_73sfq"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jmwq0"]
