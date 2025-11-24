@@ -37,6 +37,9 @@ def handle_device(dev, tag):
     roll = pitch = yaw = 0.0
     last_t = time.time()
     alpha = 0.98  # complementary filter weight
+    last_send = 0.0
+    send_interval = 1.0 / 60.0
+
 
     def gyro_to_rads(code, raw_value):
         info = dev.absinfo(code)
@@ -81,8 +84,10 @@ def handle_device(dev, tag):
                 elif yaw < -math.pi:
                     yaw += 2 * math.pi
 
-                msg = f"{tag}:{yaw:.4f},{pitch:.4f},{roll:.4f}"
-                sock.sendto(msg.encode(), (UDP_IP, UDP_PORT))
+                if now - last_send >= send_interval:
+                    msg = f"{tag}:{roll:.4f},{pitch:.4f},{yaw:.4f}"
+                    sock.sendto(msg.encode(), (UDP_IP, UDP_PORT))
+                    last_send = now
 
 # -------------------------------
 # Main

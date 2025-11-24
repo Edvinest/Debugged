@@ -6,7 +6,6 @@
 [resource]
 script = ExtResource("1_r2tni")
 name = "Iron Sword"
-attack_speed = 0.5
 mesh = ExtResource("1_2cs4o")
 weapon_rotation = Vector3(0, 90, 0)
 metadata/_custom_type_script = "uid://cf5websnqr811"
