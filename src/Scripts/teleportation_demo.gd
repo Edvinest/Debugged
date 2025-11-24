@@ -4,7 +4,7 @@ extends MeshInstance3D
 @export var target_id: int
 
 var destination : MeshInstance3D
-@onready var player: CharacterBody3D = $"../../CharacterBody3D"
+@onready var player: CharacterBody3D = $"../../Player"
 
 @onready var timer: Timer = Timer.new()
 const DEF_COOLDOWN := 2.0
