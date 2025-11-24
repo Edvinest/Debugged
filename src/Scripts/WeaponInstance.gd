@@ -15,6 +15,9 @@ var is_attacking : bool = false
 
 signal request_animation(anim_name: String)
 
+func _ready() -> void:
+	_enable_hitbox(false)
+
 #func _physics_process(_delta: float) -> void:
 	#if is_attacking:
 		#if get_parent().get_parent().using_first_person():
@@ -33,7 +36,8 @@ func _load_model(scene: PackedScene) -> void:
 			return
 		
 	for c in model_holder.get_children():
-		c.queue_free()
+		if c is MeshInstance3D:
+			c.queue_free()
 	
 	var instance = scene.instantiate()
 	model_holder.add_child(instance)
@@ -73,6 +77,7 @@ func _attack_slash(hand : String):
 	is_attacking = true
 	
 	var anim_name = "attack_slash_%s" % hand.to_lower()
+	emit_signal("request_animation", anim_name)
 	_enable_hitbox(true)
 	await get_tree().create_timer(weapon_data.attack_speed).timeout
 	_enable_hitbox(false)
@@ -93,9 +98,13 @@ func _enable_hitbox(enabled : bool) -> void:
 		hitbox.monitorable = enabled
 		
 ## Area3D based detection for keyboard and mouse
-func _on_Hitbox_body_entered(body) -> void:
+func _on_area_3d_body_entered(body: Node3D) -> void:
+	print("----IN RANGE-----")
 	if body.is_in_group("enemy"):
-		body.take_damage(weapon_data.damage)
+		if body.has_method("take_damage"):
+			body.take_damage(weapon_data.damage)
+		else:
+			push_warning("Body does not have 'take_damage' method")
 
 ## for IMU based attacks
 ## uses the tip of the weapon to track each hit
