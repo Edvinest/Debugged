@@ -65,8 +65,13 @@ grow_vertical = 2
 rounded = true
 show_percentage = false
 
-[node name="Timer" type="Timer" parent="."]
+[node name="AttackCooldown" type="Timer" parent="."]
+one_shot = true
+
+[node name="DodgeTimer" type="Timer" parent="."]
+wait_time = 5.0
 one_shot = true
 
 [connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]
 [connection signal="body_exited" from="Hitbox" to="." method="_on_hitbox_body_exited"]
+[connection signal="timeout" from="DodgeTimer" to="." method="_on_dodge_timer_timeout"]

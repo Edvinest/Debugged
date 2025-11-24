@@ -1,4 +1,4 @@
-[gd_scene load_steps=186 format=4 uid="uid://cln6asbdyk1i3"]
+[gd_scene load_steps=189 format=4 uid="uid://cln6asbdyk1i3"]
 
 [ext_resource type="Material" uid="uid://ca1kwee5fjjar" path="res://src/Objects/LevelOne/Materials/mat_emissionRed.tres" id="2_iv6wx"]
 [ext_resource type="Material" uid="uid://b4apxmgpff0s4" path="res://src/Objects/LevelOne/Materials/mat_spiderBody.tres" id="2_t3q8o"]
@@ -2499,10 +2499,70 @@ tracks/31/interp = 1
 tracks/31/loop_wrap = true
 tracks/31/keys = PackedFloat32Array(0, 1, -1.1305034e-09, -4.026727e-09, 0.6132955, 0.7898536, 0.033333335, 1, -3.2015974e-09, 2.7666993e-09, 0.6178191, 0.7863203, 0.06666667, 1, -9.2859696e-12, -4.5501236e-10, 0.6213374, 0.7835431, 0.1, 1, -2.9794123e-10, 7.6347456e-10, 0.62394935, 0.78146476, 0.13333334, 1, -2.2381992e-10, -2.8723557e-09, 0.6255375, 0.7801941, 0.23333333, 1, -7.609856e-09, -7.460645e-09, 0.6255349, 0.7801962, 0.26666668, 1, -2.3852569e-09, -2.3852569e-09, 0.62465733, 0.780899, 0.3, 1, -5.0623656e-09, 5.657938e-09, 0.6234392, 0.7818718, 0.33333334, 1, -1.784247e-09, 1.4868733e-09, 0.6220794, 0.7829542, 0.36666667, 1, -7.721811e-09, 1.1285726e-08, 0.62081045, 0.7839607, 0.4, 1, -3.5605383e-09, 8.011214e-09, 0.61987114, 0.7847036, 0.46666667, 1, -5.9345906e-09, 1.2165909e-08, 0.61993116, 0.78465617, 0.5, 1, -9.50762e-09, 2.3769056e-09, 0.6212113, 0.7836431, 0.53333336, 1, -2.9903064e-09, 1.1363164e-08, 0.62749827, 0.77861804, 0.56666666, 1, -7.889461e-09, -1.5172038e-08, 0.6412861, 0.7673019, 0.6, 1, -3.09558e-09, 6.191157e-10, 0.6590042, 0.7521393, 0.6333333, 1, -3.8020134e-09, 1.2673381e-09, 0.6782131, 0.7348653, 0.6666667, 1, -3.0954655e-16, -5.8424954e-09, 0.69674164, 0.7173222, 0.7, 1, 6.2470695e-09, -2.9591383e-09, 0.7060749, 0.7081372, 0.73333335, 1, -8.0250295e-09, -1.3102093e-09, 0.7108199, 0.70337415, 0.76666665, 1, 8.20189e-10, -9.842267e-10, 0.70968604, 0.7045181, 0.8, 1, -1.0647226e-09, -1.310428e-09, 0.7034942, 0.71070105, 0.8333333, 1, -5.865988e-10, -8.6978463e-10, 0.69458485, 0.71941084, 0.8666667, 1, 5.771316e-10, -2.1891203e-10, 0.6821503, 0.73121196, 0.9, 1, 2.7341934e-10, -5.468389e-10, 0.6669447, 0.7451073, 0.93333334, 1, 2.680218e-10, -5.609311e-09, 0.6497906, 0.7601133, 0.96666664, 1, -4.60157e-09, -1.4948075e-09, 0.6302844, 0.7763643, 1, 1, 5.1401877e-10, 7.0494e-09, 0.6096349, 0.7926824, 1.0333333, 1, 7.3197226e-11, -3.037671e-09, 0.6063204, 0.7952205, 1.0666667, 1, 4.7388565e-10, 4.3743287e-10, 0.602129, 0.79839885, 1.1, 1, -3.991534e-10, 4.717269e-10, 0.5972529, 0.802053, 1.1333333, 1, -1.4436575e-09, 1.8045723e-09, 0.59138215, 0.8063914, 1.1666666, 1, -7.462738e-09, -5.5970544e-09, 0.58480173, 0.8111763, 1.2, 1, 5.4190386e-09, 5.9894663e-09, 0.57757074, 0.8163406, 1.2333333, 1, 5.6665987e-09, 5.09994e-09, 0.56982654, 0.821765, 1.3, 1, -1.6772844e-08, -5.590948e-09, 0.55344707, 0.83288443, 1.3333334, 1, -5.556497e-09, -5.0008477e-09, 0.545596, 0.83804834, 1.4, 1, 1.112088e-09, 1.6681316e-09, 0.5465072, 0.83745444, 1.4333333, 1, 8.905176e-09, 3.8960137e-09, 0.5477267, 0.8366573, 1.4666667, 1, -2.2294313e-09, 5.016222e-09, 0.549521, 0.8354799, 1.5, 1, 1.1169411e-09, -8.935533e-09, 0.5520441, 0.8338149, 1.5333333, 1, 5.6191835e-10, 1.7981403e-08, 0.5596955, 0.82869846, 1.5666667, 1, -3.9825903e-09, 3.6981196e-09, 0.5745499, 0.8184696, 1.6, 1, -1.6781506e-08, -4.9187165e-09, 0.59367347, 0.80470604, 1.6333333, 1, -2.952326e-09, -4.7237223e-09, 0.61486226, 0.78863454, 1.6666666, 1, -9.0346686e-10, -1.1142761e-08, 0.6342552, 0.7731238, 1.7, 1, -3.374823e-09, 9.204058e-10, 0.6512127, 0.7588953, 1.7333333, 1, -6.0608674e-09, -3.108143e-10, 0.6624566, 0.7491003, 1.7666667, 1, -2.578655e-09, 9.376929e-10, 0.66717064, 0.7449049, 1.8, 1, -1.7982762e-09, -2.6192293e-09, 0.6676476, 0.74447745, 1.8333334, 1, 1.948006e-11, 5.941413e-10, 0.66480535, 0.74701667, 1.8666667, 1, -8.222781e-11, 7.593984e-10, 0.6590202, 0.7521253, 1.9, 1, -4.0236442e-10, -4.0236436e-10, 0.6505232, 0.75948644, 1.9333333, 1, 2.3286728e-09, -1.609245e-09, 0.63969463, 0.7686292, 1.9666667, 1, -7.4782215e-11, -4.758001e-09, 0.6278117, 0.7783654, 2, 1, 4.3994466e-09, 2.0106485e-09, 0.6145484, 0.78887916)
 
+[sub_resource type="Animation" id="Animation_iv6wx"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Armature/Skeleton3D/Bone_031/BODY_001/HEAD:material_overlay:albedo_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.40832946, 0.40832946, 0.40832946, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Armature/Skeleton3D/Bone_031/BODY_001/HEAD:material_overlay:emission")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.45882353, 0, 0, 1)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_3bqwr"]
 _data = {
+&"RESET": SubResource("Animation_iv6wx"),
 &"SpiderIdle": SubResource("Animation_vlxpe"),
 &"SpiderWalkCycle": SubResource("Animation_ua0w3")
+}
+
+[sub_resource type="Animation" id="Animation_t3q8o"]
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Armature/Skeleton3D/Bone_031/BODY_001/HEAD:material_overlay:albedo_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(0.40832946, 0.40832946, 0.40832946, 1), Color(0.92941177, 0, 0, 1), Color(0.40832946, 0.40832946, 0.40832946, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Armature/Skeleton3D/Bone_031/BODY_001/HEAD:material_overlay:emission")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(0.45882353, 0, 0, 1), Color(0, 0, 0, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_nurlt"]
+_data = {
+&"hit_received": SubResource("Animation_t3q8o")
 }
 
 [node name="entity_spider" type="Node3D"]
@@ -3223,6 +3283,7 @@ skeleton = NodePath("")
 [node name="HEAD" type="MeshInstance3D" parent="Armature/Skeleton3D/Bone_031/BODY_001"]
 transform = Transform3D(0.30415556, 0, 0, 0, 0.30622792, 0, 0, 0, 0.5035477, 0, 0, 0)
 material_override = ExtResource("2_t3q8o")
+material_overlay = ExtResource("2_t3q8o")
 mesh = SubResource("ArrayMesh_2imkt")
 skeleton = NodePath("")
 
@@ -3245,6 +3306,8 @@ mesh = SubResource("ArrayMesh_4p4hk")
 skeleton = NodePath("")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+reset_on_save = false
 libraries = {
-&"": SubResource("AnimationLibrary_3bqwr")
+&"": SubResource("AnimationLibrary_3bqwr"),
+&"custom": SubResource("AnimationLibrary_nurlt")
 }

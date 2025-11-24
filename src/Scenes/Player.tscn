@@ -1,9 +1,8 @@
-[gd_scene load_steps=16 format=3 uid="uid://dct6crx3jwiat"]
+[gd_scene load_steps=17 format=3 uid="uid://dct6crx3jwiat"]
 
 [ext_resource type="Script" uid="uid://nchnj2u7kv5" path="res://src/Scripts/Player.gd" id="1_rpqav"]
 [ext_resource type="Script" uid="uid://dsi0c4pqhkju7" path="res://src/Scripts/PlayerCombat.gd" id="3_g1uh0"]
 [ext_resource type="PackedScene" uid="uid://be1gwv0coi2ua" path="res://src/Scenes/WeaponInstance.tscn" id="4_5dq0m"]
-[ext_resource type="Resource" uid="uid://tfggkjfecp7f" path="res://src/Objects/Weapons/Blade1/Sword1.tres" id="4_ma0cp"]
 [ext_resource type="Script" uid="uid://biya2r8iv253u" path="res://src/Scripts/hud.gd" id="5_ma0cp"]
 [ext_resource type="Script" uid="uid://tmk08xd244ca" path="res://src/Scripts/death_screen.gd" id="6_4mdpm"]
 
@@ -247,7 +246,7 @@ script = ExtResource("1_rpqav")
 shape = SubResource("CapsuleShape3D_qbkls")
 
 [node name="ThirdPersonCamera" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.70710677, 0.70710677, 0, -0.70710677, 0.70710677, 0, 6, 6)
+transform = Transform3D(1, 0, 0, 0, 0.8591207, 0.511773, 0, -0.511773, 0.8591207, 0, 2.7003121, 2.2092881)
 
 [node name="FirstPersonCamera" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4769659, 0.088204324)
