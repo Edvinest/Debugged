@@ -14,7 +14,14 @@ var mouse_sensitivity := 0.002
 var controller_sensitivity := 2.0
 var gravity := 30
 
+const MAX_HEALTH = 100
+var health: float
+@onready var hp_bar: ProgressBar = $HUD/Control/ProgressBar
+@onready var death_screen: CanvasLayer = %DEATH_SCREEN
+
 func _ready():
+	health = MAX_HEALTH
+	death_screen.hide()
 	Hands.set_weapons(left_weapon, right_weapon)
 	
 	if using_first_person:
@@ -29,6 +36,10 @@ func _ready():
 		using_first_person = true
 		
 func _process(delta: float) -> void:
+	hp_bar.value = health
+	if health <= 0:
+		death_screen.show()
+	
 	var right_x := Input.get_joy_axis(0, JOY_AXIS_RIGHT_X)
 	var right_y := Input.get_joy_axis(0, JOY_AXIS_RIGHT_Y)
 
@@ -103,3 +114,7 @@ func set_camera_mode(first_person : bool):
 	firstPersonCamera.current = first_person
 	thirdPersonCamera.current = not first_person
 	$PlayerBody/Hands.using_first_person = first_person
+
+func take_damage(damage_to_take):
+	health -= damage_to_take
+	print("Player took damage: " + str(damage_to_take))

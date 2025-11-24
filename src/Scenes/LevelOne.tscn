@@ -46,7 +46,7 @@ left_weapon = ExtResource("2_58uts")
 right_weapon = ExtResource("3_xaf01")
 
 [node name="SpiderEnemy" parent="." instance=ExtResource("18_7qily")]
-transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 4.210294, 3.8804832, 1.172594)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.210294, 3.8804832, 1.172594)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_ygosd")
@@ -57,28 +57,30 @@ light_color = Color(1, 1, 0.5372549, 1)
 light_energy = 0.1
 shadow_enabled = true
 
-[node name="prop_bed" parent="." instance=ExtResource("1_02nir")]
+[node name="Props" type="Node3D" parent="."]
+
+[node name="prop_bed" parent="Props" instance=ExtResource("1_02nir")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5832319, -0.28739643, -1.3672981)
 
-[node name="prop_floor" parent="." instance=ExtResource("2_1b8pk")]
+[node name="prop_floor" parent="Props" instance=ExtResource("2_1b8pk")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0921669, 0, -0.90050125)
 
-[node name="prop_cabinet" parent="." instance=ExtResource("5_austs")]
+[node name="prop_cabinet" parent="Props" instance=ExtResource("5_austs")]
 transform = Transform3D(2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, 4.617687, 3, -13.735708)
 
-[node name="prop_frames" parent="." instance=ExtResource("9_pjf87")]
+[node name="prop_frames" parent="Props" instance=ExtResource("9_pjf87")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.11976433, 9.8645115, 16.734161)
 
-[node name="desk_and_props" type="Node3D" parent="."]
+[node name="desk_and_props" type="Node3D" parent="Props"]
 transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 4.2096777, -4.3758326, 0)
 
-[node name="prop_desk" parent="desk_and_props" instance=ExtResource("3_ajlcv")]
+[node name="prop_desk" parent="Props/desk_and_props" instance=ExtResource("3_ajlcv")]
 transform = Transform3D(-9.616505e-08, 0, 2.2, 0, 2.2, 0, -2.2, 0, -9.616505e-08, -10.395598, 4.9381933, 0.04573822)
 
-[node name="prop_display" parent="desk_and_props" instance=ExtResource("8_b06gv")]
+[node name="prop_display" parent="Props/desk_and_props" instance=ExtResource("8_b06gv")]
 transform = Transform3D(0.9, 0, 0, 0, 0.9, 0, 0, 0, 0.9, -9.333334, 8.691412, 0.32955536)
 
-[node name="SpotLight3D" type="SpotLight3D" parent="desk_and_props/prop_display"]
+[node name="SpotLight3D" type="SpotLight3D" parent="Props/desk_and_props/prop_display"]
 transform = Transform3D(-3.2378804e-08, 0, -0.7407407, 0, 0.7407407, 0, 0.7407407, 0, -3.2378804e-08, -0.014277935, 1.7653913, -0.73330754)
 light_energy = 5.946
 shadow_enabled = true
@@ -86,10 +88,10 @@ spot_range = 4.829
 spot_angle = 64.6
 spot_angle_attenuation = 0.659754
 
-[node name="prop_deskLamp" parent="desk_and_props" instance=ExtResource("7_ygok4")]
+[node name="prop_deskLamp" parent="Props/desk_and_props" instance=ExtResource("7_ygok4")]
 transform = Transform3D(0.6666667, 0, 0, 0, 0.6666667, 0, 0, 0, 0.6666667, -9.930262, 8.673414, -2.6672246)
 
-[node name="OmniLight3D" type="OmniLight3D" parent="desk_and_props/prop_deskLamp"]
+[node name="OmniLight3D" type="OmniLight3D" parent="Props/desk_and_props/prop_deskLamp"]
 transform = Transform3D(0.92038214, 0.3910203, 1.7092038e-08, 0, -4.3711392e-08, 1, 0.3910203, -0.92038214, -4.023118e-08, 0.023152351, 1.4678602, -0.045244694)
 light_color = Color(0.84705883, 0.6627451, 0, 1)
 light_energy = 5.686
@@ -97,10 +99,10 @@ shadow_enabled = true
 omni_range = 3.785
 omni_attenuation = 1.02
 
-[node name="prop_mainLamp" parent="." instance=ExtResource("10_75nk5")]
+[node name="prop_mainLamp" parent="Props" instance=ExtResource("10_75nk5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.7059708, 18.20557, 0.47491837)
 
-[node name="SpotLight3D" type="SpotLight3D" parent="prop_mainLamp"]
+[node name="SpotLight3D" type="SpotLight3D" parent="Props/prop_mainLamp"]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
 light_energy = 11.345
 shadow_enabled = true
@@ -108,25 +110,25 @@ spot_range = 28.108
 spot_angle = 73.1094
 spot_angle_attenuation = 1.1892081
 
-[node name="prop_carpet" parent="." instance=ExtResource("12_ygok4")]
+[node name="prop_carpet" parent="Props" instance=ExtResource("12_ygok4")]
 transform = Transform3D(4.641847, 0, -3.8017437, 0, 6, 0, 3.8017437, 0, 4.641847, 1.2410023, 2.9815786, -0.38185036)
 
-[node name="prop_books" parent="." instance=ExtResource("13_b06gv")]
+[node name="prop_books" parent="Props" instance=ExtResource("13_b06gv")]
 transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, -9.238658, 8.699198, -6.3913565)
 
-[node name="prop_walls" parent="." instance=ExtResource("14_pjf87")]
+[node name="prop_walls" parent="Props" instance=ExtResource("14_pjf87")]
 transform = Transform3D(0.9, 0, 0, 0, 0.8260235, 0, 0, 0, 0.9, 1.676465, 2.1275032, 0.4252429)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="prop_walls"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Props/prop_walls"]
 transform = Transform3D(40, 0, 0, 0, 4.0631843, 0, 0, 0, 40, 0, 23.245556, 0)
 material_overlay = ExtResource("15_2rfmo")
 mesh = SubResource("BoxMesh_f868b")
 
-[node name="prop_pc" parent="." instance=ExtResource("17_f868b")]
+[node name="prop_pc" parent="Props" instance=ExtResource("17_f868b")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.217733, 3.3334022, -6.8039417)
 
-[node name="prop_cactus" parent="." instance=ExtResource("11_ceyxk")]
+[node name="prop_cactus" parent="Props" instance=ExtResource("11_ceyxk")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.747814, 8.63596, 6.075992)
 
-[node name="prop_chair" parent="." instance=ExtResource("6_ceyxk")]
+[node name="prop_chair" parent="Props" instance=ExtResource("6_ceyxk")]
 transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, -5.718702, 2.9582841, 0.45221567)
