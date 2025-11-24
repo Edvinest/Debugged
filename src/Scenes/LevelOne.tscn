@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://bp1n81hkwp3tu"]
+[gd_scene load_steps=26 format=3 uid="uid://bp1n81hkwp3tu"]
 
 [ext_resource type="PackedScene" uid="uid://chpye160qgiy6" path="res://src/Objects/LevelOne/prop_bed.tscn" id="1_02nir"]
 [ext_resource type="PackedScene" uid="uid://ch7albaj53q7" path="res://src/Objects/LevelOne/prop_floor.tscn" id="2_1b8pk"]
@@ -19,6 +19,7 @@
 [ext_resource type="PackedScene" uid="uid://cwl5p6tqsbgn0" path="res://src/Objects/LevelOne/prop_walls.tscn" id="14_pjf87"]
 [ext_resource type="Material" uid="uid://ckflsbqsydvbq" path="res://src/Objects/LevelOne/Materials/mat_clay.tres" id="15_2rfmo"]
 [ext_resource type="PackedScene" uid="uid://bliarftr5secx" path="res://src/Objects/LevelOne/prop_pc.tscn" id="17_f868b"]
+[ext_resource type="Script" uid="uid://dj63i1pq61734" path="res://src/Scripts/teleportation_demo.gd" id="19_teleport"]
 [ext_resource type="PackedScene" path="res://src/Scenes/SpiderEnemy.tscn" id="18_7qily"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_ndl4m"]
@@ -37,6 +38,15 @@ glow_levels/3 = 1.07
 glow_levels/5 = 0.42
 
 [sub_resource type="BoxMesh" id="BoxMesh_f868b"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_f868b"]
+emission_enabled = true
+emission = Color(1, 0, 0, 1)
+emission_energy_multiplier = 8.43
+
+[sub_resource type="BoxMesh" id="BoxMesh_7qily"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_46rq7"]
 
 [node name="LevelOne" type="Node3D"]
 
@@ -127,6 +137,70 @@ mesh = SubResource("BoxMesh_f868b")
 [node name="prop_pc" parent="Props" instance=ExtResource("17_f868b")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.217733, 3.3334022, -6.8039417)
 
+[node name="teleport_pads" type="Node3D" parent="."]
+transform = Transform3D(0.29999998, 0, 0, 0, 0.29999998, 0, 0, 0, 0.29999998, 7, 3.3905268, 0)
+
+[node name="pad" type="MeshInstance3D" parent="teleport_pads" groups=["teleport_pads"]]
+material_override = SubResource("StandardMaterial3D_f868b")
+mesh = SubResource("BoxMesh_7qily")
+skeleton = NodePath("../..")
+script = ExtResource("18_7qily")
+target_id = 1
+
+[node name="Area3D" type="Area3D" parent="teleport_pads/pad"]
+transform = Transform3D(1.0000001, 0, 0, 0, 1.0000001, 0, 0, 0, 1.0000001, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="teleport_pads/pad/Area3D"]
+shape = SubResource("BoxShape3D_46rq7")
+
+[node name="pad2" type="MeshInstance3D" parent="teleport_pads" groups=["teleport_pads"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.666666, 10.000001, 10)
+material_override = SubResource("StandardMaterial3D_f868b")
+mesh = SubResource("BoxMesh_7qily")
+skeleton = NodePath("../..")
+script = ExtResource("18_7qily")
+pad_id = 1
+
+[node name="Area3D" type="Area3D" parent="teleport_pads/pad2"]
+transform = Transform3D(1.0000001, 0, 0, 0, 1.0000001, 0, 0, 0, 1.0000001, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="teleport_pads/pad2/Area3D"]
+shape = SubResource("BoxShape3D_46rq7")
+
+[node name="pad3" type="MeshInstance3D" parent="teleport_pads" groups=["teleport_pads"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -52.692772, 19.887348, -10.649537)
+material_override = SubResource("StandardMaterial3D_f868b")
+mesh = SubResource("BoxMesh_7qily")
+skeleton = NodePath("../..")
+script = ExtResource("18_7qily")
+pad_id = 3
+target_id = 2
+
+[node name="Area3D" type="Area3D" parent="teleport_pads/pad3"]
+transform = Transform3D(1.0000001, 0, 0, 0, 1.0000001, 0, 0, 0, 1.0000001, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="teleport_pads/pad3/Area3D"]
+shape = SubResource("BoxShape3D_46rq7")
+
+[node name="pad4" type="MeshInstance3D" parent="teleport_pads" groups=["teleport_pads"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -31.479685)
+material_override = SubResource("StandardMaterial3D_f868b")
+mesh = SubResource("BoxMesh_7qily")
+skeleton = NodePath("../..")
+script = ExtResource("18_7qily")
+pad_id = 2
+target_id = 3
+
+[node name="Area3D" type="Area3D" parent="teleport_pads/pad4"]
+transform = Transform3D(1.0000001, 0, 0, 0, 1.0000001, 0, 0, 0, 1.0000001, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="teleport_pads/pad4/Area3D"]
+shape = SubResource("BoxShape3D_46rq7")
+
+[connection signal="body_entered" from="teleport_pads/pad/Area3D" to="teleport_pads/pad" method="_on_area_3d_body_entered"]
+[connection signal="body_entered" from="teleport_pads/pad2/Area3D" to="teleport_pads/pad2" method="_on_area_3d_body_entered"]
+[connection signal="body_entered" from="teleport_pads/pad3/Area3D" to="teleport_pads/pad3" method="_on_area_3d_body_entered"]
+[connection signal="body_entered" from="teleport_pads/pad4/Area3D" to="teleport_pads/pad4" method="_on_area_3d_body_entered"]
 [node name="prop_cactus" parent="Props" instance=ExtResource("11_ceyxk")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.747814, 8.63596, 6.075992)
 
