@@ -28,7 +28,8 @@ func _load_model(scene: PackedScene) -> void:
 			return
 		
 	for c in model_holder.get_children():
-		c.queue_free()
+		if c is MeshInstance3D:
+			c.queue_free()
 	
 	var instance = scene.instantiate()
 	model_holder.add_child(instance)
@@ -218,8 +219,48 @@ func _attack_slam(hand : String):
 	is_attacking = false
 
 func _attack_shoot():
-	# TODO: Implement it later
-	pass
+	if is_attacking:
+		return
+		
+	is_attacking = true
+	var enemy = _retro_hitscan()
+	if enemy:
+		enemy.take_damage(weapon_data.damage)
+		
+	# TODO: add effect
+	
+	await get_tree().create_timer(weapon_data.attack_speed).timeout
+	is_attacking = false
+
+func _retro_hitscan() -> Node:
+	var origin = global_transform.origin
+	var forward = -global_transform.basis.z # this is the player forward direction
+	
+	# Convert it to 2D because we don't care about enemy height
+	var origin2d = Vector2(origin.x, origin.z)
+	var forward2d = Vector2(forward.x, forward.z).normalized()
+	
+	var max_shoot_dist = 10 #weapon_data.range if weapon_data.has("range") else
+	var end2d = origin2d + forward2d * max_shoot_dist
+	
+	var best_target : Node = null
+	var best_dist := INF
+	
+	# Width of the shot (will be useful for a shotgun for example)
+	var tolerance : float = 1.0
+	
+	for enemy in get_tree().get_nodes_in_group("enemy"):
+		var pos = enemy.global_transform.origin
+		var pos2d = Vector2(pos.x, pos.z)
+		
+		var d = Geometry2D.get_closest_point_to_segment(pos2d, origin2d, end2d)
+		if d <= tolerance:
+			var dist = origin2d.direction_to(pos2d)
+			if dist < best_dist:
+				best_dist = dist
+				best_target = enemy
+	
+	return best_target
 
 func _enable_hitbox(enabled : bool) -> void:
 	if hitbox:
