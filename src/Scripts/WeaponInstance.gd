@@ -55,7 +55,7 @@ func start_motion_attack(direction: String, hand: Node3D) -> void:
 			_imu_hammer_attack(direction, hand)
 			pass
 		Weapon.WeaponType.GUN:
-			_attack_shoot()
+			_imu_gun_shoot()
 		_:
 			push_warning("Unknown weapon type")
 
@@ -158,7 +158,44 @@ func _imu_hammer_attack(direction: String, hand: Node3D) -> void:
 
 	_enable_hitbox(false)
 	is_attacking = false
+	
+func _imu_gun_shoot() -> void:
+	if is_attacking:
+		return
+		
+	is_attacking = true
+	var enemy = _imu_aim_assist()
+	if enemy:
+		enemy.take_damage(weapon_data.damage)
+		
+	#TODO: add effect
+	
+	await get_tree().create_timer(weapon_data.attack_speed).timeout
+	is_attacking = false
 
+func _imu_aim_assist(max_dist : float = 10.0, fov_degrees : float = 15.0) -> Node:
+	var origin = global_transform.origin
+	var forward = -global_transform.basis.z
+	
+	var best_target : Node = null
+	var best_angle = deg_to_rad(fov_degrees)
+	
+	for enemy in get_tree().get_nodes_in_group("enemy"):
+		var to_enemy = enemy.global_transform.origin - origin
+		var dist = to_enemy.length()
+		
+		if dist > max_dist:
+			continue  # too far
+		
+		var dir = to_enemy.normalized()
+		var angle = acos(forward.dot(dir))
+		
+		if angle < best_angle:
+			best_angle = angle
+			best_target = enemy
+	
+	return best_target
+	
 # Smooth timed return of weapon rotation
 func _smooth_reset_rotation(orig_hand_pos: Vector3, orig_hand_rot: Vector3, orig_weapon_rot: Vector3, hand: Node3D) -> void:
 	var t := 0.0
@@ -219,8 +256,48 @@ func _attack_slam(hand : String):
 	is_attacking = false
 
 func _attack_shoot():
-	# TODO: Implement it later
-	pass
+	if is_attacking:
+		return
+		
+	is_attacking = true
+	var enemy = _retro_hitscan()
+	if enemy:
+		enemy.take_damage(weapon_data.damage)
+		
+	# TODO: add effect
+	
+	await get_tree().create_timer(weapon_data.attack_speed).timeout
+	is_attacking = false
+
+func _retro_hitscan() -> Node:
+	var origin = global_transform.origin
+	var forward = -global_transform.basis.z # this is the player forward direction
+	
+	# Convert it to 2D because we don't care about enemy height
+	var origin2d = Vector2(origin.x, origin.z)
+	var forward2d = Vector2(forward.x, forward.z).normalized()
+	
+	var max_shoot_dist = 10 #weapon_data.range if weapon_data.has("range") else
+	var end2d = origin2d + forward2d * max_shoot_dist
+	
+	var best_target : Node = null
+	var best_dist := INF
+	
+	# Width of the shot (will be useful for a shotgun for example)
+	var tolerance : float = 1.0
+	
+	for enemy in get_tree().get_nodes_in_group("enemy"):
+		var pos = enemy.global_transform.origin
+		var pos2d = Vector2(pos.x, pos.z)
+		
+		var d = Geometry2D.get_closest_point_to_segment(pos2d, origin2d, end2d)
+		if d <= tolerance:
+			var dist = origin2d.direction_to(pos2d)
+			if dist < best_dist:
+				best_dist = dist
+				best_target = enemy
+	
+	return best_target
 
 func _enable_hitbox(enabled : bool) -> void:
 	if hitbox:
