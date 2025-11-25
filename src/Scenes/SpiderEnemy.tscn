@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://qjjoef5p6xhx"]
+[gd_scene load_steps=10 format=3 uid="uid://qjjoef5p6xhx"]
 
 [ext_resource type="PackedScene" uid="uid://cln6asbdyk1i3" path="res://src/Objects/LevelOne/entity_spider.tscn" id="1_peton"]
 [ext_resource type="Script" uid="uid://cicppk4ymhc72" path="res://src/Scripts/enemy_Spider.gd" id="2_2yc0a"]
 [ext_resource type="Script" uid="uid://n8twil0p3eb6" path="res://src/Scenes/hp_bar.gd" id="3_quvuh"]
+[ext_resource type="Script" uid="uid://c5nnq5hwyro4s" path="res://src/Scripts/entity_spider.gd" id="3_r8l3h"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_peton"]
 size = Vector3(2.3, 1.1989257, 1.0109863)
@@ -45,6 +46,7 @@ surface_material_override/0 = SubResource("StandardMaterial3D_2yc0a")
 
 [node name="entity_spider" parent="." instance=ExtResource("1_peton")]
 transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, 0)
+script = ExtResource("3_r8l3h")
 
 [node name="HP_bar" type="Sprite3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.047917843, 0.91172886, 0)

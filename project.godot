@@ -31,6 +31,16 @@ project/assembly_name="Debugged"
 
 enabled=PackedStringArray("res://addons/godot-firebase/plugin.cfg")
 
+[file_customization]
+
+folder_colors={
+"res://src/": "yellow",
+"res://src/Materials/": "purple",
+"res://src/Objects/": "orange",
+"res://src/Scenes/": "red",
+"res://src/Scripts/": "gray"
+}
+
 [input]
 
 move_forward={

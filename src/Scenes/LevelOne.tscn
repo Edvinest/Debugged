@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://bp1n81hkwp3tu"]
+[gd_scene load_steps=30 format=3 uid="uid://bp1n81hkwp3tu"]
 
 [ext_resource type="PackedScene" uid="uid://chpye160qgiy6" path="res://src/Objects/LevelOne/prop_bed.tscn" id="1_02nir"]
 [ext_resource type="PackedScene" uid="uid://ch7albaj53q7" path="res://src/Objects/LevelOne/prop_floor.tscn" id="2_1b8pk"]
@@ -21,6 +21,7 @@
 [ext_resource type="PackedScene" uid="uid://bliarftr5secx" path="res://src/Objects/LevelOne/prop_pc.tscn" id="17_f868b"]
 [ext_resource type="PackedScene" uid="uid://qjjoef5p6xhx" path="res://src/Scenes/SpiderEnemy.tscn" id="18_7qily"]
 [ext_resource type="Script" uid="uid://dj63i1pq61734" path="res://src/Scripts/teleportation_demo.gd" id="19_teleport"]
+[ext_resource type="PackedScene" uid="uid://dgsixffdjh8gk" path="res://src/Scenes/spawner.tscn" id="22_jik07"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_ndl4m"]
 panorama = ExtResource("4_n562r")
@@ -54,9 +55,6 @@ emission_energy_multiplier = 8.43
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.817619, 9.796223, 3.003212)
 left_weapon = ExtResource("2_58uts")
 right_weapon = ExtResource("3_xaf01")
-
-[node name="SpiderEnemy" parent="." instance=ExtResource("18_7qily")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.210294, 3.8804832, 1.172594)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_ygosd")
@@ -155,6 +153,7 @@ target_id = 1
 
 [node name="Area3D" type="Area3D" parent="teleport_pads/pad"]
 transform = Transform3D(1.0000001, 0, 0, 0, 1.0000001, 0, 0, 0, 1.0000001, 0, 0, 0)
+collision_mask = 2
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="teleport_pads/pad/Area3D"]
 shape = SubResource("BoxShape3D_46rq7")
@@ -169,6 +168,7 @@ pad_id = 1
 
 [node name="Area3D" type="Area3D" parent="teleport_pads/pad2"]
 transform = Transform3D(1.0000001, 0, 0, 0, 1.0000001, 0, 0, 0, 1.0000001, 0, 0, 0)
+collision_mask = 2
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="teleport_pads/pad2/Area3D"]
 shape = SubResource("BoxShape3D_46rq7")
@@ -184,6 +184,7 @@ target_id = 3
 
 [node name="Area3D" type="Area3D" parent="teleport_pads/pad3"]
 transform = Transform3D(1.0000001, 0, 0, 0, 1.0000001, 0, 0, 0, 1.0000001, 0, 0, 0)
+collision_mask = 2
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="teleport_pads/pad3/Area3D"]
 shape = SubResource("BoxShape3D_46rq7")
@@ -199,9 +200,15 @@ target_id = 2
 
 [node name="Area3D" type="Area3D" parent="teleport_pads/pad4"]
 transform = Transform3D(1.0000001, 0, 0, 0, 1.0000001, 0, 0, 0, 1.0000001, 0, 0, 0)
+collision_mask = 2
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="teleport_pads/pad4/Area3D"]
 shape = SubResource("BoxShape3D_46rq7")
+
+[node name="Spawner" parent="." instance=ExtResource("22_jik07")]
+transform = Transform3D(0.3762728, 0, -0.9265089, 0, 1, 0, 0.9265089, 0, 0.3762728, 0.19784927, 3.848476, 17.795755)
+mob_to_spawn = ExtResource("18_7qily")
+max_spawns = 5
 
 [connection signal="body_entered" from="teleport_pads/pad/Area3D" to="teleport_pads/pad" method="_on_area_3d_body_entered"]
 [connection signal="body_entered" from="teleport_pads/pad2/Area3D" to="teleport_pads/pad2" method="_on_area_3d_body_entered"]

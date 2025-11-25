@@ -1,11 +1,17 @@
 extends RigidBody3D
 
+#For spawner to know how many are 
+signal died(points)
+
 # Instances
 var player: CharacterBody3D = null
 @onready var animation_player: AnimationPlayer = $entity_spider/AnimationPlayer
+@onready var animation_tree: AnimationTree = $entity_spider/AnimationTree
 @onready var hp_bar: ProgressBar = $HP_bar/SubViewport/ProgressBar
 @onready var attack_cooldown: Timer = $AttackCooldown
 @onready var dodge_timer: Timer = $DodgeTimer
+@onready var entity_spider: Node3D = $entity_spider
+
 
 # Constants
 const DETECTION_RANGE = 10.0
@@ -14,6 +20,8 @@ const CRITICAL_HP = 20
 const NORMAL_SPEED = 3.0
 const RETREAT_SPEED = 5.0
 const DODGE_DURATION = .7  # Duration of retreat in seconds
+#Point to give player upon killing it.
+const POINT = 10
 
 # Properties
 var health = MAX_HEALTH
@@ -47,6 +55,7 @@ func _physics_process(delta: float) -> void:
 	var distance = global_position.distance_to(player.global_position)
 
 	if health <= 0:
+		died.emit(POINT)
 		queue_free()
 		return
 
@@ -54,7 +63,6 @@ func _physics_process(delta: float) -> void:
 	if is_dodging:
 		state = State.DODGE
 	elif target != null and health <= CRITICAL_HP and flag_dodge == 1:
-		# Start dodge once
 		is_dodging = true
 		flag_dodge = 0
 		dodge_timer.start(DODGE_DURATION)
@@ -85,25 +93,22 @@ func _physics_process(delta: float) -> void:
 
 	hp_bar.value = health
 
-# --- Movement ---
 func _tracking(target_pos: Vector3, move_speed: float):
 	var direction = global_position.direction_to(target_pos)
 	direction.y = 0.0
 	linear_velocity = direction * move_speed
 	rotation.y = Vector3.FORWARD.signed_angle_to(direction, Vector3.UP)
-	rotate_y(30)
 
 func _dodge(target_pos: Vector3, move_speed: float):
-	# Move directly away from player
 	var direction = (global_position - target_pos).normalized()
 	direction.y = 0.0
 	linear_velocity = direction * move_speed
 
-# --- Combat ---
+
 func take_damage(damage_to_take):
 	health -= damage_to_take
 	hp_bar.value = health
-	animation_player.play("custom/hit_received")
+	entity_spider.hurt()
 	print("Enemy HP:", health)
 
 func deal_damage(body):
@@ -112,7 +117,6 @@ func deal_damage(body):
 		if body.has_method("take_damage"):
 			body.take_damage(damage)
 
-# --- Hitbox signals ---
 func _on_hitbox_body_entered(body: Node3D) -> void:
 	target = body
 
