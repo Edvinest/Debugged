@@ -21,6 +21,7 @@ func _ready():
 	tp_camera_original_rotation = thirdPersonCamera.global_rotation
 	
 	using_first_person = Input.get_connected_joypads().size() > 0
+	set_camera_mode(using_first_person)
 	
 func _process(delta: float) -> void:
 	if not using_first_person:
