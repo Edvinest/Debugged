@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bnhkaedhsgc7h"
-path="res://.godot/imported/Debugged_UML.png-68023de5b44bb74952861543780ead16.ctex"
+uid="uid://bwao4gl531t6s"
+path="res://.godot/imported/potatobug.png-6a9a12f5ea27142d2dfc220dd7357f2b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://docs/Debugged_UML.png"
-dest_files=["res://.godot/imported/Debugged_UML.png-68023de5b44bb74952861543780ead16.ctex"]
+source_file="res://concept_arts/potatobug.png"
+dest_files=["res://.godot/imported/potatobug.png-6a9a12f5ea27142d2dfc220dd7357f2b.ctex"]
 
 [params]
 

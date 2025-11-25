@@ -305,6 +305,15 @@ func _enable_hitbox(enabled : bool) -> void:
 		hitbox.monitorable = enabled
 		
 ## Area3D based detection for keyboard and mouse
-func _on_Hitbox_body_entered(body) -> void:
+func _on_area_3d_body_entered(body: Node3D) -> void:
+	print("----IN RANGE-----")
 	if body.is_in_group("enemy"):
-		body.take_damage(weapon_data.damage)
+		if body.has_method("take_damage"):
+			body.take_damage(weapon_data.damage)
+		else:
+			push_warning("Body does not have 'take_damage' method")
+
+## for IMU based attacks
+## uses the tip of the weapon to track each hit
+func _motion_hit_detection():
+	pass
