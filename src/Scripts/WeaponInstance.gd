@@ -55,7 +55,7 @@ func start_motion_attack(direction: String, hand: Node3D) -> void:
 			_imu_hammer_attack(direction, hand)
 			pass
 		Weapon.WeaponType.GUN:
-			_attack_shoot()
+			_imu_gun_shoot()
 		_:
 			push_warning("Unknown weapon type")
 
@@ -158,7 +158,44 @@ func _imu_hammer_attack(direction: String, hand: Node3D) -> void:
 
 	_enable_hitbox(false)
 	is_attacking = false
+	
+func _imu_gun_shoot() -> void:
+	if is_attacking:
+		return
+		
+	is_attacking = true
+	var enemy = _imu_aim_assist()
+	if enemy:
+		enemy.take_damage(weapon_data.damage)
+		
+	#TODO: add effect
+	
+	await get_tree().create_timer(weapon_data.attack_speed).timeout
+	is_attacking = false
 
+func _imu_aim_assist(max_dist : float = 10.0, fov_degrees : float = 15.0) -> Node:
+	var origin = global_transform.origin
+	var forward = -global_transform.basis.z
+	
+	var best_target : Node = null
+	var best_angle = deg_to_rad(fov_degrees)
+	
+	for enemy in get_tree().get_nodes_in_group("enemy"):
+		var to_enemy = enemy.global_transform.origin - origin
+		var dist = to_enemy.length()
+		
+		if dist > max_dist:
+			continue  # too far
+		
+		var dir = to_enemy.normalized()
+		var angle = acos(forward.dot(dir))
+		
+		if angle < best_angle:
+			best_angle = angle
+			best_target = enemy
+	
+	return best_target
+	
 # Smooth timed return of weapon rotation
 func _smooth_reset_rotation(orig_hand_pos: Vector3, orig_hand_rot: Vector3, orig_weapon_rot: Vector3, hand: Node3D) -> void:
 	var t := 0.0
