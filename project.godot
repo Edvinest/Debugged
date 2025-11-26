@@ -38,8 +38,14 @@ folder_colors={
 "res://src/Materials/": "purple",
 "res://src/Objects/": "orange",
 "res://src/Scenes/": "red",
-"res://src/Scripts/": "gray"
+"res://src/Scripts/": "gray",
+"res://src/Scripts/Modular_upgrades/": "purple",
+"res://src/Upgrade_resources/": "purple"
 }
+
+[gui]
+
+theme/default_font_multichannel_signed_distance_field=true
 
 [input]
 

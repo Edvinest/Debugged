@@ -1,3 +1,4 @@
+@tool
 extends Sprite3D
 
 @onready var progress_bar: ProgressBar = $SubViewport/ProgressBar

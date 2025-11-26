@@ -1,0 +1,408 @@
+[gd_scene load_steps=8 format=3 uid="uid://b31i4qglpbknl"]
+
+[ext_resource type="Script" uid="uid://b1ojrc30aeurp" path="res://src/Scripts/wave_logic.gd" id="1_emjs1"]
+[ext_resource type="Script" uid="uid://dus6br5pbvsco" path="res://src/Scenes/weapon_upgrade.gd" id="2_ohee5"]
+[ext_resource type="Texture2D" uid="uid://xeoihqfey41w" path="res://src/Objects/LevelTwo/prop_strawberry_straberry.png" id="3_ohee5"]
+[ext_resource type="Texture2D" uid="uid://cmcu4bla6v6if" path="res://icon.svg" id="3_vdcd2"]
+[ext_resource type="Script" uid="uid://ymh0bhbe37fv" path="res://src/Scenes/player_upgrade.gd" id="5_k7ons"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_emjs1"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jfqbt"]
+bg_color = Color(0.9254902, 0.8352941, 0.7372549, 1)
+
+[node name="WaveLogic" type="Node2D"]
+script = ExtResource("1_emjs1")
+
+[node name="Timer" type="Timer" parent="."]
+unique_name_in_owner = true
+
+[node name="HUD_element" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="HUD_element"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="show_timer" type="Label" parent="HUD_element/Control"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -40.5
+offset_right = 40.5
+offset_bottom = 23.0
+grow_horizontal = 2
+text = "Show:Timer"
+metadata/_edit_use_anchors_ = true
+
+[node name="UPGRADE_element" type="CanvasLayer" parent="."]
+unique_name_in_owner = true
+
+[node name="Control" type="Control" parent="UPGRADE_element"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="UPGRADE_element/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.45882353, 0.5411765, 0.5764706, 1)
+
+[node name="PanelContainer" type="PanelContainer" parent="UPGRADE_element/Control"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 60.0
+offset_top = 150.0
+offset_right = -60.0
+offset_bottom = -150.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_emjs1")
+
+[node name="MarginContainer" type="MarginContainer" parent="UPGRADE_element/Control/PanelContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="UI_Upgrades" type="VBoxContainer" parent="UPGRADE_element/Control/PanelContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="WU_label" type="Label" parent="UPGRADE_element/Control/PanelContainer/MarginContainer/UI_Upgrades"]
+layout_mode = 2
+text = "Weapon Upgrades"
+
+[node name="Weapon_Upgrades" type="HBoxContainer" parent="UPGRADE_element/Control/PanelContainer/MarginContainer/UI_Upgrades"]
+layout_mode = 2
+size_flags_horizontal = 4
+script = ExtResource("2_ohee5")
+needs_update = false
+
+[node name="Upgrade1" type="PanelContainer" parent="UPGRADE_element/Control/PanelContainer/MarginContainer/UI_Upgrades/Weapon_Upgrades"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_jfqbt")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UPGRADE_element/Control/PanelContainer/MarginContainer/UI_Upgrades/Weapon_Upgrades/Upgrade1"]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="upgrade_name" type="Label" parent="UPGRADE_element/Control/PanelContainer/MarginContainer/UI_Upgrades/Weapon_Upgrades/Upgrade1/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Weapon Demage Update"
+
+[node name="upgrade_weapon" type="TextureRect" parent="UPGRADE_element/Control/PanelContainer/MarginContainer/UI_Upgrades/Weapon_Upgrades/Upgrade1/VBoxContainer"]
+layout_mode = 2
+texture = ExtResource("3_vdcd2")
+stretch_mode = 3
+
+[node name="upgrade_specs" type="Label" parent="UPGRADE_element/Control/PanelContainer/MarginContainer/UI_Upgrades/Weapon_Upgrades/Upgrade1/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Increases Weapon Damage by 10%"
+
+[node name="upgread_weapon" type="Label" parent="UPGRADE_element/Control/PanelContainer/MarginContainer/UI_Upgrades/Weapon_Upgrades/Upgrade1/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Applies to: Iron Sword, Mighty Hammer"
+
+[node name="upgrade_cost" type="Label" parent="UPGRADE_element/Control/PanelContainer/MarginContainer/UI_Upgrades/Weapon_Upgrades/Upgrade1/VBoxContainer"]
+layout_mode = 2
+text = "Cost: 20.0"
+
+[node name="upgrade_purchase" type="Button" parent="UPGRADE_element/Control/PanelContainer/MarginContainer/UI_Upgrades/Weapon_Upgrades/Upgrade1/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Purchase"
+
+[node name="Upgrade2" type="PanelContainer" parent="UPGRADE_element/Control/PanelContainer/MarginContainer/UI_Upgrades/Weapon_Upgrades"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_jfqbt")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UPGRADE_element/Control/PanelContainer/MarginContainer/UI_Upgrades/Weapon_Upgrades/Upgrade2"]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="upgrade_name" type="Label" parent="UPGRADE_element/Control/PanelContainer/MarginContainer/UI_Upgrades/Weapon_Upgrades/Upgrade2/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Weapon Demage Update"
+
+[node name="upgrade_weapon" type="TextureRect" parent="UPGRADE_element/Control/PanelContainer/MarginContainer/UI_Upgrades/Weapon_Upgrades/Upgrade2/VBoxContainer"]
+layout_mode = 2
+texture = ExtResource("3_vdcd2")
+stretch_mode = 3
+
+[node name="upgrade_specs" type="Label" parent="UPGRADE_element/Control/PanelContainer/MarginContainer/UI_Upgrades/Weapon_Upgrades/Upgrade2/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Increases Weapon Damage by 10%"
+
+[node name="upgread_weapon" type="Label" parent="UPGRADE_element/Control/PanelContainer/MarginContainer/UI_Upgrades/Weapon_Upgrades/Upgrade2/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Applies to: Iron Sword, Mighty Hammer"
+
+[node name="upgrade_cost" type="Label" parent="UPGRADE_element/Control/PanelContainer/MarginContainer/UI_Upgrades/Weapon_Upgrades/Upgrade2/VBoxContainer"]
+layout_mode = 2
+text = "Cost: 20.0"
+
+[node name="upgrade_purchase" type="Button" parent="UPGRADE_element/Control/PanelContainer/MarginContainer/UI_Upgrades/Weapon_Upgrades/Upgrade2/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Purchase"
+
+[node name="Upgrade3" type="PanelContainer" parent="UPGRADE_element/Control/PanelContainer/MarginContainer/UI_Upgrades/Weapon_Upgrades"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_jfqbt")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UPGRADE_element/Control/PanelContainer/MarginContainer/UI_Upgrades/Weapon_Upgrades/Upgrade3"]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="upgrade_name" type="Label" parent="UPGRADE_element/Control/PanelContainer/MarginContainer/UI_Upgrades/Weapon_Upgrades/Upgrade3/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Weapon Demage Update"
+
+[node name="upgrade_weapon" type="TextureRect" parent="UPGRADE_element/Control/PanelContainer/MarginContainer/UI_Upgrades/Weapon_Upgrades/Upgrade3/VBoxContainer"]
+layout_mode = 2
+texture = ExtResource("3_vdcd2")
+stretch_mode = 3
+
+[node name="upgrade_specs" type="Label" parent="UPGRADE_element/Control/PanelContainer/MarginContainer/UI_Upgrades/Weapon_Upgrades/Upgrade3/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Increases Weapon Damage by 10%"
+
+[node name="upgread_weapon" type="Label" parent="UPGRADE_element/Control/PanelContainer/MarginContainer/UI_Upgrades/Weapon_Upgrades/Upgrade3/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Applies to: Iron Sword, Mighty Hammer"
+
+[node name="upgrade_cost" type="Label" parent="UPGRADE_element/Control/PanelContainer/MarginContainer/UI_Upgrades/Weapon_Upgrades/Upgrade3/VBoxContainer"]
+layout_mode = 2
+text = "Cost: 20.0"
+
+[node name="upgrade_purchase" type="Button" parent="UPGRADE_element/Control/PanelContainer/MarginContainer/UI_Upgrades/Weapon_Upgrades/Upgrade3/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Purchase"
+
+[node name="Upgrade4" type="PanelContainer" parent="UPGRADE_element/Control/PanelContainer/MarginContainer/UI_Upgrades/Weapon_Upgrades"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_jfqbt")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UPGRADE_element/Control/PanelContainer/MarginContainer/UI_Upgrades/Weapon_Upgrades/Upgrade4"]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="upgrade_name" type="Label" parent="UPGRADE_element/Control/PanelContainer/MarginContainer/UI_Upgrades/Weapon_Upgrades/Upgrade4/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Weapon Demage Update"
+
+[node name="upgrade_weapon" type="TextureRect" parent="UPGRADE_element/Control/PanelContainer/MarginContainer/UI_Upgrades/Weapon_Upgrades/Upgrade4/VBoxContainer"]
+layout_mode = 2
+texture = ExtResource("3_vdcd2")
+stretch_mode = 3
+
+[node name="upgrade_specs" type="Label" parent="UPGRADE_element/Control/PanelContainer/MarginContainer/UI_Upgrades/Weapon_Upgrades/Upgrade4/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Increases Weapon Damage by 10%"
+
+[node name="upgread_weapon" type="Label" parent="UPGRADE_element/Control/PanelContainer/MarginContainer/UI_Upgrades/Weapon_Upgrades/Upgrade4/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Applies to: Iron Sword, Mighty Hammer"
+
+[node name="upgrade_cost" type="Label" parent="UPGRADE_element/Control/PanelContainer/MarginContainer/UI_Upgrades/Weapon_Upgrades/Upgrade4/VBoxContainer"]
+layout_mode = 2
+text = "Cost: 20.0"
+
+[node name="upgrade_purchase" type="Button" parent="UPGRADE_element/Control/PanelContainer/MarginContainer/UI_Upgrades/Weapon_Upgrades/Upgrade4/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Purchase"
+
+[node name="PU_label" type="Label" parent="UPGRADE_element/Control/PanelContainer/MarginContainer/UI_Upgrades"]
+layout_mode = 2
+text = "Player Upgrades"
+
+[node name="Player_Upgrades" type="HBoxContainer" parent="UPGRADE_element/Control/PanelContainer/MarginContainer/UI_Upgrades"]
+layout_mode = 2
+size_flags_horizontal = 4
+script = ExtResource("5_k7ons")
+needs_update = false
+
+[node name="Upgrade1" type="PanelContainer" parent="UPGRADE_element/Control/PanelContainer/MarginContainer/UI_Upgrades/Player_Upgrades"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_jfqbt")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UPGRADE_element/Control/PanelContainer/MarginContainer/UI_Upgrades/Player_Upgrades/Upgrade1"]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="upgrade_name" type="Label" parent="UPGRADE_element/Control/PanelContainer/MarginContainer/UI_Upgrades/Player_Upgrades/Upgrade1/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Weapon Demage Update"
+
+[node name="upgrade_weapon" type="TextureRect" parent="UPGRADE_element/Control/PanelContainer/MarginContainer/UI_Upgrades/Player_Upgrades/Upgrade1/VBoxContainer"]
+layout_mode = 2
+texture = ExtResource("3_vdcd2")
+stretch_mode = 3
+
+[node name="upgrade_specs" type="Label" parent="UPGRADE_element/Control/PanelContainer/MarginContainer/UI_Upgrades/Player_Upgrades/Upgrade1/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Increases Weapon Damage by 10%"
+
+[node name="upgread_weapon" type="Label" parent="UPGRADE_element/Control/PanelContainer/MarginContainer/UI_Upgrades/Player_Upgrades/Upgrade1/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Applies to: Iron Sword, Mighty Hammer"
+
+[node name="upgrade_cost" type="Label" parent="UPGRADE_element/Control/PanelContainer/MarginContainer/UI_Upgrades/Player_Upgrades/Upgrade1/VBoxContainer"]
+layout_mode = 2
+text = "Cost: 20.0"
+
+[node name="upgrade_purchase" type="Button" parent="UPGRADE_element/Control/PanelContainer/MarginContainer/UI_Upgrades/Player_Upgrades/Upgrade1/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Purchase"
+
+[node name="Upgrade2" type="PanelContainer" parent="UPGRADE_element/Control/PanelContainer/MarginContainer/UI_Upgrades/Player_Upgrades"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_jfqbt")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UPGRADE_element/Control/PanelContainer/MarginContainer/UI_Upgrades/Player_Upgrades/Upgrade2"]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="upgrade_name" type="Label" parent="UPGRADE_element/Control/PanelContainer/MarginContainer/UI_Upgrades/Player_Upgrades/Upgrade2/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Weapon Demage Update"
+
+[node name="upgrade_weapon" type="TextureRect" parent="UPGRADE_element/Control/PanelContainer/MarginContainer/UI_Upgrades/Player_Upgrades/Upgrade2/VBoxContainer"]
+layout_mode = 2
+texture = ExtResource("3_vdcd2")
+stretch_mode = 3
+
+[node name="upgrade_specs" type="Label" parent="UPGRADE_element/Control/PanelContainer/MarginContainer/UI_Upgrades/Player_Upgrades/Upgrade2/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Increases Weapon Damage by 10%"
+
+[node name="upgread_weapon" type="Label" parent="UPGRADE_element/Control/PanelContainer/MarginContainer/UI_Upgrades/Player_Upgrades/Upgrade2/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Applies to: Iron Sword, Mighty Hammer"
+
+[node name="upgrade_cost" type="Label" parent="UPGRADE_element/Control/PanelContainer/MarginContainer/UI_Upgrades/Player_Upgrades/Upgrade2/VBoxContainer"]
+layout_mode = 2
+text = "Cost: 20.0"
+
+[node name="upgrade_purchase" type="Button" parent="UPGRADE_element/Control/PanelContainer/MarginContainer/UI_Upgrades/Player_Upgrades/Upgrade2/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Purchase"
+
+[node name="Upgrade3" type="PanelContainer" parent="UPGRADE_element/Control/PanelContainer/MarginContainer/UI_Upgrades/Player_Upgrades"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_jfqbt")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UPGRADE_element/Control/PanelContainer/MarginContainer/UI_Upgrades/Player_Upgrades/Upgrade3"]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="upgrade_name" type="Label" parent="UPGRADE_element/Control/PanelContainer/MarginContainer/UI_Upgrades/Player_Upgrades/Upgrade3/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Weapon Speed Upgrade"
+
+[node name="upgrade_weapon" type="TextureRect" parent="UPGRADE_element/Control/PanelContainer/MarginContainer/UI_Upgrades/Player_Upgrades/Upgrade3/VBoxContainer"]
+layout_mode = 2
+texture = ExtResource("3_ohee5")
+stretch_mode = 3
+
+[node name="upgrade_specs" type="Label" parent="UPGRADE_element/Control/PanelContainer/MarginContainer/UI_Upgrades/Player_Upgrades/Upgrade3/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Increases Weapon Speed by 5%"
+
+[node name="upgread_weapon" type="Label" parent="UPGRADE_element/Control/PanelContainer/MarginContainer/UI_Upgrades/Player_Upgrades/Upgrade3/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Applies to: Iron Sword"
+
+[node name="upgrade_cost" type="Label" parent="UPGRADE_element/Control/PanelContainer/MarginContainer/UI_Upgrades/Player_Upgrades/Upgrade3/VBoxContainer"]
+layout_mode = 2
+text = "Cost: 50.0"
+
+[node name="upgrade_purchase" type="Button" parent="UPGRADE_element/Control/PanelContainer/MarginContainer/UI_Upgrades/Player_Upgrades/Upgrade3/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Purchase"
+
+[node name="Upgrade4" type="PanelContainer" parent="UPGRADE_element/Control/PanelContainer/MarginContainer/UI_Upgrades/Player_Upgrades"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_jfqbt")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UPGRADE_element/Control/PanelContainer/MarginContainer/UI_Upgrades/Player_Upgrades/Upgrade4"]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="upgrade_name" type="Label" parent="UPGRADE_element/Control/PanelContainer/MarginContainer/UI_Upgrades/Player_Upgrades/Upgrade4/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Weapon Demage Update"
+
+[node name="upgrade_weapon" type="TextureRect" parent="UPGRADE_element/Control/PanelContainer/MarginContainer/UI_Upgrades/Player_Upgrades/Upgrade4/VBoxContainer"]
+layout_mode = 2
+texture = ExtResource("3_vdcd2")
+stretch_mode = 3
+
+[node name="upgrade_specs" type="Label" parent="UPGRADE_element/Control/PanelContainer/MarginContainer/UI_Upgrades/Player_Upgrades/Upgrade4/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Increases Weapon Damage by 10%"
+
+[node name="upgread_weapon" type="Label" parent="UPGRADE_element/Control/PanelContainer/MarginContainer/UI_Upgrades/Player_Upgrades/Upgrade4/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Applies to: Iron Sword, Mighty Hammer"
+
+[node name="upgrade_cost" type="Label" parent="UPGRADE_element/Control/PanelContainer/MarginContainer/UI_Upgrades/Player_Upgrades/Upgrade4/VBoxContainer"]
+layout_mode = 2
+text = "Cost: 20.0"
+
+[node name="upgrade_purchase" type="Button" parent="UPGRADE_element/Control/PanelContainer/MarginContainer/UI_Upgrades/Player_Upgrades/Upgrade4/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Purchase"
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

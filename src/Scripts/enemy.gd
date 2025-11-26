@@ -1,3 +1,52 @@
+"""
+Enemy (base class)
+
+Required per-enemy setup (in each child script):
+
+- Node references (assign these in the child's `_ready()`):
+	- `animation_player` : AnimationPlayer node used to play animations.
+	- `hp_bar`          : ProgressBar node (optional) used to show health.
+	- `attack_cooldown` : Timer node used to throttle attacks.
+	- `dodge_timer`     : Timer node used to control dodge duration.
+	- `entity_model`    : Node3D reference for calling model-specific methods (e.g. `hurt`).
+
+- Configurable parameters (either export them in the child or assign in `_ready()`):
+	- `max_health`      : float — starting/max health for the enemy.
+	- `damage`          : float — damage dealt to the player on attack.
+	- `points`          : int   — points given to player on death.
+	- `detection_range` : float — distance at which enemy starts tracking the player.
+	- `normal_speed`    : float — speed while tracking.
+	- `retreat_speed`   : float — speed while dodging/retreating.
+	- `critical_hp`     : float — threshold to trigger a dodge when target present.
+	- `dodge_duration`  : float — how long the dodge lasts (seconds).
+
+Notes for child scripts:
+- Child scripts typically `extends Enemy`.
+- Export instance-specific values in the child (e.g. `@export var slime_max_health = 30.0`) and then
+	assign them to the base fields inside `_ready()`:
+
+		func _ready() -> void:
+				self.animation_player = $AnimationPlayer
+				self.hp_bar = $HP_Bar
+				self.attack_cooldown = $AttackCooldown
+				self.dodge_timer = $DodgeTimer
+				self.entity_model = $Model
+
+				max_health = slime_max_health
+				health = max_health
+				damage = slime_damage
+				points = slime_points
+				detection_range = slime_detection_range
+				normal_speed = slime_normal_speed
+				retreat_speed = slime_retreat_speed
+				critical_hp = slime_critical_hp
+				dodge_duration = slime_dodge_duration
+
+- Override `_play_animation(anim_name: String)` to map generic state animation names
+	(`"idle"`, `"walk"`) to your model's actual animation tracks.
+
+"""
+
 class_name Enemy
 extends RigidBody3D
 

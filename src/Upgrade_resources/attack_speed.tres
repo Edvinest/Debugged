@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="AttackSpeedWeaponStrategy" load_steps=3 format=3 uid="uid://nqhkkhntbgxq"]
+
+[ext_resource type="Script" uid="uid://gujo2wxiwyl0" path="res://src/Scripts/Modular_upgrades/attack_speed_weapon_strategy.gd" id="1_pijyg"]
+[ext_resource type="Texture2D" uid="uid://xeoihqfey41w" path="res://src/Objects/LevelTwo/prop_strawberry_straberry.png" id="2_ayqtk"]
+
+[resource]
+script = ExtResource("1_pijyg")
+attack_speed_increase = 5.0
+upgrade_name = "Weapon Speed Upgrade"
+texture = ExtResource("2_ayqtk")
+upgrade_specs = "Increases Weapon Speed by 5%"
+upgrade_cost = 50.0
+allowed_weapon_types = ["Iron Sword"]
+metadata/_custom_type_script = "uid://gujo2wxiwyl0"

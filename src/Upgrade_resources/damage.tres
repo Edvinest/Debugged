@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="DamageWeaponStrategy" load_steps=3 format=3 uid="uid://2ywsm8vfdjwr"]
+
+[ext_resource type="Script" uid="uid://bixfi5qbu6ebc" path="res://src/Scripts/Modular_upgrades/damage_weapon_strategy.gd" id="1_rtvl5"]
+[ext_resource type="Texture2D" uid="uid://cmcu4bla6v6if" path="res://icon.svg" id="2_msda4"]
+
+[resource]
+script = ExtResource("1_rtvl5")
+damage_increase = 10.0
+upgrade_name = "Weapon Demage Update"
+texture = ExtResource("2_msda4")
+upgrade_specs = "Increases Weapon Damage by 10%"
+upgrade_cost = 20.0
+allowed_weapon_types = ["Iron Sword", "Mighty Hammer"]
+metadata/_custom_type_script = "uid://bixfi5qbu6ebc"
