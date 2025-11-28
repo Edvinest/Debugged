@@ -1,6 +1,5 @@
 extends CharacterBody3D
 
-@export var speed := 10.0
 @onready var firstPersonCamera = $FirstPersonCamera
 @onready var thirdPersonCamera = $ThirdPersonCamera
 
@@ -14,13 +13,29 @@ var mouse_sensitivity := 0.002
 var controller_sensitivity := 2.0
 var gravity := 30
 
-const MAX_HEALTH = 100
+#Speed component
+@export var speed_component : PlayerSpeedComponent = null
+var speed: float
+
+#Health component
+@export var health_component: PlayerHealthComponent = null
+var MAX_HEALTH: float
 var health: float
+
 @onready var hp_bar: ProgressBar = $HUD/Control/ProgressBar
 @onready var death_screen: CanvasLayer = %DEATH_SCREEN
 
 func _ready():
+	
+	if health_component == null:
+		push_warning("No HEALTH component is scope.")
+	MAX_HEALTH = health_component.player_max_health
 	health = MAX_HEALTH
+
+	if speed_component == null:
+		push_warning("No SPEED component is scope.")
+	speed = speed_component.player_speed
+
 	death_screen.hide()
 	Hands.set_weapons(left_weapon, right_weapon)
 	
@@ -36,6 +51,10 @@ func _ready():
 		using_first_person = true
 		
 func _process(delta: float) -> void:
+	MAX_HEALTH = health_component.player_max_health
+	hp_bar.max_value = MAX_HEALTH
+	print(hp_bar.max_value)
+	speed = speed_component.player_speed
 	hp_bar.value = health
 	if health <= 0:
 		death_screen.show()

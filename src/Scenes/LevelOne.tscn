@@ -212,6 +212,7 @@ mob_to_spawn = ExtResource("18_7qily")
 max_spawns = 5
 
 [node name="WaveLogic" parent="." instance=ExtResource("23_avwfb")]
+time_between_waves = 15.0
 
 [connection signal="body_entered" from="teleport_pads/pad/Area3D" to="teleport_pads/pad" method="_on_area_3d_body_entered"]
 [connection signal="body_entered" from="teleport_pads/pad2/Area3D" to="teleport_pads/pad2" method="_on_area_3d_body_entered"]

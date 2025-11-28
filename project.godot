@@ -40,6 +40,8 @@ folder_colors={
 "res://src/Scenes/": "red",
 "res://src/Scripts/": "gray",
 "res://src/Scripts/Modular_upgrades/": "purple",
+"res://src/Scripts/Player_Components/": "orange",
+"res://src/Scripts/Player_resources/": "purple",
 "res://src/Upgrade_resources/": "purple"
 }
 

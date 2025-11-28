@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="PlayerHealthComponent" load_steps=2 format=3 uid="uid://chtuv7ka5xakl"]
+
+[ext_resource type="Script" uid="uid://3ursixkf5uoc" path="res://src/Scripts/Player_Components/player_health_component.gd" id="1_vi74d"]
+
+[resource]
+script = ExtResource("1_vi74d")
+metadata/_custom_type_script = "uid://3ursixkf5uoc"
