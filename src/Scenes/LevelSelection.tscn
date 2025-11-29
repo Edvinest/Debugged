@@ -46,11 +46,6 @@ text = "Level 1
 [node name="ButtonLevelTwo" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
-theme_override_constants/outline_size = 15
-theme_override_constants/h_separation = 15
-theme_override_constants/icon_max_width = 15
-theme_override_constants/align_to_largest_stylebox = 15
-theme_override_constants/line_spacing = 15
 theme_override_font_sizes/font_size = 40
 text = "Level 2"
 
