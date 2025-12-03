@@ -25,9 +25,11 @@ const PACKET_HISTORY_SIZE = 8
 var left_weapon : Weapon = null
 var right_weapon : Weapon = null
 
-@onready var right_hand = $RightHand
-@onready var left_hand = $LeftHand
-@onready var AnimPlayer = $"../../AnimationPlayer"
+@onready var fp_right_hand = $FirstPersonModel/Hands/RightHand
+@onready var tp_right_hand = $ThirdPersonModel/Player/Skeleton3D/RightHand
+@onready var fp_left_hand = $FirstPersonModel/Hands/LeftHand
+@onready var tp_left_hand = $ThirdPersonModel/Player/Skeleton3D/LeftHand
+#@onready var AnimPlayer = $"../../AnimationPlayer"
 
 var using_first_person : bool = true
 
@@ -41,11 +43,17 @@ func set_weapons(left : Weapon, right: Weapon):
 	left_weapon = left
 	right_weapon = right
 	
-	if right_hand.has_node("RightWeapon"):
-		right_hand.get_node("RightWeapon").set_weapon_data(right_weapon)
+	if fp_right_hand.has_node("RightWeapon"):
+		fp_right_hand.get_node("RightWeapon").set_weapon_data(right_weapon)
 		
-	if left_hand.has_node("LeftWeapon"):
-		left_hand.get_node("LeftWeapon").set_weapon_data(left_weapon)
+	if fp_left_hand.has_node("LeftWeapon"):
+		fp_left_hand.get_node("LeftWeapon").set_weapon_data(left_weapon)
+		
+	if tp_right_hand.has_node("RightWeapon"):
+		tp_right_hand.get_node("RightWeapon").set_weapon_data(right_weapon)
+		
+	if tp_left_hand.has_node("LeftWeapon"):
+		tp_left_hand.get_node("LeftWeapon").set_weapon_data(left_weapon)
 
 func _process(delta: float) -> void:
 	_handle_joycon()
@@ -62,12 +70,12 @@ func _process(delta: float) -> void:
 
 func _detect_input_attacks():
 	if Input.is_action_just_pressed("attack_left"):
-		if left_hand.has_node("LeftWeapon"):
-			left_hand.get_node("LeftWeapon")._perform_standard_attack("left", )
+		if tp_left_hand.has_node("LeftWeapon"):
+			tp_left_hand.get_node("LeftWeapon")._perform_standard_attack()
 			
 	if Input.is_action_just_pressed("attack_right"):
-		if right_hand.has_node("RightWeapon"):
-			right_hand.get_node("RightWeapon")._perform_standard_attack("right")
+		if tp_right_hand.has_node("RightWeapon"):
+			tp_right_hand.get_node("RightWeapon")._perform_standard_attack()
 			#right_hand.get_node("WeaponInstance").start_motion_attack("diag_up_right", right_hand)
 	
 		
@@ -120,7 +128,7 @@ func _handle_joycon():
 			swing_freeze_L = FREEZE_TIME
 			
 			var direction_L = _classify_swing_direction(rot_vel_L)
-			left_hand.get_node("WeaponInstance").start_motion_attack(direction_L, left_hand)
+			fp_left_hand.get_node("WeaponInstance").start_motion_attack(direction_L, fp_left_hand)
 	
 	
 	if right_weapon and swing_freeze_R <= 0:
@@ -131,7 +139,7 @@ func _handle_joycon():
 			swing_freeze_R = FREEZE_TIME
 			
 			var direction_R = _classify_swing_direction(rot_vel_R)
-			right_hand.get_node("WeaponInstance").start_motion_attack(direction_R, right_hand)
+			fp_right_hand.get_node("WeaponInstance").start_motion_attack(direction_R, fp_right_hand)
 
 		var sway_strength_rot = 0.03          
 		var sway_strength_pos = 0.0003          
@@ -149,18 +157,18 @@ func _handle_joycon():
 		
 		if using_first_person:
 			if swing_freeze_L <= 0:
-				left_hand.rotation = smoothRotL
-				left_hand.rotation.x += rot_wiggle_x
-				left_hand.rotation.z += rot_wiggle_z
+				fp_left_hand.rotation = smoothRotL
+				fp_left_hand.rotation.x += rot_wiggle_x
+				fp_left_hand.rotation.z += rot_wiggle_z
 
-				left_hand.position += Vector3(side_offset, bob_offset, 0)
+				fp_left_hand.position += Vector3(side_offset, bob_offset, 0)
 				
 			if swing_freeze_R <= 0:
-				right_hand.rotation = smoothRotR
-				right_hand.rotation.x += rot_wiggle_x
-				right_hand.rotation.z += rot_wiggle_z
+				fp_right_hand.rotation = smoothRotR
+				fp_right_hand.rotation.x += rot_wiggle_x
+				fp_right_hand.rotation.z += rot_wiggle_z
 
-				right_hand.position += Vector3(-side_offset, bob_offset, 0)
+				fp_right_hand.position += Vector3(-side_offset, bob_offset, 0)
 
 	else:
 		pass
@@ -222,9 +230,13 @@ func _weighted_average_mod(history: Array) -> Vector3:
 
 	return avg
 
-func _on_weapon_instance_request_animation(anim_name: String) -> void:
-	if AnimPlayer.has_animation(anim_name):
-		AnimPlayer.play(anim_name)
-		AnimPlayer.queue("RESET")
-	else:
-		print("Animation not found:", anim_name)
+func _on_left_weapon_request_animation(anim_name: String) -> void:
+	$"../AnimationTree"["parameters/conditions/%sleft" %anim_name] = true
+	await get_tree().process_frame
+	$"../AnimationTree"["parameters/conditions/%sleft" %anim_name] = false
+
+
+func _on_right_weapon_request_animation(anim_name: String) -> void:
+	$"../AnimationTree"["parameters/conditions/%sright" %anim_name] = true
+	await get_tree().process_frame
+	$"../AnimationTree"["parameters/conditions/%sright" %anim_name] = false

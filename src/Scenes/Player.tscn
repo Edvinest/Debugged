@@ -1,9 +1,11 @@
-[gd_scene load_steps=16 format=3 uid="uid://dct6crx3jwiat"]
+[gd_scene load_steps=41 format=3 uid="uid://dct6crx3jwiat"]
 
 [ext_resource type="Script" uid="uid://nchnj2u7kv5" path="res://src/Scripts/Player.gd" id="1_rpqav"]
+[ext_resource type="PackedScene" uid="uid://cwtppq1cb1yxl" path="res://src/Objects/Player/Alpi.glb" id="2_4mdpm"]
 [ext_resource type="Script" uid="uid://dsi0c4pqhkju7" path="res://src/Scripts/PlayerCombat.gd" id="3_g1uh0"]
 [ext_resource type="PackedScene" uid="uid://be1gwv0coi2ua" path="res://src/Scenes/WeaponInstance.tscn" id="4_5dq0m"]
-[ext_resource type="Resource" uid="uid://tfggkjfecp7f" path="res://src/Objects/Weapons/Blade1/Sword1.tres" id="4_ma0cp"]
+[ext_resource type="PackedScene" uid="uid://yabfag3vnn0q" path="res://src/Objects/Player/RightHand.glb" id="4_8fvgu"]
+[ext_resource type="PackedScene" uid="uid://sy3pu51jwruj" path="res://src/Objects/Player/LeftHand.glb" id="5_0umxx"]
 [ext_resource type="Script" uid="uid://biya2r8iv253u" path="res://src/Scripts/hud.gd" id="5_ma0cp"]
 [ext_resource type="Script" uid="uid://tmk08xd244ca" path="res://src/Scripts/death_screen.gd" id="6_4mdpm"]
 
@@ -11,233 +13,144 @@
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_5dq0m"]
 
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_qm7rr"]
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_bblsp"]
+animation = &"Gun_Shoot_L"
 
-[sub_resource type="BoxMesh" id="BoxMesh_qbkls"]
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_3y32l"]
+animation = &"Gun_Shoot_R"
 
-[sub_resource type="BoxMesh" id="BoxMesh_rpqav"]
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_qde8h"]
+animation = &"Hammer_Swing_L"
 
-[sub_resource type="Animation" id="Animation_ma0cp"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("PlayerBody/Hands/RightHand:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(0, 0, 0)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("PlayerBody/Hands/RightHand:rotation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(0, 0, 0)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("PlayerBody/Hands/RightHand/RightWeapon:rotation")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(0, 0, 0)]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("PlayerBody/Hands/LeftHand:position")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(0, 0, 0)]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("PlayerBody/Hands/LeftHand:rotation")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(0, 0, 0)]
-}
-tracks/5/type = "value"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("PlayerBody/Hands/LeftHand/LeftWeapon:rotation")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(0, 0, 0)]
-}
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_wkd3r"]
+animation = &"Hammer_Swing_R"
 
-[sub_resource type="Animation" id="Animation_8fvgu"]
-resource_name = "attack_slam_left"
-length = 0.25
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("PlayerBody/Hands/LeftHand:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.24999999),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector3(0.66448176, 0, 0), Vector3(-0.21642083, 0, 0)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("PlayerBody/Hands/LeftHand/LeftWeapon:rotation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.24999999),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector3(0, 0, 0), Vector3(-1.5707964, 0, 0)]
-}
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_0umxx"]
+animation = &"Walk"
+use_custom_timeline = true
+timeline_length = 0.0
+stretch_time_scale = true
+start_offset = 0.0
+loop_mode = 0
 
-[sub_resource type="Animation" id="Animation_g1uh0"]
-resource_name = "attack_slam_right"
-length = 0.25
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("PlayerBody/Hands/RightHand:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.25),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector3(0.66448176, 0, 0), Vector3(-0.21642083, 0, 0)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("PlayerBody/Hands/RightHand/RightWeapon:rotation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.25),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector3(0, 0, 0), Vector3(-1.5707964, 0, 0)]
-}
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_xop61"]
+animation = &"Sword_Swing_L"
 
-[sub_resource type="Animation" id="Animation_4mdpm"]
-resource_name = "attack_slash_left"
-length = 0.1
-step = 0.041666668
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("PlayerBody/Hands/LeftHand:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0.0007635392, 0.0986),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector3(-0.125, 0, 0), Vector3(-0.125, 0, 0)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("PlayerBody/Hands/LeftHand:rotation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0.0007635392, 0.0986),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector3(0, 0.2617994, 0), Vector3(0, -0.2617994, 0)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("PlayerBody/Hands/LeftHand/LeftWeapon:rotation")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0.0007635392, 0.0986),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector3(-1.5707964, 0, 0), Vector3(-1.5707964, 0, 0)]
-}
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ws13c"]
+animation = &"Sword_Swing_R"
 
-[sub_resource type="Animation" id="Animation_5dq0m"]
-resource_name = "attack_slash_right"
-length = 0.1
-step = 0.041666668
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("PlayerBody/Hands/RightHand:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.09858669),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector3(0.125, 0, 0), Vector3(0.125, 0, 0)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("PlayerBody/Hands/RightHand:rotation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.0986),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector3(0, -0.2617994, 0), Vector3(0, 0.2617994, 0)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("PlayerBody/Hands/RightHand/RightWeapon:rotation")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.09858669),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector3(-1.5707964, 0, -0.08726646), Vector3(-1.5707964, 0, -0.08726646)]
-}
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_3mr6j"]
+animation = &"Walk"
+use_custom_timeline = true
+timeline_length = 1.0
+stretch_time_scale = true
+start_offset = 0.0
+loop_mode = 1
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_ma0cp"]
-_data = {
-&"RESET": SubResource("Animation_ma0cp"),
-&"attack_slam_left": SubResource("Animation_8fvgu"),
-&"attack_slam_right": SubResource("Animation_g1uh0"),
-&"attack_slash_left": SubResource("Animation_4mdpm"),
-&"attack_slash_right": SubResource("Animation_5dq0m")
-}
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_bblsp"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_3y32l"]
+advance_mode = 2
+advance_condition = &"is_moving"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_qde8h"]
+advance_mode = 2
+advance_condition = &"idle"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_bpr1r"]
+advance_mode = 2
+advance_condition = &"gun_shoot_left"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_r6toq"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_elb8c"]
+advance_mode = 2
+advance_condition = &"hammer_swing_left"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_8hoe3"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_fxj3g"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_hhc11"]
+advance_mode = 2
+advance_condition = &"sword_swing_left"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_fhgg7"]
+advance_mode = 2
+advance_condition = &"gun_shoot_right"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_85hkr"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_t5ocg"]
+advance_mode = 2
+advance_condition = &"hammer_swing_right"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_qthqd"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_pjlvt"]
+advance_mode = 2
+advance_condition = &"sword_swing_right"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_dxf3x"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_0umxx"]
+advance_mode = 2
+advance_condition = &"sword_swing_left"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_3mr6j"]
+advance_mode = 2
+advance_condition = &"hammer_swing_left"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_wkd3r"]
+advance_mode = 2
+advance_condition = &"gun_shoot_left"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_xop61"]
+advance_mode = 2
+advance_condition = &"sword_swing_right"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ws13c"]
+advance_mode = 2
+advance_condition = &"hammer_swing_right"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_5orpi"]
+advance_mode = 2
+advance_condition = &"gun_shoot_right"
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_0umxx"]
+states/End/position = Vector2(1217, 100)
+states/Gun_Shoot_L/node = SubResource("AnimationNodeAnimation_bblsp")
+states/Gun_Shoot_L/position = Vector2(391, -59.75)
+states/Gun_Shoot_R/node = SubResource("AnimationNodeAnimation_3y32l")
+states/Gun_Shoot_R/position = Vector2(391, 242.25)
+states/Hammer_Swing_L/node = SubResource("AnimationNodeAnimation_qde8h")
+states/Hammer_Swing_L/position = Vector2(593, -59.75)
+states/Hammer_Swing_R/node = SubResource("AnimationNodeAnimation_wkd3r")
+states/Hammer_Swing_R/position = Vector2(593, 242.25)
+states/Idle/node = SubResource("AnimationNodeAnimation_0umxx")
+states/Idle/position = Vector2(230, 100)
+states/Start/position = Vector2(50, 108)
+states/Sword_Swing_L/node = SubResource("AnimationNodeAnimation_xop61")
+states/Sword_Swing_L/position = Vector2(892, -59.75)
+states/Sword_Swing_R/node = SubResource("AnimationNodeAnimation_ws13c")
+states/Sword_Swing_R/position = Vector2(887, 242.25)
+states/Walk/node = SubResource("AnimationNodeAnimation_3mr6j")
+states/Walk/position = Vector2(950, 100)
+transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_bblsp"), "Idle", "Walk", SubResource("AnimationNodeStateMachineTransition_3y32l"), "Walk", "Idle", SubResource("AnimationNodeStateMachineTransition_qde8h"), "Idle", "Gun_Shoot_L", SubResource("AnimationNodeStateMachineTransition_bpr1r"), "Gun_Shoot_L", "Idle", SubResource("AnimationNodeStateMachineTransition_r6toq"), "Idle", "Hammer_Swing_L", SubResource("AnimationNodeStateMachineTransition_elb8c"), "Hammer_Swing_L", "Idle", SubResource("AnimationNodeStateMachineTransition_8hoe3"), "Sword_Swing_L", "Idle", SubResource("AnimationNodeStateMachineTransition_fxj3g"), "Idle", "Sword_Swing_L", SubResource("AnimationNodeStateMachineTransition_hhc11"), "Idle", "Gun_Shoot_R", SubResource("AnimationNodeStateMachineTransition_fhgg7"), "Gun_Shoot_R", "Idle", SubResource("AnimationNodeStateMachineTransition_85hkr"), "Idle", "Hammer_Swing_R", SubResource("AnimationNodeStateMachineTransition_t5ocg"), "Hammer_Swing_R", "Idle", SubResource("AnimationNodeStateMachineTransition_qthqd"), "Idle", "Sword_Swing_R", SubResource("AnimationNodeStateMachineTransition_pjlvt"), "Sword_Swing_R", "Idle", SubResource("AnimationNodeStateMachineTransition_dxf3x"), "Walk", "Sword_Swing_L", SubResource("AnimationNodeStateMachineTransition_0umxx"), "Walk", "Hammer_Swing_L", SubResource("AnimationNodeStateMachineTransition_3mr6j"), "Walk", "Gun_Shoot_L", SubResource("AnimationNodeStateMachineTransition_wkd3r"), "Walk", "Sword_Swing_R", SubResource("AnimationNodeStateMachineTransition_xop61"), "Walk", "Hammer_Swing_R", SubResource("AnimationNodeStateMachineTransition_ws13c"), "Walk", "Gun_Shoot_R", SubResource("AnimationNodeStateMachineTransition_5orpi")]
+graph_offset = Vector2(0, -145.93324)
 
 [node name="Player" type="CharacterBody3D"]
 collision_layer = 3
@@ -250,7 +163,7 @@ shape = SubResource("CapsuleShape3D_qbkls")
 transform = Transform3D(1, 0, 0, 0, 0.70710677, 0.70710677, 0, -0.70710677, 0.70710677, 0, 6, 6)
 
 [node name="FirstPersonCamera" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4769659, 0.088204324)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4769659, 0.08534697)
 
 [node name="HurtBox" type="Area3D" parent="."]
 
@@ -258,39 +171,74 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4769659, 0.088204324)
 shape = SubResource("CapsuleShape3D_5dq0m")
 debug_color = Color(0.972549, 0, 0, 0.41960785)
 
-[node name="PlayerBody" type="MeshInstance3D" parent="."]
-mesh = SubResource("CapsuleMesh_qm7rr")
-
-[node name="Hands" type="Node3D" parent="PlayerBody"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.39501464, 0.4332748)
+[node name="Body" type="Node3D" parent="."]
 script = ExtResource("3_g1uh0")
 
-[node name="RightHand" type="Node3D" parent="PlayerBody/Hands"]
-transform = Transform3D(0.9999997, 0, 0, 0, 1, 0, 0, 0, 0.9999997, 0, 0, 0)
-
-[node name="RightWeapon" parent="PlayerBody/Hands/RightHand" instance=ExtResource("4_5dq0m")]
-transform = Transform3D(0.9999999, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0.43993986, 0, -0.8960203)
-
-[node name="RHandMesh" type="MeshInstance3D" parent="PlayerBody/Hands/RightHand"]
-transform = Transform3D(0.25, 0, 0, 0, 0.123000026, 0, 0, 0, 0.64300007, 0.435, 0, -0.712)
-mesh = SubResource("BoxMesh_qbkls")
+[node name="FirstPersonModel" type="MeshInstance3D" parent="Body"]
+transform = Transform3D(0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, -4.440892e-16, 0.2215457, -0.8567713)
 skeleton = NodePath("../..")
 
-[node name="LeftHand" type="Node3D" parent="PlayerBody/Hands"]
-transform = Transform3D(0.9999997, 0, 0, 0, 1, 0, 0, 0, 0.9999997, 0, 0, 0)
+[node name="Hands" type="Node3D" parent="Body/FirstPersonModel"]
+transform = Transform3D(0.30000004, 0, 0, 0, 0.30000004, 0, 0, 0, 0.30000004, -1.9626807e-08, 0.09864569, 0.94295424)
 
-[node name="LeftWeapon" parent="PlayerBody/Hands/LeftHand" instance=ExtResource("4_5dq0m")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.44, 0, -0.896)
+[node name="RightHand" parent="Body/FirstPersonModel/Hands" instance=ExtResource("4_8fvgu")]
+transform = Transform3D(-0.19999982, 0, -1.7484547e-08, 0, 0.19999981, 0, 1.7484547e-08, 0, -0.19999982, 0.1654366, -0.1867916, 0.03441137)
 
-[node name="LHandMesh" type="MeshInstance3D" parent="PlayerBody/Hands/LeftHand"]
-transform = Transform3D(0.248, 0, 0, 0, 0.124000005, 0, 0, 0, 0.584, -0.435, 0, -0.712)
-mesh = SubResource("BoxMesh_rpqav")
-skeleton = NodePath("../..")
+[node name="RightWeapon" parent="Body/FirstPersonModel/Hands/RightHand" instance=ExtResource("4_5dq0m")]
+transform = Transform3D(-5.0000014, 0, 4.3711415e-07, 0, 5.000003, 0, -4.3711415e-07, 0, -5.0000014, -0.01623869, 0.933959, 3.0761414)
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_ma0cp")
-}
+[node name="LeftHand" parent="Body/FirstPersonModel/Hands" instance=ExtResource("5_0umxx")]
+transform = Transform3D(-0.19999981, 0, -1.7484549e-08, 0, 0.1999998, 0, 1.7484549e-08, 0, -0.19999981, -0.22542939, -0.1867916, 0.03441134)
+
+[node name="LeftWeapon" parent="Body/FirstPersonModel/Hands/LeftHand" instance=ExtResource("4_5dq0m")]
+transform = Transform3D(-5.0000024, 0, 4.3711438e-07, 0, 5.000005, 0, -4.3711438e-07, 0, -5.0000024, 0.009615421, 0.933959, 3.0761414)
+
+[node name="ThirdPersonModel" parent="Body" instance=ExtResource("2_4mdpm")]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, -0.27100432, 0.03606558)
+
+[node name="Skeleton3D" parent="Body/ThirdPersonModel/Player" index="0"]
+bones/1/rotation = Quaternion(0, 0.052335948, 0, 0.9986295)
+bones/3/position = Vector3(0.91351366, 0.9178297, -0.046597518)
+bones/3/rotation = Quaternion(-3.6259157e-06, 3.4442837e-05, -0.9961928, 0.08717797)
+bones/4/rotation = Quaternion(0.0034681312, 0.001553929, -0.026134633, 0.9996512)
+bones/5/position = Vector3(-0.9135136, 0.9178297, -0.046597514)
+bones/5/rotation = Quaternion(-3.6259157e-06, -3.4442837e-05, 0.9961928, 0.08717797)
+bones/6/rotation = Quaternion(0.0034681312, -0.001553929, 0.026134633, 0.9996512)
+bones/7/position = Vector3(0.27663198, -0.116931096, -2.7375584e-08)
+bones/7/rotation = Quaternion(0.028429903, -0.020286907, 0.9978889, -0.054752655)
+bones/8/rotation = Quaternion(0.021532265, 0.030050183, 0.010409185, 0.9992623)
+bones/9/position = Vector3(-0.27663198, -0.116931096, -2.7375584e-08)
+bones/9/rotation = Quaternion(-0.021276433, -0.020687416, 0.99804974, 0.054918822)
+bones/10/rotation = Quaternion(0.021605575, -0.022958614, -0.010255776, 0.9994504)
+
+[node name="RightHand" type="BoneAttachment3D" parent="Body/ThirdPersonModel/Player/Skeleton3D" index="0"]
+transform = Transform3D(-0.9867433, -0.12060598, 0.108589344, 0.12200755, -0.9925088, 0.006332312, 0.10701217, 0.019497087, 0.99406654, -1.0634196, 1.0624855, 0.064855196)
+bone_name = "Bone.004.R"
+bone_idx = 6
+
+[node name="RightWeapon" parent="Body/ThirdPersonModel/Player/Skeleton3D/RightHand" instance=ExtResource("4_5dq0m")]
+transform = Transform3D(-3, 0, -4.5298742e-07, 0, 3, 0, 4.5298742e-07, 0, -3, 0.060025573, 1.1484153, -0.00798776)
+
+[node name="LeftHand" type="BoneAttachment3D" parent="Body/ThirdPersonModel/Player/Skeleton3D" index="2"]
+transform = Transform3D(-0.9874297, 0.12202413, 0.100461595, -0.12200755, -0.9925088, 0.006332312, 0.10048171, -0.006004359, 0.9949208, 1.0536655, 1.0624855, -0.15765935)
+bone_name = "Bone.004.L"
+bone_idx = 4
+
+[node name="LeftWeapon" parent="Body/ThirdPersonModel/Player/Skeleton3D/LeftHand" instance=ExtResource("4_5dq0m")]
+transform = Transform3D(-3.0000007, 0, -2.6226837e-07, 0, 3.0000002, 0, 2.622684e-07, 0, -3.0000005, 0.060025573, 1.1484149, -0.007987767)
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+root_node = NodePath("../Body/ThirdPersonModel")
+tree_root = SubResource("AnimationNodeStateMachine_0umxx")
+anim_player = NodePath("../Body/ThirdPersonModel/AnimationPlayer")
+parameters/conditions/gun_shoot_left = false
+parameters/conditions/gun_shoot_right = false
+parameters/conditions/hammer_swing_left = false
+parameters/conditions/hammer_swing_right = false
+parameters/conditions/idle = false
+parameters/conditions/is_moving = false
+parameters/conditions/sword_swing_left = false
+parameters/conditions/sword_swing_right = false
 
 [node name="HUD" type="CanvasLayer" parent="."]
 script = ExtResource("5_ma0cp")
@@ -348,6 +296,10 @@ grow_horizontal = 2
 grow_vertical = 2
 text = "RESTART"
 
-[connection signal="request_animation" from="PlayerBody/Hands/RightHand/RightWeapon" to="PlayerBody/Hands" method="_on_weapon_instance_request_animation"]
-[connection signal="request_animation" from="PlayerBody/Hands/LeftHand/LeftWeapon" to="PlayerBody/Hands" method="_on_weapon_instance_request_animation"]
+[connection signal="request_animation" from="Body/FirstPersonModel/Hands/RightHand/RightWeapon" to="Body/FirstPersonModel/Hands" method="_on_weapon_instance_request_animation"]
+[connection signal="request_animation" from="Body/FirstPersonModel/Hands/LeftHand/LeftWeapon" to="Body/FirstPersonModel/Hands" method="_on_weapon_instance_request_animation"]
+[connection signal="request_animation" from="Body/ThirdPersonModel/Player/Skeleton3D/RightHand/RightWeapon" to="Body" method="_on_right_weapon_request_animation"]
+[connection signal="request_animation" from="Body/ThirdPersonModel/Player/Skeleton3D/LeftHand/LeftWeapon" to="Body" method="_on_left_weapon_request_animation"]
 [connection signal="pressed" from="DEATH_SCREEN/Control/RESTART" to="DEATH_SCREEN" method="_on_restart_pressed"]
+
+[editable path="Body/ThirdPersonModel"]

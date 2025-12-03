@@ -12,7 +12,7 @@ extends Node3D
 @onready var model_holder : Node3D = $ModelHolder
 @onready var hitbox : Area3D = $ModelHolder/Area3D
 var is_attacking : bool = false
-
+var enemies_hit_this_attack: Array = []
 signal request_animation(anim_name: String)
 
 func set_weapon_data(data : Weapon) -> void:
@@ -40,6 +40,7 @@ func _load_model(scene: PackedScene) -> void:
 	# Only needed if we don't use animation based attacks or want to offset model
 	instance.transform.origin = weapon_data.weapon_position
 	instance.rotation_degrees = weapon_data.weapon_rotation
+	instance.scale = weapon_data.weapon_scale
 
 func start_motion_attack(direction: String, hand: Node3D) -> void:
 	if is_attacking:
@@ -64,6 +65,7 @@ func _imu_sword_attack(direction: String, hand: Node3D) -> void:
 		return
 
 	is_attacking = true
+	enemies_hit_this_attack.clear()
 
 	# Save original hand transform
 	var original_hand_pos = hand.position
@@ -120,7 +122,8 @@ func _imu_hammer_attack(direction: String, hand: Node3D) -> void:
 		return
 
 	is_attacking = true
-
+	enemies_hit_this_attack.clear()
+	
 	# Save original hand transform
 	var original_hand_pos = hand.position
 	var original_hand_rot = hand.rotation_degrees
@@ -164,6 +167,8 @@ func _imu_gun_shoot() -> void:
 		return
 		
 	is_attacking = true
+	enemies_hit_this_attack.clear()
+	
 	var enemy = _imu_aim_assist()
 	if enemy:
 		enemy.take_damage(weapon_data.damage)
@@ -213,27 +218,28 @@ func _smooth_reset_rotation(orig_hand_pos: Vector3, orig_hand_rot: Vector3, orig
 		await get_tree().process_frame
 	is_attacking = false
 
-func _perform_standard_attack(hand : String):
+func _perform_standard_attack():
 	if weapon_data == null:
 		return
 
 	match weapon_data.type:
 		Weapon.WeaponType.BLADE:
-			_attack_slash(hand)
+			_attack_slash()
 		Weapon.WeaponType.HAMMER:
-			_attack_slam(hand)
+			_attack_slam()
 		Weapon.WeaponType.GUN:
 			_attack_shoot()
 		_:
 			push_warning("Unknown weapon type")
 	
-func _attack_slash(hand : String):
+func _attack_slash():
 	if is_attacking:
 		return
 		
 	is_attacking = true
+	enemies_hit_this_attack.clear()
 	
-	var anim_name = "attack_slash_%s" % hand.to_lower()
+	var anim_name = "sword_swing_"
 	emit_signal("request_animation", anim_name)
 	_enable_hitbox(true)
 	await get_tree().create_timer(weapon_data.attack_speed).timeout
@@ -241,13 +247,14 @@ func _attack_slash(hand : String):
 	
 	is_attacking = false
 
-func _attack_slam(hand : String):
+func _attack_slam():
 	if is_attacking:
 		return
 		
 	is_attacking = true
+	enemies_hit_this_attack.clear()
 	
-	var anim_name = "attack_slam_%s" % hand.to_lower()
+	var anim_name = "hammer_swing_"
 	emit_signal("request_animation", anim_name)
 	_enable_hitbox(true)
 	await get_tree().create_timer(weapon_data.attack_speed).timeout
@@ -260,12 +267,15 @@ func _attack_shoot():
 		return
 		
 	is_attacking = true
+	enemies_hit_this_attack.clear()
+	
 	var enemy = _retro_hitscan()
 	if enemy:
 		enemy.take_damage(weapon_data.damage)
 		
 	# TODO: add effect
-	
+	var anim_name = "gun_shoot_"
+	emit_signal("request_animation", anim_name)
 	await get_tree().create_timer(weapon_data.attack_speed).timeout
 	is_attacking = false
 
@@ -290,8 +300,9 @@ func _retro_hitscan() -> Node:
 		var pos = enemy.global_transform.origin
 		var pos2d = Vector2(pos.x, pos.z)
 		
-		var d = Geometry2D.get_closest_point_to_segment(pos2d, origin2d, end2d)
-		if d <= tolerance:
+		var closest_point = Geometry2D.get_closest_point_to_segment(pos2d, origin2d, end2d)
+		var dist_to_segment = pos2d.distance_to(closest_point)
+		if dist_to_segment <= tolerance:
 			var dist = origin2d.direction_to(pos2d)
 			if dist < best_dist:
 				best_dist = dist
@@ -307,11 +318,21 @@ func _enable_hitbox(enabled : bool) -> void:
 ## Area3D based detection for keyboard and mouse
 func _on_area_3d_body_entered(body: Node3D) -> void:
 	print("----IN RANGE-----")
-	if body.is_in_group("enemy"):
-		if body.has_method("take_damage"):
-			body.take_damage(weapon_data.damage)
-		else:
-			push_warning("Body does not have 'take_damage' method")
+	if not is_attacking:
+		return
+		
+	if not body.is_in_group("enemy"):
+		return
+		
+	if body in enemies_hit_this_attack:
+		return
+		
+	enemies_hit_this_attack.append(body)
+
+	if body.has_method("take_damage"):
+		body.take_damage(weapon_data.damage)
+	else:
+		push_warning("Body does not have 'take_damage' method")
 
 ## for IMU based attacks
 ## uses the tip of the weapon to track each hit

@@ -7,7 +7,6 @@ extends CharacterBody3D
 @export var left_weapon : Weapon = null
 @export var right_weapon : Weapon = null
 
-@onready var Hands = $"PlayerBody/Hands"
 var using_first_person : bool
 
 var mouse_sensitivity := 0.002
@@ -23,7 +22,8 @@ var health: float
 func _ready():
 	health = MAX_HEALTH
 	death_screen.hide()
-	Hands.set_weapons(left_weapon, right_weapon)
+	if left_weapon != null or right_weapon != null:
+		$Body.set_weapons(left_weapon, right_weapon)
 	tp_camera_original_rotation = thirdPersonCamera.global_rotation
 	
 	using_first_person = Input.get_connected_joypads().size() > 0
@@ -31,7 +31,7 @@ func _ready():
 	
 func _process(delta: float) -> void:
 	if not using_first_person:
-		return
+		_update_animation()
 		
 	hp_bar.value = health
 	if health <= 0:
@@ -84,36 +84,46 @@ func _physics_process(delta):
 
 	move_and_slide()
 
+func _update_animation() -> void:
+	if velocity.length() < 0.1:
+		$AnimationTree["parameters/conditions/idle"] = true
+		$AnimationTree["parameters/conditions/is_moving"] = false
+	else:
+		$AnimationTree["parameters/conditions/idle"] = false
+		$AnimationTree["parameters/conditions/is_moving"] = true
+		
 func _third_person_controls():
 		var mousePosition = get_viewport().get_mouse_position()
 		var from = thirdPersonCamera.project_ray_origin(mousePosition)
-		var to = from + thirdPersonCamera.project_ray_normal(mousePosition) * 1000
+		var dir = thirdPersonCamera.project_ray_normal(mousePosition)
 		
-		var query = PhysicsRayQueryParameters3D.new()
-		query.from = from
-		query.to = to
-		query.exclude = [self]
-		var space_state = get_world_3d().direct_space_state
-		var result = space_state.intersect_ray(query)
+		var t = (global_transform.origin.y - from.y) / dir.y
+		if t < 0:
+			return
+
+		var target_pos = from + dir * t
+		var lookDir = target_pos - global_transform.origin
+		lookDir.y = 0
+		lookDir = lookDir.normalized()
 		
-		if result:
-			var target_pos = result.position
-			var lookDir = target_pos - global_transform.origin
-			lookDir.y = 0
-			
-			if lookDir.length() > 0.01:
-				var target_angle = atan2(-lookDir.x, -lookDir.z)
-				$PlayerBody.rotation.y = target_angle	 
+		var target_angle = atan2(-lookDir.x, -lookDir.z)
+		$Body/ThirdPersonModel.rotation.y = target_angle + PI
 
 func set_camera_mode(first_person: bool):
 	using_first_person = first_person
 
 	if first_person:
-		rotation.y = $PlayerBody.rotation.y  
-		$PlayerBody.global_rotation.y = global_rotation.y
+		$Body/FirstPersonModel.visible = true
+		$Body/ThirdPersonModel.visible = false
+		
+		var f = -$Body/ThirdPersonModel.global_transform.basis.z
+		rotation.y = atan2(f.x, f.z)
+		$Body/FirstPersonModel.global_rotation.y = global_rotation.y
 		firstPersonCamera.rotation.x = 0
 		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	else:
+		$Body/FirstPersonModel.visible = false
+		$Body/ThirdPersonModel.visible = true
 		rotation.y = 0
 		thirdPersonCamera.global_rotation = tp_camera_original_rotation
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
@@ -121,7 +131,7 @@ func set_camera_mode(first_person: bool):
 	firstPersonCamera.current = first_person
 	thirdPersonCamera.current = not first_person
 	
-	$PlayerBody/Hands.using_first_person = first_person
+	#$Body/FirstPersonModel/Hands.using_first_person = first_person
 
 func take_damage(damage_to_take):
 	health -= damage_to_take
