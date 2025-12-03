@@ -27,3 +27,7 @@ func _on_yes_button_pressed() -> void:
 	
 func _on_no_button_pressed() -> void:
 	popUp.hide()
+
+
+func _on_profile_button_pressed() -> void:
+	get_tree().change_scene_to_file("res://src/Scenes/Profile.tscn")

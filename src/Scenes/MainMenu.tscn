@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://c17fchistp0rd"]
+[gd_scene load_steps=12 format=3 uid="uid://c17fchistp0rd"]
 
 [ext_resource type="Texture2D" uid="uid://c3v3sa5pct3nm" path="res://src/Objects/MainMenu/icon.png" id="1_814sq"]
 [ext_resource type="Script" uid="uid://dg6jeqsyye484" path="res://src/Scripts/MainMenu.gd" id="1_ftic1"]
-
-[sub_resource type="SystemFont" id="SystemFont_814sq"]
+[ext_resource type="Texture2D" uid="uid://vy6fi1wh7nwe" path="res://src/Objects/background/bg.png" id="2_1nasp"]
+[ext_resource type="Texture2D" uid="uid://bcoyofebqemiq" path="res://src/Objects/background/spider_bg.png" id="3_0k47g"]
+[ext_resource type="Texture2D" uid="uid://cc8bl5prwm341" path="res://src/Objects/background/web.png" id="4_0k47g"]
 
 [sub_resource type="SystemFont" id="SystemFont_ftic1"]
 
@@ -11,20 +12,116 @@
 
 [sub_resource type="SystemFont" id="SystemFont_1nasp"]
 
+[sub_resource type="Animation" id="Animation_fc7xl"]
+resource_name = "new_animation"
+length = 10.0
+loop_mode = 1
+markers = [{
+"color": Color(1, 1, 1, 1),
+"name": &"new_marker",
+"time": 0.0
+}]
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Sprite2D2:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(-0.033333335, 3.7666667, 4.9666667, 7.9333334),
+"transitions": PackedFloat32Array(1.8025012, 2.8284266, 1.8, 2.6390142),
+"update": 0,
+"values": [Vector2(960, 542), Vector2(960, 1045), Vector2(960, 1045), Vector2(960, 542)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../Sprite2D3:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 3.7666667, 4.9666667, 7.9566665),
+"transitions": PackedFloat32Array(1.7923427, 2.828427, 1.8, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1, 35), Vector2(1, 35), Vector2(1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../Sprite2D3:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 3.7666667, 4.9666667, 7.9666667),
+"transitions": PackedFloat32Array(1.8, 2.82, 1.8, 1.8),
+"update": 0,
+"values": [Vector2(1710, 103), Vector2(1710, 378), Vector2(1710, 378), Vector2(1710, 103)]
+}
+
+[sub_resource type="Animation" id="Animation_1nasp"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Sprite2D2:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(960, 542)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../Sprite2D3:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../Sprite2D3:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1694, 378)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_jb13k"]
+_data = {
+&"RESET": SubResource("Animation_1nasp"),
+&"spider": SubResource("Animation_fc7xl")
+}
+
 [node name="MainMenu" type="Node2D"]
 script = ExtResource("1_ftic1")
 
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(962, 542)
+texture = ExtResource("2_1nasp")
+
 [node name="PanelContainer" type="PanelContainer" parent="."]
+modulate = Color(1, 1, 1, 0.95686275)
+self_modulate = Color(1, 1, 1, 0)
 custom_minimum_size = Vector2(1920, 1080)
-offset_left = 6.0
-offset_top = 18.0
-offset_right = 1926.0
-offset_bottom = 1098.0
+offset_left = -1.0
+offset_right = 1919.0
+offset_bottom = 1080.0
 
 [node name="ProfileMenu" type="MarginContainer" parent="PanelContainer"]
-custom_minimum_size = Vector2(350, 250)
+custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
-size_flags_horizontal = 8
+size_flags_horizontal = 0
 size_flags_vertical = 0
 theme_override_constants/margin_left = 15
 theme_override_constants/margin_top = 15
@@ -32,23 +129,14 @@ theme_override_constants/margin_right = 15
 theme_override_constants/margin_bottom = 15
 
 [node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/ProfileMenu"]
+custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 
-[node name="ProfileButton" type="MenuButton" parent="PanelContainer/ProfileMenu/VBoxContainer"]
+[node name="ProfileButton" type="Button" parent="PanelContainer/ProfileMenu/VBoxContainer"]
 unique_name_in_owner = true
-light_mask = 0
-custom_minimum_size = Vector2(100, 100)
+custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
-size_flags_horizontal = 8
-size_flags_vertical = 0
-tooltip_text = "asd"
-theme_override_fonts/font = SubResource("SystemFont_814sq")
 icon = ExtResource("1_814sq")
-
-[node name="Button" type="Button" parent="PanelContainer/ProfileMenu/VBoxContainer/ProfileButton"]
-layout_mode = 0
-offset_right = 8.0
-offset_bottom = 8.0
 
 [node name="Menu" type="MarginContainer" parent="PanelContainer"]
 custom_minimum_size = Vector2(450, 350)
@@ -138,6 +226,21 @@ size_flags_vertical = 8
 theme_override_font_sizes/font_size = 25
 text = "EXIT GAME"
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="PanelContainer"]
+libraries = {
+&"": SubResource("AnimationLibrary_jb13k")
+}
+autoplay = "spider"
+
+[node name="Sprite2D3" type="Sprite2D" parent="."]
+position = Vector2(1694, 378)
+texture = ExtResource("4_0k47g")
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+position = Vector2(960, 542)
+texture = ExtResource("3_0k47g")
+
+[connection signal="pressed" from="PanelContainer/ProfileMenu/VBoxContainer/ProfileButton" to="." method="_on_profile_button_pressed"]
 [connection signal="pressed" from="PanelContainer/Menu/Window/MarginContainer/VBoxContainer/YesButton" to="." method="_on_yes_button_pressed"]
 [connection signal="pressed" from="PanelContainer/Menu/Window/MarginContainer/VBoxContainer/NoButton" to="." method="_on_no_button_pressed"]
 [connection signal="pressed" from="PanelContainer/Menu/VBoxContainer/StartGameButton" to="." method="_on_start_game_button_pressed"]
