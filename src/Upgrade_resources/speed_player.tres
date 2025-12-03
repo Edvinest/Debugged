@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bnl6rhigvo4xv" path="res://src/Scripts/Modular_upgrades/speed_player_strategy.gd" id="1_skh1q"]
 [ext_resource type="Resource" uid="uid://ddtmr3nr11bf1" path="res://src/Scripts/Player_resources/player_speed.tres" id="2_p82j5"]
-[ext_resource type="Texture2D" uid="uid://cmcu4bla6v6if" path="res://icon.svg" id="3_xhdy0"]
+[ext_resource type="Texture2D" uid="uid://ctnyp51wn3mdn" path="res://src/UI_resources/Icons/speed-svgrepo-com.svg" id="3_xhdy0"]
 
 [resource]
 script = ExtResource("1_skh1q")

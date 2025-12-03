@@ -25,7 +25,12 @@ var health: float
 @onready var hp_bar: ProgressBar = $HUD/Control/ProgressBar
 @onready var death_screen: CanvasLayer = %DEATH_SCREEN
 
+var spawn_point = null
+
 func _ready():
+	
+	if spawn_point != null:
+		global_position = spawn_point.global_position 
 	
 	if health_component == null:
 		push_warning("No HEALTH component is scope.")
@@ -53,7 +58,7 @@ func _ready():
 func _process(delta: float) -> void:
 	MAX_HEALTH = health_component.player_max_health
 	hp_bar.max_value = MAX_HEALTH
-	print(hp_bar.max_value)
+	#print(hp_bar.max_value)
 	speed = speed_component.player_speed
 	hp_bar.value = health
 	if health <= 0:
@@ -137,3 +142,10 @@ func set_camera_mode(first_person : bool):
 func take_damage(damage_to_take):
 	health -= damage_to_take
 	print("Player took damage: " + str(damage_to_take))
+
+
+func _on_player_spawn_points_on_spawn_point_selected(point: Marker3D) -> void:
+	if point is Marker3D:
+		spawn_point = point
+	else:
+		push_error("Player: Invalid spawn point.")

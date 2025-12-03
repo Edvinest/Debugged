@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bxcfhe3ciur57" path="res://src/Scripts/Modular_upgrades/health_player_strategy.gd" id="1_6ibwk"]
 [ext_resource type="Resource" uid="uid://chtuv7ka5xakl" path="res://src/Scripts/Player_resources/player_health.tres" id="1_sxfcj"]
-[ext_resource type="Texture2D" uid="uid://cq6srtfmpdx2y" path="res://docs/concept_arts/potatobug.png" id="3_4t0sq"]
+[ext_resource type="Texture2D" uid="uid://pkilqv8ibwar" path="res://src/UI_resources/Icons/health-svgrepo-com (1).svg" id="3_4t0sq"]
 
 [resource]
 script = ExtResource("1_6ibwk")
