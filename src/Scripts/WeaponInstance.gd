@@ -306,7 +306,7 @@ func _enable_hitbox(enabled : bool) -> void:
 		
 ## Area3D based detection for keyboard and mouse
 func _on_area_3d_body_entered(body: Node3D) -> void:
-	print("----IN RANGE-----")
+	#print("----IN RANGE-----")
 	if body.is_in_group("enemy"):
 		if body.has_method("take_damage"):
 			body.take_damage(weapon_data.damage)

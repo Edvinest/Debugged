@@ -31,6 +31,24 @@ project/assembly_name="Debugged"
 
 enabled=PackedStringArray("res://addons/godot-firebase/plugin.cfg")
 
+[file_customization]
+
+folder_colors={
+"res://src/": "yellow",
+"res://src/Materials/": "purple",
+"res://src/Objects/": "orange",
+"res://src/Scenes/": "red",
+"res://src/Scripts/": "gray",
+"res://src/Scripts/Modular_upgrades/": "purple",
+"res://src/Scripts/Player_Components/": "orange",
+"res://src/Scripts/Player_resources/": "purple",
+"res://src/Upgrade_resources/": "purple"
+}
+
+[gui]
+
+theme/default_font_multichannel_signed_distance_field=true
+
 [input]
 
 move_forward={

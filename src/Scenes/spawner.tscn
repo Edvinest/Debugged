@@ -1,0 +1,42 @@
+[gd_scene load_steps=5 format=3 uid="uid://dgsixffdjh8gk"]
+
+[ext_resource type="Script" uid="uid://cmch4f6q8t8hk" path="res://src/Scripts/spawner.gd" id="1_ey73o"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_di8km"]
+radius = 1.493
+height = 3.414
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_f47lh"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_f47lh"]
+size = Vector3(10, 4, 10)
+
+[node name="Spawner" type="Node3D"]
+script = ExtResource("1_ey73o")
+spawning_intervals_sec = 2.0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_di8km")
+surface_material_override/0 = SubResource("StandardMaterial3D_f47lh")
+
+[node name="Marker3D" type="Marker3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5812926, -0.0037922263, -0.95588315)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Marker3D"]
+visible = false
+size = Vector3(0.5, 0.5, 0.5)
+
+[node name="Timer" type="Timer" parent="."]
+unique_name_in_owner = true
+autostart = true
+
+[node name="Area3D" type="Area3D" parent="."]
+collision_mask = 4
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("BoxShape3D_f47lh")
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="body_exited" from="Area3D" to="." method="_on_area_3d_body_exited"]

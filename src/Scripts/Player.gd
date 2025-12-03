@@ -1,6 +1,5 @@
 extends CharacterBody3D
 
-@export var speed := 10.0
 @onready var firstPersonCamera = $FirstPersonCamera
 @onready var thirdPersonCamera = $ThirdPersonCamera
 
@@ -14,14 +13,36 @@ var mouse_sensitivity := 0.002
 var controller_sensitivity := 2.0
 var gravity := 30
 
+#Speed component
+@export var speed_component : PlayerSpeedComponent = null
+var speed: float
+
 var tp_camera_original_rotation : Vector3
-const MAX_HEALTH = 100
+
+#Health component
+@export var health_component: PlayerHealthComponent = null
+var MAX_HEALTH: float
 var health: float
+
 @onready var hp_bar: ProgressBar = $HUD/Control/ProgressBar
 @onready var death_screen: CanvasLayer = %DEATH_SCREEN
 
+var spawn_point = null
+
 func _ready():
+	
+	if spawn_point != null:
+		global_position = spawn_point.global_position 
+	
+	if health_component == null:
+		push_warning("No HEALTH component is scope.")
+	MAX_HEALTH = health_component.player_max_health
 	health = MAX_HEALTH
+
+	if speed_component == null:
+		push_warning("No SPEED component is scope.")
+	speed = speed_component.player_speed
+
 	death_screen.hide()
 	Hands.set_weapons(left_weapon, right_weapon)
 	tp_camera_original_rotation = thirdPersonCamera.global_rotation
@@ -30,9 +51,10 @@ func _ready():
 	set_camera_mode(using_first_person)
 	
 func _process(delta: float) -> void:
-	if not using_first_person:
-		return
-		
+	MAX_HEALTH = health_component.player_max_health
+	hp_bar.max_value = MAX_HEALTH
+	#print(hp_bar.max_value)
+	speed = speed_component.player_speed
 	hp_bar.value = health
 	if health <= 0:
 		death_screen.show()
@@ -126,3 +148,10 @@ func set_camera_mode(first_person: bool):
 func take_damage(damage_to_take):
 	health -= damage_to_take
 	print("Player took damage: " + str(damage_to_take))
+
+
+func _on_player_spawn_points_on_spawn_point_selected(point: Marker3D) -> void:
+	if point is Marker3D:
+		spawn_point = point
+	else:
+		push_error("Player: Invalid spawn point.")
