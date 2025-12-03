@@ -16,20 +16,25 @@ script = ExtResource("1_ld1db")
 [node name="ButtonPanelContainer" type="PanelContainer" parent="."]
 unique_name_in_owner = true
 modulate = Color(2.805782, 2.805782, 2.805782, 1)
-self_modulate = Color(0.5165994, 0.5165994, 0.5165994, 1)
-custom_minimum_size = Vector2(10, 25)
+self_modulate = Color(0.5176471, 0.5176471, 0.5176471, 0)
+custom_minimum_size = Vector2(20, 20)
 layout_mode = 0
-offset_right = 150.0
-offset_bottom = 150.0
+offset_left = 1768.0
+offset_top = 2.0
+offset_right = 1918.0
+offset_bottom = 152.0
 size_flags_horizontal = 8
 size_flags_vertical = 0
 
 [node name="MarginContainer" type="MarginContainer" parent="ButtonPanelContainer"]
 custom_minimum_size = Vector2(20, 20)
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 
 [node name="PauseButton" type="Button" parent="ButtonPanelContainer/MarginContainer"]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(20, 20)
 layout_mode = 2
 icon = ExtResource("2_aqlgf")
 icon_alignment = 1
