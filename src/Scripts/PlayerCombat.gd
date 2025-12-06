@@ -36,9 +36,10 @@ var using_first_person : bool = true
 func _ready():
 	udp.bind(4243, "127.0.0.1")
 	
-	if Input.get_connected_joypads().is_empty():
-		using_first_person = false
 
+func set_first_person(fp : bool) -> void:
+	using_first_person = fp
+	
 func set_weapons(left : Weapon, right: Weapon):
 	left_weapon = left
 	right_weapon = right
@@ -128,7 +129,7 @@ func _handle_joycon():
 			swing_freeze_L = FREEZE_TIME
 			
 			var direction_L = _classify_swing_direction(rot_vel_L)
-			fp_left_hand.get_node("WeaponInstance").start_motion_attack(direction_L, fp_left_hand)
+			fp_left_hand.get_node("LeftWeapon").start_motion_attack(direction_L, fp_left_hand)
 	
 	
 	if right_weapon and swing_freeze_R <= 0:
@@ -139,36 +140,7 @@ func _handle_joycon():
 			swing_freeze_R = FREEZE_TIME
 			
 			var direction_R = _classify_swing_direction(rot_vel_R)
-			fp_right_hand.get_node("WeaponInstance").start_motion_attack(direction_R, fp_right_hand)
-
-		var sway_strength_rot = 0.03          
-		var sway_strength_pos = 0.0003          
-		var sway_speed = 2.0            
-
-		# Smooth bobbing up/down
-		var bob_offset = sin(fp_anim_time * sway_speed) * sway_strength_pos
-
-		# Slight side-to-side sway using cosine
-		var side_offset = cos(fp_anim_time * sway_speed) * sway_strength_pos
-
-		# Slight rotation wiggle
-		var rot_wiggle_x = sin(fp_anim_time * sway_speed) * sway_strength_rot
-		var rot_wiggle_z = cos(fp_anim_time * sway_speed) * sway_strength_rot
-		
-		if using_first_person:
-			if swing_freeze_L <= 0:
-				fp_left_hand.rotation = smoothRotL
-				fp_left_hand.rotation.x += rot_wiggle_x
-				fp_left_hand.rotation.z += rot_wiggle_z
-
-				fp_left_hand.position += Vector3(side_offset, bob_offset, 0)
-				
-			if swing_freeze_R <= 0:
-				fp_right_hand.rotation = smoothRotR
-				fp_right_hand.rotation.x += rot_wiggle_x
-				fp_right_hand.rotation.z += rot_wiggle_z
-
-				fp_right_hand.position += Vector3(-side_offset, bob_offset, 0)
+			fp_right_hand.get_node("RightWeapon").start_motion_attack(direction_R, fp_right_hand)
 
 	else:
 		pass

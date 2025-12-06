@@ -130,8 +130,7 @@ func set_camera_mode(first_person: bool):
 
 	firstPersonCamera.current = first_person
 	thirdPersonCamera.current = not first_person
-	
-	#$Body/FirstPersonModel/Hands.using_first_person = first_person
+	$Body.set_first_person(first_person)
 
 func take_damage(damage_to_take):
 	health -= damage_to_take

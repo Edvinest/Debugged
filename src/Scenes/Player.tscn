@@ -1,7 +1,7 @@
 [gd_scene load_steps=41 format=3 uid="uid://dct6crx3jwiat"]
 
 [ext_resource type="Script" uid="uid://nchnj2u7kv5" path="res://src/Scripts/Player.gd" id="1_rpqav"]
-[ext_resource type="PackedScene" uid="uid://cwtppq1cb1yxl" path="res://src/Objects/Player/Alpi.glb" id="2_4mdpm"]
+[ext_resource type="PackedScene" uid="uid://cwvq1yyfex6w7" path="res://src/Objects/Player/Alpi.glb" id="2_4mdpm"]
 [ext_resource type="Script" uid="uid://dsi0c4pqhkju7" path="res://src/Scripts/PlayerCombat.gd" id="3_g1uh0"]
 [ext_resource type="PackedScene" uid="uid://be1gwv0coi2ua" path="res://src/Scenes/WeaponInstance.tscn" id="4_5dq0m"]
 [ext_resource type="PackedScene" uid="uid://yabfag3vnn0q" path="res://src/Objects/Player/RightHand.glb" id="4_8fvgu"]
@@ -201,31 +201,35 @@ bones/1/rotation = Quaternion(0, 0.052335948, 0, 0.9986295)
 bones/3/position = Vector3(0.91351366, 0.9178297, -0.046597518)
 bones/3/rotation = Quaternion(-3.6259157e-06, 3.4442837e-05, -0.9961928, 0.08717797)
 bones/4/rotation = Quaternion(0.0034681312, 0.001553929, -0.026134633, 0.9996512)
-bones/5/position = Vector3(-0.9135136, 0.9178297, -0.046597514)
-bones/5/rotation = Quaternion(-3.6259157e-06, -3.4442837e-05, 0.9961928, 0.08717797)
-bones/6/rotation = Quaternion(0.0034681312, -0.001553929, 0.026134633, 0.9996512)
-bones/7/position = Vector3(0.27663198, -0.116931096, -2.7375584e-08)
-bones/7/rotation = Quaternion(0.028429903, -0.020286907, 0.9978889, -0.054752655)
-bones/8/rotation = Quaternion(0.021532265, 0.030050183, 0.010409185, 0.9992623)
-bones/9/position = Vector3(-0.27663198, -0.116931096, -2.7375584e-08)
-bones/9/rotation = Quaternion(-0.021276433, -0.020687416, 0.99804974, 0.054918822)
-bones/10/rotation = Quaternion(0.021605575, -0.022958614, -0.010255776, 0.9994504)
+bones/5/position = Vector3(0.0017228425, 1.18114, -0.0058921254)
+bones/5/rotation = Quaternion(0.49041736, 0.49279523, 0.45108446, 0.5596129)
+bones/6/position = Vector3(-0.9135136, 0.9178297, -0.046597514)
+bones/6/rotation = Quaternion(-3.6259157e-06, -3.4442837e-05, 0.9961928, 0.08717797)
+bones/7/rotation = Quaternion(0.0034681312, -0.001553929, 0.026134633, 0.9996512)
+bones/8/position = Vector3(-0.015371367, 1.20016, -0.0060171876)
+bones/8/rotation = Quaternion(0.4904176, -0.49279496, -0.45108387, 0.5596132)
+bones/9/position = Vector3(0.27663198, -0.116931096, -2.7375584e-08)
+bones/9/rotation = Quaternion(0.028429903, -0.020286907, 0.9978889, -0.054752655)
+bones/10/rotation = Quaternion(0.021532265, 0.030050183, 0.010409185, 0.9992623)
+bones/11/position = Vector3(-0.27663198, -0.116931096, -2.7375584e-08)
+bones/11/rotation = Quaternion(-0.021276433, -0.020687416, 0.99804974, 0.054918822)
+bones/12/rotation = Quaternion(0.021605575, -0.022958614, -0.010255776, 0.9994504)
 
 [node name="RightHand" type="BoneAttachment3D" parent="Body/ThirdPersonModel/Player/Skeleton3D" index="0"]
-transform = Transform3D(-0.9867433, -0.12060598, 0.108589344, 0.12200755, -0.9925088, 0.006332312, 0.10701217, 0.019497087, 0.99406654, -1.0634196, 1.0624855, 0.064855196)
-bone_name = "Bone.004.R"
-bone_idx = 6
+transform = Transform3D(0.025103234, 0.073140144, 0.9970055, 0.9946016, -0.10227267, -0.017539969, 0.100683525, 0.9920641, -0.07531268, -1.1936519, -0.13059747, 0.08062841)
+bone_name = "Bone.004.R.001"
+bone_idx = 8
 
 [node name="RightWeapon" parent="Body/ThirdPersonModel/Player/Skeleton3D/RightHand" instance=ExtResource("4_5dq0m")]
-transform = Transform3D(-3, 0, -4.5298742e-07, 0, 3, 0, 4.5298742e-07, 0, -3, 0.060025573, 1.1484153, -0.00798776)
+transform = Transform3D(1.3113414e-07, -2.6226834e-07, 3, 2.6226832e-07, 3, 2.6226832e-07, -3, 2.6226832e-07, 1.3113416e-07, 0, 0, 0)
 
-[node name="LeftHand" type="BoneAttachment3D" parent="Body/ThirdPersonModel/Player/Skeleton3D" index="2"]
-transform = Transform3D(-0.9874297, 0.12202413, 0.100461595, -0.12200755, -0.9925088, 0.006332312, 0.10048171, -0.006004359, 0.9949208, 1.0536655, 1.0624855, -0.15765935)
-bone_name = "Bone.004.L"
-bone_idx = 4
+[node name="LeftHand" type="BoneAttachment3D" parent="Body/ThirdPersonModel/Player/Skeleton3D" index="1"]
+transform = Transform3D(0.0036229994, 0.1347201, -0.99087703, -0.9946017, -0.10227215, -0.017541474, -0.10370233, 0.9855918, 0.1336222, 1.1954999, -0.1100539, -0.17044042)
+bone_name = "Bone.004.L.001"
+bone_idx = 5
 
 [node name="LeftWeapon" parent="Body/ThirdPersonModel/Player/Skeleton3D/LeftHand" instance=ExtResource("4_5dq0m")]
-transform = Transform3D(-3.0000007, 0, -2.6226837e-07, 0, 3.0000002, 0, 2.622684e-07, 0, -3.0000005, 0.060025573, 1.1484149, -0.007987767)
+transform = Transform3D(1.3113417e-07, -2.6226837e-07, 3.0000005, 2.622684e-07, 3.0000002, 2.6226837e-07, -3.0000007, 2.6226832e-07, 1.3113419e-07, 0, 0, 0)
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
 root_node = NodePath("../Body/ThirdPersonModel")
