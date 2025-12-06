@@ -5,6 +5,7 @@ extends CharacterBody3D
 @onready var thirdPersonCamera = $ThirdPersonCamera
 @export var left_weapon : Weapon
 @export var right_weapon : Weapon
+@onready var Hands = $PlayerBody/Hands
 var using_first_person : bool
 
 var mouse_sensitivity := 0.002
