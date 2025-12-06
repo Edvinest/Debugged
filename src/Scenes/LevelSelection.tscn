@@ -6,6 +6,7 @@
 script = ExtResource("1_x7vxi")
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
+self_modulate = Color(1, 1, 1, 0)
 custom_minimum_size = Vector2(1920, 1080)
 offset_right = 40.0
 offset_bottom = 40.0
@@ -26,7 +27,7 @@ theme_override_constants/separation = 30
 [node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 1
-theme_override_font_sizes/font_size = 40
+theme_override_font_sizes/font_size = 35
 text = "
 Select your next challenge
 "
@@ -39,20 +40,20 @@ layout_mode = 2
 size_flags_vertical = 4
 theme_override_constants/outline_size = 2
 theme_override_constants/h_separation = 15
-theme_override_font_sizes/font_size = 40
+theme_override_font_sizes/font_size = 25
 text = "Level 1
 "
 
 [node name="ButtonLevelTwo" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
-theme_override_font_sizes/font_size = 40
+theme_override_font_sizes/font_size = 25
 text = "Level 2"
 
 [node name="ButtonBack" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
-theme_override_font_sizes/font_size = 40
+theme_override_font_sizes/font_size = 25
 text = "Back
 "
 

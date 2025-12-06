@@ -23,6 +23,7 @@ grow_vertical = 2
 script = ExtResource("1_h6vxg")
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
+self_modulate = Color(1, 1, 1, 0.64705884)
 custom_minimum_size = Vector2(1920, 1080)
 layout_mode = 0
 offset_right = 1920.0
@@ -30,15 +31,23 @@ offset_bottom = 1080.0
 
 [node name="MarginContainer" type="MarginContainer" parent="PanelContainer"]
 custom_minimum_size = Vector2(850, 650)
+layout_direction = 1
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer"]
+[node name="VBoxContainer3" type="VBoxContainer" parent="PanelContainer/MarginContainer"]
+layout_direction = 1
 layout_mode = 2
-theme_override_constants/separation = 15
+alignment = 1
 
-[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer3"]
+layout_mode = 2
+size_flags_vertical = 6
+theme_override_constants/separation = 15
+alignment = 1
+
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer3/VBoxContainer"]
 custom_minimum_size = Vector2(300, 75)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -47,18 +56,18 @@ text = "Player Profile"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer3/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/separation = 10
 
-[node name="AchievementsButton" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="AchievementsButton" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer3/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(100, 75)
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 25
 text = "Achievements"
 
-[node name="HighscoreButton" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="HighscoreButton" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer3/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(110, 75)
 layout_mode = 2
@@ -67,7 +76,7 @@ theme_override_font_sizes/font_size = 25
 text = "Highscore
 "
 
-[node name="LeaderboardButton" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="LeaderboardButton" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer3/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(110, 75)
 layout_mode = 2
@@ -75,7 +84,7 @@ size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 25
 text = "Leaderboard"
 
-[node name="BackButton" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="BackButton" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer3/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(110, 75)
 layout_mode = 2
@@ -83,8 +92,45 @@ size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 25
 text = "Back"
 
-[node name="HereComesTheText" type="RichTextLabel" parent="PanelContainer/MarginContainer/VBoxContainer"]
+[node name="Highscore" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer3"]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(850, 400)
+layout_mode = 2
+size_flags_vertical = 6
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/MarginContainer/VBoxContainer3/Highscore"]
+custom_minimum_size = Vector2(0, 350)
+layout_mode = 2
+theme_override_constants/margin_top = 50
+
+[node name="Highscore" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer3/Highscore/MarginContainer"]
+custom_minimum_size = Vector2(0, 350)
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="LeaderboardLabel" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer3/Highscore/MarginContainer/Highscore"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+text = "Your placement is:"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HighsoreLabel" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer3/Highscore/MarginContainer/Highscore"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+text = "Your highscore is:"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Achievements" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer3"]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(850, 400)
+layout_mode = 2
+
+[node name="Achievements" type="RichTextLabel" parent="PanelContainer/MarginContainer/VBoxContainer3/Achievements"]
 custom_minimum_size = Vector2(850, 350)
 layout_mode = 2
 theme_override_colors/table_border = Color(0, 0, 0, 0.96862745)
@@ -96,7 +142,44 @@ fit_content = true
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/AchievementsButton" to="." method="_on_achievements_button_pressed"]
-[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/HighscoreButton" to="." method="_on_highscore_button_pressed"]
-[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/LeaderboardButton" to="." method="_on_leaderboard_button_pressed"]
-[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/BackButton" to="." method="_on_back_button_pressed"]
+[node name="Leaderboard" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer3"]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(850, 400)
+layout_mode = 2
+
+[node name="Leaderboard" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer3/Leaderboard"]
+self_modulate = Color(0.12941177, 0.12941177, 0.12941177, 1)
+custom_minimum_size = Vector2(0, 350)
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="Title" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer3/Leaderboard/Leaderboard"]
+custom_minimum_size = Vector2(0, 75)
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+text = "Leaderboard"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="First" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer3/Leaderboard/Leaderboard"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+
+[node name="Second" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer3/Leaderboard/Leaderboard"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+theme_override_constants/outline_size = 10
+
+[node name="Third" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer3/Leaderboard/Leaderboard"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+theme_override_constants/outline_size = 5
+
+[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer3/VBoxContainer/HBoxContainer/AchievementsButton" to="." method="_on_achievements_button_pressed"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer3/VBoxContainer/HBoxContainer/HighscoreButton" to="." method="_on_highscore_button_pressed"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer3/VBoxContainer/HBoxContainer/LeaderboardButton" to="." method="_on_leaderboard_button_pressed"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer3/VBoxContainer/HBoxContainer/BackButton" to="." method="_on_back_button_pressed"]
