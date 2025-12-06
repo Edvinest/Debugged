@@ -3,7 +3,8 @@ extends CharacterBody3D
 @export var jump_velocity := 4.5
 @onready var firstPersonCamera = $FirstPersonCamera
 @onready var thirdPersonCamera = $ThirdPersonCamera
-
+@export var left_weapon : Weapon
+@export var right_weapon : Weapon
 var using_first_person : bool
 
 var mouse_sensitivity := 0.002
@@ -12,7 +13,6 @@ var gravity := 30
 
 #Speed component
 @export var speed_component : PlayerSpeedComponent = null
-var speed: float
 
 var tp_camera_original_rotation : Vector3
 

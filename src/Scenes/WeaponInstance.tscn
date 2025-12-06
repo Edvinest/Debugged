@@ -1,8 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://be1gwv0coi2ua"]
+[gd_scene load_steps=4 format=3 uid="uid://be1gwv0coi2ua"]
 
 [ext_resource type="Script" uid="uid://bkaksglscwqf4" path="res://src/Scripts/WeaponInstance.gd" id="1_ow7c6"]
 [ext_resource type="Resource" uid="uid://tfggkjfecp7f" path="res://src/Objects/Weapons/Blade1/Sword1.tres" id="2_hpulj"]
-[ext_resource type="PackedScene" uid="uid://b7rnaui7pmkj" path="res://src/Objects/Weapons/Blade1/Sword1.glb" id="3_5qxeo"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_hpulj"]
 size = Vector3(1, 2, 2)
@@ -21,8 +20,5 @@ monitorable = false
 [node name="CollisionShape3D" type="CollisionShape3D" parent="ModelHolder/Area3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 shape = SubResource("BoxShape3D_hpulj")
-
-[node name="Sword1" type="Node3D" parent="ModelHolder" instance=ExtResource("3_5qxeo")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, 0)
 
 [connection signal="body_entered" from="ModelHolder/Area3D" to="." method="_on_area_3d_body_entered"]
