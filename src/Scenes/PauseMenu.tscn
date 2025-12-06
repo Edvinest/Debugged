@@ -1,0 +1,89 @@
+[gd_scene load_steps=3 format=3 uid="uid://cmhtbw8dp4dir"]
+
+[ext_resource type="Script" uid="uid://cu8a6v2l0h05s" path="res://src/Scripts/PauseMenu.gd" id="1_ld1db"]
+[ext_resource type="Texture2D" uid="uid://dq6vedthxpe3w" path="res://src/Objects/Pause_menu/Pause_button.png" id="2_aqlgf"]
+
+[node name="PauseMenu" type="Control"]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_ld1db")
+
+[node name="ButtonPanelContainer" type="PanelContainer" parent="."]
+unique_name_in_owner = true
+modulate = Color(2.805782, 2.805782, 2.805782, 1)
+self_modulate = Color(0.5176471, 0.5176471, 0.5176471, 0)
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 0
+offset_left = 1768.0
+offset_top = 2.0
+offset_right = 1918.0
+offset_bottom = 152.0
+size_flags_horizontal = 8
+size_flags_vertical = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="ButtonPanelContainer"]
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="PauseButton" type="Button" parent="ButtonPanelContainer/MarginContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+icon = ExtResource("2_aqlgf")
+icon_alignment = 1
+text_direction = 3
+
+[node name="PauseWindow" type="Window" parent="."]
+unique_name_in_owner = true
+oversampling_override = 1.0
+initial_position = 2
+size = Vector2i(350, 350)
+visible = false
+borderless = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PauseWindow"]
+custom_minimum_size = Vector2(350, 350)
+offset_left = 2.0
+offset_top = 4.0
+offset_right = 352.0
+offset_bottom = 354.0
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="Label2" type="Label" parent="PauseWindow/VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+text = "The game is paused!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PauseWindow/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 15
+
+[node name="QuitToMMButton" type="Button" parent="PauseWindow/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(120, 50)
+layout_mode = 2
+text = "Quit"
+
+[node name="ContinueButton" type="Button" parent="PauseWindow/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(120, 50)
+layout_mode = 2
+text = "Continue
+"
+
+[connection signal="pressed" from="ButtonPanelContainer/MarginContainer/PauseButton" to="." method="_on_pause_button_pressed"]
+[connection signal="pressed" from="PauseWindow/VBoxContainer/HBoxContainer/QuitToMMButton" to="." method="_on_quit_to_mm_button_pressed"]
+[connection signal="pressed" from="PauseWindow/VBoxContainer/HBoxContainer/ContinueButton" to="." method="_on_continue_button_pressed"]

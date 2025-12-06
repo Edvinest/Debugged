@@ -1,12 +1,9 @@
 extends CharacterBody3D
-
+@export var speed := 5.0
+@export var jump_velocity := 4.5
 @onready var firstPersonCamera = $FirstPersonCamera
 @onready var thirdPersonCamera = $ThirdPersonCamera
 
-@export var left_weapon : Weapon = null
-@export var right_weapon : Weapon = null
-
-@onready var Hands = $"PlayerBody/Hands"
 var using_first_person : bool
 
 var mouse_sensitivity := 0.002
@@ -144,6 +141,7 @@ func set_camera_mode(first_person: bool):
 	thirdPersonCamera.current = not first_person
 	
 	$PlayerBody/Hands.using_first_person = first_person
+	%PauseMenu.set_p_mode(first_person)
 
 func take_damage(damage_to_take):
 	health -= damage_to_take
