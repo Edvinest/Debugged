@@ -35,10 +35,10 @@ func _ready() -> void:
 			destination = node
 			break
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	label.text = "Ready" if can_teleport else str("%.1f" % timer.time_left)
 
-func _on_area_3d_body_entered(body: Node3D) -> void:
+func _on_area_3d_body_entered(_body: Node3D) -> void:
 	if can_teleport:
 		player.global_position = destination.global_position
 		can_teleport = false

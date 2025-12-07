@@ -54,7 +54,7 @@ func _select_random_default(btn: OptionButton, is_left_hand: bool) -> void:
 		PlayerData.right_hand_weapon = weapon_res
 		print("Auto-selected Right: ", weapon_res)
 
-func _on_left_hand_button_item_selected(index: int) -> void:
+func _on_left_hand_button_item_selected(_index: int) -> void:
 	var selected_weapon = left_options.get_selected_metadata()
 	
 	if selected_weapon:
@@ -62,7 +62,7 @@ func _on_left_hand_button_item_selected(index: int) -> void:
 	else:
 		print("Invalid selection")
 
-func _on_right_hand_button_item_selected(index: int) -> void:
+func _on_right_hand_button_item_selected(_index: int) -> void:
 	var selected_weapon = right_options.get_selected_metadata()
 	
 	if selected_weapon:

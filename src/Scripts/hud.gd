@@ -23,6 +23,6 @@ func _ready() -> void:
 	hp_bar.add_theme_stylebox_override("background", style_bg)
 	hp_bar.add_theme_stylebox_override("fill", style_fill)
 	
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if hp_bar.value <= 0:
 		hp_bar.hide()

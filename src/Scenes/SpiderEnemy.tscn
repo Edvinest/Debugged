@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://cln6asbdyk1i3" path="res://src/Objects/LevelOne/entity_spider.tscn" id="1_peton"]
 [ext_resource type="Script" uid="uid://cicppk4ymhc72" path="res://src/Scripts/enemy_Spider.gd" id="2_2yc0a"]
-[ext_resource type="Script" uid="uid://n8twil0p3eb6" path="res://src/Scenes/hp_bar.gd" id="3_quvuh"]
+[ext_resource type="Script" path="res://src/Scripts/hp_bar.gd" id="3_quvuh"]
 [ext_resource type="Script" uid="uid://c5nnq5hwyro4s" path="res://src/Scripts/entity_spider.gd" id="3_r8l3h"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_peton"]

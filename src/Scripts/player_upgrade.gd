@@ -82,7 +82,7 @@ func populate_panels() -> void:
 
 		var rng := RandomNumberGenerator.new()
 		rng.randomize()
-		var rand_upgrd := rng.randi_range(0, upgrades.size() - 1)
+		var rand_upgrd := rng.randi_range(0, shuffled_upgrades.size() - 1)
 
 		var info: BasePlayerStrategy = shuffled_upgrades.pop_at(rand_upgrd)
 		upgrades_to_show.append(info)

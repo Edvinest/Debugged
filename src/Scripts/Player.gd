@@ -1,4 +1,7 @@
 extends CharacterBody3D
+
+signal player_died
+
 @export var speed := 5.0
 @onready var firstPersonCamera = $FirstPersonCamera
 @onready var thirdPersonCamera = $ThirdPersonCamera
@@ -10,7 +13,7 @@ var score=PlayerData.highscore
 @export var right_weapon : Weapon = PlayerData.right_hand_weapon
 
 var using_first_person : bool
-
+var pause_fl = false
 var mouse_sensitivity := 0.002
 var controller_sensitivity := 2.0
 var gravity := 30
@@ -54,7 +57,10 @@ func _ready():
 func _process(delta: float) -> void:
 	if not using_first_person:
 		_update_animation()
-		
+	
+	if pause_fl:
+		return
+	
 	MAX_HEALTH = health_component.player_max_health
 	hp_bar.max_value = MAX_HEALTH
 	#print(hp_bar.max_value)
@@ -62,6 +68,7 @@ func _process(delta: float) -> void:
 	hp_bar.value = health
 	if health <= 0:
 		death_screen.show()
+		player_died.emit()
 		var doc = await stats.get_doc(PlayerData.uid)
 		var current_highscore = doc.get_value("highscore")
 
@@ -74,7 +81,7 @@ func _process(delta: float) -> void:
 			
 			for ach_id in ach_list:
 				var ach_data = await ach.get_doc(ach_id)
-				print("Checking:", ach_id, "→", ach_data)
+				#print("Checking:", ach_id, "→", ach_data)
 				
 				var required_score = ach_data.get_value("score_needed")
 				
@@ -89,8 +96,6 @@ func _process(delta: float) -> void:
 				"highscore": score,
 				"achievements": achievements
 			})
-		set_process(false)
-		get_tree().paused = true
 		
 
 	var right_x := Input.get_joy_axis(0, JOY_AXIS_RIGHT_X)
@@ -194,7 +199,7 @@ func set_camera_mode(first_person: bool):
 
 func take_damage(damage_to_take):
 	health -= damage_to_take
-	print("Player took damage: " + str(damage_to_take))
+	#print("Player took damage: " + str(damage_to_take))
 
 
 func _on_player_spawn_points_on_spawn_point_selected(point: Marker3D) -> void:

@@ -6,6 +6,5 @@ extends BaseUpgradeStrategy
 @export var allowed_weapon_type: Weapon = null 
 
 
-func apply_upgrade(weapon: Weapon):
-    pass
-
+func apply_upgrade(_weapon: Weapon):
+	pass

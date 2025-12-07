@@ -235,6 +235,7 @@ shape = SubResource("BoxShape3D_46rq7")
 
 [connection signal="enemy_defeated" from="WaveLogic/Spawner" to="WaveLogic" method="_on_spawner_enemy_defeated"]
 [connection signal="on_spawn_point_selected" from="PlayerSpawnPoints" to="Player" method="_on_player_spawn_points_on_spawn_point_selected"]
+[connection signal="player_died" from="Player" to="WaveLogic" method="_on_player_player_died"]
 [connection signal="body_entered" from="teleport_pads/pad/Area3D" to="teleport_pads/pad" method="_on_area_3d_body_entered"]
 [connection signal="body_entered" from="teleport_pads/pad2/Area3D" to="teleport_pads/pad2" method="_on_area_3d_body_entered"]
 [connection signal="body_entered" from="teleport_pads/pad3/Area3D" to="teleport_pads/pad3" method="_on_area_3d_body_entered"]

@@ -27,7 +27,7 @@ func _ready() -> void:
 	wave_timer.start()
 	label_timer.text = "Next Wave In: " + str(time_between_waves)
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 
 	label_score.text = "Score: " + str(score)
 
@@ -79,3 +79,7 @@ func _on_player_upgrades_player_upgrade_purchased(cost: float, upgrade: BasePlay
 
 func _on_warning_timer_timeout() -> void:
 	INSUFICIENT_SCORE.hide()
+
+
+func _on_player_player_died() -> void:
+	pass # Replace with function body.

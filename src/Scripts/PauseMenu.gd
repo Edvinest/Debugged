@@ -20,7 +20,7 @@ func resume() -> void:
 	get_tree().paused=false
 	popUp.hide()
 
-func _process(delta: float)-> void:
+func _process(_delta: float)-> void:
 	if Input.is_action_just_pressed("paused") and get_tree().paused==false:
 		pause()
 		

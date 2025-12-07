@@ -8,8 +8,6 @@ var upgrades: Array = []
 var upgrades_to_show: Array = []
 @export var needs_update: bool = true
 
-func _process(delta: float) -> void:
-	pass
 
 func get_upgrades():
 	pass
@@ -17,5 +15,5 @@ func get_upgrades():
 func populate_panels() -> void:
 	pass
 
-func initiate_upgrade(id: int) -> void:
+func initiate_upgrade(_id: int) -> void:
 	pass

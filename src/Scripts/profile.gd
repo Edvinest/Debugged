@@ -32,14 +32,6 @@ func load_profile_data(uid: String) -> void:
 	
 		achievement_descriptions.append(description+"\n")
 
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
-
-
-		
 func _on_back_button_pressed() -> void:
 	emit_signal("backPressed")
 

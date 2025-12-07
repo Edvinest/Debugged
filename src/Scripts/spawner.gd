@@ -31,5 +31,5 @@ func _on_enemy_died(point) -> void:
 
 
 
-func _on_area_3d_body_exited(body: Node3D) -> void:
+func _on_area_3d_body_exited(_body: Node3D) -> void:
 	spawn_area_clear = true

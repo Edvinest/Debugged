@@ -66,6 +66,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="VolumeHSlider" type="HSlider" parent="PanelContainer/MarginContainer/VBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 70)
 layout_mode = 2
 size_flags_vertical = 4
