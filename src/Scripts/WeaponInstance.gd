@@ -1,19 +1,17 @@
-@tool
 extends Node3D
 
-@export var weapon_data : Weapon:
-	set(value):
-		weapon_data = value
-		if weapon_data and weapon_data.mesh:
-			_load_model(weapon_data.mesh)
-		if Engine.is_editor_hint():
-			return
+@export var weapon_data : Weapon
 
 @onready var model_holder : Node3D = $ModelHolder
 @onready var hitbox : Area3D = $ModelHolder/Area3D
-var is_attacking : bool = false
+@onready var tp_camera = %ThirdPersonCamera
+@onready var fp_camera = %FirstPersonCamera
+@onready var sfx_player = $AudioStream
 
+var is_attacking : bool = false
+var enemies_hit_this_attack: Array = []
 signal request_animation(anim_name: String)
+signal request_fp_animation(anim_name: String)
 
 func set_weapon_data(data : Weapon) -> void:
 	weapon_data = data
@@ -40,8 +38,16 @@ func _load_model(scene: PackedScene) -> void:
 	# Only needed if we don't use animation based attacks or want to offset model
 	instance.transform.origin = weapon_data.weapon_position
 	instance.rotation_degrees = weapon_data.weapon_rotation
+	instance.scale = weapon_data.weapon_scale
 
-func start_motion_attack(direction: String, hand: Node3D) -> void:
+func _play_attack_sound():
+	if weapon_data and weapon_data.attack_sound:
+		sfx_player.stream = weapon_data.attack_sound
+		
+		sfx_player.pitch_scale = randf_range(0.9, 1.1)
+		sfx_player.play()
+
+func start_motion_attack(direction: String, hand: String) -> void:
 	if is_attacking:
 		return
 	
@@ -53,129 +59,73 @@ func start_motion_attack(direction: String, hand: Node3D) -> void:
 			_imu_sword_attack(direction, hand)
 		Weapon.WeaponType.HAMMER:
 			_imu_hammer_attack(direction, hand)
-			pass
-		Weapon.WeaponType.GUN:
-			_imu_gun_shoot()
 		_:
 			push_warning("Unknown weapon type")
 
-func _imu_sword_attack(direction: String, hand: Node3D) -> void:
+func _imu_sword_attack(direction: String, hand: String) -> void:
 	if is_attacking or weapon_data == null:
 		return
 
 	is_attacking = true
-
-	# Save original hand transform
-	var original_hand_pos = hand.position
-	var original_hand_rot = hand.rotation_degrees
-	var original_weapon_rot = rotation_degrees
-
-	# --- Hand swing motion ---
-	var hand_position_offset := Vector3.ZERO
-	var hand_rotation_offset := Vector3.ZERO
+	enemies_hit_this_attack.clear()
+	_play_attack_sound()
 	
-	rotation_degrees = Vector3(-130, 0, 0)
-
 	match direction:
 		"up":               
-			hand_position_offset = Vector3(0, 0.5, 0)
-			model_holder.rotate_object_local(Vector3(0,1,0), deg_to_rad(90))
-		"down":             
-			hand_position_offset = Vector3(0, -0.5, 0)
-			model_holder.rotate_object_local(Vector3(0,1,0), deg_to_rad(90))
+			emit_signal("request_fp_animation", "swing_up_%s" % hand)
+		"down":
+			emit_signal("request_fp_animation", "swing_down_%s" % hand)             
 		"left":             
-			hand_position_offset = Vector3(-0.5, 0, 0)
-			hand_rotation_offset = Vector3(0, 5, 0)
+			emit_signal("request_fp_animation", "swing_left_%s" % hand)             
 		"right":            
-			hand_position_offset = Vector3(0.5, 0, 0)
-			hand_rotation_offset = Vector3(0, 5, 0)
-		"diag_up_left":     
-			hand_position_offset = Vector3(-0.35, 0.35, 0)
-			hand_rotation_offset = Vector3(-20, 20, 0)
-		"diag_up_right":    
-			hand_position_offset = Vector3(0.35, 0.35, 0)
-			hand_rotation_offset = Vector3(-20, -20, 0)
-		"diag_down_left":   
-			hand_position_offset = Vector3(-0.35, -0.35, 0)
-			hand_rotation_offset = Vector3(20, 20, 0)
-		"diag_down_right":  
-			hand_position_offset = Vector3(0.35, -0.35, 0)
-			hand_rotation_offset = Vector3(20, -20, 0)
-		"stab":             hand_position_offset = Vector3(0, 0, -0.5)
-
-	# Apply hand movement
-	hand.position += hand_position_offset
-	hand.rotation_degrees += hand_rotation_offset
+			emit_signal("request_fp_animation", "swing_right_%s" % hand)             
+		"stab":
+			emit_signal("request_fp_animation", "stab_%s" % hand)
 
 	_enable_hitbox(true)
-
-	# --- Smoothly reset ---
-	await _smooth_reset_rotation(original_hand_pos, original_hand_rot, original_weapon_rot, hand)
-
+	await get_tree().create_timer(weapon_data.attack_speed).timeout
 	_enable_hitbox(false)
 	is_attacking = false
 
-func _imu_hammer_attack(direction: String, hand: Node3D) -> void:
+func _imu_hammer_attack(direction: String, hand: String) -> void:
 	if is_attacking or weapon_data == null:
 		return
 
 	is_attacking = true
-
-	# Save original hand transform
-	var original_hand_pos = hand.position
-	var original_hand_rot = hand.rotation_degrees
-	var original_weapon_rot = rotation_degrees
-
-	# --- Hand swing motion ---
-	var hand_position_offset := Vector3.ZERO
-	var hand_rotation_offset := Vector3.ZERO
+	enemies_hit_this_attack.clear()
+	_play_attack_sound()
 	
-	rotation_degrees = Vector3(-130, 0, 0)
-
-	#TODO: make nicer animations
 	match direction:
-		"down":             
-			hand_position_offset = Vector3(0, -0.7, 0)
-			hand_rotation_offset = Vector3(-20.0, 0, 0)
-		"left":             
-			hand_position_offset = Vector3(-0.3, -0.3, 0)
-			hand_rotation_offset = Vector3(-15.0, 10.0, 0)
-		"right":            
-			hand_position_offset = Vector3(0.3, -0.3, 0)
-			hand_rotation_offset = Vector3(-15.0, 10.0, 0)
-		"stab":             
-			hand_position_offset = Vector3(0, -0.2, -0.5)
-			hand_rotation_offset = Vector3(-25.0, 0, 0)
-
-	# Apply hand movement
-	hand.position += hand_position_offset
-	hand.rotation_degrees += hand_rotation_offset
+		"down": emit_signal("request_fp_animation", "swing_down_%s" % hand)
+		"left": emit_signal("request_fp_animation", "swing_left_%s" % hand)           
+		"right": emit_signal("request_fp_animation", "swing_right_%s" % hand)          
+		"stab": emit_signal("request_fp_animation", "stab_%s" % hand)          
 
 	_enable_hitbox(true)
-
-	# --- Smoothly reset ---
-	await _smooth_reset_rotation(original_hand_pos, original_hand_rot, original_weapon_rot, hand)
-
+	await get_tree().create_timer(weapon_data.attack_speed).timeout
 	_enable_hitbox(false)
 	is_attacking = false
 	
-func _imu_gun_shoot() -> void:
+func _imu_gun_shoot(hand : String) -> void:
 	if is_attacking:
 		return
 		
 	is_attacking = true
+	enemies_hit_this_attack.clear()
+	_play_attack_sound()
 	var enemy = _imu_aim_assist()
 	if enemy:
 		enemy.take_damage(weapon_data.damage)
-		
+	
+	emit_signal("request_fp_animation", "shoot_%s" % hand)
 	#TODO: add effect
 	
 	await get_tree().create_timer(weapon_data.attack_speed).timeout
 	is_attacking = false
 
 func _imu_aim_assist(max_dist : float = 10.0, fov_degrees : float = 15.0) -> Node:
-	var origin = global_transform.origin
-	var forward = -global_transform.basis.z
+	var origin = fp_camera.global_transform.origin
+	var forward = -fp_camera.global_transform.basis.z
 	
 	var best_target : Node = null
 	var best_angle = deg_to_rad(fov_degrees)
@@ -195,45 +145,29 @@ func _imu_aim_assist(max_dist : float = 10.0, fov_degrees : float = 15.0) -> Nod
 			best_target = enemy
 	
 	return best_target
-	
-# Smooth timed return of weapon rotation
-func _smooth_reset_rotation(orig_hand_pos: Vector3, orig_hand_rot: Vector3, orig_weapon_rot: Vector3, hand: Node3D) -> void:
-	var t := 0.0
-	var dur := weapon_data.attack_speed
 
-	while t < dur:
-		t += get_process_delta_time()
-		var alpha := t / dur
-
-		hand.position = hand.position.lerp(orig_hand_pos, alpha)
-		hand.rotation_degrees = hand.rotation_degrees.lerp(orig_hand_rot, alpha)
-		rotation_degrees = rotation_degrees.lerp(orig_weapon_rot, alpha)
-		model_holder.rotation_degrees = model_holder.rotation_degrees.lerp(orig_weapon_rot, alpha**2)
-
-		await get_tree().process_frame
-	is_attacking = false
-
-func _perform_standard_attack(hand : String):
+func _perform_standard_attack():
 	if weapon_data == null:
 		return
 
 	match weapon_data.type:
 		Weapon.WeaponType.BLADE:
-			_attack_slash(hand)
+			_attack_slash()
 		Weapon.WeaponType.HAMMER:
-			_attack_slam(hand)
+			_attack_slam()
 		Weapon.WeaponType.GUN:
 			_attack_shoot()
 		_:
 			push_warning("Unknown weapon type")
 	
-func _attack_slash(hand : String):
+func _attack_slash():
 	if is_attacking:
 		return
 		
 	is_attacking = true
-	
-	var anim_name = "attack_slash_%s" % hand.to_lower()
+	enemies_hit_this_attack.clear()
+	_play_attack_sound()
+	var anim_name = "sword_swing_"
 	emit_signal("request_animation", anim_name)
 	_enable_hitbox(true)
 	await get_tree().create_timer(weapon_data.attack_speed).timeout
@@ -241,13 +175,15 @@ func _attack_slash(hand : String):
 	
 	is_attacking = false
 
-func _attack_slam(hand : String):
+func _attack_slam():
 	if is_attacking:
 		return
 		
 	is_attacking = true
+	enemies_hit_this_attack.clear()
+	_play_attack_sound()
 	
-	var anim_name = "attack_slam_%s" % hand.to_lower()
+	var anim_name = "hammer_swing_"
 	emit_signal("request_animation", anim_name)
 	_enable_hitbox(true)
 	await get_tree().create_timer(weapon_data.attack_speed).timeout
@@ -260,44 +196,61 @@ func _attack_shoot():
 		return
 		
 	is_attacking = true
+	enemies_hit_this_attack.clear()
+	_play_attack_sound()
+	
 	var enemy = _retro_hitscan()
 	if enemy:
 		enemy.take_damage(weapon_data.damage)
 		
 	# TODO: add effect
-	
+	var anim_name = "gun_shoot_"
+	emit_signal("request_animation", anim_name)
 	await get_tree().create_timer(weapon_data.attack_speed).timeout
 	is_attacking = false
 
 func _retro_hitscan() -> Node:
-	var origin = global_transform.origin
-	var forward = -global_transform.basis.z # this is the player forward direction
-	
-	# Convert it to 2D because we don't care about enemy height
-	var origin2d = Vector2(origin.x, origin.z)
-	var forward2d = Vector2(forward.x, forward.z).normalized()
-	
-	var max_shoot_dist = 10 #weapon_data.range if weapon_data.has("range") else
-	var end2d = origin2d + forward2d * max_shoot_dist
-	
+	var mouse_pos = get_viewport().get_mouse_position()
+
+	var origin3d = tp_camera.project_ray_origin(mouse_pos)
+	var dir3d = tp_camera.project_ray_normal(mouse_pos)
+
+	# Project ray onto the ground plane (XZ)
+	var t = (global_transform.origin.y - origin3d.y) / dir3d.y
+	if t < 0:
+		return null
+
+	var end3d = origin3d + dir3d * t
+
+	# Convert to 2D for Doom-style hitscan
+	var origin2d = Vector2(origin3d.x, origin3d.z)
+	var end2d = Vector2(end3d.x, end3d.z)
+
 	var best_target : Node = null
 	var best_dist := INF
-	
-	# Width of the shot (will be useful for a shotgun for example)
-	var tolerance : float = 1.0
-	
+	var tolerance := 0.75
+
 	for enemy in get_tree().get_nodes_in_group("enemy"):
 		var pos = enemy.global_transform.origin
 		var pos2d = Vector2(pos.x, pos.z)
-		
-		var d = Geometry2D.get_closest_point_to_segment(pos2d, origin2d, end2d)
-		if d <= tolerance:
-			var dist = origin2d.direction_to(pos2d)
-			if dist < best_dist:
-				best_dist = dist
+
+		var closest_point = Geometry2D.get_closest_point_to_segment(
+			pos2d,
+			origin2d,
+			end2d
+		)
+
+		var dist_to_segment = pos2d.distance_to(closest_point)
+
+		if dist_to_segment <= tolerance:
+			# Distance ALONG the ray
+			var dist_along = origin2d.distance_to(closest_point)
+			if dist_along < best_dist:
+				best_dist = dist_along
 				best_target = enemy
-	
+
 	return best_target
+
 
 func _enable_hitbox(enabled : bool) -> void:
 	if hitbox:
@@ -306,14 +259,19 @@ func _enable_hitbox(enabled : bool) -> void:
 		
 ## Area3D based detection for keyboard and mouse
 func _on_area_3d_body_entered(body: Node3D) -> void:
-	#print("----IN RANGE-----")
-	if body.is_in_group("enemy") and is_attacking:
-		if body.has_method("take_damage"):
-			body.take_damage(weapon_data.damage)
-		else:
-			push_warning("Body does not have 'take_damage' method")
+	print("----IN RANGE-----")
+	if not is_attacking:
+		return
+		
+	if not body.is_in_group("enemy"):
+		return
+		
+	if body in enemies_hit_this_attack:
+		return
+		
+	enemies_hit_this_attack.append(body)
 
-## for IMU based attacks
-## uses the tip of the weapon to track each hit
-func _motion_hit_detection():
-	pass
+	if body.has_method("take_damage"):
+		body.take_damage(weapon_data.damage)
+	else:
+		push_warning("Body does not have 'take_damage' method")

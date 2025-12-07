@@ -8,7 +8,9 @@ enum WeaponType {BLADE, HAMMER, GUN}
 @export var damage : float = 10.0
 @export var attack_speed : float = 1.0
 @export var mesh : PackedScene
+@export var attack_sound : AudioStream
 
 @export_category("Weapon orientation")
 @export var weapon_position : Vector3
 @export var weapon_rotation : Vector3
+@export var weapon_scale : Vector3 = Vector3(1, 1, 1)

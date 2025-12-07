@@ -1,12 +1,20 @@
 extends CharacterBody3D
-
+@export var speed := 5.0
+@export var jump_velocity := 4.5
 @onready var firstPersonCamera = $FirstPersonCamera
 @onready var thirdPersonCamera = $ThirdPersonCamera
+@export var left_weapon : Weapon
+@export var right_weapon : Weapon
+@onready var Hands = $PlayerBody/Hands
+@onready var stats = Firebase.Firestore.collection("Stats")
+@onready var ach = Firebase.Firestore.collection("Achievements")
+@onready var ok:bool=false
+var ach_update=""
+var score=70 # TODO -> get player score
 
 @export var left_weapon : Weapon = null
 @export var right_weapon : Weapon = null
 
-@onready var Hands = $"PlayerBody/Hands"
 var using_first_person : bool
 
 var mouse_sensitivity := 0.002
@@ -15,7 +23,6 @@ var gravity := 30
 
 #Speed component
 @export var speed_component : PlayerSpeedComponent = null
-var speed: float
 
 var tp_camera_original_rotation : Vector3
 
@@ -25,12 +32,11 @@ var MAX_HEALTH: float
 var health: float
 
 @onready var hp_bar: ProgressBar = $HUD/Control/ProgressBar
-@onready var death_screen: CanvasLayer = %DEATH_SCREEN
+@onready var death_screen = %DEATH_SCREEN
 
 var spawn_point = null
 
 func _ready():
-	
 	if spawn_point != null:
 		global_position = spawn_point.global_position 
 	
@@ -42,15 +48,19 @@ func _ready():
 	if speed_component == null:
 		push_warning("No SPEED component is scope.")
 	speed = speed_component.player_speed
-
+	
 	death_screen.hide()
-	Hands.set_weapons(left_weapon, right_weapon)
+	if left_weapon != null or right_weapon != null:
+		$Body.set_weapons(left_weapon, right_weapon)
 	tp_camera_original_rotation = thirdPersonCamera.global_rotation
 	
 	using_first_person = Input.get_connected_joypads().size() > 0
 	set_camera_mode(using_first_person)
 	
 func _process(delta: float) -> void:
+	if not using_first_person:
+		_update_animation()
+		
 	MAX_HEALTH = health_component.player_max_health
 	hp_bar.max_value = MAX_HEALTH
 	#print(hp_bar.max_value)
@@ -58,7 +68,36 @@ func _process(delta: float) -> void:
 	hp_bar.value = health
 	if health <= 0:
 		death_screen.show()
-	
+		var doc = await stats.get_doc(PlayerData.uid)
+		var current_highscore = doc.get_value("highscore")
+
+		if score > current_highscore:
+			
+			# Achievement ID-k listája a külön dokumentumból
+			var ach_doc = await ach.get_doc("achievements")
+			var ach_list = ach_doc.get_value("achievement_id_list")
+			var achievements = doc.get_value("achievements")  # JELENLEGI lista
+			
+			for ach_id in ach_list:
+				var ach_data = await ach.get_doc(ach_id)
+				print("Checking:", ach_id, "→", ach_data)
+				
+				var required_score = ach_data.get_value("score_needed")
+				
+				if score >= required_score:
+					# Már ne legyen duplikátum
+					if ach_id not in achievements:
+						achievements.append(ach_id)
+
+			# FIRESTORE UPDATE – csak egyszer
+			await stats.set_doc(PlayerData.uid, {
+				"u_id": PlayerData.uid,
+				"highscore": score,
+				"achievements": achievements
+			})
+			
+		set_process(false)
+
 	var right_x := Input.get_joy_axis(0, JOY_AXIS_RIGHT_X)
 	var right_y := Input.get_joy_axis(0, JOY_AXIS_RIGHT_Y)
 
@@ -107,44 +146,56 @@ func _physics_process(delta):
 
 	move_and_slide()
 
+func _update_animation() -> void:
+	if velocity.length() < 0.1:
+		$AnimationTree["parameters/conditions/idle"] = true
+		$AnimationTree["parameters/conditions/is_moving"] = false
+	else:
+		$AnimationTree["parameters/conditions/idle"] = false
+		$AnimationTree["parameters/conditions/is_moving"] = true
+		
 func _third_person_controls():
 		var mousePosition = get_viewport().get_mouse_position()
 		var from = thirdPersonCamera.project_ray_origin(mousePosition)
-		var to = from + thirdPersonCamera.project_ray_normal(mousePosition) * 1000
+		var dir = thirdPersonCamera.project_ray_normal(mousePosition)
 		
-		var query = PhysicsRayQueryParameters3D.new()
-		query.from = from
-		query.to = to
-		query.exclude = [self]
-		var space_state = get_world_3d().direct_space_state
-		var result = space_state.intersect_ray(query)
+		var t = (global_transform.origin.y - from.y) / dir.y
+		if t < 0:
+			return
+
+		var target_pos = from + dir * t
+		var lookDir = target_pos - global_transform.origin
+		lookDir.y = 0
+		lookDir = lookDir.normalized()
 		
-		if result:
-			var target_pos = result.position
-			var lookDir = target_pos - global_transform.origin
-			lookDir.y = 0
-			
-			if lookDir.length() > 0.01:
-				var target_angle = atan2(-lookDir.x, -lookDir.z)
-				$PlayerBody.rotation.y = target_angle	 
+		var target_angle = atan2(-lookDir.x, -lookDir.z)
+		$Body/ThirdPersonModel.rotation.y = target_angle + PI
 
 func set_camera_mode(first_person: bool):
 	using_first_person = first_person
+	
+	RenderingServer.global_shader_parameter_set("is_third_person", not first_person)
 
 	if first_person:
-		rotation.y = $PlayerBody.rotation.y  
-		$PlayerBody.global_rotation.y = global_rotation.y
+		$Body/FirstPersonModel.visible = true
+		$Body/ThirdPersonModel.visible = false
+		
+		var f = -$Body/ThirdPersonModel.global_transform.basis.z
+		rotation.y = atan2(f.x, f.z)
+		$Body/FirstPersonModel.global_rotation.y = global_rotation.y
 		firstPersonCamera.rotation.x = 0
 		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	else:
+		$Body/FirstPersonModel.visible = false
+		$Body/ThirdPersonModel.visible = true
 		rotation.y = 0
 		thirdPersonCamera.global_rotation = tp_camera_original_rotation
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
 	firstPersonCamera.current = first_person
 	thirdPersonCamera.current = not first_person
-	
-	$PlayerBody/Hands.using_first_person = first_person
+	$Body.set_first_person(first_person)
+	%PauseMenu.set_p_mode(first_person)
 
 func take_damage(damage_to_take):
 	health -= damage_to_take
