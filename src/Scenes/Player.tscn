@@ -1,18 +1,377 @@
-[gd_scene load_steps=41 format=3 uid="uid://dct6crx3jwiat"]
+[gd_scene load_steps=59 format=3 uid="uid://dct6crx3jwiat"]
 
 [ext_resource type="Script" uid="uid://nchnj2u7kv5" path="res://src/Scripts/Player.gd" id="1_rpqav"]
-[ext_resource type="PackedScene" uid="uid://cwvq1yyfex6w7" path="res://src/Objects/Player/Alpi.glb" id="2_4mdpm"]
+[ext_resource type="Resource" uid="uid://tfggkjfecp7f" path="res://src/Objects/Weapons/Blade1/Sword1.tres" id="2_3y32l"]
+[ext_resource type="Resource" uid="uid://chtuv7ka5xakl" path="res://src/Scripts/Player_resources/player_health.tres" id="2_4mdpm"]
+[ext_resource type="Resource" uid="uid://ddtmr3nr11bf1" path="res://src/Scripts/Player_resources/player_speed.tres" id="2_8fvgu"]
 [ext_resource type="Script" uid="uid://dsi0c4pqhkju7" path="res://src/Scripts/PlayerCombat.gd" id="3_g1uh0"]
 [ext_resource type="PackedScene" uid="uid://be1gwv0coi2ua" path="res://src/Scenes/WeaponInstance.tscn" id="4_5dq0m"]
 [ext_resource type="PackedScene" uid="uid://yabfag3vnn0q" path="res://src/Objects/Player/RightHand.glb" id="4_8fvgu"]
 [ext_resource type="PackedScene" uid="uid://sy3pu51jwruj" path="res://src/Objects/Player/LeftHand.glb" id="5_0umxx"]
 [ext_resource type="Script" uid="uid://biya2r8iv253u" path="res://src/Scripts/hud.gd" id="5_ma0cp"]
-[ext_resource type="Script" uid="uid://tmk08xd244ca" path="res://src/Scripts/death_screen.gd" id="6_4mdpm"]
-[ext_resource type="PackedScene" uid="uid://c6box3bvo8g64" path="res://src/Scenes/PauseMenu.tscn" id="6_4mdpm"]
+[ext_resource type="PackedScene" uid="uid://cmhtbw8dp4dir" path="res://src/Scenes/PauseMenu.tscn" id="6_4mdpm"]
+[ext_resource type="PackedScene" uid="uid://cwvq1yyfex6w7" path="res://src/Objects/Player/Alpi.glb" id="9_qde8h"]
+[ext_resource type="Script" uid="uid://tmk08xd244ca" path="res://src/Scripts/death_screen.gd" id="12_qde8h"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_qbkls"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_5dq0m"]
+
+[sub_resource type="Animation" id="Animation_0umxx"]
+resource_name = "swing_down_L"
+length = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Hands/LeftHand:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(-0.34906584, -3.1415927, 0), Vector3(0.5235988, -3.1415927, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_3mr6j"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Hands/LeftHand:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, -3.1415925, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Hands/RightHand:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, -3.1415925, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Hands/LeftHand:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-0.22542939, -0.1867916, 0.03441134)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Hands/LeftHand/LeftWeapon:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 3.1415925, 0)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Hands/RightHand:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.1654366, -0.1867916, 0.03441137)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Hands/RightHand/RightWeapon:rotation")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 3.1415925, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_bblsp"]
+resource_name = "swing_down_R"
+length = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Hands/RightHand:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(-0.34906584, -3.1415927, 0), Vector3(0.5235988, -3.1415927, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_3y32l"]
+resource_name = "swing_up_L"
+length = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Hands/LeftHand:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.23333333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0.5235988, -3.1415927, 0), Vector3(-0.34906584, -3.1415927, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_qde8h"]
+resource_name = "swing_up_R"
+length = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Hands/RightHand:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0.5235988, -3.1415927, 0), Vector3(-0.34906584, -3.1415927, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_wkd3r"]
+resource_name = "swing_left_L"
+length = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Hands/LeftHand:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.24),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 2.268928, 0), Vector3(0, 3.2288592, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Hands/LeftHand/LeftWeapon:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, -1.5707964, -1.5707964)]
+}
+
+[sub_resource type="Animation" id="Animation_xop61"]
+resource_name = "swing_left_R"
+length = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Hands/RightHand:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.24),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 2.268928, 0), Vector3(0, 3.2288592, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Hands/RightHand/RightWeapon:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, -1.5707964, -1.5707964)]
+}
+
+[sub_resource type="Animation" id="Animation_ws13c"]
+resource_name = "swing_right_L"
+length = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Hands/LeftHand:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.24),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 3.2288592, 0), Vector3(0, 2.268928, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Hands/LeftHand/LeftWeapon:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, -1.5707964, -1.5707964)]
+}
+
+[sub_resource type="Animation" id="Animation_bpr1r"]
+resource_name = "swing_right_R"
+length = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Hands/RightHand:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.24),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 3.2288592, 0), Vector3(0, 2.268928, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Hands/RightHand/RightWeapon:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, -1.5707964, -1.5707964)]
+}
+
+[sub_resource type="Animation" id="Animation_r6toq"]
+resource_name = "stab_L"
+length = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Hands/LeftHand:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.23333333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(-0.22542939, -0.1867916, -0.09580232), Vector3(-0.225, -0.187, 0.034)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Hands/LeftHand/LeftWeapon:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-1.5707964, 3.1415927, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_5orpi"]
+resource_name = "stab_R"
+length = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Hands/RightHand:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.23333333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0.225, -0.187, -0.096), Vector3(0.225, -0.187, 0.034)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Hands/RightHand/RightWeapon:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-1.5707964, 3.1415927, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_cqg8p"]
+resource_name = "shoot_L"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Hands/LeftHand:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(-0.225, -0.187, -0.094), Vector3(-0.225, -0.187, 0.034)]
+}
+
+[sub_resource type="Animation" id="Animation_elb8c"]
+resource_name = "shoot_R"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Hands/RightHand:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0.165, -0.187, -0.094), Vector3(0.165, -0.187, 0.034)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_bblsp"]
+_data = {
+&"RESET": SubResource("Animation_3mr6j"),
+&"shoot_L": SubResource("Animation_cqg8p"),
+&"shoot_R": SubResource("Animation_elb8c"),
+&"stab_L": SubResource("Animation_r6toq"),
+&"stab_R": SubResource("Animation_5orpi"),
+&"swing_down_L": SubResource("Animation_0umxx"),
+&"swing_down_R": SubResource("Animation_bblsp"),
+&"swing_left_L": SubResource("Animation_wkd3r"),
+&"swing_left_R": SubResource("Animation_xop61"),
+&"swing_right_L": SubResource("Animation_ws13c"),
+&"swing_right_R": SubResource("Animation_bpr1r"),
+&"swing_up_L": SubResource("Animation_3y32l"),
+&"swing_up_R": SubResource("Animation_qde8h")
+}
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_bblsp"]
 animation = &"Gun_Shoot_L"
@@ -156,6 +515,7 @@ graph_offset = Vector2(0, -145.93324)
 [node name="Player" type="CharacterBody3D"]
 collision_layer = 3
 script = ExtResource("1_rpqav")
+left_weapon = ExtResource("2_3y32l")
 speed_component = ExtResource("2_8fvgu")
 health_component = ExtResource("2_4mdpm")
 
@@ -163,9 +523,11 @@ health_component = ExtResource("2_4mdpm")
 shape = SubResource("CapsuleShape3D_qbkls")
 
 [node name="ThirdPersonCamera" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.8591207, 0.511773, 0, -0.511773, 0.8591207, 0, 2.7003121, 2.2092881)
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 0.70710677, 0.70710677, 0, -0.70710677, 0.70710677, 0, 6, 6)
 
 [node name="FirstPersonCamera" type="Camera3D" parent="."]
+unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4769659, 0.08534697)
 
 [node name="HurtBox" type="Area3D" parent="."]
@@ -185,19 +547,25 @@ skeleton = NodePath("../..")
 transform = Transform3D(0.30000004, 0, 0, 0, 0.30000004, 0, 0, 0, 0.30000004, -1.9626807e-08, 0.09864569, 0.94295424)
 
 [node name="RightHand" parent="Body/FirstPersonModel/Hands" instance=ExtResource("4_8fvgu")]
-transform = Transform3D(-0.19999982, 0, -1.7484547e-08, 0, 0.19999981, 0, 1.7484547e-08, 0, -0.19999982, 0.1654366, -0.1867916, 0.03441137)
+transform = Transform3D(-0.19999981, 0, -3.0199132e-08, 0, 0.19999976, 0, 3.0199132e-08, 0, -0.19999981, 0.1654366, -0.1867916, 0.03441137)
 
 [node name="RightWeapon" parent="Body/FirstPersonModel/Hands/RightHand" instance=ExtResource("4_5dq0m")]
-transform = Transform3D(-5.0000014, 0, 4.3711415e-07, 0, 5.000003, 0, -4.3711415e-07, 0, -5.0000014, -0.01623869, 0.933959, 3.0761414)
+transform = Transform3D(-5.0000014, 0, 7.549792e-07, 0, 5.000004, 0, -7.549792e-07, 0, -5.0000014, -0.01623869, 2.419487, 3.0761414)
 
 [node name="LeftHand" parent="Body/FirstPersonModel/Hands" instance=ExtResource("5_0umxx")]
-transform = Transform3D(-0.19999981, 0, -1.7484549e-08, 0, 0.1999998, 0, 1.7484549e-08, 0, -0.19999981, -0.22542939, -0.1867916, 0.03441134)
+transform = Transform3D(-0.1999998, 0, -3.019913e-08, 0, 0.19999972, 0, 3.019913e-08, 0, -0.19999978, -0.22542939, -0.1867916, 0.03441134)
 
 [node name="LeftWeapon" parent="Body/FirstPersonModel/Hands/LeftHand" instance=ExtResource("4_5dq0m")]
-transform = Transform3D(-5.0000024, 0, 4.3711438e-07, 0, 5.000005, 0, -4.3711438e-07, 0, -5.0000024, 0.009615421, 0.933959, 3.0761414)
+transform = Transform3D(-5.0000014, 0, 7.549792e-07, 0, 5.000005, 0, -7.549792e-07, 0, -5.0000014, -0.01623869, 2.419487, 3.0761414)
 
-[node name="ThirdPersonModel" parent="Body" instance=ExtResource("2_4mdpm")]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Body/FirstPersonModel"]
+libraries = {
+&"": SubResource("AnimationLibrary_bblsp")
+}
+
+[node name="ThirdPersonModel" parent="Body" instance=ExtResource("9_qde8h")]
 transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, -0.27100432, 0.03606558)
+visible = false
 
 [node name="Skeleton3D" parent="Body/ThirdPersonModel/Player" index="0"]
 bones/1/rotation = Quaternion(0, 0.052335948, 0, 0.9986295)
@@ -232,7 +600,7 @@ bone_name = "Bone.004.L.001"
 bone_idx = 5
 
 [node name="LeftWeapon" parent="Body/ThirdPersonModel/Player/Skeleton3D/LeftHand" instance=ExtResource("4_5dq0m")]
-transform = Transform3D(1.3113417e-07, -2.6226837e-07, 3.0000005, 2.622684e-07, 3.0000002, 2.6226837e-07, -3.0000007, 2.6226832e-07, 1.3113419e-07, 0, 0, 0)
+transform = Transform3D(-1.311342e-07, 0, -3.0000005, 0, 3.0000002, 0, 3.0000007, 0, -1.3113419e-07, 0, 0, 0)
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
 root_node = NodePath("../Body/ThirdPersonModel")
@@ -246,14 +614,12 @@ parameters/conditions/idle = false
 parameters/conditions/is_moving = false
 parameters/conditions/sword_swing_left = false
 parameters/conditions/sword_swing_right = false
+
 [node name="PauseMenu" parent="." instance=ExtResource("6_4mdpm")]
 unique_name_in_owner = true
-offset_left = 393.0
-offset_top = 65.0
-offset_right = 433.0
-offset_bottom = 105.0
 
 [node name="HUD" type="CanvasLayer" parent="."]
+script = ExtResource("5_ma0cp")
 
 [node name="Control" type="Control" parent="HUD"]
 layout_mode = 3
@@ -268,6 +634,7 @@ offset_bottom = 27.0
 
 [node name="DEATH_SCREEN" type="CanvasLayer" parent="."]
 unique_name_in_owner = true
+script = ExtResource("12_qde8h")
 
 [node name="Control" type="Control" parent="DEATH_SCREEN"]
 layout_mode = 3
@@ -308,7 +675,9 @@ grow_vertical = 2
 text = "RESTART"
 
 [connection signal="request_animation" from="Body/FirstPersonModel/Hands/RightHand/RightWeapon" to="Body/FirstPersonModel/Hands" method="_on_weapon_instance_request_animation"]
+[connection signal="request_fp_animation" from="Body/FirstPersonModel/Hands/RightHand/RightWeapon" to="Body" method="_on_right_weapon_request_fp_animation"]
 [connection signal="request_animation" from="Body/FirstPersonModel/Hands/LeftHand/LeftWeapon" to="Body/FirstPersonModel/Hands" method="_on_weapon_instance_request_animation"]
+[connection signal="request_fp_animation" from="Body/FirstPersonModel/Hands/LeftHand/LeftWeapon" to="Body" method="_on_left_weapon_request_fp_animation"]
 [connection signal="request_animation" from="Body/ThirdPersonModel/Player/Skeleton3D/RightHand/RightWeapon" to="Body" method="_on_right_weapon_request_animation"]
 [connection signal="request_animation" from="Body/ThirdPersonModel/Player/Skeleton3D/LeftHand/LeftWeapon" to="Body" method="_on_left_weapon_request_animation"]
 [connection signal="pressed" from="DEATH_SCREEN/Control/RESTART" to="DEATH_SCREEN" method="_on_restart_pressed"]
