@@ -7,131 +7,132 @@ UDP_IP = "127.0.0.1"
 UDP_PORT = 4243
 sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 
-# --- SCALING & TUNING ---
-# We treat Right JoyCon as "Raw Integers" (Huge Numbers)
-SCALE_R = 100000.0  # Divides "3,000,000" down to "30.0"
-THRESH_R = 35.0     # Speed required to trigger
-DEADZONE_R = 5.0    # Ignore noise
+# --- SCALING (SEPARATED) ---
+SCALE_GYRO = 100000.0  # Gyro needs massive damping
+SCALE_ACCEL = 100.0    # Accel needs light damping
 
-# Left JoyCon (Standard)
-SCALE_L = 1.0
-THRESH_L = 3.5
-DEADZONE_L = 0.15
+# --- THRESHOLDS ---
+THRESH_SWING = 60.0    # Gyro Speed
+THRESH_STAB = 70.0     # Accel Magnitude (Must beat the ~50.0 noise floor)
 
-COOLDOWN = 0.25
+DEADZONE_GYRO = 5.0
+
+# Safety: Can't stab while swinging
+MAX_ROT_FOR_STAB = 15
+
+# Cooldowns
+COOLDOWN = 0.5
 
 def get_motion_name(gx, gy):
     angle = math.atan2(gy, -gx)
     pi = math.pi
     if angle < -7*pi/8: return "left"
-    #if angle < -5*pi/8: return "diag_down_left"
     if angle < -3*pi/8: return "down"
-    #if angle < -pi/8:   return "diag_down_right"
     if angle < pi/8:    return "right"
-    #if angle < 3*pi/8:  return "diag_up_right"
     if angle < 5*pi/8:  return "up"
-   # if angle < 7*pi/8:  return "diag_up_left"
     return "left"
 
 def handle_device(dev, tag):
-    current_gx = 0.0
-    current_gy = 0.0
-    current_gz = 0.0
+    c_gx, c_gy, c_gz = 0.0, 0.0, 0.0
+    c_ax, c_ay, c_az = 0.0, 0.0, 0.0
     has_data = False
 
-    # Logic Selection
-    if tag == "L":
-        divisor = SCALE_L
-        thresh = THRESH_L
-        dzone = DEADZONE_L
-        output_mult = 1.0
-    else:
-        divisor = SCALE_R
-        thresh = THRESH_R
-        dzone = DEADZONE_R
-        output_mult = 10.0 # Boost Right JC slightly for Godot visual feel
+    output_mult = 10.0
 
-    # Calibration
     print(f"[{tag}] Calibrating... Keep FLAT!")
     calibrating = True
     calib_count = 0
     off_gx, off_gy, off_gz = 0.0, 0.0, 0.0
+    off_ax, off_ay, off_az = 0.0, 0.0, 0.0
 
     last_trigger = 0
 
     for ev in dev.read_loop():
         if ev.type == ecodes.EV_ABS:
-            if ev.code == ecodes.ABS_RX: current_gx = ev.value
-            elif ev.code == ecodes.ABS_RY: current_gy = ev.value
-            elif ev.code == ecodes.ABS_RZ: current_gz = ev.value
+            if ev.code == ecodes.ABS_RX: c_gx = ev.value
+            elif ev.code == ecodes.ABS_RY: c_gy = ev.value
+            elif ev.code == ecodes.ABS_RZ: c_gz = ev.value
+            elif ev.code == ecodes.ABS_X: c_ax = ev.value
+            elif ev.code == ecodes.ABS_Y: c_ay = ev.value
+            elif ev.code == ecodes.ABS_Z: c_az = ev.value
             else: continue
             has_data = True
 
         if has_data:
-            # 1. READ & SCALE
-            gx = current_gx / divisor
-            gy = current_gy / divisor
-            gz = current_gz / divisor
+            # 1. SCALE (Using separate scales now)
+            gx = c_gx / SCALE_GYRO
+            gy = c_gy / SCALE_GYRO
+            gz = c_gz / SCALE_GYRO
+
+            ax = c_ax / SCALE_ACCEL
+            ay = c_ay / SCALE_ACCEL
+            az = c_az / SCALE_ACCEL
 
             # 2. CALIBRATION
             if calibrating:
-                off_gx += gx
-                off_gy += gy
-                off_gz += gz
+                off_gx += gx; off_gy += gy; off_gz += gz
+                off_ax += ax; off_ay += ay; off_az += az
                 calib_count += 1
                 if calib_count > 100:
-                    off_gx /= 100
-                    off_gy /= 100
-                    off_gz /= 100
+                    off_gx /= 100; off_gy /= 100; off_gz /= 100
+                    off_ax /= 100; off_ay /= 100; off_az /= 100
                     calibrating = False
-                    print(f"[{tag}] Ready! Offsets: {off_gx:.1f}, {off_gy:.1f}")
+                    print(f"[{tag}] Ready!")
                 continue
 
             # Apply Offset
-            gx -= off_gx
-            gy -= off_gy
-            gz -= off_gz
+            gx -= off_gx; gy -= off_gy; gz -= off_gz
+            ax -= off_ax; ay -= off_ay; az -= off_az
 
-            # 3. MAPPING FIX (Un-swapped based on your logs)
+            # 3. MAPPING
             if tag == "R":
-                # Your log showed:
-                # UP affected X (incorrectly swapped to X) -> Should be Y
-                # LEFT affected Y (incorrectly swapped to Y) -> Should be X
-
-                # So we simply DON'T swap.
-                # But we do need to invert Y based on standard screen coords
                 final_gx = gx
                 final_gy = -gy
                 final_gz = -gz
             else:
                 final_gx = gx
-                final_gy = gy
-                final_gz = gz
+                final_gy = -gy
+                final_gz = -gz
 
             # 4. DEADZONE
-            if abs(final_gx) < dzone: final_gx = 0.0
-            if abs(final_gy) < dzone: final_gy = 0.0
-            if abs(final_gz) < dzone: final_gz = 0.0
+            if abs(final_gx) < DEADZONE_GYRO: final_gx = 0.0
+            if abs(final_gy) < DEADZONE_GYRO: final_gy = 0.0
+            if abs(final_gz) < DEADZONE_GYRO: final_gz = 0.0
 
             # 5. LOGIC
-            speed = math.sqrt(final_gx**2 + final_gy**2 + final_gz**2)
-            motion = "none"
+            rot_speed = math.sqrt(final_gx**2 + final_gy**2 + final_gz**2)
+            accel_mag = math.sqrt(ax**2 + ay**2 + az**2)
 
+            motion = "none"
             now = time.time()
+
             if now - last_trigger > COOLDOWN:
-                if speed > thresh:
+
+                # PRIORITY 1: SWING
+                if rot_speed > THRESH_SWING:
                     motion = get_motion_name(final_gx, final_gy)
                     last_trigger = now
-                    print(f"[{tag}] ACTION: {motion} ({speed:.0f})")
+                    print(f"[{tag}] ACTION: {motion} (Spd: {rot_speed:.0f})")
 
-            # 6. SEND TO GODOT
-            # We divide by 10.0 just to normalize the "Speed" visual for Godot
-            # (Godot expects ~1.0 to 10.0 rad/s, we have ~30.0)
+                # PRIORITY 2: STAB
+                # Condition: High Accel + Low Rotation
+                elif accel_mag > THRESH_STAB and rot_speed < MAX_ROT_FOR_STAB:
+                    motion = "stab"
+                    last_trigger = now
+                    # Added debug print to see the force value
+                    print(f"[{tag}] ACTION: STAB !!! (Force: {accel_mag:.0f} | Rot: {rot_speed:.0f})")
+
+            # 6. SEND
             norm_gx = final_gx / output_mult
             norm_gy = final_gy / output_mult
             norm_gz = final_gz / output_mult
 
-            msg = f"{tag}:{norm_gx:.4f},{norm_gy:.4f},{norm_gz:.4f},0,0,0,{motion}"
+            # Send raw accel / 100 for consistency in sway
+            norm_ax = ax / 100.0
+            norm_ay = ay / 100.0
+            norm_az = az / 100.0
+
+            msg = f"{tag}:{norm_gx:.4f},{norm_gy:.4f},{norm_gz:.4f},{norm_ax:.4f},{norm_ay:.4f},{norm_az:.4f},{motion}"
             sock.sendto(msg.encode(), (UDP_IP, UDP_PORT))
 
 def find_devices():
@@ -154,5 +155,5 @@ else:
         t.daemon = True
         t.start()
 
-    print("--- FINAL V2 TRACKER RUNNING ---")
+    print("--- JOY-CON SERVER RUNNING ---")
     while True: time.sleep(1)

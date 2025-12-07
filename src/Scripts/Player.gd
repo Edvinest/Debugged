@@ -111,6 +111,8 @@ func _third_person_controls():
 
 func set_camera_mode(first_person: bool):
 	using_first_person = first_person
+	
+	RenderingServer.global_shader_parameter_set("is_third_person", not first_person)
 
 	if first_person:
 		$Body/FirstPersonModel.visible = true
