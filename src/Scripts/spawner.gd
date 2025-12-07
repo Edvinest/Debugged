@@ -6,17 +6,19 @@ signal enemy_defeated(points: float)
 @onready var marker_3d: Marker3D = %Marker3D
 @onready var timer: Timer = %Timer
 
+@export var GRADE := 0
 @export var mob_to_spawn: PackedScene
 @export var max_spawns = 1
 @export var spawning_intervals_sec = 1.0
 var curr_spawns = 0
 var spawn_area_clear = true
+var spawn_fl = false
 
 func _ready() -> void:
 	timer.wait_time = spawning_intervals_sec
 
 func _on_timer_timeout() -> void:
-	if curr_spawns < max_spawns and spawn_area_clear:
+	if curr_spawns < max_spawns and spawn_area_clear and spawn_fl:
 		curr_spawns += 1
 		spawn_area_clear = false
 		var new_mob = mob_to_spawn.instantiate()

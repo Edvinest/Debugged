@@ -89,7 +89,7 @@ func populate_panels() -> void:
 		# Pick a safe random index from 0..upgrades.size()-1
 		var rng := RandomNumberGenerator.new()
 		rng.randomize()
-		var rand_upgrd := rng.randi_range(0, upgrades.size() - 1)
+		var rand_upgrd := rng.randi_range(0, shuffled_upgrades.size() - 1)
 
 		var info: BaseWeaponStrategy = shuffled_upgrades.pop_at(rand_upgrd)
 		upgrades_to_show.append(info)
@@ -117,10 +117,6 @@ func initiate_upgrade(id: int) -> void:
 	var curr_upgrade: BaseWeaponStrategy = upgrades_to_show[id]
 	if curr_upgrade == null:
 		push_warning("initiate_upgrade: upgrade is null at index %d" % id)
-		return
-
-	if curr_upgrade.allowed_weapon_types.is_empty():
-		push_warning("initiate_upgrade: upgrade at index %d has no applicable weapon types" % id)
 		return
 
 	weapon_upgrade_purchased.emit(curr_upgrade.upgrade_cost, curr_upgrade, curr_upgrade.allowed_weapon_type)
