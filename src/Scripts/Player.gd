@@ -1,8 +1,10 @@
+class_name Player
 extends CharacterBody3D
 
 signal player_died
 
-@export var speed := 5.0
+var pause_fl = false
+
 @onready var firstPersonCamera = $FirstPersonCamera
 @onready var thirdPersonCamera = $ThirdPersonCamera
 @onready var stats = Firebase.Firestore.collection("Stats")
@@ -67,6 +69,7 @@ func _process(delta: float) -> void:
 	speed = speed_component.player_speed
 	hp_bar.value = health
 	if health <= 0:
+		player_died.emit()
 		death_screen.show()
 		player_died.emit()
 		var doc = await stats.get_doc(PlayerData.uid)
@@ -201,9 +204,11 @@ func take_damage(damage_to_take):
 	health -= damage_to_take
 	#print("Player took damage: " + str(damage_to_take))
 
-
 func _on_player_spawn_points_on_spawn_point_selected(point: Marker3D) -> void:
 	if point is Marker3D:
 		spawn_point = point
 	else:
 		push_error("Player: Invalid spawn point.")
+
+func reset_health():
+	health = MAX_HEALTH
