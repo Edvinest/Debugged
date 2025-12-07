@@ -1,11 +1,11 @@
 [gd_scene load_steps=18 format=3 uid="uid://b31i4qglpbknl"]
 
 [ext_resource type="Script" uid="uid://b1ojrc30aeurp" path="res://src/Scripts/wave_logic.gd" id="1_emjs1"]
-[ext_resource type="Script" uid="uid://dus6br5pbvsco" path="res://src/Scenes/weapon_upgrade.gd" id="2_ohee5"]
+[ext_resource type="Script" path="res://src/Scenes/weapon_upgrade.gd" id="2_ohee5"]
 [ext_resource type="FontFile" uid="uid://777ot6q65lqp" path="res://src/UI_resources/Fonts/RobotoMono-VariableFont_wght.ttf" id="2_ovmah"]
 [ext_resource type="Script" uid="uid://dq83iom010byo" path="res://src/Scripts/hover_animation.gd" id="4_hwg84"]
 [ext_resource type="Script" uid="uid://338h5f0n812o" path="res://src/Scripts/upgrade_purchase_btn.gd" id="4_pirhb"]
-[ext_resource type="Script" uid="uid://ymh0bhbe37fv" path="res://src/Scenes/player_upgrade.gd" id="5_k7ons"]
+[ext_resource type="Script" path="res://src/Scenes/player_upgrade.gd" id="5_k7ons"]
 [ext_resource type="Texture2D" uid="uid://c665fedhanp8m" path="res://src/UI_resources/Icons/hammer-drop-svgrepo-com.svg" id="7_gp7mn"]
 [ext_resource type="Texture2D" uid="uid://daes224r3wpya" path="res://src/UI_resources/Icons/lvl3.svg" id="8_tfmt4"]
 [ext_resource type="Texture2D" uid="uid://bt0xhvstpoayq" path="res://src/UI_resources/Icons/sword-spin-svgrepo-com (5).svg" id="9_j3cfe"]

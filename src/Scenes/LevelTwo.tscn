@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://8qntwwgak3vn"]
+[gd_scene load_steps=12 format=3 uid="uid://8qntwwgak3vn"]
 
 [ext_resource type="PackedScene" uid="uid://b31i4qglpbknl" path="res://src/Scenes/wave_logic.tscn" id="1_mp8yv"]
 [ext_resource type="PackedScene" uid="uid://d2d2c08im7jck" path="res://src/Objects/LevelTwo/prop_garden.tscn" id="1_ufe8o"]
@@ -8,8 +8,6 @@
 [ext_resource type="PackedScene" uid="uid://qjjoef5p6xhx" path="res://src/Scenes/SpiderEnemy.tscn" id="3_n4pv2"]
 [ext_resource type="Texture2D" uid="uid://n7sqk2ahk5er" path="res://src/Materials/citrus_orchard_puresky_1k.exr" id="4_go00i"]
 [ext_resource type="PackedScene" uid="uid://cdim0in7b6lrh" path="res://src/Objects/LevelTwo/prop_lamp.tscn" id="4_u45fr"]
-[ext_resource type="Resource" uid="uid://bqwyrpwgffbns" path="res://src/Objects/Weapons/Hammer1/Hammer.tres" id="5_pe5jj"]
-[ext_resource type="Resource" uid="uid://tfggkjfecp7f" path="res://src/Objects/Weapons/Blade1/Sword1.tres" id="6_tw6g7"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_u45fr"]
 panorama = ExtResource("4_go00i")
@@ -35,8 +33,6 @@ max_spawns = 5
 
 [node name="Player" parent="." instance=ExtResource("3_3ce2r")]
 transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -24.873821, 0.9941931, 32.926308)
-left_weapon = ExtResource("5_pe5jj")
-right_weapon = ExtResource("6_tw6g7")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_mp8yv")

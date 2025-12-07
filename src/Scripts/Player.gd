@@ -1,19 +1,13 @@
 extends CharacterBody3D
 @export var speed := 5.0
-@export var jump_velocity := 4.5
 @onready var firstPersonCamera = $FirstPersonCamera
 @onready var thirdPersonCamera = $ThirdPersonCamera
-@export var left_weapon : Weapon
-@export var right_weapon : Weapon
-@onready var Hands = $PlayerBody/Hands
 @onready var stats = Firebase.Firestore.collection("Stats")
 @onready var ach = Firebase.Firestore.collection("Achievements")
-@onready var ok:bool=false
-var ach_update=""
-var score=70 # TODO -> get player score
+var score=PlayerData.highscore
 
-@export var left_weapon : Weapon = null
-@export var right_weapon : Weapon = null
+@export var left_weapon : Weapon = PlayerData.left_hand_weapon
+@export var right_weapon : Weapon = PlayerData.right_hand_weapon
 
 var using_first_person : bool
 
@@ -95,8 +89,9 @@ func _process(delta: float) -> void:
 				"highscore": score,
 				"achievements": achievements
 			})
-			
 		set_process(false)
+		get_tree().paused = true
+		
 
 	var right_x := Input.get_joy_axis(0, JOY_AXIS_RIGHT_X)
 	var right_y := Input.get_joy_axis(0, JOY_AXIS_RIGHT_Y)

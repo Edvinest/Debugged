@@ -1,7 +1,6 @@
-[gd_scene load_steps=59 format=3 uid="uid://dct6crx3jwiat"]
+[gd_scene load_steps=58 format=3 uid="uid://dct6crx3jwiat"]
 
 [ext_resource type="Script" uid="uid://nchnj2u7kv5" path="res://src/Scripts/Player.gd" id="1_rpqav"]
-[ext_resource type="Resource" uid="uid://tfggkjfecp7f" path="res://src/Objects/Weapons/Blade1/Sword1.tres" id="2_3y32l"]
 [ext_resource type="Resource" uid="uid://chtuv7ka5xakl" path="res://src/Scripts/Player_resources/player_health.tres" id="2_4mdpm"]
 [ext_resource type="Resource" uid="uid://ddtmr3nr11bf1" path="res://src/Scripts/Player_resources/player_speed.tres" id="2_8fvgu"]
 [ext_resource type="Script" uid="uid://dsi0c4pqhkju7" path="res://src/Scripts/PlayerCombat.gd" id="3_g1uh0"]
@@ -9,29 +8,13 @@
 [ext_resource type="PackedScene" uid="uid://yabfag3vnn0q" path="res://src/Objects/Player/RightHand.glb" id="4_8fvgu"]
 [ext_resource type="PackedScene" uid="uid://sy3pu51jwruj" path="res://src/Objects/Player/LeftHand.glb" id="5_0umxx"]
 [ext_resource type="Script" uid="uid://biya2r8iv253u" path="res://src/Scripts/hud.gd" id="5_ma0cp"]
-[ext_resource type="PackedScene" uid="uid://cmhtbw8dp4dir" path="res://src/Scenes/PauseMenu.tscn" id="6_4mdpm"]
+[ext_resource type="PackedScene" uid="uid://c6box3bvo8g64" path="res://src/Scenes/PauseMenu.tscn" id="6_4mdpm"]
 [ext_resource type="PackedScene" uid="uid://cwvq1yyfex6w7" path="res://src/Objects/Player/Alpi.glb" id="9_qde8h"]
 [ext_resource type="Script" uid="uid://tmk08xd244ca" path="res://src/Scripts/death_screen.gd" id="12_qde8h"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_qbkls"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_5dq0m"]
-
-[sub_resource type="Animation" id="Animation_0umxx"]
-resource_name = "swing_down_L"
-length = 0.25
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Hands/LeftHand:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.25),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector3(-0.34906584, -3.1415927, 0), Vector3(0.5235988, -3.1415927, 0)]
-}
 
 [sub_resource type="Animation" id="Animation_3mr6j"]
 length = 0.001
@@ -108,6 +91,110 @@ tracks/5/keys = {
 "values": [Vector3(0, 3.1415925, 0)]
 }
 
+[sub_resource type="Animation" id="Animation_cqg8p"]
+resource_name = "shoot_L"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Hands/LeftHand:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(-0.225, -0.187, -0.094), Vector3(-0.225, -0.187, 0.034)]
+}
+
+[sub_resource type="Animation" id="Animation_elb8c"]
+resource_name = "shoot_R"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Hands/RightHand:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0.165, -0.187, -0.094), Vector3(0.165, -0.187, 0.034)]
+}
+
+[sub_resource type="Animation" id="Animation_r6toq"]
+resource_name = "stab_L"
+length = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Hands/LeftHand:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.23333333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(-0.22542939, -0.1867916, -0.09580232), Vector3(-0.225, -0.187, 0.034)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Hands/LeftHand/LeftWeapon:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-1.5707964, 3.1415927, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_5orpi"]
+resource_name = "stab_R"
+length = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Hands/RightHand:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.23333333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0.225, -0.187, -0.096), Vector3(0.225, -0.187, 0.034)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Hands/RightHand/RightWeapon:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-1.5707964, 3.1415927, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_0umxx"]
+resource_name = "swing_down_L"
+length = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Hands/LeftHand:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(-0.34906584, -3.1415927, 0), Vector3(0.5235988, -3.1415927, 0)]
+}
+
 [sub_resource type="Animation" id="Animation_bblsp"]
 resource_name = "swing_down_R"
 length = 0.25
@@ -122,38 +209,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector3(-0.34906584, -3.1415927, 0), Vector3(0.5235988, -3.1415927, 0)]
-}
-
-[sub_resource type="Animation" id="Animation_3y32l"]
-resource_name = "swing_up_L"
-length = 0.25
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Hands/LeftHand:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.23333333),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector3(0.5235988, -3.1415927, 0), Vector3(-0.34906584, -3.1415927, 0)]
-}
-
-[sub_resource type="Animation" id="Animation_qde8h"]
-resource_name = "swing_up_R"
-length = 0.25
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Hands/RightHand:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.25),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector3(0.5235988, -3.1415927, 0), Vector3(-0.34906584, -3.1415927, 0)]
 }
 
 [sub_resource type="Animation" id="Animation_wkd3r"]
@@ -268,92 +323,36 @@ tracks/1/keys = {
 "values": [Vector3(0, -1.5707964, -1.5707964)]
 }
 
-[sub_resource type="Animation" id="Animation_r6toq"]
-resource_name = "stab_L"
+[sub_resource type="Animation" id="Animation_3y32l"]
+resource_name = "swing_up_L"
 length = 0.25
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Hands/LeftHand:position")
+tracks/0/path = NodePath("Hands/LeftHand:rotation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.23333333),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector3(-0.22542939, -0.1867916, -0.09580232), Vector3(-0.225, -0.187, 0.034)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Hands/LeftHand/LeftWeapon:rotation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(-1.5707964, 3.1415927, 0)]
+"values": [Vector3(0.5235988, -3.1415927, 0), Vector3(-0.34906584, -3.1415927, 0)]
 }
 
-[sub_resource type="Animation" id="Animation_5orpi"]
-resource_name = "stab_R"
+[sub_resource type="Animation" id="Animation_qde8h"]
+resource_name = "swing_up_R"
 length = 0.25
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Hands/RightHand:position")
+tracks/0/path = NodePath("Hands/RightHand:rotation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.23333333),
+"times": PackedFloat32Array(0, 0.25),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector3(0.225, -0.187, -0.096), Vector3(0.225, -0.187, 0.034)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Hands/RightHand/RightWeapon:rotation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(-1.5707964, 3.1415927, 0)]
-}
-
-[sub_resource type="Animation" id="Animation_cqg8p"]
-resource_name = "shoot_L"
-length = 0.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Hands/LeftHand:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector3(-0.225, -0.187, -0.094), Vector3(-0.225, -0.187, 0.034)]
-}
-
-[sub_resource type="Animation" id="Animation_elb8c"]
-resource_name = "shoot_R"
-length = 0.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Hands/RightHand:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector3(0.165, -0.187, -0.094), Vector3(0.165, -0.187, 0.034)]
+"values": [Vector3(0.5235988, -3.1415927, 0), Vector3(-0.34906584, -3.1415927, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_bblsp"]
@@ -515,7 +514,6 @@ graph_offset = Vector2(0, -145.93324)
 [node name="Player" type="CharacterBody3D"]
 collision_layer = 3
 script = ExtResource("1_rpqav")
-left_weapon = ExtResource("2_3y32l")
 speed_component = ExtResource("2_8fvgu")
 health_component = ExtResource("2_4mdpm")
 
@@ -632,20 +630,25 @@ layout_mode = 0
 offset_right = 279.0
 offset_bottom = 27.0
 
-[node name="DEATH_SCREEN" type="CanvasLayer" parent="."]
-unique_name_in_owner = true
-script = ExtResource("12_qde8h")
-
-[node name="Control" type="Control" parent="DEATH_SCREEN"]
+[node name="Control" type="Control" parent="."]
+process_mode = 3
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("12_qde8h")
 
-[node name="DEATH_LABEL" type="Label" parent="DEATH_SCREEN/Control"]
-layout_mode = 1
+[node name="DEATH_SCREEN" type="Window" parent="Control"]
+unique_name_in_owner = true
+oversampling_override = 1.0
+initial_position = 2
+size = Vector2i(250, 250)
+borderless = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/DEATH_SCREEN"]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -674,38 +677,12 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 25
 text = "RESTART"
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-root_node = NodePath("../PlayerBody/Hands")
-
-[connection signal="pressed" from="Control/DEATH_SCREEN/VBoxContainer/RESTART" to="Control" method="_on_restart_pressed"]
-offset_top = -29.5
-offset_right = 40.0
-offset_bottom = -6.5
-grow_horizontal = 2
-grow_vertical = 2
-text = "YOU DIED!"
-
-[node name="RESTART" type="Button" parent="DEATH_SCREEN/Control"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -37.5
-offset_top = -2.5
-offset_right = 37.5
-offset_bottom = 28.5
-grow_horizontal = 2
-grow_vertical = 2
-text = "RESTART"
-
 [connection signal="request_animation" from="Body/FirstPersonModel/Hands/RightHand/RightWeapon" to="Body/FirstPersonModel/Hands" method="_on_weapon_instance_request_animation"]
 [connection signal="request_fp_animation" from="Body/FirstPersonModel/Hands/RightHand/RightWeapon" to="Body" method="_on_right_weapon_request_fp_animation"]
 [connection signal="request_animation" from="Body/FirstPersonModel/Hands/LeftHand/LeftWeapon" to="Body/FirstPersonModel/Hands" method="_on_weapon_instance_request_animation"]
 [connection signal="request_fp_animation" from="Body/FirstPersonModel/Hands/LeftHand/LeftWeapon" to="Body" method="_on_left_weapon_request_fp_animation"]
 [connection signal="request_animation" from="Body/ThirdPersonModel/Player/Skeleton3D/RightHand/RightWeapon" to="Body" method="_on_right_weapon_request_animation"]
 [connection signal="request_animation" from="Body/ThirdPersonModel/Player/Skeleton3D/LeftHand/LeftWeapon" to="Body" method="_on_left_weapon_request_animation"]
-[connection signal="pressed" from="DEATH_SCREEN/Control/RESTART" to="DEATH_SCREEN" method="_on_restart_pressed"]
+[connection signal="pressed" from="Control/DEATH_SCREEN/VBoxContainer/RESTART" to="Control" method="_on_restart_pressed"]
 
 [editable path="Body/ThirdPersonModel"]

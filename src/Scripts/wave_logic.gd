@@ -42,22 +42,24 @@ func _process(delta: float) -> void:
 func _on_timer_timeout() -> void:
 	upgrade_element.show()
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	get_tree().paused = true
 	
 
 func _on_button_pressed() -> void:
 	upgrade_element.hide()
 	wave_timer.start()
 	wave_counter += 1
+	get_tree().paused = false
 
 func _on_spawner_enemy_defeated(points: float) -> void:
-	score += points
+	PlayerData.highscore += points
 	print("Enemy killed: Score: ", score)
 
 
 
 func _on_weapon_upgrades_weapon_upgrade_purchased(cost: float, upgrade: BaseWeaponStrategy, weapon: Weapon) -> void:
-	if score >= cost:
-		score -= cost
+	if PlayerData.highscore >= cost:
+		PlayerData.highscore -= cost
 		if upgrade.has_method("apply_upgrade"):
 			upgrade.apply_upgrade(weapon)
 	else:
