@@ -3,6 +3,14 @@ extends CharacterBody3D
 @export var jump_velocity := 4.5
 @onready var firstPersonCamera = $FirstPersonCamera
 @onready var thirdPersonCamera = $ThirdPersonCamera
+@export var left_weapon : Weapon
+@export var right_weapon : Weapon
+@onready var Hands = $PlayerBody/Hands
+@onready var stats = Firebase.Firestore.collection("Stats")
+@onready var ach = Firebase.Firestore.collection("Achievements")
+@onready var ok:bool=false
+var ach_update=""
+var score=70 # TODO -> get player score
 
 @export var left_weapon : Weapon = null
 @export var right_weapon : Weapon = null
@@ -24,12 +32,11 @@ var MAX_HEALTH: float
 var health: float
 
 @onready var hp_bar: ProgressBar = $HUD/Control/ProgressBar
-@onready var death_screen: CanvasLayer = %DEATH_SCREEN
+@onready var death_screen = %DEATH_SCREEN
 
 var spawn_point = null
 
 func _ready():
-	
 	if spawn_point != null:
 		global_position = spawn_point.global_position 
 	
@@ -41,7 +48,7 @@ func _ready():
 	if speed_component == null:
 		push_warning("No SPEED component is scope.")
 	speed = speed_component.player_speed
-
+	
 	death_screen.hide()
 	if left_weapon != null or right_weapon != null:
 		$Body.set_weapons(left_weapon, right_weapon)
@@ -61,7 +68,36 @@ func _process(delta: float) -> void:
 	hp_bar.value = health
 	if health <= 0:
 		death_screen.show()
-	
+		var doc = await stats.get_doc(PlayerData.uid)
+		var current_highscore = doc.get_value("highscore")
+
+		if score > current_highscore:
+			
+			# Achievement ID-k listája a külön dokumentumból
+			var ach_doc = await ach.get_doc("achievements")
+			var ach_list = ach_doc.get_value("achievement_id_list")
+			var achievements = doc.get_value("achievements")  # JELENLEGI lista
+			
+			for ach_id in ach_list:
+				var ach_data = await ach.get_doc(ach_id)
+				print("Checking:", ach_id, "→", ach_data)
+				
+				var required_score = ach_data.get_value("score_needed")
+				
+				if score >= required_score:
+					# Már ne legyen duplikátum
+					if ach_id not in achievements:
+						achievements.append(ach_id)
+
+			# FIRESTORE UPDATE – csak egyszer
+			await stats.set_doc(PlayerData.uid, {
+				"u_id": PlayerData.uid,
+				"highscore": score,
+				"achievements": achievements
+			})
+			
+		set_process(false)
+
 	var right_x := Input.get_joy_axis(0, JOY_AXIS_RIGHT_X)
 	var right_y := Input.get_joy_axis(0, JOY_AXIS_RIGHT_Y)
 

@@ -15,6 +15,8 @@ func _on_main_menu_options_pressed() -> void:
 func _on_main_menu_profile_pressed() -> void:
 	$MainMenu.hide()
 	$Profile.show()
+	var uid = PlayerData.uid
+	$Profile.load_profile_data(uid)
 
 func _on_main_menu_start_game_pressed() -> void:
 	$MainMenu.hide()

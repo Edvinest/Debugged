@@ -652,6 +652,32 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -40.0
+offset_top = -52.0
+offset_right = 40.0
+offset_bottom = 52.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 15
+
+[node name="DEATH_LABEL" type="Label" parent="Control/DEATH_SCREEN/VBoxContainer"]
+custom_minimum_size = Vector2(100, 50)
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+text = "YOU DIED!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RESTART" type="Button" parent="Control/DEATH_SCREEN/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(100, 50)
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+text = "RESTART"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../PlayerBody/Hands")
+
+[connection signal="pressed" from="Control/DEATH_SCREEN/VBoxContainer/RESTART" to="Control" method="_on_restart_pressed"]
 offset_top = -29.5
 offset_right = 40.0
 offset_bottom = -6.5

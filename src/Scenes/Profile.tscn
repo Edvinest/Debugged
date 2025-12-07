@@ -76,14 +76,6 @@ theme_override_font_sizes/font_size = 25
 text = "Highscore
 "
 
-[node name="LeaderboardButton" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer3/VBoxContainer/HBoxContainer"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(110, 75)
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_font_sizes/font_size = 25
-text = "Leaderboard"
-
 [node name="BackButton" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer3/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(110, 75)
@@ -109,6 +101,7 @@ layout_mode = 2
 theme_override_constants/separation = 15
 
 [node name="LeaderboardLabel" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer3/Highscore/MarginContainer/Highscore"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 theme_override_font_sizes/font_size = 25
@@ -116,7 +109,8 @@ text = "Your placement is:"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="HighsoreLabel" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer3/Highscore/MarginContainer/Highscore"]
+[node name="HighscoreLabel" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer3/Highscore/MarginContainer/Highscore"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 theme_override_font_sizes/font_size = 25
@@ -130,7 +124,8 @@ visible = false
 custom_minimum_size = Vector2(850, 400)
 layout_mode = 2
 
-[node name="Achievements" type="RichTextLabel" parent="PanelContainer/MarginContainer/VBoxContainer3/Achievements"]
+[node name="AchievementsText" type="RichTextLabel" parent="PanelContainer/MarginContainer/VBoxContainer3/Achievements"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(850, 350)
 layout_mode = 2
 theme_override_colors/table_border = Color(0, 0, 0, 0.96862745)
@@ -148,38 +143,6 @@ visible = false
 custom_minimum_size = Vector2(850, 400)
 layout_mode = 2
 
-[node name="Leaderboard" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer3/Leaderboard"]
-self_modulate = Color(0.12941177, 0.12941177, 0.12941177, 1)
-custom_minimum_size = Vector2(0, 350)
-layout_mode = 2
-theme_override_constants/separation = 15
-
-[node name="Title" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer3/Leaderboard/Leaderboard"]
-custom_minimum_size = Vector2(0, 75)
-layout_mode = 2
-theme_override_font_sizes/font_size = 25
-text = "Leaderboard"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="First" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer3/Leaderboard/Leaderboard"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(0, 50)
-layout_mode = 2
-
-[node name="Second" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer3/Leaderboard/Leaderboard"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(0, 50)
-layout_mode = 2
-theme_override_constants/outline_size = 10
-
-[node name="Third" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer3/Leaderboard/Leaderboard"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(0, 50)
-layout_mode = 2
-theme_override_constants/outline_size = 5
-
 [connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer3/VBoxContainer/HBoxContainer/AchievementsButton" to="." method="_on_achievements_button_pressed"]
 [connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer3/VBoxContainer/HBoxContainer/HighscoreButton" to="." method="_on_highscore_button_pressed"]
-[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer3/VBoxContainer/HBoxContainer/LeaderboardButton" to="." method="_on_leaderboard_button_pressed"]
 [connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer3/VBoxContainer/HBoxContainer/BackButton" to="." method="_on_back_button_pressed"]

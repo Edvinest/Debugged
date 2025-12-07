@@ -1,7 +1,7 @@
-extends CanvasLayer
+extends Control
 
-@onready var restart: Button = $Control/RESTART
-
+@onready var restart: Button = %RESTART
+@onready var death_screen =%DEATH_SCREEN
 
 func _on_restart_pressed() -> void:
 	var tree := get_tree()
@@ -12,5 +12,5 @@ func _on_restart_pressed() -> void:
 		return
 		
 	var packed_scene := current_scene.get_scene_file_path()
-	
 	tree.change_scene_to_file(packed_scene)
+	death_screen.hide()
