@@ -1,14 +1,14 @@
-[gd_scene load_steps=13 format=3 uid="uid://b4x43pde3kc2t"]
+[gd_scene load_steps=13 format=3 uid="uid://7flfqcjpbcyq"]
 
 [ext_resource type="PackedScene" uid="uid://vbf7gt6ejvsd" path="res://src/Scenes/LoginScreen.tscn" id="1_80ksy"]
 [ext_resource type="Script" uid="uid://bnxisxu8ix6v8" path="res://src/Scripts/MenuScript.gd" id="1_u7g5k"]
 [ext_resource type="Texture2D" uid="uid://vy6fi1wh7nwe" path="res://src/Objects/background/bg.png" id="2_gjktw"]
 [ext_resource type="Texture2D" uid="uid://cc8bl5prwm341" path="res://src/Objects/background/web.png" id="3_emsn6"]
 [ext_resource type="Texture2D" uid="uid://bcoyofebqemiq" path="res://src/Objects/background/spider_bg.png" id="4_10oqu"]
-[ext_resource type="PackedScene" uid="uid://c17fchistp0rd" path="res://src/Scenes/MainMenu.tscn" id="6_o2ra5"]
-[ext_resource type="PackedScene" uid="uid://nc3sc5t841g1" path="res://src/Scenes/Options.tscn" id="7_76m4s"]
-[ext_resource type="PackedScene" uid="uid://dfxipxvjnascj" path="res://src/Scenes/LevelSelection.tscn" id="8_2hceg"]
-[ext_resource type="PackedScene" uid="uid://barqae7y8ru11" path="res://src/Scenes/Profile.tscn" id="9_76m4s"]
+[ext_resource type="PackedScene" path="res://src/Scenes/MainMenu.tscn" id="6_o2ra5"]
+[ext_resource type="PackedScene" path="res://src/Scenes/Options.tscn" id="7_76m4s"]
+[ext_resource type="PackedScene" path="res://src/Scenes/LevelSelection.tscn" id="8_2hceg"]
+[ext_resource type="PackedScene" path="res://src/Scenes/Profile.tscn" id="9_76m4s"]
 
 [sub_resource type="Animation" id="Animation_1nasp"]
 length = 0.001

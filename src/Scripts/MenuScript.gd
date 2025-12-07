@@ -3,6 +3,7 @@ extends Control
 
 func _on_login_screen_successful_login() -> void:
 	$LoginScreen.queue_free()
+	
 	$MainMenu.show()
 
 
