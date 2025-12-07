@@ -2,6 +2,8 @@
 class_name PlayerUpgrade
 extends UIUpgrade
 
+signal player_upgrade_purchased(cost: float, upgrade: BasePlayerStrategy)
+
 func _ready() -> void:
 	if not Engine.is_editor_hint():
 		get_upgrades()
@@ -42,6 +44,9 @@ func populate_panels() -> void:
 	var panels: Array = get_children()
 	var count = panels.size()
 
+	var shuffled_upgrades = upgrades.duplicate()
+	shuffled_upgrades.shuffle()
+
 	for i in range(count):
 		var p = panels[i]
 
@@ -79,11 +84,17 @@ func populate_panels() -> void:
 		rng.randomize()
 		var rand_upgrd := rng.randi_range(0, upgrades.size() - 1)
 
-		var info: BasePlayerStrategy = upgrades[rand_upgrd]
+		var info: BasePlayerStrategy = shuffled_upgrades.pop_at(rand_upgrd)
 		upgrades_to_show.append(info)
-
 		name_label.text = info.upgrade_name
-		specs_label.text = info.upgrade_specs
+
+		var modification_value
+		if info is HealthPlayerStrategy:
+			modification_value = info.max_health_increase
+		elif info is SpeedPlayerStrategy:
+			modification_value = info.speed_increase
+		specs_label.text = info.upgrade_specs + " " + str(modification_value) + "%"
+		
 		cost_label.text = "Cost: " + str(info.upgrade_cost)
 		sprite.texture = info.texture
 
@@ -97,7 +108,8 @@ func initiate_upgrade(id: int) -> void:
 		push_warning("initiate_upgrade: upgrade is null at index %d" % id)
 		return
 
-	curr_upgrade.apply_upgrade()
+	player_upgrade_purchased.emit(curr_upgrade.upgrade_cost, curr_upgrade)
+	
 
 
 func _on_upgrade_purchase_btn_clicked(id: int) -> void:

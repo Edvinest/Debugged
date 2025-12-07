@@ -1,3 +1,4 @@
+class_name SpiderEnemy
 extends Enemy
 
 @onready var spider_animation_player: AnimationPlayer = $entity_spider/AnimationPlayer
@@ -10,7 +11,7 @@ extends Enemy
 # Exported Spider-specific parameters
 @export var spider_max_health: float = 50.0
 @export var spider_damage: float = 10.0
-@export var spider_points: int = 10
+@export var spider_points: float = 10
 @export var spider_detection_range: float = 10.0
 @export var spider_normal_speed: float = 3.0
 @export var spider_retreat_speed: float = 5.0

@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="AttackSpeedWeaponStrategy" load_steps=4 format=3 uid="uid://nqhkkhntbgxq"]
+
+[ext_resource type="Resource" uid="uid://tfggkjfecp7f" path="res://src/Objects/Weapons/Blade1/Sword1.tres" id="1_781jr"]
+[ext_resource type="Script" uid="uid://gujo2wxiwyl0" path="res://src/Scripts/Modular_upgrades/attack_speed_weapon_strategy.gd" id="2_86eju"]
+[ext_resource type="Texture2D" uid="uid://c5pgdd5y37irg" path="res://src/UI_resources/Icons/sword-spin-svgrepo-com (3).svg" id="3_781jr"]
+
+[resource]
+script = ExtResource("2_86eju")
+attack_speed_decrease = 3.0
+allowed_weapon_type = ExtResource("1_781jr")
+upgrade_name = "Weapon Attack Speed Upgrade"
+texture = ExtResource("3_781jr")
+upgrade_specs = "Decrese weapon attack speed by"
+upgrade_cost = 60.0
+metadata/_custom_type_script = "uid://gujo2wxiwyl0"

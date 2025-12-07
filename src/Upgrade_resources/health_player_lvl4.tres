@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="HealthPlayerStrategy" load_steps=4 format=3 uid="uid://cskcwptanjnir"]
+
+[ext_resource type="Resource" uid="uid://chtuv7ka5xakl" path="res://src/Scripts/Player_resources/player_health.tres" id="1_tbvtg"]
+[ext_resource type="Script" uid="uid://bxcfhe3ciur57" path="res://src/Scripts/Modular_upgrades/health_player_strategy.gd" id="2_sivx1"]
+[ext_resource type="Texture2D" uid="uid://7l7fe8bvmgpl" path="res://src/UI_resources/Icons/health-svgrepo-com (5).svg" id="3_tbvtg"]
+
+[resource]
+script = ExtResource("2_sivx1")
+max_health_increase = 50.0
+health_component = ExtResource("1_tbvtg")
+upgrade_name = "Health Player"
+texture = ExtResource("3_tbvtg")
+upgrade_specs = "Increases max health"
+upgrade_cost = 2000.0
+metadata/_custom_type_script = "uid://bxcfhe3ciur57"

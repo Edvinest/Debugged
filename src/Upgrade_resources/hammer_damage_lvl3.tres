@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="DamageWeaponStrategy" load_steps=4 format=3 uid="uid://bar7at1w2ek33"]
+
+[ext_resource type="Resource" uid="uid://tfggkjfecp7f" path="res://src/Objects/Weapons/Blade1/Sword1.tres" id="1_8seye"]
+[ext_resource type="Script" uid="uid://bixfi5qbu6ebc" path="res://src/Scripts/Modular_upgrades/damage_weapon_strategy.gd" id="2_vay2o"]
+[ext_resource type="Texture2D" uid="uid://dgi4fpx64i168" path="res://src/UI_resources/Icons/hammer-break-svgrepo-com (1).svg" id="3_8seye"]
+
+[resource]
+script = ExtResource("2_vay2o")
+damage_increase = 35.0
+allowed_weapon_type = ExtResource("1_8seye")
+upgrade_name = "Weapon Demage Update"
+texture = ExtResource("3_8seye")
+upgrade_specs = "Increase weapon damage by"
+upgrade_cost = 600.0
+metadata/_custom_type_script = "uid://bixfi5qbu6ebc"

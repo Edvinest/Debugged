@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="DamageWeaponStrategy" load_steps=4 format=3 uid="uid://2ywsm8vfdjwr"]
+
+[ext_resource type="Resource" uid="uid://tfggkjfecp7f" path="res://src/Objects/Weapons/Blade1/Sword1.tres" id="1_gjshn"]
+[ext_resource type="Script" uid="uid://bixfi5qbu6ebc" path="res://src/Scripts/Modular_upgrades/damage_weapon_strategy.gd" id="2_t2m7o"]
+[ext_resource type="Texture2D" uid="uid://crgtiyftwyj1x" path="res://src/UI_resources/Icons/damage_lvl1.svg" id="3_gjshn"]
+
+[resource]
+script = ExtResource("2_t2m7o")
+allowed_weapon_type = ExtResource("1_gjshn")
+upgrade_name = "Weapon Demage Update"
+texture = ExtResource("3_gjshn")
+upgrade_specs = "Increase weapon damage by"
+upgrade_cost = 60.0
+metadata/_custom_type_script = "uid://bixfi5qbu6ebc"
