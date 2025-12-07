@@ -5,11 +5,11 @@
 [ext_resource type="FontFile" uid="uid://777ot6q65lqp" path="res://src/UI_resources/Fonts/RobotoMono-VariableFont_wght.ttf" id="2_ovmah"]
 [ext_resource type="Script" uid="uid://dq83iom010byo" path="res://src/Scripts/hover_animation.gd" id="4_hwg84"]
 [ext_resource type="Script" uid="uid://338h5f0n812o" path="res://src/Scripts/upgrade_purchase_btn.gd" id="4_pirhb"]
+[ext_resource type="Texture2D" uid="uid://u6fxd7sfu1wl" path="res://src/UI_resources/Icons/hammer-break-svgrepo-com (2).svg" id="5_gp7mn"]
 [ext_resource type="Script" uid="uid://ymh0bhbe37fv" path="res://src/Scenes/player_upgrade.gd" id="5_k7ons"]
-[ext_resource type="Texture2D" uid="uid://c665fedhanp8m" path="res://src/UI_resources/Icons/hammer-drop-svgrepo-com.svg" id="7_gp7mn"]
+[ext_resource type="Texture2D" uid="uid://bu5lkqjmubjd1" path="res://src/UI_resources/Icons/hammer-break-svgrepo-com.svg" id="8_j3cfe"]
 [ext_resource type="Texture2D" uid="uid://daes224r3wpya" path="res://src/UI_resources/Icons/lvl3.svg" id="8_tfmt4"]
-[ext_resource type="Texture2D" uid="uid://bt0xhvstpoayq" path="res://src/UI_resources/Icons/sword-spin-svgrepo-com (5).svg" id="9_j3cfe"]
-[ext_resource type="Texture2D" uid="uid://bl0b0e8b88di" path="res://src/UI_resources/Icons/hammer-drop-svgrepo-com (3).svg" id="9_yp6k0"]
+[ext_resource type="Texture2D" uid="uid://dgi4fpx64i168" path="res://src/UI_resources/Icons/hammer-break-svgrepo-com (1).svg" id="9_47vle"]
 [ext_resource type="Script" uid="uid://bwqclsvwuqg63" path="res://src/Scripts/warnings.gd" id="10_hwg84"]
 [ext_resource type="Texture2D" uid="uid://bxn2hwc72u0tm" path="res://src/UI_resources/Icons/health-svgrepo-com (3).svg" id="11_ix78q"]
 
@@ -47,39 +47,6 @@ script = ExtResource("1_emjs1")
 [node name="Timer" type="Timer" parent="."]
 unique_name_in_owner = true
 one_shot = true
-
-[node name="HUD_element" type="CanvasLayer" parent="."]
-
-[node name="Control" type="Control" parent="HUD_element"]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-metadata/_edit_use_anchors_ = true
-
-[node name="show_timer" type="Label" parent="HUD_element/Control"]
-unique_name_in_owner = true
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -40.5
-offset_right = 40.5
-offset_bottom = 23.0
-grow_horizontal = 2
-text = "Show:Timer"
-metadata/_edit_use_anchors_ = true
-
-[node name="show_score" type="Label" parent="HUD_element/Control"]
-unique_name_in_owner = true
-layout_mode = 0
-offset_left = 1.0
-offset_top = 77.0
-offset_right = 41.0
-offset_bottom = 100.0
-text = "SCORE"
 
 [node name="UPGRADE_element" type="CanvasLayer" parent="."]
 unique_name_in_owner = true
@@ -153,27 +120,27 @@ layout_mode = 2
 [node name="upgrade_name" type="Label" parent="UPGRADE_element/Control/PanelContainer/VBoxContainer/MarginContainer/UI_Upgrades/Weapon_Upgrades/Upgrade1/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
-text = "Weapon Attack Speed Upgrade"
+text = "Weapon Demage Update"
 
 [node name="upgrade_weapon" type="TextureRect" parent="UPGRADE_element/Control/PanelContainer/VBoxContainer/MarginContainer/UI_Upgrades/Weapon_Upgrades/Upgrade1/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 6
-texture = ExtResource("9_yp6k0")
+texture = ExtResource("5_gp7mn")
 
 [node name="upgrade_specs" type="Label" parent="UPGRADE_element/Control/PanelContainer/VBoxContainer/MarginContainer/UI_Upgrades/Weapon_Upgrades/Upgrade1/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
-text = "Decrese weapon attack speed by 22.0%"
+text = "Increase weapon damage by 18.0%"
 
 [node name="upgread_weapon" type="Label" parent="UPGRADE_element/Control/PanelContainer/VBoxContainer/MarginContainer/UI_Upgrades/Weapon_Upgrades/Upgrade1/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
-text = "Applies to: Mighty Hammer"
+text = "Applies to: Iron Sword"
 
 [node name="upgrade_cost" type="Label" parent="UPGRADE_element/Control/PanelContainer/VBoxContainer/MarginContainer/UI_Upgrades/Weapon_Upgrades/Upgrade1/VBoxContainer"]
 layout_mode = 2
-text = "Cost: 1400.0"
+text = "Cost: 240.0"
 
 [node name="upgrade_purchase" type="Button" parent="UPGRADE_element/Control/PanelContainer/VBoxContainer/MarginContainer/UI_Upgrades/Weapon_Upgrades/Upgrade1/VBoxContainer"]
 layout_mode = 2
@@ -194,27 +161,27 @@ layout_mode = 2
 [node name="upgrade_name" type="Label" parent="UPGRADE_element/Control/PanelContainer/VBoxContainer/MarginContainer/UI_Upgrades/Weapon_Upgrades/Upgrade2/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
-text = "Weapon Attack Speed Upgrade"
+text = "Weapon Demage Update"
 
 [node name="upgrade_weapon" type="TextureRect" parent="UPGRADE_element/Control/PanelContainer/VBoxContainer/MarginContainer/UI_Upgrades/Weapon_Upgrades/Upgrade2/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 6
-texture = ExtResource("7_gp7mn")
+texture = ExtResource("8_tfmt4")
 
 [node name="upgrade_specs" type="Label" parent="UPGRADE_element/Control/PanelContainer/VBoxContainer/MarginContainer/UI_Upgrades/Weapon_Upgrades/Upgrade2/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
-text = "Decrese weapon attack speed by 5.0%"
+text = "Increase weapon damage by 25.0%"
 
 [node name="upgread_weapon" type="Label" parent="UPGRADE_element/Control/PanelContainer/VBoxContainer/MarginContainer/UI_Upgrades/Weapon_Upgrades/Upgrade2/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
-text = "Applies to: Mighty Hammer"
+text = "Applies to: Iron Sword"
 
 [node name="upgrade_cost" type="Label" parent="UPGRADE_element/Control/PanelContainer/VBoxContainer/MarginContainer/UI_Upgrades/Weapon_Upgrades/Upgrade2/VBoxContainer"]
 layout_mode = 2
-text = "Cost: 80.0"
+text = "Cost: 450.0"
 
 [node name="upgrade_purchase" type="Button" parent="UPGRADE_element/Control/PanelContainer/VBoxContainer/MarginContainer/UI_Upgrades/Weapon_Upgrades/Upgrade2/VBoxContainer"]
 layout_mode = 2
@@ -241,12 +208,12 @@ text = "Weapon Demage Update"
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 6
-texture = ExtResource("8_tfmt4")
+texture = ExtResource("8_j3cfe")
 
 [node name="upgrade_specs" type="Label" parent="UPGRADE_element/Control/PanelContainer/VBoxContainer/MarginContainer/UI_Upgrades/Weapon_Upgrades/Upgrade3/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
-text = "Increase weapon damage by 25.0%"
+text = "Increase weapon damage by 60.0%"
 
 [node name="upgread_weapon" type="Label" parent="UPGRADE_element/Control/PanelContainer/VBoxContainer/MarginContainer/UI_Upgrades/Weapon_Upgrades/Upgrade3/VBoxContainer"]
 layout_mode = 2
@@ -255,7 +222,7 @@ text = "Applies to: Iron Sword"
 
 [node name="upgrade_cost" type="Label" parent="UPGRADE_element/Control/PanelContainer/VBoxContainer/MarginContainer/UI_Upgrades/Weapon_Upgrades/Upgrade3/VBoxContainer"]
 layout_mode = 2
-text = "Cost: 450.0"
+text = "Cost: 1400.0"
 
 [node name="upgrade_purchase" type="Button" parent="UPGRADE_element/Control/PanelContainer/VBoxContainer/MarginContainer/UI_Upgrades/Weapon_Upgrades/Upgrade3/VBoxContainer"]
 layout_mode = 2
@@ -276,18 +243,18 @@ layout_mode = 2
 [node name="upgrade_name" type="Label" parent="UPGRADE_element/Control/PanelContainer/VBoxContainer/MarginContainer/UI_Upgrades/Weapon_Upgrades/Upgrade4/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
-text = "Weapon Attack Speed Upgrade"
+text = "Weapon Demage Update"
 
 [node name="upgrade_weapon" type="TextureRect" parent="UPGRADE_element/Control/PanelContainer/VBoxContainer/MarginContainer/UI_Upgrades/Weapon_Upgrades/Upgrade4/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 6
-texture = ExtResource("9_j3cfe")
+texture = ExtResource("9_47vle")
 
 [node name="upgrade_specs" type="Label" parent="UPGRADE_element/Control/PanelContainer/VBoxContainer/MarginContainer/UI_Upgrades/Weapon_Upgrades/Upgrade4/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
-text = "Decrese weapon attack speed by 18.0%"
+text = "Increase weapon damage by 35.0%"
 
 [node name="upgread_weapon" type="Label" parent="UPGRADE_element/Control/PanelContainer/VBoxContainer/MarginContainer/UI_Upgrades/Weapon_Upgrades/Upgrade4/VBoxContainer"]
 layout_mode = 2
@@ -296,7 +263,7 @@ text = "Applies to: Iron Sword"
 
 [node name="upgrade_cost" type="Label" parent="UPGRADE_element/Control/PanelContainer/VBoxContainer/MarginContainer/UI_Upgrades/Weapon_Upgrades/Upgrade4/VBoxContainer"]
 layout_mode = 2
-text = "Cost: 450.0"
+text = "Cost: 600.0"
 
 [node name="upgrade_purchase" type="Button" parent="UPGRADE_element/Control/PanelContainer/VBoxContainer/MarginContainer/UI_Upgrades/Weapon_Upgrades/Upgrade4/VBoxContainer"]
 layout_mode = 2
@@ -442,6 +409,37 @@ layout_mode = 2
 size_flags_horizontal = 4
 theme_override_colors/font_color = Color(1, 1, 1, 0.44313726)
 text = "Close"
+
+[node name="HUD_element" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="HUD_element"]
+layout_mode = 3
+anchor_right = 1.0
+anchor_bottom = 0.10030864
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="show_timer" type="Label" parent="HUD_element/Control"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -40.5
+offset_right = 40.5
+offset_bottom = 23.0
+grow_horizontal = 2
+text = "Show:Timer"
+metadata/_edit_use_anchors_ = true
+
+[node name="show_score" type="Label" parent="HUD_element/Control"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 800.0
+offset_right = 851.0
+offset_bottom = 23.0
+text = "SCORE"
 
 [node name="WarningTimer" type="Timer" parent="."]
 unique_name_in_owner = true

@@ -1,4 +1,9 @@
+class_name Player
 extends CharacterBody3D
+
+signal player_died
+
+var pause_fl = false
 
 @onready var firstPersonCamera = $FirstPersonCamera
 @onready var thirdPersonCamera = $ThirdPersonCamera
@@ -51,12 +56,17 @@ func _ready():
 	set_camera_mode(using_first_person)
 	
 func _process(delta: float) -> void:
+
+	if pause_fl:
+		return
+
 	MAX_HEALTH = health_component.player_max_health
 	hp_bar.max_value = MAX_HEALTH
 	#print(hp_bar.max_value)
 	speed = speed_component.player_speed
 	hp_bar.value = health
 	if health <= 0:
+		player_died.emit()
 		death_screen.show()
 	
 	var right_x := Input.get_joy_axis(0, JOY_AXIS_RIGHT_X)
@@ -150,9 +160,11 @@ func take_damage(damage_to_take):
 	health -= damage_to_take
 	print("Player took damage: " + str(damage_to_take))
 
-
 func _on_player_spawn_points_on_spawn_point_selected(point: Marker3D) -> void:
 	if point is Marker3D:
 		spawn_point = point
 	else:
 		push_error("Player: Invalid spawn point.")
+
+func reset_health():
+	health = MAX_HEALTH

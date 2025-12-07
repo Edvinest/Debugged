@@ -311,6 +311,7 @@ offset_bottom = 27.0
 
 [node name="DEATH_SCREEN" type="CanvasLayer" parent="."]
 unique_name_in_owner = true
+layer = 9
 script = ExtResource("6_4mdpm")
 
 [node name="Control" type="Control" parent="DEATH_SCREEN"]
