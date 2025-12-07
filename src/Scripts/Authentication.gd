@@ -1,6 +1,7 @@
 extends Control
 signal successfulLogin
-@onready var users_collection = Firebase.Firestore.collection("users") 
+@onready var users_collection = Firebase.Firestore.collection("users")
+@onready var users_stats = Firebase.Firestore.collection("Stats")
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	Firebase.Auth.login_succeeded.connect(on_login_succeeded)
@@ -26,6 +27,8 @@ func on_profile_data_received(userdata : FirebaseUserData):
 	if uid == "" or uid == null:
 		_handle_session_error("Couldn't load saved session")
 		return
+		
+	PlayerData.uid = uid
 	
 	var user_doc = await users_collection.get_doc(uid)
 	if user_doc == null or user_doc.document == null:
@@ -68,13 +71,13 @@ func _on_log_in_button_pressed() -> void:
 	
 	
 func on_login_succeeded(auth)->void:
-	print(auth)
+	#print(auth)
 	%StateLabel.text="Login succeeded"
 	Firebase.Auth.save_auth(auth)
 	Firebase.Auth.get_user_data()
 
 func on_signup_succeeded(auth)->void:
-	print("Auth response:", auth)
+	#print("Auth response:", auth)
 	%StateLabel.text="Signup succeeded"
 	
 	Firebase.Auth.save_auth(auth)
@@ -88,14 +91,22 @@ func on_signup_succeeded(auth)->void:
 		"email":email,
 		"u_id":uid
 	}
+	var user_stats ={
+		"u_id":uid,
+		"highscore":0,
+		"achievements":["a1"]
+		
+	}
 	
-
 	await users_collection.add(uid, user_data)
+	await users_stats.add(uid, user_stats)
 	%StateLabel.text = "Signup successful! You can now log in."
+	
+	
 func _on_show_button_pressed() -> void:
 	if 	%PasswordLineEdit.secret==true:
-			%PasswordLineEdit.secret=false
-			%ShowButton.text="HIDE"
+		%PasswordLineEdit.secret=false
+		%ShowButton.text="HIDE"
 	else: 	
 		%PasswordLineEdit.secret=true
 		%ShowButton.text="SHOW"
