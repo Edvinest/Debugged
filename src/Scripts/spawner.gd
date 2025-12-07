@@ -1,6 +1,8 @@
 class_name Spawner
 extends Node3D
 
+signal enemy_defeated(points: float)
+
 @onready var marker_3d: Marker3D = %Marker3D
 @onready var timer: Timer = %Timer
 
@@ -20,10 +22,13 @@ func _on_timer_timeout() -> void:
 		var new_mob = mob_to_spawn.instantiate()
 		add_child(new_mob)
 		new_mob.global_position = marker_3d.global_position
+		new_mob.died.connect(_on_enemy_died)
 
 
-func _on_spider_enemy_died(_point) -> void:
+func _on_enemy_died(point) -> void:
 	curr_spawns -= 1
+	enemy_defeated.emit(point)
+
 
 
 func _on_area_3d_body_exited(body: Node3D) -> void:

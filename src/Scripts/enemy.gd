@@ -70,7 +70,7 @@ var detection_range: float = 10.0
 var normal_speed: float = 3.0
 var retreat_speed: float = 5.0
 var damage: float = 10.0
-var points: int = 10
+var points: float = 10
 
 # Dodge system
 var critical_hp: float = 20.0

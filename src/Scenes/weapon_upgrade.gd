@@ -2,6 +2,8 @@
 class_name WeaponUpgrade
 extends UIUpgrade
 
+signal weapon_upgrade_purchased(cost: float, upgrade: BaseWeaponStrategy, weapon: Weapon)
+
 func _ready() -> void:
 	# Populate upgrades at runtime (not only editor) so upgrades_to_show is available during play
 	if not Engine.is_editor_hint():
@@ -47,8 +49,8 @@ func populate_panels() -> void:
 	#TO-DO: by creating a duplication of the upgrades, then pop the used one there won't
 		#be displayed the same upgrade twice
 	#Use shufle on them:
-		#   var shuffled_upgrades = upgrades.duplicate()
-		#   shuffled_upgrades.shuffle()
+	var shuffled_upgrades = upgrades.duplicate()
+	shuffled_upgrades.shuffle()
 
 	for i in range(count):
 		var p = panels[i]
@@ -89,11 +91,19 @@ func populate_panels() -> void:
 		rng.randomize()
 		var rand_upgrd := rng.randi_range(0, upgrades.size() - 1)
 
-		var info: BaseWeaponStrategy = upgrades[rand_upgrd]
+		var info: BaseWeaponStrategy = shuffled_upgrades.pop_at(rand_upgrd)
 		upgrades_to_show.append(info)
 		name_label.text = info.upgrade_name
-		specs_label.text = info.upgrade_specs
-		applies_label.text = "Applies to: " + ", ".join(info.allowed_weapon_types.map(func(w): return str(w.name)))
+
+		var modification_value
+		if info is DamageWeaponStrategy:
+			modification_value = info.damage_increase
+		elif info is AttackSpeedWeaponStrategy:
+			modification_value = info.attack_speed_decrease
+		specs_label.text = info.upgrade_specs + " " + str(modification_value) + "%"
+
+		#applies_label.text = "Applies to: " + ", ".join(info.allowed_weapon_types.map(func(w): return str(w.name)))
+		applies_label.text = "Applies to: " + info.allowed_weapon_type.name
 		cost_label.text = "Cost: " + str(info.upgrade_cost)
 		sprite.texture = info.texture
 
@@ -113,9 +123,7 @@ func initiate_upgrade(id: int) -> void:
 		push_warning("initiate_upgrade: upgrade at index %d has no applicable weapon types" % id)
 		return
 
-	for w in curr_upgrade.allowed_weapon_types:
-		if w is Weapon:
-			curr_upgrade.apply_upgrade(w)
+	weapon_upgrade_purchased.emit(curr_upgrade.upgrade_cost, curr_upgrade, curr_upgrade.allowed_weapon_type)
 
 func _on_upgrade_purchase_btn_clicked(id: int) -> void:
 	# Buttons are expected to provide 1-based IDs in the editor (e.g. "UpgradeButton1").

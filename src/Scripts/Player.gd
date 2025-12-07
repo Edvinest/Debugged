@@ -63,6 +63,7 @@ func _process(delta: float) -> void:
 	var right_y := Input.get_joy_axis(0, JOY_AXIS_RIGHT_Y)
 
 	# Deadzone
+	
 	if abs(right_x) > 0.15 and using_first_person:
 		rotate_y(-right_x * delta * controller_sensitivity)  
 	

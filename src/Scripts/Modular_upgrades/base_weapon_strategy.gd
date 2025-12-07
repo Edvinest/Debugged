@@ -3,7 +3,7 @@ extends BaseUpgradeStrategy
 
 ##Base strategy that all other weapon strategies will inherit from.
 
-@export var allowed_weapon_types: Array[Weapon] = []  # -> when empty applies to all
+@export var allowed_weapon_type: Weapon = null 
 
 
 func apply_upgrade(weapon: Weapon):
