@@ -88,7 +88,6 @@ func start_wave():
 	player.pause_fl = false
 	player.reset_health()
 	wave_counter += 1
-	get_tree().paused = false
 
 	init_wave_properties()
 
@@ -110,7 +109,7 @@ func init_wave_properties():
 
 
 func _on_spawner_enemy_defeated(points: float) -> void:
-	PlayerData.highscore += points
+	PlayerData.current_score += points
 	print("Enemy killed: Score: ", score)
 
 
@@ -142,3 +141,7 @@ func _on_warning_timer_timeout() -> void:
 func _on_player_player_died() -> void:
 	wave_timer.stop()
 	set_process(false)
+
+
+func _on_spawner_2_enemy_defeated(points: float) -> void:
+	pass # Replace with function body.

@@ -2,14 +2,12 @@ class_name Player
 extends CharacterBody3D
 
 signal player_died
-
-var pause_fl = false
-
+var speed = 5
 @onready var firstPersonCamera = $FirstPersonCamera
 @onready var thirdPersonCamera = $ThirdPersonCamera
 @onready var stats = Firebase.Firestore.collection("Stats")
 @onready var ach = Firebase.Firestore.collection("Achievements")
-var score=PlayerData.highscore
+var score = 0
 
 @export var left_weapon : Weapon = PlayerData.left_hand_weapon
 @export var right_weapon : Weapon = PlayerData.right_hand_weapon
@@ -44,6 +42,8 @@ func _ready():
 	MAX_HEALTH = health_component.player_max_health
 	health = MAX_HEALTH
 
+	PlayerData.reset_score()
+	PlayerData.score_updated.connect(_on_score_updated)
 	if speed_component == null:
 		push_warning("No SPEED component is scope.")
 	speed = speed_component.player_speed
@@ -173,6 +173,9 @@ func _third_person_controls():
 		
 		var target_angle = atan2(-lookDir.x, -lookDir.z)
 		$Body/ThirdPersonModel.rotation.y = target_angle + PI
+
+func _on_score_updated(new_score : int):
+	score = new_score
 
 func set_camera_mode(first_person: bool):
 	using_first_person = first_person

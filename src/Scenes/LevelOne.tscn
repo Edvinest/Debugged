@@ -1,11 +1,9 @@
-[gd_scene load_steps=33 format=3 uid="uid://bp1n81hkwp3tu"]
+[gd_scene load_steps=31 format=3 uid="uid://bp1n81hkwp3tu"]
 
 [ext_resource type="PackedScene" uid="uid://chpye160qgiy6" path="res://src/Objects/LevelOne/prop_bed.tscn" id="1_02nir"]
 [ext_resource type="PackedScene" uid="uid://ch7albaj53q7" path="res://src/Objects/LevelOne/prop_floor.tscn" id="2_1b8pk"]
-[ext_resource type="Resource" uid="uid://bqwyrpwgffbns" path="res://src/Objects/Weapons/Hammer1/Hammer.tres" id="2_58uts"]
 [ext_resource type="PackedScene" uid="uid://dct6crx3jwiat" path="res://src/Scenes/Player.tscn" id="2_mwp01"]
 [ext_resource type="PackedScene" uid="uid://b7pxexvaix2s4" path="res://src/Objects/LevelOne/prop_desk.tscn" id="3_ajlcv"]
-[ext_resource type="Resource" uid="uid://tfggkjfecp7f" path="res://src/Objects/Weapons/Blade1/Sword1.tres" id="4_5ha2e"]
 [ext_resource type="PackedScene" uid="uid://fh15aoamosj4" path="res://src/Scenes/BloodSpiderEnemy.tscn" id="4_cqtgt"]
 [ext_resource type="Texture2D" uid="uid://n7sqk2ahk5er" path="res://src/Materials/citrus_orchard_puresky_1k.exr" id="4_n562r"]
 [ext_resource type="PackedScene" uid="uid://bp2svu4xo4o8r" path="res://src/Objects/LevelOne/prop_cabinet.tscn" id="5_austs"]
@@ -56,12 +54,19 @@ emission_energy_multiplier = 8.43
 
 [node name="WaveLogic" parent="." instance=ExtResource("23_avwfb")]
 process_mode = 3
+incr_dif = 30.0
 time_between_waves = 10.0
 
-[node name="Spawner" parent="WaveLogic" instance=ExtResource("22_jik07")]
+[node name="Spawner" parent="WaveLogic" groups=["spawner"] instance=ExtResource("22_jik07")]
 transform = Transform3D(0.3762728, 0, -0.9265089, 0, 1, 0, 0.9265089, 0, 0.3762728, 0.19784927, 3.848476, 17.795755)
 mob_to_spawn = ExtResource("18_7qily")
 max_spawns = 5
+
+[node name="Spawner2" parent="WaveLogic" groups=["spawner"] instance=ExtResource("22_jik07")]
+transform = Transform3D(0.20917486, 0, -0.9778782, 0, 1, 0, 0.9778782, 0, 0.20917486, -8.474623, 3.848476, 17.795755)
+GRADE = 1
+mob_to_spawn = ExtResource("4_cqtgt")
+spawning_intervals_sec = 4.0
 
 [node name="PlayerSpawnPoints" parent="." instance=ExtResource("24_5ha2e")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.734362, 9.39201, 7.1966004)
@@ -82,23 +87,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.726297, 4.820718, -20.7191
 
 [node name="Player" parent="." instance=ExtResource("2_mwp01")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.817619, 9.796223, 3.003212)
-left_weapon = ExtResource("2_58uts")
-right_weapon = ExtResource("4_5ha2e")
-
-[node name="WaveLogic" parent="." instance=ExtResource("23_avwfb")]
-incr_dif = 30.0
-time_between_waves = 10.0
-
-[node name="Spawner" parent="WaveLogic" groups=["spawner"] instance=ExtResource("22_jik07")]
-transform = Transform3D(0.3762728, 0, -0.9265089, 0, 1, 0, 0.9265089, 0, 0.3762728, 0.19784927, 3.848476, 17.795755)
-mob_to_spawn = ExtResource("18_7qily")
-max_spawns = 5
-
-[node name="Spawner2" parent="WaveLogic" groups=["spawner"] instance=ExtResource("22_jik07")]
-transform = Transform3D(0.20917486, 0, -0.9778782, 0, 1, 0, 0.9778782, 0, 0.20917486, -8.474623, 3.848476, 17.795755)
-GRADE = 1
-mob_to_spawn = ExtResource("4_cqtgt")
-spawning_intervals_sec = 4.0
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_ygosd")
@@ -249,10 +237,10 @@ collision_mask = 2
 [node name="CollisionShape3D" type="CollisionShape3D" parent="teleport_pads/pad4/Area3D"]
 shape = SubResource("BoxShape3D_46rq7")
 
+[connection signal="enemy_defeated" from="WaveLogic/Spawner" to="WaveLogic" method="_on_spawner_enemy_defeated"]
+[connection signal="enemy_defeated" from="WaveLogic/Spawner2" to="WaveLogic" method="_on_spawner_2_enemy_defeated"]
 [connection signal="on_spawn_point_selected" from="PlayerSpawnPoints" to="Player" method="_on_player_spawn_points_on_spawn_point_selected"]
 [connection signal="player_died" from="Player" to="WaveLogic" method="_on_player_player_died"]
-[connection signal="enemy_defeated" from="WaveLogic/Spawner" to="WaveLogic" method="_on_spawner_enemy_defeated"]
-[connection signal="enemy_defeated" from="WaveLogic/Spawner2" to="WaveLogic" method="_on_spawner_enemy_defeated"]
 [connection signal="body_entered" from="teleport_pads/pad/Area3D" to="teleport_pads/pad" method="_on_area_3d_body_entered"]
 [connection signal="body_entered" from="teleport_pads/pad2/Area3D" to="teleport_pads/pad2" method="_on_area_3d_body_entered"]
 [connection signal="body_entered" from="teleport_pads/pad3/Area3D" to="teleport_pads/pad3" method="_on_area_3d_body_entered"]
