@@ -25,206 +25,175 @@ const PACKET_HISTORY_SIZE = 8
 var left_weapon : Weapon = null
 var right_weapon : Weapon = null
 
-@onready var right_hand = $RightHand
-@onready var left_hand = $LeftHand
-@onready var AnimPlayer = $"../../AnimationPlayer"
+@onready var fp_right_hand = $FirstPersonModel/Hands/RightHand
+@onready var tp_right_hand = $ThirdPersonModel/Player/Skeleton3D/RightHand
+@onready var fp_left_hand = $FirstPersonModel/Hands/LeftHand
+@onready var tp_left_hand = $ThirdPersonModel/Player/Skeleton3D/LeftHand
+
+const SHOULDER_OFFSET_R = Vector3(-0.25, -0.25, -0.3)
+const SHOULDER_OFFSET_L = Vector3(0.25, -0.25, -0.3)
+
+var ARM_LENGTH = 0.0        # How far out the hand is
+var ROTATION_SPEED = 15    # Sensitivity Multiplier
+var SWAY_INTENSITY = 0.1   # How much the sword "lags" (Visual Weight)
+var SMOOTHING = 15.0        # Higher = Snappier, Lower = Smoother/Laggier
+
+var target_rot_L := Vector3.ZERO # Accumulated Euler Angles (Pitch, Yaw, Roll)
+var target_rot_R := Vector3.ZERO
+
+var sway_target_L := Vector3.ZERO
+var sway_target_R := Vector3.ZERO
+
+var current_sway_L := Vector3.ZERO
+var current_sway_R := Vector3.ZERO
 
 var using_first_person : bool = true
 
 func _ready():
 	udp.bind(4243, "127.0.0.1")
 	
-	if Input.get_connected_joypads().is_empty():
-		using_first_person = false
 
+func set_first_person(fp : bool) -> void:
+	using_first_person = fp
+	
 func set_weapons(left : Weapon, right: Weapon):
 	left_weapon = left
 	right_weapon = right
 	
-	if right_hand.has_node("RightWeapon"):
-		right_hand.get_node("RightWeapon").set_weapon_data(right_weapon)
+	if fp_right_hand.has_node("RightWeapon"):
+		fp_right_hand.get_node("RightWeapon").set_weapon_data(right_weapon)
 		
-	if left_hand.has_node("LeftWeapon"):
-		left_hand.get_node("LeftWeapon").set_weapon_data(left_weapon)
+	if fp_left_hand.has_node("LeftWeapon"):
+		fp_left_hand.get_node("LeftWeapon").set_weapon_data(left_weapon)
+		
+	if tp_right_hand.has_node("RightWeapon"):
+		tp_right_hand.get_node("RightWeapon").set_weapon_data(right_weapon)
+		
+	if tp_left_hand.has_node("LeftWeapon"):
+		tp_left_hand.get_node("LeftWeapon").set_weapon_data(left_weapon)
 
 func _process(delta: float) -> void:
-	_handle_joycon()
+	_handle_joycon(delta)
 	
 	if using_first_person:
-		if swing_freeze_L > 0:
-			swing_freeze_L -= delta
-		if swing_freeze_R > 0:
-			swing_freeze_R -= delta
-			
-		fp_anim_time += delta
+		pass
+		#if fp_right_hand:
+			#current_sway_R = current_sway_R.lerp(sway_target_R, 5.0 * delta)
+			#_apply_arm_model(fp_right_hand, target_rot_R, current_sway_R, SHOULDER_OFFSET_R, delta)
+			#
+		#if fp_left_hand:
+			#current_sway_L = current_sway_L.lerp(sway_target_L, 5.0 * delta)
+			#_apply_arm_model(fp_left_hand, target_rot_L, current_sway_L, SHOULDER_OFFSET_L, delta)
 	else:
 		_detect_input_attacks()
+		
+	if Input.is_action_just_pressed("recenter_hands"):
+		targetRotL = Vector3.ZERO
+		targetRotR = Vector3.ZERO
 
 func _detect_input_attacks():
 	if Input.is_action_just_pressed("attack_left"):
-		if left_hand.has_node("LeftWeapon"):
-			left_hand.get_node("LeftWeapon")._perform_standard_attack("left", )
+		if tp_left_hand.has_node("LeftWeapon"):
+			tp_left_hand.get_node("LeftWeapon")._perform_standard_attack()
 			
 	if Input.is_action_just_pressed("attack_right"):
-		if right_hand.has_node("RightWeapon"):
-			right_hand.get_node("RightWeapon")._perform_standard_attack("right")
-			#right_hand.get_node("WeaponInstance").start_motion_attack("diag_up_right", right_hand)
+		if tp_right_hand.has_node("RightWeapon"):
+			tp_right_hand.get_node("RightWeapon")._perform_standard_attack()
+
+func _apply_arm_model(hand_node: Node3D, rot_euler: Vector3, cur_sway: Vector3, shoulder_offset: Vector3, delta: float):
+	# A. ROTATION
+	# Convert our accumulated Euler angles (X, Y, Z) into a Quaternion for the node
+	var target_quat = Quaternion.from_euler(Vector3(rot_euler.x, rot_euler.y, rot_euler.z))
+	hand_node.quaternion = hand_node.quaternion.slerp(target_quat, SMOOTHING * delta)
 	
-		
-func _handle_joycon():
+	# B. POSITION (Forward Kinematics)
+	# Find where the "Hand" is based on rotation
+	# We take the Hand's Basis Z vector (Forward) and project it out by ARM_LENGTH
+	var forward_dir = hand_node.transform.basis.z 
+	# Note: Depending on your model export, Forward might be -Z. Flip if sword points backwards.
+	var arm_pos = -forward_dir * ARM_LENGTH 
+	
+	# C. COMPOSITION
+	# Final Pos = Shoulder + Arm Extension + Sway
+	var final_pos = shoulder_offset + arm_pos + cur_sway
+	
+	# Lerp position for smoothness
+	hand_node.position = hand_node.position.lerp(final_pos, SMOOTHING * delta)
+
+func _handle_joycon(delta: float):
 	while udp.get_available_packet_count() > 0:
 		var packet = udp.get_packet().get_string_from_utf8().strip_edges()
 		#print("Got packet:", packet)
-
-		# Expect "L:roll, pitch, yaw" or "R:roll, pitch, yaw"
-		var side_and_vals = packet.split(":")
-		if side_and_vals.size() == 2:
-			var side = side_and_vals[0]
-			var vals = side_and_vals[1].split(",")
-			if vals.size() == 3:
-				var roll = float(vals[0])
-				var pitch = float(vals[1])
-				var yaw = float(vals[2])
-				var rot_vec = Vector3(pitch, yaw, roll)
+		
+		var parts = packet.split(":")
+		if parts.size() < 2: continue
+		
+		# L or R
+		var side = parts[0]
+		var data = parts[1].split(',')
+		
+		if left_weapon.type == Weapon.WeaponType.GUN:
+			if Input.is_action_just_pressed("joy_shoot_left"):
+				fp_left_hand.get_node("LeftWeapon")._imu_gun_shoot("L")
+		if right_weapon.type == Weapon.WeaponType.GUN:
+			if Input.is_action_just_pressed("joy_shoot_right"):
+				fp_right_hand.get_node("RightWeapon")._imu_gun_shoot("R")
+		
+		# Expect "gx, gy, gz, ax, ay, az, motion_name"
+		if data.size() >= 7:
+			var gx = float(data[0]) * ROTATION_SPEED
+			var gy = float(data[1]) * ROTATION_SPEED
+			var gz = float(data[2]) * ROTATION_SPEED
+			var ax = float(data[3])
+			var ay = float(data[4])
+			
+			var motion_name = data[6]
+			
 				
-				if side == "L":
-					recentPacketsL.append(rot_vec)
-					if recentPacketsL.size() > PACKET_HISTORY_SIZE:
-						recentPacketsL.pop_front()
-						
+			if side == "L":
+				target_rot_L.x += gx * delta
+				target_rot_L.y += gy * delta
+				target_rot_L.z += gz * delta
+				
+				sway_target_L = Vector3(-ax, -ay, 0) * SWAY_INTENSITY
+				
+				if motion_name != "none" and left_weapon:
+					fp_left_hand.get_node("LeftWeapon").start_motion_attack(motion_name, "L")
+					
 				elif side == "R":
-					recentPacketsR.append(rot_vec)
-					if recentPacketsR.size() > PACKET_HISTORY_SIZE:
-						recentPacketsR.pop_front()
-
-
-	# Compute weighted average for left and right
-	var avgL = _weighted_average_mod(recentPacketsL)
-	#print("Average L: " ,avgL)
-	var avgR = _weighted_average_mod(recentPacketsR)
-	#print("Average R: " , avgR)
-	
-	filteredRotL = filteredRotL.lerp(avgL, 0.25)
-	filteredRotR = filteredRotR.lerp(avgR, 0.25)
-	
-	var rot_vel_L = (filteredRotL - prevRotL).abs()
-	var rot_vel_R = (filteredRotR - prevRotR).abs()
-	prevRotL = filteredRotL
-	prevRotR = filteredRotR
-	
-	if left_weapon and swing_freeze_L <= 0:
-		var max_axis_L = rot_vel_L.max_axis_index()
-		var speed_L = rot_vel_L[max_axis_L]
-		
-		if speed_L > SWING_THRESHOLD:
-			swing_freeze_L = FREEZE_TIME
-			
-			var direction_L = _classify_swing_direction(rot_vel_L)
-			left_hand.get_node("WeaponInstance").start_motion_attack(direction_L, left_hand)
-	
-	
-	if right_weapon and swing_freeze_R <= 0:
-		var max_axis_R = rot_vel_R.max_axis_index()
-		var speed_R = rot_vel_R[max_axis_R]
-		
-		if speed_R > SWING_THRESHOLD:
-			swing_freeze_R = FREEZE_TIME
-			
-			var direction_R = _classify_swing_direction(rot_vel_R)
-			right_hand.get_node("WeaponInstance").start_motion_attack(direction_R, right_hand)
-
-		var sway_strength_rot = 0.03          
-		var sway_strength_pos = 0.0003          
-		var sway_speed = 2.0            
-
-		# Smooth bobbing up/down
-		var bob_offset = sin(fp_anim_time * sway_speed) * sway_strength_pos
-
-		# Slight side-to-side sway using cosine
-		var side_offset = cos(fp_anim_time * sway_speed) * sway_strength_pos
-
-		# Slight rotation wiggle
-		var rot_wiggle_x = sin(fp_anim_time * sway_speed) * sway_strength_rot
-		var rot_wiggle_z = cos(fp_anim_time * sway_speed) * sway_strength_rot
-		
-		if using_first_person:
-			if swing_freeze_L <= 0:
-				left_hand.rotation = smoothRotL
-				left_hand.rotation.x += rot_wiggle_x
-				left_hand.rotation.z += rot_wiggle_z
-
-				left_hand.position += Vector3(side_offset, bob_offset, 0)
+					# Accumulate Rotation (Integration)
+					target_rot_R.x += gx * delta # Pitch
+					target_rot_R.y += gy * delta # Yaw
+					target_rot_R.z += gz * delta # Roll
 				
-			if swing_freeze_R <= 0:
-				right_hand.rotation = smoothRotR
-				right_hand.rotation.x += rot_wiggle_x
-				right_hand.rotation.z += rot_wiggle_z
+					# Set Sway (Inverted Accel feels like weight lag)
+					sway_target_R = Vector3(-ax, -ay, 0) * SWAY_INTENSITY
+					if motion_name != "none" and right_weapon:
+						fp_right_hand.get_node("RightWeapon").start_motion_attack(motion_name, "R")
+		
 
-				right_hand.position += Vector3(-side_offset, bob_offset, 0)
+func _on_left_weapon_request_animation(anim_name: String) -> void:
+	$"../AnimationTree"["parameters/conditions/%sleft" %anim_name] = true
+	await get_tree().process_frame
+	$"../AnimationTree"["parameters/conditions/%sleft" %anim_name] = false
 
+
+func _on_right_weapon_request_animation(anim_name: String) -> void:
+	$"../AnimationTree"["parameters/conditions/%sright" %anim_name] = true
+	await get_tree().process_frame
+	$"../AnimationTree"["parameters/conditions/%sright" %anim_name] = false
+
+
+func _on_right_weapon_request_fp_animation(anim_name: String) -> void:
+	if $FirstPersonModel/AnimationPlayer.has_animation(anim_name):
+		$FirstPersonModel/AnimationPlayer.play(anim_name)
+		$FirstPersonModel/AnimationPlayer.queue("RESET")
 	else:
-		pass
+		print("Animation not found")
 
-func _classify_swing_direction(vel: Vector3) -> String:
-	var dir_2d = Vector2(vel.y, -vel.x)  # horizontal/vertical projection
-	if dir_2d.length() < 0.05:
-		return "stab"
-	dir_2d = dir_2d.normalized()
-	var angle = dir_2d.angle()  # -PI..PI
-	# Divide circle into 8 segments
-	if angle < -7*PI/8: return "left"
-	if angle < -5*PI/8: return "diag_down_left"
-	if angle < -3*PI/8: return "down"
-	if angle < -PI/8: return "diag_down_right"
-	if angle < PI/8: return "right"
-	if angle < 3*PI/8: return "diag_up_right"
-	if angle < 5*PI/8: return "up"
-	if angle < 7*PI/8: return "diag_up_left"
-	return "left"
-
-func _weighted_average_mod(history: Array) -> Vector3:
-	if history.is_empty():
-		return Vector3.ZERO
-
-	var total_weight = 0.0
-	var weighted_sum = Vector3.ZERO
-	var count = history.size()
-
-	var last_yaw_sign = sign(history[0].y)
-	var stabilized_history: Array = []
-
-	for i in range(count):
-		var v = history[i]
-		var current_sign = sign(v.y)
-
-		# Detect a single-sample sign flip (likely noise)
-		if abs(v.y) < 0.015:  # small deadzone near zero
-			v.y = 0.0
-		elif current_sign != 0 and current_sign != last_yaw_sign:
-			# Smooth out the sudden sign flip
-			v.y = (2*v.y + history[i - 1].y) / 2.0
-			last_yaw_sign = current_sign
-		stabilized_history.append(v)
-
-	# Weighted average after stabilization
-	for i in range(count):
-		var weight = float(i + 1) / count
-		if history[i].y < 0.1 and history[i].y>-0.1:
-			history[i].y *= 10
-		weighted_sum += stabilized_history[i] * weight
-		total_weight += weight
-
-	var avg = weighted_sum / total_weight
-
-	# Keep yaw slightly alive even when near zero
-	if abs(avg.y) < 0.1:
-		avg.y = sign(avg.y) * 0.1 if avg.y != 0 else 0.1
-
-	return avg
-
-func _on_weapon_instance_request_animation(anim_name: String) -> void:
-	if AnimPlayer.has_animation(anim_name):
-		AnimPlayer.play(anim_name)
-		AnimPlayer.queue("RESET")
+func _on_left_weapon_request_fp_animation(anim_name: String) -> void:
+	if $FirstPersonModel/AnimationPlayer.has_animation(anim_name):
+		$FirstPersonModel/AnimationPlayer.play(anim_name)
+		$FirstPersonModel/AnimationPlayer.queue("RESET")
 	else:
-		print("Animation not found:", anim_name)
+		print("Animation not found")
