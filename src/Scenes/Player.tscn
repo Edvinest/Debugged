@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://sy3pu51jwruj" path="res://src/Objects/Player/LeftHand.glb" id="5_0umxx"]
 [ext_resource type="Script" uid="uid://biya2r8iv253u" path="res://src/Scripts/hud.gd" id="5_ma0cp"]
 [ext_resource type="Script" uid="uid://tmk08xd244ca" path="res://src/Scripts/death_screen.gd" id="6_4mdpm"]
+[ext_resource type="PackedScene" uid="uid://c6box3bvo8g64" path="res://src/Scenes/PauseMenu.tscn" id="6_4mdpm"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_qbkls"]
 
@@ -155,12 +156,14 @@ graph_offset = Vector2(0, -145.93324)
 [node name="Player" type="CharacterBody3D"]
 collision_layer = 3
 script = ExtResource("1_rpqav")
+speed_component = ExtResource("2_8fvgu")
+health_component = ExtResource("2_4mdpm")
 
 [node name="Collision" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_qbkls")
 
 [node name="ThirdPersonCamera" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.70710677, 0.70710677, 0, -0.70710677, 0.70710677, 0, 6, 6)
+transform = Transform3D(1, 0, 0, 0, 0.8591207, 0.511773, 0, -0.511773, 0.8591207, 0, 2.7003121, 2.2092881)
 
 [node name="FirstPersonCamera" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4769659, 0.08534697)
@@ -243,9 +246,14 @@ parameters/conditions/idle = false
 parameters/conditions/is_moving = false
 parameters/conditions/sword_swing_left = false
 parameters/conditions/sword_swing_right = false
+[node name="PauseMenu" parent="." instance=ExtResource("6_4mdpm")]
+unique_name_in_owner = true
+offset_left = 393.0
+offset_top = 65.0
+offset_right = 433.0
+offset_bottom = 105.0
 
 [node name="HUD" type="CanvasLayer" parent="."]
-script = ExtResource("5_ma0cp")
 
 [node name="Control" type="Control" parent="HUD"]
 layout_mode = 3
@@ -260,7 +268,6 @@ offset_bottom = 27.0
 
 [node name="DEATH_SCREEN" type="CanvasLayer" parent="."]
 unique_name_in_owner = true
-script = ExtResource("6_4mdpm")
 
 [node name="Control" type="Control" parent="DEATH_SCREEN"]
 layout_mode = 3

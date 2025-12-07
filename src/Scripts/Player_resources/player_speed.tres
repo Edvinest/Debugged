@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="PlayerSpeedComponent" load_steps=2 format=3 uid="uid://ddtmr3nr11bf1"]
+
+[ext_resource type="Script" uid="uid://qq71scxcwsc7" path="res://src/Scripts/Player_Components/player_speed_component.gd" id="1_adfvt"]
+
+[resource]
+script = ExtResource("1_adfvt")
+metadata/_custom_type_script = "uid://qq71scxcwsc7"

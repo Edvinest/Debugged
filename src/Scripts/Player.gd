@@ -1,6 +1,6 @@
 extends CharacterBody3D
-
-@export var speed := 10.0
+@export var speed := 5.0
+@export var jump_velocity := 4.5
 @onready var firstPersonCamera = $FirstPersonCamera
 @onready var thirdPersonCamera = $ThirdPersonCamera
 
@@ -13,14 +13,35 @@ var mouse_sensitivity := 0.002
 var controller_sensitivity := 2.0
 var gravity := 30
 
+#Speed component
+@export var speed_component : PlayerSpeedComponent = null
+
 var tp_camera_original_rotation : Vector3
-const MAX_HEALTH = 100
+
+#Health component
+@export var health_component: PlayerHealthComponent = null
+var MAX_HEALTH: float
 var health: float
+
 @onready var hp_bar: ProgressBar = $HUD/Control/ProgressBar
 @onready var death_screen: CanvasLayer = %DEATH_SCREEN
 
+var spawn_point = null
+
 func _ready():
+	
+	if spawn_point != null:
+		global_position = spawn_point.global_position 
+	
+	if health_component == null:
+		push_warning("No HEALTH component is scope.")
+	MAX_HEALTH = health_component.player_max_health
 	health = MAX_HEALTH
+
+	if speed_component == null:
+		push_warning("No SPEED component is scope.")
+	speed = speed_component.player_speed
+
 	death_screen.hide()
 	if left_weapon != null or right_weapon != null:
 		$Body.set_weapons(left_weapon, right_weapon)
@@ -33,6 +54,10 @@ func _process(delta: float) -> void:
 	if not using_first_person:
 		_update_animation()
 		
+	MAX_HEALTH = health_component.player_max_health
+	hp_bar.max_value = MAX_HEALTH
+	#print(hp_bar.max_value)
+	speed = speed_component.player_speed
 	hp_bar.value = health
 	if health <= 0:
 		death_screen.show()
@@ -133,7 +158,15 @@ func set_camera_mode(first_person: bool):
 	firstPersonCamera.current = first_person
 	thirdPersonCamera.current = not first_person
 	$Body.set_first_person(first_person)
+	%PauseMenu.set_p_mode(first_person)
 
 func take_damage(damage_to_take):
 	health -= damage_to_take
 	print("Player took damage: " + str(damage_to_take))
+
+
+func _on_player_spawn_points_on_spawn_point_selected(point: Marker3D) -> void:
+	if point is Marker3D:
+		spawn_point = point
+	else:
+		push_error("Player: Invalid spawn point.")
