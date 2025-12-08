@@ -7,6 +7,7 @@
 [resource]
 script = ExtResource("1_vbjx0")
 type = 2
+attack_speed = 0.25
 mesh = ExtResource("1_mcxca")
 attack_sound = ExtResource("1_2044f")
 weapon_position = Vector3(0, 0.2, 0)

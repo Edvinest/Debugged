@@ -24,7 +24,8 @@ glow_enabled = true
 [node name="LevelTwo" type="Node3D"]
 
 [node name="WaveLogic" parent="." instance=ExtResource("1_mp8yv")]
-time_between_waves = 1000.0
+incr_dif = 30.0
+time_between_waves = 30.0
 
 [node name="Spawner" parent="WaveLogic" instance=ExtResource("2_n4pv2")]
 transform = Transform3D(0.8596472, 0, -0.510888, 0, 1, 0, 0.510888, 0, 0.8596472, -19.689152, 1.4453802, 59.51841)

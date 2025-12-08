@@ -8,7 +8,7 @@
 script = ExtResource("1_r2tni")
 name = "Iron Sword"
 damage = 11.0
-attack_speed = 2.0
+attack_speed = 0.5
 mesh = ExtResource("1_2cs4o")
 attack_sound = ExtResource("1_h30fb")
 weapon_rotation = Vector3(0, 90, 0)

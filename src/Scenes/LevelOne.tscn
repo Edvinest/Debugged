@@ -55,7 +55,7 @@ emission_energy_multiplier = 8.43
 [node name="WaveLogic" parent="." instance=ExtResource("23_avwfb")]
 process_mode = 3
 incr_dif = 30.0
-time_between_waves = 10.0
+time_between_waves = 30.0
 
 [node name="Spawner" parent="WaveLogic" groups=["spawner"] instance=ExtResource("22_jik07")]
 transform = Transform3D(0.3762728, 0, -0.9265089, 0, 1, 0, 0.9265089, 0, 0.3762728, 0.19784927, 3.848476, 17.795755)
