@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="AttackSpeedWeaponStrategy" load_steps=4 format=3 uid="uid://cg3nc63tepvdr"]
+
+[ext_resource type="Resource" uid="uid://bqwyrpwgffbns" path="res://src/Objects/Weapons/Hammer1/Hammer.tres" id="1_3nnst"]
+[ext_resource type="Script" uid="uid://gujo2wxiwyl0" path="res://src/Scripts/Modular_upgrades/attack_speed_weapon_strategy.gd" id="2_jdpje"]
+[ext_resource type="Texture2D" uid="uid://bc20w468xhgn5" path="res://src/UI_resources/Icons/hammer-drop-svgrepo-com (2).svg" id="3_3nnst"]
+
+[resource]
+script = ExtResource("2_jdpje")
+attack_speed_decrease = 12.0
+allowed_weapon_type = ExtResource("1_3nnst")
+upgrade_name = "Weapon Attack Speed Upgrade"
+texture = ExtResource("3_3nnst")
+upgrade_specs = "Decrese weapon attack speed by"
+upgrade_cost = 600.0
+metadata/_custom_type_script = "uid://gujo2wxiwyl0"

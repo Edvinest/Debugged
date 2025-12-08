@@ -1,0 +1,459 @@
+[gd_scene load_steps=18 format=3 uid="uid://b31i4qglpbknl"]
+
+[ext_resource type="Script" uid="uid://b1ojrc30aeurp" path="res://src/Scripts/wave_logic.gd" id="1_emjs1"]
+[ext_resource type="Script" path="res://src/Scripts/weapon_upgrade.gd" id="2_ohee5"]
+[ext_resource type="FontFile" uid="uid://777ot6q65lqp" path="res://src/UI_resources/Fonts/RobotoMono-VariableFont_wght.ttf" id="2_ovmah"]
+[ext_resource type="Script" uid="uid://dq83iom010byo" path="res://src/Scripts/hover_animation.gd" id="4_hwg84"]
+[ext_resource type="Script" uid="uid://338h5f0n812o" path="res://src/Scripts/upgrade_purchase_btn.gd" id="4_pirhb"]
+[ext_resource type="Texture2D" uid="uid://u6fxd7sfu1wl" path="res://src/UI_resources/Icons/hammer-break-svgrepo-com (2).svg" id="5_gp7mn"]
+[ext_resource type="Script" uid="uid://ymh0bhbe37fv" path="res://src/Scripts/player_upgrade.gd" id="5_k7ons"]
+[ext_resource type="Texture2D" uid="uid://bu5lkqjmubjd1" path="res://src/UI_resources/Icons/hammer-break-svgrepo-com.svg" id="8_j3cfe"]
+[ext_resource type="Texture2D" uid="uid://daes224r3wpya" path="res://src/UI_resources/Icons/lvl3.svg" id="8_tfmt4"]
+[ext_resource type="Texture2D" uid="uid://dgi4fpx64i168" path="res://src/UI_resources/Icons/hammer-break-svgrepo-com (1).svg" id="9_47vle"]
+[ext_resource type="Script" uid="uid://bwqclsvwuqg63" path="res://src/Scripts/warnings.gd" id="10_hwg84"]
+[ext_resource type="Texture2D" uid="uid://bxn2hwc72u0tm" path="res://src/UI_resources/Icons/health-svgrepo-com (3).svg" id="11_ix78q"]
+
+[sub_resource type="Theme" id="Theme_gp7mn"]
+Button/colors/font_color = Color(0.48235294, 0.7882353, 0.3137255, 1)
+Button/font_sizes/font_size = 18
+Button/fonts/font = ExtResource("2_ovmah")
+Label/colors/font_color = Color(0.36078432, 0.11372549, 0.11372549, 1)
+Label/fonts/font = ExtResource("2_ovmah")
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_emjs1"]
+
+[sub_resource type="Theme" id="Theme_sn2qo"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jfqbt"]
+content_margin_top = 10.0
+bg_color = Color(0.9254902, 0.8352941, 0.7372549, 1)
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
+expand_margin_left = 10.0
+expand_margin_top = 10.0
+expand_margin_right = 10.0
+expand_margin_bottom = 10.0
+shadow_color = Color(0.28627452, 0, 0, 0.6)
+shadow_size = 15
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hwg84"]
+bg_color = Color(0.23753911, 0.23753914, 0.23753902, 1)
+
+[node name="WaveLogic" type="Node2D"]
+script = ExtResource("1_emjs1")
+
+[node name="Timer" type="Timer" parent="."]
+unique_name_in_owner = true
+one_shot = true
+
+[node name="UPGRADE_element" type="CanvasLayer" parent="."]
+unique_name_in_owner = true
+
+[node name="Control" type="Control" parent="UPGRADE_element"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_gp7mn")
+
+[node name="ColorRect" type="ColorRect" parent="UPGRADE_element/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.45882353, 0.5411765, 0.5764706, 1)
+
+[node name="PanelContainer" type="PanelContainer" parent="UPGRADE_element/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_emjs1")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UPGRADE_element/Control/PanelContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="MarginContainer" type="MarginContainer" parent="UPGRADE_element/Control/PanelContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="UI_Upgrades" type="VBoxContainer" parent="UPGRADE_element/Control/PanelContainer/VBoxContainer/MarginContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="WU_lb_margin" type="MarginContainer" parent="UPGRADE_element/Control/PanelContainer/VBoxContainer/MarginContainer/UI_Upgrades"]
+layout_mode = 2
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_bottom = 15
+
+[node name="WU_label" type="Label" parent="UPGRADE_element/Control/PanelContainer/VBoxContainer/MarginContainer/UI_Upgrades/WU_lb_margin"]
+layout_mode = 2
+text = "Weapon Upgrades"
+
+[node name="Weapon_Upgrades" type="HBoxContainer" parent="UPGRADE_element/Control/PanelContainer/VBoxContainer/MarginContainer/UI_Upgrades"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = SubResource("Theme_sn2qo")
+alignment = 1
+script = ExtResource("2_ohee5")
+needs_update = false
+
+[node name="Upgrade1" type="PanelContainer" parent="UPGRADE_element/Control/PanelContainer/VBoxContainer/MarginContainer/UI_Upgrades/Weapon_Upgrades"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_jfqbt")
+script = ExtResource("4_hwg84")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UPGRADE_element/Control/PanelContainer/VBoxContainer/MarginContainer/UI_Upgrades/Weapon_Upgrades/Upgrade1"]
+layout_mode = 2
+
+[node name="upgrade_name" type="Label" parent="UPGRADE_element/Control/PanelContainer/VBoxContainer/MarginContainer/UI_Upgrades/Weapon_Upgrades/Upgrade1/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Weapon Demage Update"
+
+[node name="upgrade_weapon" type="TextureRect" parent="UPGRADE_element/Control/PanelContainer/VBoxContainer/MarginContainer/UI_Upgrades/Weapon_Upgrades/Upgrade1/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+texture = ExtResource("5_gp7mn")
+
+[node name="upgrade_specs" type="Label" parent="UPGRADE_element/Control/PanelContainer/VBoxContainer/MarginContainer/UI_Upgrades/Weapon_Upgrades/Upgrade1/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Increase weapon damage by 18.0%"
+
+[node name="upgread_weapon" type="Label" parent="UPGRADE_element/Control/PanelContainer/VBoxContainer/MarginContainer/UI_Upgrades/Weapon_Upgrades/Upgrade1/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Applies to: Iron Sword"
+
+[node name="upgrade_cost" type="Label" parent="UPGRADE_element/Control/PanelContainer/VBoxContainer/MarginContainer/UI_Upgrades/Weapon_Upgrades/Upgrade1/VBoxContainer"]
+layout_mode = 2
+text = "Cost: 240.0"
+
+[node name="upgrade_purchase" type="Button" parent="UPGRADE_element/Control/PanelContainer/VBoxContainer/MarginContainer/UI_Upgrades/Weapon_Upgrades/Upgrade1/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Purchase"
+script = ExtResource("4_pirhb")
+btn_id = 1
+
+[node name="Upgrade2" type="PanelContainer" parent="UPGRADE_element/Control/PanelContainer/VBoxContainer/MarginContainer/UI_Upgrades/Weapon_Upgrades"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_jfqbt")
+script = ExtResource("4_hwg84")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UPGRADE_element/Control/PanelContainer/VBoxContainer/MarginContainer/UI_Upgrades/Weapon_Upgrades/Upgrade2"]
+layout_mode = 2
+
+[node name="upgrade_name" type="Label" parent="UPGRADE_element/Control/PanelContainer/VBoxContainer/MarginContainer/UI_Upgrades/Weapon_Upgrades/Upgrade2/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Weapon Demage Update"
+
+[node name="upgrade_weapon" type="TextureRect" parent="UPGRADE_element/Control/PanelContainer/VBoxContainer/MarginContainer/UI_Upgrades/Weapon_Upgrades/Upgrade2/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+texture = ExtResource("8_tfmt4")
+
+[node name="upgrade_specs" type="Label" parent="UPGRADE_element/Control/PanelContainer/VBoxContainer/MarginContainer/UI_Upgrades/Weapon_Upgrades/Upgrade2/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Increase weapon damage by 25.0%"
+
+[node name="upgread_weapon" type="Label" parent="UPGRADE_element/Control/PanelContainer/VBoxContainer/MarginContainer/UI_Upgrades/Weapon_Upgrades/Upgrade2/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Applies to: Iron Sword"
+
+[node name="upgrade_cost" type="Label" parent="UPGRADE_element/Control/PanelContainer/VBoxContainer/MarginContainer/UI_Upgrades/Weapon_Upgrades/Upgrade2/VBoxContainer"]
+layout_mode = 2
+text = "Cost: 450.0"
+
+[node name="upgrade_purchase" type="Button" parent="UPGRADE_element/Control/PanelContainer/VBoxContainer/MarginContainer/UI_Upgrades/Weapon_Upgrades/Upgrade2/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Purchase"
+script = ExtResource("4_pirhb")
+btn_id = 2
+
+[node name="Upgrade3" type="PanelContainer" parent="UPGRADE_element/Control/PanelContainer/VBoxContainer/MarginContainer/UI_Upgrades/Weapon_Upgrades"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_jfqbt")
+script = ExtResource("4_hwg84")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UPGRADE_element/Control/PanelContainer/VBoxContainer/MarginContainer/UI_Upgrades/Weapon_Upgrades/Upgrade3"]
+layout_mode = 2
+
+[node name="upgrade_name" type="Label" parent="UPGRADE_element/Control/PanelContainer/VBoxContainer/MarginContainer/UI_Upgrades/Weapon_Upgrades/Upgrade3/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Weapon Demage Update"
+
+[node name="upgrade_weapon" type="TextureRect" parent="UPGRADE_element/Control/PanelContainer/VBoxContainer/MarginContainer/UI_Upgrades/Weapon_Upgrades/Upgrade3/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+texture = ExtResource("8_j3cfe")
+
+[node name="upgrade_specs" type="Label" parent="UPGRADE_element/Control/PanelContainer/VBoxContainer/MarginContainer/UI_Upgrades/Weapon_Upgrades/Upgrade3/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Increase weapon damage by 60.0%"
+
+[node name="upgread_weapon" type="Label" parent="UPGRADE_element/Control/PanelContainer/VBoxContainer/MarginContainer/UI_Upgrades/Weapon_Upgrades/Upgrade3/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Applies to: Iron Sword"
+
+[node name="upgrade_cost" type="Label" parent="UPGRADE_element/Control/PanelContainer/VBoxContainer/MarginContainer/UI_Upgrades/Weapon_Upgrades/Upgrade3/VBoxContainer"]
+layout_mode = 2
+text = "Cost: 1400.0"
+
+[node name="upgrade_purchase" type="Button" parent="UPGRADE_element/Control/PanelContainer/VBoxContainer/MarginContainer/UI_Upgrades/Weapon_Upgrades/Upgrade3/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Purchase"
+script = ExtResource("4_pirhb")
+btn_id = 3
+
+[node name="Upgrade4" type="PanelContainer" parent="UPGRADE_element/Control/PanelContainer/VBoxContainer/MarginContainer/UI_Upgrades/Weapon_Upgrades"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_jfqbt")
+script = ExtResource("4_hwg84")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UPGRADE_element/Control/PanelContainer/VBoxContainer/MarginContainer/UI_Upgrades/Weapon_Upgrades/Upgrade4"]
+layout_mode = 2
+
+[node name="upgrade_name" type="Label" parent="UPGRADE_element/Control/PanelContainer/VBoxContainer/MarginContainer/UI_Upgrades/Weapon_Upgrades/Upgrade4/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Weapon Demage Update"
+
+[node name="upgrade_weapon" type="TextureRect" parent="UPGRADE_element/Control/PanelContainer/VBoxContainer/MarginContainer/UI_Upgrades/Weapon_Upgrades/Upgrade4/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+texture = ExtResource("9_47vle")
+
+[node name="upgrade_specs" type="Label" parent="UPGRADE_element/Control/PanelContainer/VBoxContainer/MarginContainer/UI_Upgrades/Weapon_Upgrades/Upgrade4/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Increase weapon damage by 35.0%"
+
+[node name="upgread_weapon" type="Label" parent="UPGRADE_element/Control/PanelContainer/VBoxContainer/MarginContainer/UI_Upgrades/Weapon_Upgrades/Upgrade4/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Applies to: Iron Sword"
+
+[node name="upgrade_cost" type="Label" parent="UPGRADE_element/Control/PanelContainer/VBoxContainer/MarginContainer/UI_Upgrades/Weapon_Upgrades/Upgrade4/VBoxContainer"]
+layout_mode = 2
+text = "Cost: 600.0"
+
+[node name="upgrade_purchase" type="Button" parent="UPGRADE_element/Control/PanelContainer/VBoxContainer/MarginContainer/UI_Upgrades/Weapon_Upgrades/Upgrade4/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Purchase"
+script = ExtResource("4_pirhb")
+btn_id = 4
+
+[node name="PU_lb_margin" type="MarginContainer" parent="UPGRADE_element/Control/PanelContainer/VBoxContainer/MarginContainer/UI_Upgrades"]
+layout_mode = 2
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_bottom = 15
+
+[node name="PU_label" type="Label" parent="UPGRADE_element/Control/PanelContainer/VBoxContainer/MarginContainer/UI_Upgrades/PU_lb_margin"]
+layout_mode = 2
+text = "Player Upgrades"
+
+[node name="Player_Upgrades" type="HBoxContainer" parent="UPGRADE_element/Control/PanelContainer/VBoxContainer/MarginContainer/UI_Upgrades"]
+layout_mode = 2
+size_flags_horizontal = 4
+script = ExtResource("5_k7ons")
+needs_update = false
+
+[node name="Upgrade1" type="PanelContainer" parent="UPGRADE_element/Control/PanelContainer/VBoxContainer/MarginContainer/UI_Upgrades/Player_Upgrades"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_jfqbt")
+script = ExtResource("4_hwg84")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UPGRADE_element/Control/PanelContainer/VBoxContainer/MarginContainer/UI_Upgrades/Player_Upgrades/Upgrade1"]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="upgrade_name" type="Label" parent="UPGRADE_element/Control/PanelContainer/VBoxContainer/MarginContainer/UI_Upgrades/Player_Upgrades/Upgrade1/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Health Player"
+
+[node name="upgrade_weapon" type="TextureRect" parent="UPGRADE_element/Control/PanelContainer/VBoxContainer/MarginContainer/UI_Upgrades/Player_Upgrades/Upgrade1/VBoxContainer"]
+layout_mode = 2
+texture = ExtResource("11_ix78q")
+stretch_mode = 3
+
+[node name="upgrade_specs" type="Label" parent="UPGRADE_element/Control/PanelContainer/VBoxContainer/MarginContainer/UI_Upgrades/Player_Upgrades/Upgrade1/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Increases max health 12.0%"
+
+[node name="upgrade_cost" type="Label" parent="UPGRADE_element/Control/PanelContainer/VBoxContainer/MarginContainer/UI_Upgrades/Player_Upgrades/Upgrade1/VBoxContainer"]
+layout_mode = 2
+text = "Cost: 300.0"
+
+[node name="upgrade_purchase" type="Button" parent="UPGRADE_element/Control/PanelContainer/VBoxContainer/MarginContainer/UI_Upgrades/Player_Upgrades/Upgrade1/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Purchase"
+script = ExtResource("4_pirhb")
+btn_id = 1
+
+[node name="Upgrade2" type="PanelContainer" parent="UPGRADE_element/Control/PanelContainer/VBoxContainer/MarginContainer/UI_Upgrades/Player_Upgrades"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_jfqbt")
+script = ExtResource("4_hwg84")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UPGRADE_element/Control/PanelContainer/VBoxContainer/MarginContainer/UI_Upgrades/Player_Upgrades/Upgrade2"]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="upgrade_name" type="Label" parent="UPGRADE_element/Control/PanelContainer/VBoxContainer/MarginContainer/UI_Upgrades/Player_Upgrades/Upgrade2/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Health Player"
+
+[node name="upgrade_weapon" type="TextureRect" parent="UPGRADE_element/Control/PanelContainer/VBoxContainer/MarginContainer/UI_Upgrades/Player_Upgrades/Upgrade2/VBoxContainer"]
+layout_mode = 2
+texture = ExtResource("11_ix78q")
+stretch_mode = 3
+
+[node name="upgrade_specs" type="Label" parent="UPGRADE_element/Control/PanelContainer/VBoxContainer/MarginContainer/UI_Upgrades/Player_Upgrades/Upgrade2/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Increases max health 12.0%"
+
+[node name="upgrade_cost" type="Label" parent="UPGRADE_element/Control/PanelContainer/VBoxContainer/MarginContainer/UI_Upgrades/Player_Upgrades/Upgrade2/VBoxContainer"]
+layout_mode = 2
+text = "Cost: 300.0"
+
+[node name="upgrade_purchase" type="Button" parent="UPGRADE_element/Control/PanelContainer/VBoxContainer/MarginContainer/UI_Upgrades/Player_Upgrades/Upgrade2/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Purchase"
+script = ExtResource("4_pirhb")
+btn_id = 2
+
+[node name="Continue_btn" type="Button" parent="UPGRADE_element/Control/PanelContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "CONTINUE"
+
+[node name="WarningInsuficientScore" type="CanvasLayer" parent="."]
+unique_name_in_owner = true
+script = ExtResource("10_hwg84")
+
+[node name="Control" type="Control" parent="WarningInsuficientScore"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="WarningInsuficientScore/Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -209.5
+offset_top = -81.0
+offset_right = 209.5
+offset_bottom = 81.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="WarningInsuficientScore/Control/PanelContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_hwg84")
+
+[node name="WarningMessage" type="Label" parent="WarningInsuficientScore/Control/PanelContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Not enough points to purchase this upgrade."
+
+[node name="MarginContainer" type="MarginContainer" parent="WarningInsuficientScore/Control/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = 100
+
+[node name="Close" type="Label" parent="WarningInsuficientScore/Control/PanelContainer/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(1, 1, 1, 0.44313726)
+text = "Close"
+
+[node name="HUD_element" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="HUD_element"]
+layout_mode = 3
+anchor_right = 1.0
+anchor_bottom = 0.10030864
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="show_timer" type="Label" parent="HUD_element/Control"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -40.5
+offset_right = 40.5
+offset_bottom = 23.0
+grow_horizontal = 2
+text = "Show:Timer"
+metadata/_edit_use_anchors_ = true
+
+[node name="show_score" type="Label" parent="HUD_element/Control"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 800.0
+offset_right = 851.0
+offset_bottom = 23.0
+text = "SCORE"
+
+[node name="WarningTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+wait_time = 2.0
+one_shot = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="weapon_upgrade_purchased" from="UPGRADE_element/Control/PanelContainer/VBoxContainer/MarginContainer/UI_Upgrades/Weapon_Upgrades" to="." method="_on_weapon_upgrades_weapon_upgrade_purchased"]
+[connection signal="btn_clicked" from="UPGRADE_element/Control/PanelContainer/VBoxContainer/MarginContainer/UI_Upgrades/Weapon_Upgrades/Upgrade1/VBoxContainer/upgrade_purchase" to="UPGRADE_element/Control/PanelContainer/VBoxContainer/MarginContainer/UI_Upgrades/Weapon_Upgrades" method="_on_upgrade_purchase_btn_clicked"]
+[connection signal="btn_clicked" from="UPGRADE_element/Control/PanelContainer/VBoxContainer/MarginContainer/UI_Upgrades/Weapon_Upgrades/Upgrade2/VBoxContainer/upgrade_purchase" to="UPGRADE_element/Control/PanelContainer/VBoxContainer/MarginContainer/UI_Upgrades/Weapon_Upgrades" method="_on_upgrade_purchase_btn_clicked"]
+[connection signal="btn_clicked" from="UPGRADE_element/Control/PanelContainer/VBoxContainer/MarginContainer/UI_Upgrades/Weapon_Upgrades/Upgrade3/VBoxContainer/upgrade_purchase" to="UPGRADE_element/Control/PanelContainer/VBoxContainer/MarginContainer/UI_Upgrades/Weapon_Upgrades" method="_on_upgrade_purchase_btn_clicked"]
+[connection signal="btn_clicked" from="UPGRADE_element/Control/PanelContainer/VBoxContainer/MarginContainer/UI_Upgrades/Weapon_Upgrades/Upgrade4/VBoxContainer/upgrade_purchase" to="UPGRADE_element/Control/PanelContainer/VBoxContainer/MarginContainer/UI_Upgrades/Weapon_Upgrades" method="_on_upgrade_purchase_btn_clicked"]
+[connection signal="player_upgrade_purchased" from="UPGRADE_element/Control/PanelContainer/VBoxContainer/MarginContainer/UI_Upgrades/Player_Upgrades" to="." method="_on_player_upgrades_player_upgrade_purchased"]
+[connection signal="btn_clicked" from="UPGRADE_element/Control/PanelContainer/VBoxContainer/MarginContainer/UI_Upgrades/Player_Upgrades/Upgrade1/VBoxContainer/upgrade_purchase" to="UPGRADE_element/Control/PanelContainer/VBoxContainer/MarginContainer/UI_Upgrades/Player_Upgrades" method="_on_upgrade_purchase_btn_clicked"]
+[connection signal="btn_clicked" from="UPGRADE_element/Control/PanelContainer/VBoxContainer/MarginContainer/UI_Upgrades/Player_Upgrades/Upgrade2/VBoxContainer/upgrade_purchase" to="UPGRADE_element/Control/PanelContainer/VBoxContainer/MarginContainer/UI_Upgrades/Player_Upgrades" method="_on_upgrade_purchase_btn_clicked"]
+[connection signal="pressed" from="UPGRADE_element/Control/PanelContainer/VBoxContainer/Continue_btn" to="." method="_on_button_pressed"]
+[connection signal="timeout" from="WarningTimer" to="." method="_on_warning_timer_timeout"]

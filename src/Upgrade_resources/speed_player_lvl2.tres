@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="SpeedPlayerStrategy" load_steps=4 format=3 uid="uid://da25e3cudcklf"]
+
+[ext_resource type="Script" uid="uid://bnl6rhigvo4xv" path="res://src/Scripts/Modular_upgrades/speed_player_strategy.gd" id="1_fburf"]
+[ext_resource type="Resource" uid="uid://ddtmr3nr11bf1" path="res://src/Scripts/Player_resources/player_speed.tres" id="2_6nto5"]
+[ext_resource type="Texture2D" uid="uid://ccjv26vjlhgbd" path="res://src/UI_resources/Icons/thunderbolt-svgrepo-com (2).svg" id="3_fburf"]
+
+[resource]
+script = ExtResource("1_fburf")
+speed_increase = 8.0
+speed_component = ExtResource("2_6nto5")
+upgrade_name = "Speed Player"
+texture = ExtResource("3_fburf")
+upgrade_specs = "Increases Player Speed"
+upgrade_cost = 220.0
+metadata/_custom_type_script = "uid://bnl6rhigvo4xv"

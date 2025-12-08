@@ -1,0 +1,241 @@
+[gd_scene load_steps=6 format=3 uid="uid://c17fchistp0rd"]
+
+[ext_resource type="Texture2D" uid="uid://c3v3sa5pct3nm" path="res://src/Objects/MainMenu/icon.png" id="1_814sq"]
+[ext_resource type="Script" uid="uid://dg6jeqsyye484" path="res://src/Scripts/MainMenu.gd" id="1_ftic1"]
+
+[sub_resource type="SystemFont" id="SystemFont_ftic1"]
+
+[sub_resource type="SystemFont" id="SystemFont_jlbbt"]
+
+[sub_resource type="SystemFont" id="SystemFont_1nasp"]
+
+[node name="MainMenu" type="Node2D"]
+script = ExtResource("1_ftic1")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+modulate = Color(1, 1, 1, 0.95686275)
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(1920, 1080)
+offset_left = -1.0
+offset_right = 1919.0
+offset_bottom = 1080.0
+
+[node name="ProfileMenu" type="MarginContainer" parent="PanelContainer"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 15
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/ProfileMenu"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+
+[node name="ProfileButton" type="Button" parent="PanelContainer/ProfileMenu/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+icon = ExtResource("1_814sq")
+
+[node name="Menu" type="MarginContainer" parent="PanelContainer"]
+custom_minimum_size = Vector2(450, 350)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = 50
+
+[node name="Window" type="Window" parent="PanelContainer/Menu"]
+unique_name_in_owner = true
+oversampling_override = 1.0
+mode = 1
+title = "Are you sure you want to exit?"
+initial_position = 1
+size = Vector2i(300, 200)
+visible = false
+borderless = true
+content_scale_size = Vector2i(450, 450)
+content_scale_aspect = 4
+content_scale_stretch = 1
+theme_override_constants/title_outline_size = 0
+theme_override_constants/resize_margin = 4
+theme_override_font_sizes/title_font_size = 15
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/Menu/Window"]
+offset_right = 304.0
+offset_bottom = 200.0
+size_flags_vertical = 4
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/Menu/Window/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+alignment = 1
+
+[node name="Label" type="Label" parent="PanelContainer/Menu/Window/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+text = "Are you sure ?"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="YesButton" type="Button" parent="PanelContainer/Menu/Window/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(100, 30)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_font_sizes/font_size = 20
+text = "YES"
+
+[node name="LogOutButton" type="Button" parent="PanelContainer/Menu/Window/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(150, 30)
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "LOG OUT"
+
+[node name="NoButton" type="Button" parent="PanelContainer/Menu/Window/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(100, 30)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_font_sizes/font_size = 20
+text = "NO"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/Menu"]
+custom_minimum_size = Vector2(750, 750)
+layout_mode = 2
+theme_override_constants/separation = 30
+
+[node name="MainMenu" type="Label" parent="PanelContainer/Menu/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(300, 150)
+layout_mode = 2
+size_flags_stretch_ratio = 0.0
+theme_override_fonts/font = SubResource("SystemFont_ftic1")
+theme_override_font_sizes/font_size = 40
+text = "MENU"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="StartGameButton" type="Button" parent="PanelContainer/Menu/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+theme_override_fonts/font = SubResource("SystemFont_jlbbt")
+theme_override_font_sizes/font_size = 25
+text = "START GAME"
+
+[node name="OptionsButton" type="Button" parent="PanelContainer/Menu/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+theme_override_fonts/font = SubResource("SystemFont_1nasp")
+theme_override_font_sizes/font_size = 25
+text = "OPTIONS
+"
+
+[node name="InfoButton" type="Button" parent="PanelContainer/Menu/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+text = "INFO
+"
+
+[node name="ExitButton" type="Button" parent="PanelContainer/Menu/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_font_sizes/font_size = 25
+text = "EXIT GAME"
+
+[node name="InformationsWindow" type="Window" parent="PanelContainer/Menu/VBoxContainer"]
+unique_name_in_owner = true
+oversampling_override = 1.0
+initial_position = 1
+size = Vector2i(750, 750)
+visible = false
+borderless = true
+
+[node name="PanelContainer" type="PanelContainer" parent="PanelContainer/Menu/VBoxContainer/InformationsWindow"]
+custom_minimum_size = Vector2(750, 750)
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/Menu/VBoxContainer/InformationsWindow/PanelContainer"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/Menu/VBoxContainer/InformationsWindow/PanelContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = 50
+
+[node name="RichTextLabel" type="RichTextLabel" parent="PanelContainer/Menu/VBoxContainer/InformationsWindow/PanelContainer/VBoxContainer/MarginContainer"]
+custom_minimum_size = Vector2(0, 550)
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 20
+text = "Dear Player,
+
+First of all, thank you for choosing our game. We hope it provides you with an enjoyable and memorable experience.
+
+You will find some general information below:
+
+You can control the game eithier with Joy-Cons or your keyboard and mouse. The goal is to kill the bugs and survive the waves.
+
+Controls (Keyboard):
+
+Movement: WASD
+Player rotation: mouse
+Pause game: ESC or press the pause button
+
+Attacks: left and right click 
+
+Controls (Joy-Con)
+
+Movement:
+Left Joy-stick
+
+Camera rotation:
+Right Joy-stick
+
+Attacks:
+You can attack by swinging your arms in the 4 cardinal directions or stabbing forward. Not all weapons have the same attacks, we incentivise figuring it out for yourself.
+
+"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/Menu/VBoxContainer/InformationsWindow/PanelContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="InfBackButton" type="Button" parent="PanelContainer/Menu/VBoxContainer/InformationsWindow/PanelContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(100, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_font_sizes/font_size = 25
+text = "Back
+"
+
+[connection signal="pressed" from="PanelContainer/ProfileMenu/VBoxContainer/ProfileButton" to="." method="_on_profile_button_pressed"]
+[connection signal="pressed" from="PanelContainer/Menu/Window/MarginContainer/VBoxContainer/YesButton" to="." method="_on_yes_button_pressed"]
+[connection signal="pressed" from="PanelContainer/Menu/Window/MarginContainer/VBoxContainer/LogOutButton" to="." method="_on_log_out_button_pressed"]
+[connection signal="pressed" from="PanelContainer/Menu/Window/MarginContainer/VBoxContainer/NoButton" to="." method="_on_no_button_pressed"]
+[connection signal="pressed" from="PanelContainer/Menu/VBoxContainer/StartGameButton" to="." method="_on_start_game_button_pressed"]
+[connection signal="pressed" from="PanelContainer/Menu/VBoxContainer/OptionsButton" to="." method="_on_options_button_pressed"]
+[connection signal="pressed" from="PanelContainer/Menu/VBoxContainer/InfoButton" to="." method="_on_info_button_pressed"]
+[connection signal="pressed" from="PanelContainer/Menu/VBoxContainer/ExitButton" to="." method="_on_exit_button_pressed"]
+[connection signal="pressed" from="PanelContainer/Menu/VBoxContainer/InformationsWindow/PanelContainer/VBoxContainer/HBoxContainer/InfBackButton" to="." method="_on_back_button_pressed"]
+[connection signal="pressed" from="PanelContainer/Menu/VBoxContainer/InformationsWindow/PanelContainer/VBoxContainer/HBoxContainer/InfBackButton" to="." method="_on_inf_back_button_pressed"]

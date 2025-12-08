@@ -1,0 +1,24 @@
+[gd_scene load_steps=3 format=3 uid="uid://be1gwv0coi2ua"]
+
+[ext_resource type="Script" uid="uid://bkaksglscwqf4" path="res://src/Scripts/WeaponInstance.gd" id="1_ow7c6"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_hpulj"]
+size = Vector3(1, 2, 2)
+
+[node name="WeaponInstance" type="Node3D"]
+script = ExtResource("1_ow7c6")
+
+[node name="ModelHolder" type="Node3D" parent="."]
+
+[node name="Area3D" type="Area3D" parent="ModelHolder"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4, 0, -1)
+monitoring = false
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ModelHolder/Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+shape = SubResource("BoxShape3D_hpulj")
+
+[node name="AudioStream" type="AudioStreamPlayer3D" parent="."]
+
+[connection signal="body_entered" from="ModelHolder/Area3D" to="." method="_on_area_3d_body_entered"]

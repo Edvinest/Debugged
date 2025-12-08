@@ -1,13 +1,14 @@
-[gd_scene load_steps=22 format=3 uid="uid://bp1n81hkwp3tu"]
+[gd_scene load_steps=31 format=3 uid="uid://bp1n81hkwp3tu"]
 
 [ext_resource type="PackedScene" uid="uid://chpye160qgiy6" path="res://src/Objects/LevelOne/prop_bed.tscn" id="1_02nir"]
 [ext_resource type="PackedScene" uid="uid://ch7albaj53q7" path="res://src/Objects/LevelOne/prop_floor.tscn" id="2_1b8pk"]
 [ext_resource type="PackedScene" uid="uid://dct6crx3jwiat" path="res://src/Scenes/Player.tscn" id="2_mwp01"]
 [ext_resource type="PackedScene" uid="uid://b7pxexvaix2s4" path="res://src/Objects/LevelOne/prop_desk.tscn" id="3_ajlcv"]
-[ext_resource type="Texture2D" uid="uid://n7sqk2ahk5er" path="res://src/Objects/LevelOne/Materials/citrus_orchard_puresky_1k.exr" id="4_n562r"]
+[ext_resource type="PackedScene" uid="uid://fh15aoamosj4" path="res://src/Scenes/BloodSpiderEnemy.tscn" id="4_cqtgt"]
+[ext_resource type="Texture2D" uid="uid://n7sqk2ahk5er" path="res://src/Materials/citrus_orchard_puresky_1k.exr" id="4_n562r"]
 [ext_resource type="PackedScene" uid="uid://bp2svu4xo4o8r" path="res://src/Objects/LevelOne/prop_cabinet.tscn" id="5_austs"]
 [ext_resource type="PackedScene" uid="uid://bureje6ylljyi" path="res://src/Objects/LevelOne/prop_chair.tscn" id="6_ceyxk"]
-[ext_resource type="PackedScene" uid="uid://c2dk8817ndhwr" path="res://src/Objects/LevelOne/prop_deskLamp.tscn" id="7_ygok4"]
+[ext_resource type="PackedScene" uid="uid://c83chm8mrrym0" path="res://src/Objects/LevelOne/prop_deskLamp.tscn" id="7_ygok4"]
 [ext_resource type="PackedScene" uid="uid://dn6f5seok4iub" path="res://src/Objects/LevelOne/prop_display.tscn" id="8_b06gv"]
 [ext_resource type="PackedScene" uid="uid://bf8chaltvocpt" path="res://src/Objects/LevelOne/prop_frames.tscn" id="9_pjf87"]
 [ext_resource type="PackedScene" uid="uid://cld43by6q6re3" path="res://src/Objects/LevelOne/prop_main_lamp.tscn" id="10_75nk5"]
@@ -17,6 +18,11 @@
 [ext_resource type="PackedScene" uid="uid://cwl5p6tqsbgn0" path="res://src/Objects/LevelOne/prop_walls.tscn" id="14_pjf87"]
 [ext_resource type="Material" uid="uid://ckflsbqsydvbq" path="res://src/Objects/LevelOne/Materials/mat_clay.tres" id="15_2rfmo"]
 [ext_resource type="PackedScene" uid="uid://bliarftr5secx" path="res://src/Objects/LevelOne/prop_pc.tscn" id="17_f868b"]
+[ext_resource type="PackedScene" uid="uid://qjjoef5p6xhx" path="res://src/Scenes/SpiderEnemy.tscn" id="18_7qily"]
+[ext_resource type="Script" uid="uid://dj63i1pq61734" path="res://src/Scripts/teleportation_demo.gd" id="19_teleport"]
+[ext_resource type="PackedScene" uid="uid://dgsixffdjh8gk" path="res://src/Scenes/spawner.tscn" id="22_jik07"]
+[ext_resource type="PackedScene" uid="uid://b31i4qglpbknl" path="res://src/Scenes/wave_logic.tscn" id="23_avwfb"]
+[ext_resource type="PackedScene" uid="uid://svbay7q8ngp8" path="res://src/Scenes/player_spawn_points.tscn" id="24_5ha2e"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_ndl4m"]
 panorama = ExtResource("4_n562r")
@@ -35,70 +41,108 @@ glow_levels/5 = 0.42
 
 [sub_resource type="BoxMesh" id="BoxMesh_f868b"]
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_f868b"]
+emission_enabled = true
+emission = Color(1, 0, 0, 1)
+emission_energy_multiplier = 8.43
+
+[sub_resource type="BoxMesh" id="BoxMesh_7qily"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_46rq7"]
+
 [node name="LevelOne" type="Node3D"]
+
+[node name="WaveLogic" parent="." instance=ExtResource("23_avwfb")]
+process_mode = 3
+incr_dif = 30.0
+time_between_waves = 30.0
+
+[node name="Spawner" parent="WaveLogic" groups=["spawner"] instance=ExtResource("22_jik07")]
+transform = Transform3D(0.3762728, 0, -0.9265089, 0, 1, 0, 0.9265089, 0, 0.3762728, 0.19784927, 3.848476, 17.795755)
+mob_to_spawn = ExtResource("18_7qily")
+max_spawns = 5
+
+[node name="Spawner2" parent="WaveLogic" groups=["spawner"] instance=ExtResource("22_jik07")]
+transform = Transform3D(0.20917486, 0, -0.9778782, 0, 1, 0, 0.9778782, 0, 0.20917486, -8.474623, 3.848476, 17.795755)
+GRADE = 1
+mob_to_spawn = ExtResource("4_cqtgt")
+spawning_intervals_sec = 4.0
+
+[node name="PlayerSpawnPoints" parent="." instance=ExtResource("24_5ha2e")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.734362, 9.39201, 7.1966004)
+
+[node name="Marker3D" type="Marker3D" parent="PlayerSpawnPoints"]
+
+[node name="Marker3D2" type="Marker3D" parent="PlayerSpawnPoints"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.587101, -2.7405443, 0.18160248)
+
+[node name="Marker3D4" type="Marker3D" parent="PlayerSpawnPoints"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.45039, -5.827784, -13.73574)
+
+[node name="Marker3D5" type="Marker3D" parent="PlayerSpawnPoints"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5518732, -5.827784, -10.169731)
+
+[node name="Marker3D3" type="Marker3D" parent="PlayerSpawnPoints"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.726297, 4.820718, -20.719173)
+
+[node name="Player" parent="." instance=ExtResource("2_mwp01")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.817619, 9.796223, 3.003212)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_ygosd")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(0.52632487, -0.5022381, -0.68610424, -0.40805054, -0.85711664, 0.31439757, -0.7459738, 0.114489995, -0.65606016, -5.5181646, 11.93999, 0)
+transform = Transform3D(0.52632487, -0.5022381, -0.68610424, -0.40805054, -0.85711664, 0.31439754, -0.7459738, 0.11448996, -0.65606034, -5.5181646, 11.93999, 0)
 light_color = Color(1, 1, 0.5372549, 1)
 light_energy = 0.1
 shadow_enabled = true
 
-[node name="CharacterBody3D" parent="." instance=ExtResource("2_mwp01")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.817619, 9.796223, 3.003212)
+[node name="Props" type="Node3D" parent="."]
 
-[node name="prop_bed" parent="." instance=ExtResource("1_02nir")]
+[node name="prop_bed" parent="Props" instance=ExtResource("1_02nir")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5832319, -0.28739643, -1.3672981)
 
-[node name="prop_floor" parent="." instance=ExtResource("2_1b8pk")]
+[node name="prop_floor" parent="Props" instance=ExtResource("2_1b8pk")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0921669, 0, -0.90050125)
 
-[node name="prop_cabinet" parent="." instance=ExtResource("5_austs")]
+[node name="prop_cabinet" parent="Props" instance=ExtResource("5_austs")]
 transform = Transform3D(2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, 4.617687, 3, -13.735708)
 
-[node name="prop_chair" parent="." instance=ExtResource("6_ceyxk")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.751156, 3, 0.6630683)
-
-[node name="prop_frames" parent="." instance=ExtResource("9_pjf87")]
+[node name="prop_frames" parent="Props" instance=ExtResource("9_pjf87")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.11976433, 9.8645115, 16.734161)
 
-[node name="desk_and_props" type="Node3D" parent="."]
+[node name="desk_and_props" type="Node3D" parent="Props"]
 transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 4.2096777, -4.3758326, 0)
 
-[node name="prop_desk" parent="desk_and_props" instance=ExtResource("3_ajlcv")]
+[node name="prop_desk" parent="Props/desk_and_props" instance=ExtResource("3_ajlcv")]
 transform = Transform3D(-9.616505e-08, 0, 2.2, 0, 2.2, 0, -2.2, 0, -9.616505e-08, -10.395598, 4.9381933, 0.04573822)
 
-[node name="prop_deskLamp" parent="desk_and_props" instance=ExtResource("7_ygok4")]
-transform = Transform3D(0.73630565, 0, -0.31281623, 0, 0.8, 0, 0.31281623, 0, 0.73630565, -10.261425, 8.609417, -2.6790318)
+[node name="prop_display" parent="Props/desk_and_props" instance=ExtResource("8_b06gv")]
+transform = Transform3D(0.9, 0, 0, 0, 0.9, 0, 0, 0, 0.9, -9.333334, 8.691412, 0.32955536)
 
-[node name="OmniLight3D" type="OmniLight3D" parent="desk_and_props/prop_deskLamp"]
-transform = Transform3D(0.8333334, 0, 0, 0, -3.6426158e-08, 0.8333333, 0, -0.8333334, -3.6426158e-08, 0.09236717, 1.5547428, -0.2911229)
-light_color = Color(0.84705883, 0.6627451, 0, 1)
-light_energy = 5.686
-shadow_enabled = true
-omni_range = 3.785
-omni_attenuation = 1.02
-
-[node name="prop_display" parent="desk_and_props" instance=ExtResource("8_b06gv")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.222652, 8.601893, -0.33042145)
-
-[node name="SpotLight3D" type="SpotLight3D" parent="desk_and_props/prop_display"]
-transform = Transform3D(-2.9140926e-08, 0, -0.6666667, 0, 0.6666667, 0, 0.6666667, 0, -2.9140926e-08, 0.27352428, 1.678371, 0)
+[node name="SpotLight3D" type="SpotLight3D" parent="Props/desk_and_props/prop_display"]
+transform = Transform3D(-3.2378804e-08, 0, -0.7407407, 0, 0.7407407, 0, 0.7407407, 0, -3.2378804e-08, -0.014277935, 1.7653913, -0.73330754)
 light_energy = 5.946
 shadow_enabled = true
 spot_range = 4.829
 spot_angle = 64.6
 spot_angle_attenuation = 0.659754
 
-[node name="prop_cactus" parent="desk_and_props" instance=ExtResource("11_ceyxk")]
-transform = Transform3D(0.88423073, 0, 0.46705037, 0, 1, 0, -0.46705037, 0, 0.88423073, -9.092297, 8.602879, 4.04996)
+[node name="prop_deskLamp" parent="Props/desk_and_props" instance=ExtResource("7_ygok4")]
+transform = Transform3D(0.6666667, 0, 0, 0, 0.6666667, 0, 0, 0, 0.6666667, -9.930262, 8.673414, -2.6672246)
 
-[node name="prop_mainLamp" parent="." instance=ExtResource("10_75nk5")]
+[node name="OmniLight3D" type="OmniLight3D" parent="Props/desk_and_props/prop_deskLamp"]
+transform = Transform3D(0.92038214, 0.3910203, 1.7092038e-08, 0, -4.3711392e-08, 1, 0.3910203, -0.92038214, -4.023118e-08, 0.023152351, 1.4678602, -0.045244694)
+light_color = Color(0.84705883, 0.6627451, 0, 1)
+light_energy = 5.686
+shadow_enabled = true
+omni_range = 3.785
+omni_attenuation = 1.02
+
+[node name="prop_mainLamp" parent="Props" instance=ExtResource("10_75nk5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.7059708, 18.20557, 0.47491837)
 
-[node name="SpotLight3D" type="SpotLight3D" parent="prop_mainLamp"]
+[node name="SpotLight3D" type="SpotLight3D" parent="Props/prop_mainLamp"]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
 light_energy = 11.345
 shadow_enabled = true
@@ -106,19 +150,98 @@ spot_range = 28.108
 spot_angle = 73.1094
 spot_angle_attenuation = 1.1892081
 
-[node name="prop_carpet" parent="." instance=ExtResource("12_ygok4")]
+[node name="prop_carpet" parent="Props" instance=ExtResource("12_ygok4")]
 transform = Transform3D(4.641847, 0, -3.8017437, 0, 6, 0, 3.8017437, 0, 4.641847, 1.2410023, 2.9815786, -0.38185036)
 
-[node name="prop_books" parent="." instance=ExtResource("13_b06gv")]
+[node name="prop_books" parent="Props" instance=ExtResource("13_b06gv")]
 transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, -9.238658, 8.699198, -6.3913565)
 
-[node name="prop_walls" parent="." instance=ExtResource("14_pjf87")]
+[node name="prop_walls" parent="Props" instance=ExtResource("14_pjf87")]
 transform = Transform3D(0.9, 0, 0, 0, 0.8260235, 0, 0, 0, 0.9, 1.676465, 2.1275032, 0.4252429)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="prop_walls"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Props/prop_walls"]
 transform = Transform3D(40, 0, 0, 0, 4.0631843, 0, 0, 0, 40, 0, 23.245556, 0)
 material_overlay = ExtResource("15_2rfmo")
 mesh = SubResource("BoxMesh_f868b")
 
-[node name="prop_pc" parent="." instance=ExtResource("17_f868b")]
+[node name="prop_pc" parent="Props" instance=ExtResource("17_f868b")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.217733, 3.3334022, -6.8039417)
+
+[node name="prop_cactus" parent="Props" instance=ExtResource("11_ceyxk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.747814, 8.63596, 6.075992)
+
+[node name="prop_chair" parent="Props" instance=ExtResource("6_ceyxk")]
+transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, -5.718702, 2.9582841, 0.45221567)
+
+[node name="teleport_pads" type="Node3D" parent="."]
+transform = Transform3D(0.29999998, 0, 0, 0, 0.29999998, 0, 0, 0, 0.29999998, 7, 3.3905268, 0)
+
+[node name="pad" type="MeshInstance3D" parent="teleport_pads" groups=["teleport_pads"]]
+material_override = SubResource("StandardMaterial3D_f868b")
+mesh = SubResource("BoxMesh_7qily")
+skeleton = NodePath("../..")
+script = ExtResource("19_teleport")
+target_id = 1
+
+[node name="Area3D" type="Area3D" parent="teleport_pads/pad"]
+transform = Transform3D(1.0000001, 0, 0, 0, 1.0000001, 0, 0, 0, 1.0000001, 0, 0, 0)
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="teleport_pads/pad/Area3D"]
+shape = SubResource("BoxShape3D_46rq7")
+
+[node name="pad2" type="MeshInstance3D" parent="teleport_pads" groups=["teleport_pads"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.666666, 10.000001, 10)
+material_override = SubResource("StandardMaterial3D_f868b")
+mesh = SubResource("BoxMesh_7qily")
+skeleton = NodePath("../..")
+script = ExtResource("19_teleport")
+pad_id = 1
+
+[node name="Area3D" type="Area3D" parent="teleport_pads/pad2"]
+transform = Transform3D(1.0000001, 0, 0, 0, 1.0000001, 0, 0, 0, 1.0000001, 0, 0, 0)
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="teleport_pads/pad2/Area3D"]
+shape = SubResource("BoxShape3D_46rq7")
+
+[node name="pad3" type="MeshInstance3D" parent="teleport_pads" groups=["teleport_pads"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -52.692772, 19.887348, -10.649537)
+material_override = SubResource("StandardMaterial3D_f868b")
+mesh = SubResource("BoxMesh_7qily")
+skeleton = NodePath("../..")
+script = ExtResource("19_teleport")
+pad_id = 2
+target_id = 3
+
+[node name="Area3D" type="Area3D" parent="teleport_pads/pad3"]
+transform = Transform3D(1.0000001, 0, 0, 0, 1.0000001, 0, 0, 0, 1.0000001, 0, 0, 0)
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="teleport_pads/pad3/Area3D"]
+shape = SubResource("BoxShape3D_46rq7")
+
+[node name="pad4" type="MeshInstance3D" parent="teleport_pads" groups=["teleport_pads"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -31.479685)
+material_override = SubResource("StandardMaterial3D_f868b")
+mesh = SubResource("BoxMesh_7qily")
+skeleton = NodePath("../..")
+script = ExtResource("19_teleport")
+pad_id = 3
+target_id = 2
+
+[node name="Area3D" type="Area3D" parent="teleport_pads/pad4"]
+transform = Transform3D(1.0000001, 0, 0, 0, 1.0000001, 0, 0, 0, 1.0000001, 0, 0, 0)
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="teleport_pads/pad4/Area3D"]
+shape = SubResource("BoxShape3D_46rq7")
+
+[connection signal="enemy_defeated" from="WaveLogic/Spawner" to="WaveLogic" method="_on_spawner_enemy_defeated"]
+[connection signal="enemy_defeated" from="WaveLogic/Spawner2" to="WaveLogic" method="_on_spawner_2_enemy_defeated"]
+[connection signal="on_spawn_point_selected" from="PlayerSpawnPoints" to="Player" method="_on_player_spawn_points_on_spawn_point_selected"]
+[connection signal="player_died" from="Player" to="WaveLogic" method="_on_player_player_died"]
+[connection signal="body_entered" from="teleport_pads/pad/Area3D" to="teleport_pads/pad" method="_on_area_3d_body_entered"]
+[connection signal="body_entered" from="teleport_pads/pad2/Area3D" to="teleport_pads/pad2" method="_on_area_3d_body_entered"]
+[connection signal="body_entered" from="teleport_pads/pad3/Area3D" to="teleport_pads/pad3" method="_on_area_3d_body_entered"]
+[connection signal="body_entered" from="teleport_pads/pad4/Area3D" to="teleport_pads/pad4" method="_on_area_3d_body_entered"]

@@ -1,0 +1,118 @@
+[gd_scene load_steps=13 format=3 uid="uid://7flfqcjpbcyq"]
+
+[ext_resource type="PackedScene" uid="uid://vbf7gt6ejvsd" path="res://src/Scenes/LoginScreen.tscn" id="1_80ksy"]
+[ext_resource type="Script" uid="uid://bnxisxu8ix6v8" path="res://src/Scripts/MenuScript.gd" id="1_u7g5k"]
+[ext_resource type="Texture2D" uid="uid://vy6fi1wh7nwe" path="res://src/Objects/background/bg.png" id="2_gjktw"]
+[ext_resource type="Texture2D" uid="uid://cc8bl5prwm341" path="res://src/Objects/background/web.png" id="3_emsn6"]
+[ext_resource type="Texture2D" uid="uid://bcoyofebqemiq" path="res://src/Objects/background/spider_bg.png" id="4_10oqu"]
+[ext_resource type="PackedScene" path="res://src/Scenes/MainMenu.tscn" id="6_o2ra5"]
+[ext_resource type="PackedScene" path="res://src/Scenes/Options.tscn" id="7_76m4s"]
+[ext_resource type="PackedScene" path="res://src/Scenes/LevelSelection.tscn" id="8_2hceg"]
+[ext_resource type="PackedScene" path="res://src/Scenes/Profile.tscn" id="9_76m4s"]
+
+[sub_resource type="Animation" id="Animation_1nasp"]
+length = 0.001
+
+[sub_resource type="Animation" id="Animation_fc7xl"]
+resource_name = "new_animation"
+length = 10.0
+loop_mode = 1
+markers = [{
+"color": Color(1, 1, 1, 1),
+"name": &"new_marker",
+"time": 0.0
+}]
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Spider:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 3.8, 5, 7.9666667),
+"transitions": PackedFloat32Array(1.8025012, 2.8284266, 1.8, 2.6390142),
+"update": 0,
+"values": [Vector2(960, 542), Vector2(960, 1045), Vector2(960, 1045), Vector2(960, 542)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("SpiderWeb:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 3.7666667, 4.9666667, 7.9566665),
+"transitions": PackedFloat32Array(1.7923427, 2.828427, 1.8, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1, 35), Vector2(1, 35), Vector2(1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("SpiderWeb:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 3.7666667, 4.9666667, 7.9666667),
+"transitions": PackedFloat32Array(1.8, 2.82, 1.8, 1.8),
+"update": 0,
+"values": [Vector2(1710, 103), Vector2(1710, 378), Vector2(1710, 378), Vector2(1710, 103)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_jb13k"]
+_data = {
+&"RESET": SubResource("Animation_1nasp"),
+&"spider": SubResource("Animation_fc7xl")
+}
+
+[node name="Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_u7g5k")
+
+[node name="Background" type="Sprite2D" parent="."]
+position = Vector2(962, 542)
+texture = ExtResource("2_gjktw")
+
+[node name="SpiderWeb" type="Sprite2D" parent="."]
+position = Vector2(1710, 221.00531)
+scale = Vector2(1, 15.642354)
+texture = ExtResource("3_emsn6")
+
+[node name="Spider" type="Sprite2D" parent="."]
+position = Vector2(960, 754.1921)
+texture = ExtResource("4_10oqu")
+
+[node name="LoginScreen" parent="." instance=ExtResource("1_80ksy")]
+layout_mode = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_jb13k")
+}
+autoplay = "spider"
+
+[node name="MainMenu" parent="." instance=ExtResource("6_o2ra5")]
+visible = false
+
+[node name="Options" parent="." instance=ExtResource("7_76m4s")]
+visible = false
+
+[node name="LevelSelection" parent="." instance=ExtResource("8_2hceg")]
+visible = false
+
+[node name="Profile" parent="." instance=ExtResource("9_76m4s")]
+visible = false
+layout_mode = 1
+
+[connection signal="successfulLogin" from="LoginScreen" to="." method="_on_login_screen_successful_login"]
+[connection signal="optionsPressed" from="MainMenu" to="." method="_on_main_menu_options_pressed"]
+[connection signal="profilePressed" from="MainMenu" to="." method="_on_main_menu_profile_pressed"]
+[connection signal="startGamePressed" from="MainMenu" to="." method="_on_main_menu_start_game_pressed"]
+[connection signal="backPressed" from="Options" to="." method="_on_options_back_pressed"]
+[connection signal="backPressed" from="LevelSelection" to="." method="_on_level_selection_back_pressed"]
+[connection signal="backPressed" from="Profile" to="." method="_on_profile_back_pressed"]

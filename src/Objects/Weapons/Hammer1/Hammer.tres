@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="Weapon" load_steps=4 format=3 uid="uid://bqwyrpwgffbns"]
+
+[ext_resource type="Script" uid="uid://cf5websnqr811" path="res://src/Scripts/Weapon.gd" id="1_jcb25"]
+[ext_resource type="PackedScene" uid="uid://baa8rwda0i5d6" path="res://src/Objects/Weapons/Hammer1/Hammer.glb" id="1_jf6tj"]
+[ext_resource type="AudioStream" uid="uid://cfv0v82jinigu" path="res://src/Materials/Hammer.wav" id="1_uygb8"]
+
+[resource]
+script = ExtResource("1_jcb25")
+name = "Mighty Hammer"
+type = 1
+damage = 15.0
+attack_speed = 1.25
+mesh = ExtResource("1_jf6tj")
+attack_sound = ExtResource("1_uygb8")
+weapon_rotation = Vector3(0, -90, 0)
+metadata/_custom_type_script = "uid://cf5websnqr811"

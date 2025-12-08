@@ -1,0 +1,148 @@
+[gd_scene load_steps=3 format=3 uid="uid://barqae7y8ru11"]
+
+[ext_resource type="Script" uid="uid://cldkdey1rynem" path="res://src/Scripts/profile.gd" id="1_h6vxg"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_od2qj"]
+bg_color = Color(0.24705882, 0.24705882, 0.24705882, 0)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+shadow_color = Color(0.12225223, 0.12225223, 0.12225223, 0.6)
+shadow_size = 1
+shadow_offset = Vector2(2, 0)
+
+[node name="Profile" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_h6vxg")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+self_modulate = Color(1, 1, 1, 0.64705884)
+custom_minimum_size = Vector2(1920, 1080)
+layout_mode = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer"]
+custom_minimum_size = Vector2(850, 650)
+layout_direction = 1
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="VBoxContainer3" type="VBoxContainer" parent="PanelContainer/MarginContainer"]
+layout_direction = 1
+layout_mode = 2
+alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer3"]
+layout_mode = 2
+size_flags_vertical = 6
+theme_override_constants/separation = 15
+alignment = 1
+
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer3/VBoxContainer"]
+custom_minimum_size = Vector2(300, 75)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 30
+text = "Player Profile"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer3/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="AchievementsButton" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer3/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(100, 75)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 25
+text = "Achievements"
+
+[node name="HighscoreButton" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer3/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(110, 75)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 25
+text = "Highscore
+"
+
+[node name="BackButton" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer3/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(110, 75)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 25
+text = "Back"
+
+[node name="Highscore" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer3"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(850, 400)
+layout_mode = 2
+size_flags_vertical = 6
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/MarginContainer/VBoxContainer3/Highscore"]
+custom_minimum_size = Vector2(0, 350)
+layout_mode = 2
+theme_override_constants/margin_top = 50
+
+[node name="Highscore" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer3/Highscore/MarginContainer"]
+custom_minimum_size = Vector2(0, 350)
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="LeaderboardLabel" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer3/Highscore/MarginContainer/Highscore"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+text = "Your placement is:"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HighscoreLabel" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer3/Highscore/MarginContainer/Highscore"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+text = "Your highscore is:"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Achievements" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer3"]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(850, 400)
+layout_mode = 2
+
+[node name="AchievementsText" type="RichTextLabel" parent="PanelContainer/MarginContainer/VBoxContainer3/Achievements"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(850, 350)
+layout_mode = 2
+theme_override_colors/table_border = Color(0, 0, 0, 0.96862745)
+theme_override_constants/line_separation = 4
+theme_override_constants/shadow_outline_size = 3
+theme_override_constants/outline_size = 15
+theme_override_styles/normal = SubResource("StyleBoxFlat_od2qj")
+fit_content = true
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Leaderboard" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer3"]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(850, 400)
+layout_mode = 2
+
+[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer3/VBoxContainer/HBoxContainer/AchievementsButton" to="." method="_on_achievements_button_pressed"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer3/VBoxContainer/HBoxContainer/HighscoreButton" to="." method="_on_highscore_button_pressed"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer3/VBoxContainer/HBoxContainer/BackButton" to="." method="_on_back_button_pressed"]
