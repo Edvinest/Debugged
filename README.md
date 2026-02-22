@@ -1,3 +1,6 @@
+# THE PROJECT IS FINISHED! ALL FURTHER DEVELOPMENT HAS BEEN MOVED TO A PRIVATE REPOSITORY.
+While the contents of the game can be viewed, I have purposefully removed some parts of the game. To make it work, you have to tweak the game a bit!
+
 # Debugged
 Joint project for a Software Design class.
 
